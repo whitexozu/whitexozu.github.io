@@ -9,29 +9,33 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Edge Case - TMM</title>
-<meta name="description" content="TMM website. ">
+<!-- begin _includes/seo.html --><title>GitHub에 blog 생성 - TMM</title>
+<meta name="description" content="Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다. ">
 
 
   <meta name="author" content="To much mong">
 
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="TMM">
-<meta property="og:url" content="http://localhost:4000/">
+<meta property="og:title" content="GitHub에 blog 생성">
+<meta property="og:url" content="http://localhost:4000/scm/scm-create-github-blog/">
 
 
-  <meta property="og:description" content="TMM website. ">
-
-
-
+  <meta property="og:description" content="Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다. ">
 
 
 
 
 
+
+
+  <meta property="article:published_time" content="2020-02-25T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-02-25T22:05:34+09:00">
 
 
 
@@ -40,11 +44,9 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/">
+<link rel="canonical" href="http://localhost:4000/scm/scm-create-github-blog/">
 
 
-
-  <link rel="next" href="http://localhost:4000/page2/">
 
 
 <script type="application/ld+json">
@@ -103,7 +105,7 @@
 
   </head>
 
-  <body class="layout--home">
+  <body class="layout--single">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -269,13 +271,79 @@
   </div>
 
 
-  <div class="archive">
-    
-      <h1 id="page-title" class="page__title"></h1>
-    
-    
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="GitHub에 blog 생성">
+    <meta itemprop="description" content="Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다.">
+    <meta itemprop="datePublished" content="2020-02-25T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-02-25T22:05:34+09:00">
 
-<h3 class="archive__subtitle">최근 포스트</h3>
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">GitHub에 blog 생성
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              
+
+            </nav>
+          </aside>
+        
+        <p>Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다.</p>
+
+<p>###</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">search</span><span class="pi">:</span> <span class="no">false</span>
+</code></pre></div></div>
+
+<p class="notice--info"><strong>Note:</strong> <code class="highlighter-rouge">search: false</code> only works to exclude posts when using <strong>Lunr</strong> as a search provider.</p>
+
+<p>To exclude files when using <strong>Algolia</strong> as a search provider add an array to <code class="highlighter-rouge">algolia.files_to_exclude</code> in your <code class="highlighter-rouge">_config.yml</code>. For more configuration options be sure to check their <a href="https://community.algolia.com/jekyll-algolia/options.html">full documentation</a>.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">algolia</span><span class="pi">:</span>
+  <span class="c1"># Exclude more files from indexing</span>
+  <span class="na">files_to_exclude</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="s">index.html</span>
+    <span class="pi">-</span> <span class="s">index.md</span>
+    <span class="pi">-</span> <span class="s">excluded-file.html</span>
+    <span class="pi">-</span> <span class="s">_posts/2017-11-28-post-exclude-search.md</span>
+    <span class="pi">-</span> <span class="s">subdirectory/*.html</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#blog" class="page__taxonomy-item" rel="tag">blog</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#git" class="page__taxonomy-item" rel="tag">git</a>
+    
+    </span>
+  </p>
 
 
 
@@ -283,28 +351,67 @@
   
 
 
+  
+  
+  
 
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
     
-    <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/scm/scm-create-github-blog/" rel="permalink">GitHub에 blog 생성
-</a>
       
-    </h2>
+      <a href="/categories/#scm" class="page__taxonomy-item" rel="tag">SCM</a>
     
-    <p class="archive__item-excerpt" itemprop="description">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다.
-</p>
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-02-25">February 25, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=GitHub%EC%97%90+blog+%EC%83%9D%EC%84%B1%20http%3A%2F%2Flocalhost%3A4000%2Fscm%2Fscm-create-github-blog%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fscm%2Fscm-create-github-blog%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fscm%2Fscm-create-github-blog%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/jekyll/post-exclude-search/" class="pagination--pager" title="Exclude Post from Search Index
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
   </article>
-</div>
-
 
   
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
 
 
 
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title" itemprop="headline">
@@ -319,12 +426,12 @@
   </article>
 </div>
 
+        
+          
 
-  
 
 
-
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title" itemprop="headline">
@@ -339,13 +446,21 @@
   </article>
 </div>
 
+        
+          
 
-  
 
 
-
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/markup-syntax-highlighting-teaser.jpg"
+          
+          alt="">
+      </div>
     
     <h2 class="archive__item-title" itemprop="headline">
       
@@ -359,12 +474,12 @@
   </article>
 </div>
 
+        
+          
 
-  
 
 
-
-<div class="list__item">
+<div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
     <h2 class="archive__item-title" itemprop="headline">
@@ -379,49 +494,13 @@
   </article>
 </div>
 
-
-
-
-<nav class="pagination">
+        
+      </div>
+    </div>
   
-  <ul>
-    
-    
-    <li><a href="#" class="disabled"><span aria-hidden="true">이전</span></a></li>
-    
-
-    
-    
-      <li><a href="#" class="disabled current">1</a></li>
-    
-
-    
-    
-
-    
-    
-    
-
-    
-
-    
-    
-
-    
-      <li><a href="/page2/">2</a></li>
-    
-
-    
-    
-      <li><a href="/page2/">다음</a></li>
-    
-  </ul>
-</nav>
-
-
-
-  </div>
+  
 </div>
+
     </div>
 
     
