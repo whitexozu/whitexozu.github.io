@@ -1,40 +1,149 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-26T04:47:01+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">GitHub에 blog 생성</title><link href="http://localhost:4000/scm/scm-create-github-blog/" rel="alternate" type="text/html" title="GitHub에 blog 생성" /><published>2020-02-25T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-create-github-blog</id><content type="html" xml:base="http://localhost:4000/scm/scm-create-github-blog/">&lt;p&gt;Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-26T06:31:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">GitHub에 blog 생성</title><link href="http://localhost:4000/scm/scm-create-github-blog/" rel="alternate" type="text/html" title="GitHub에 blog 생성" /><published>2020-02-25T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-create-github-blog</id><content type="html" xml:base="http://localhost:4000/scm/scm-create-github-blog/">&lt;p&gt;Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다.
+312312&lt;/p&gt;
 
-&lt;p&gt;###&lt;/p&gt;
+&lt;h2 id=&quot;os--app&quot;&gt;OS &amp;amp; App&lt;/h2&gt;
 
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
+&lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;macOS Catalina
+Ruby 2.6.3: 루비는 마츠모토 유키히로가 개발한 동적 객체 지향 스크립트 프로그래밍 언어입니다.
+gem 3.0.8: RubyGems는 Ruby 프로그램 및 라이브러리 배포를위한 표준 형식, gem 설치를 쉽게 관리하도록 설계된 도구 및 배포 용 서버를 제공하는 Ruby 프로그래밍 언어의 패키지 관리자입니다.
+jekyll 4.0.0: Jekyll은 개인, 프로젝트 또는 조직 사이트를위한 간단한 블로그 인식 정적 사이트 생성기입니다. 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;search: false&lt;/code&gt; only works to exclude posts when using &lt;strong&gt;Lunr&lt;/strong&gt; as a search provider.&lt;/p&gt;
+&lt;h2 id=&quot;install&quot;&gt;Install&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;GitHub 에 Repository 생성 및 Clone
+    &lt;ol&gt;
+      &lt;li&gt;github 에서 New Repository 클릭&lt;/li&gt;
+      &lt;li&gt;Repository name : [username].github.io&lt;/li&gt;
+      &lt;li&gt;Public 으로 생성&lt;/li&gt;
+      &lt;li&gt;git clone https://github.com/[username]/[username].github.io.git&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Ruby Version Manager 설치
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-sSL&lt;/span&gt; https://get.rvm.io | bash &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; stable &lt;span class=&quot;nt&quot;&gt;--ruby&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Teminal 재실행&lt;/li&gt;
+  &lt;li&gt;Ruby 선택
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm list
+ &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ruby-2.6.3 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; x86_64 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
 
-&lt;p&gt;To exclude files when using &lt;strong&gt;Algolia&lt;/strong&gt; as a search provider add an array to &lt;code class=&quot;highlighter-rouge&quot;&gt;algolia.files_to_exclude&lt;/code&gt; in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;. For more configuration options be sure to check their &lt;a href=&quot;https://community.algolia.com/jekyll-algolia/options.html&quot;&gt;full documentation&lt;/a&gt;.&lt;/p&gt;
+ &lt;span class=&quot;c&quot;&gt;# =&amp;gt; - current&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;# =* - current &amp;amp;&amp;amp; default&lt;/span&gt;
+ &lt;span class=&quot;c&quot;&gt;#  * - default&lt;/span&gt;
 
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;algolia&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# Exclude more files from indexing&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;files_to_exclude&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index.html&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index.md&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;excluded-file.html&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;_posts/2017-11-28-post-exclude-search.md&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;subdirectory/*.html&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="git" /><category term="blog" /><summary type="html">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다.</summary></entry><entry><title type="html">Exclude Post from Search Index</title><link href="http://localhost:4000/jekyll/post-exclude-search/" rel="alternate" type="text/html" title="Exclude Post from Search Index" /><published>2017-11-28T00:00:00+09:00</published><updated>2018-02-19T22:05:34+09:00</updated><id>http://localhost:4000/jekyll/post-exclude-search</id><content type="html" xml:base="http://localhost:4000/jekyll/post-exclude-search/">&lt;p&gt;This post should not appear in the search index because it has the following YAML Front Matter:&lt;/p&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm use 2.6.3 &lt;span class=&quot;nt&quot;&gt;--default&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ ruby 2.6.3p62 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2019-04-16 revision 67580&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x86_64-darwin19]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Jekyll 설치
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jekyll bundler
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jekyll &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+ jekyll 4.0.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Jekyll default site 생성
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;username].github.io.git
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jekyll new ./
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ ...
+ Server address: http://127.0.0.1:4000/
+ Server running... press ctrl-c to stop.
+ ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;GitHub 에 반영
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;first init&quot;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;web site 확인
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; https://[username].github.io/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;search&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+위의 내용으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub [username].github.io&lt;/code&gt; 에 반영하면 깔끔하게 잘 나옵니다.&lt;br /&gt;
+그러나 이후 테마가 적용된 소스를 GitHub 에 커밋하면 404 페이지가 나옵니다.&lt;br /&gt;
+원인은 불확실하나 처리 방법은 테마 적용후 Jekyll 서버를 기동하면 컴파일된 소스들이 &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; 폴더에 생성되는데 생성된 파일을 &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub [username].github.io&lt;/code&gt; 에 올리면 정상적으로 페이지가 나옵니다.&lt;br /&gt;
+그래서 소스 파일을 관리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub [username].github.source&lt;/code&gt; Repository 에서,  배포는 &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub [username].github.io&lt;/code&gt; Repository 에 하도록 하겠습니다.&lt;/p&gt;
 
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;search: false&lt;/code&gt; only works to exclude posts when using &lt;strong&gt;Lunr&lt;/strong&gt; as a search provider.&lt;/p&gt;
+&lt;h2 id=&quot;apply-theme&quot;&gt;Apply theme&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;GitHub 에 Repository 생성 및 Clone
+    &lt;ol&gt;
+      &lt;li&gt;github 에서 New Repository 클릭&lt;/li&gt;
+      &lt;li&gt;Repository name : [username].github.source&lt;/li&gt;
+      &lt;li&gt;git clone https://github.com/[username]/[username].github.source.git&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;GitHub 에서 테마 다운로드
+    &lt;ul&gt;
+      &lt;li&gt;Jekyll theme 중 가장 많이 다운받는 &lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes&quot;&gt;minimal-mistakes&lt;/a&gt; 에서 압축파일을 다운받아 풀고 &lt;strong&gt;[username].github.source&lt;/strong&gt; 폴더에 복사합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;커스터마이징
+    &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;s&quot;&gt;_config.yml&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;파일에는 테마 스킨, locale 선택, 블로그 정보, 사용자 정보, 검색 등의 정보를 설정 합니다.&lt;/span&gt;
+ &lt;span class=&quot;s&quot;&gt;_data/navigation.yml&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;네이게이션, 사이드바 정보를 설정 합니다.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;중요 폴더 복사
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;docs/_pages&lt;/code&gt; 폴더를 최상위 폴더로 복사합니다. 그럼 게시글들을 year, categorise, tags 단위로 그룹지어서 볼수있습니다.&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;docs/_posts&lt;/code&gt; 에 글들을 참고하여 최상위 폴더인 &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; 에 파일을 생성합니다. 파일 생성시에는 규칙이 있으며 생성된 파일들이 블로그의 게시글들이 됩니다. 자세한 내용은 링크를 참고바랍니다. 설명할게 너무 많아요.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;불필요한 폴더 삭제
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; /docs
+ /test
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;자동 배포
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[username].github.source&lt;/code&gt; 의 &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; 파일들을 &lt;code class=&quot;highlighter-rouge&quot;&gt;[username].github.io&lt;/code&gt; 폴더로 복사후 GitHub 에 커밋까지 하려면 명령어를 조금 많이 입력해야 합니다. 귀찮습니다. 그래서 shell 파일을 만들려 합니다.&lt;/li&gt;
+    &lt;/ul&gt;
 
-&lt;p&gt;To exclude files when using &lt;strong&gt;Algolia&lt;/strong&gt; as a search provider add an array to &lt;code class=&quot;highlighter-rouge&quot;&gt;algolia.files_to_exclude&lt;/code&gt; in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;. For more configuration options be sure to check their &lt;a href=&quot;https://community.algolia.com/jekyll-algolia/options.html&quot;&gt;full documentation&lt;/a&gt;.&lt;/p&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;username].github.source
 
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;algolia&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# Exclude more files from indexing&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;files_to_exclude&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index.html&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;index.md&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;excluded-file.html&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;_posts/2017-11-28-post-exclude-search.md&lt;/span&gt;
-    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;subdirectory/*.html&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><summary type="html">This post should not appear in the search index because it has the following YAML Front Matter:</summary></entry><entry><title type="html">Layout: Header Video</title><link href="http://localhost:4000/layout/uncategorized/layout-header-video/" rel="alternate" type="text/html" title="Layout: Header Video" /><published>2017-01-23T00:00:00+09:00</published><updated>2017-01-23T00:00:00+09:00</updated><id>http://localhost:4000/layout/uncategorized/layout-header-video</id><content type="html" xml:base="http://localhost:4000/layout/uncategorized/layout-header-video/">&lt;p&gt;This post should display a &lt;strong&gt;header with a responsive video&lt;/strong&gt;, if the theme supports it.&lt;/p&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+ Ctrl + c
+
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vi publish.sh
+
+     &lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+     &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ../[username].github.io/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+     &lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; _site/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; ../[username].github.io/
+     git &lt;span class=&quot;nt&quot;&gt;--git-dir&lt;/span&gt; ../[username].github.io/.git &lt;span class=&quot;nt&quot;&gt;--work-tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;../[username].github.io status
+     git &lt;span class=&quot;nt&quot;&gt;--git-dir&lt;/span&gt; ../[username].github.io/.git &lt;span class=&quot;nt&quot;&gt;--work-tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;../[username].github.io add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+     git &lt;span class=&quot;nt&quot;&gt;--git-dir&lt;/span&gt; ../[username].github.io/.git &lt;span class=&quot;nt&quot;&gt;--work-tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;../[username].github.io commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;...&quot;&lt;/span&gt;
+     git &lt;span class=&quot;nt&quot;&gt;--git-dir&lt;/span&gt; ../[username].github.io/.git &lt;span class=&quot;nt&quot;&gt;--work-tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;../[username].github.io push origin master
+
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;chmod &lt;/span&gt;755 publish.sh
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./publish.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;web site 확인
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; https://[username].github.io/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;git filter-branch --subdirectory-filter _site/ -f&lt;/code&gt; 명령어로 하나의 Repository 에서 관리를 할 수 있다고하는데 저는 잘 적용되지 않았습니다.&lt;br /&gt;
+혹시 이글을 보시는 분이 있다면 한번 도전해 보시기 바랍니다.&lt;br /&gt;
+참고했던 링크는 &lt;a href=&quot;https://rainsound-k.github.io/jekyll-blog/2018/05/02/apply-custom-plugin.html&quot;&gt;여기&lt;/a&gt;입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;https://poiemaweb.com/jekyll-basics
+https://junhobaik.github.io/jekyll-apply-theme/
+https://rainsound-k.github.io/jekyll-blog/2018/05/02/apply-custom-plugin.html
+https://jetalog.net/86&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="git" /><category term="blog" /><summary type="html">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 생성하도록 하겠습니다. 312312</summary></entry><entry><title type="html">Layout: Header Video</title><link href="http://localhost:4000/layout/uncategorized/layout-header-video/" rel="alternate" type="text/html" title="Layout: Header Video" /><published>2017-01-23T00:00:00+09:00</published><updated>2017-01-23T00:00:00+09:00</updated><id>http://localhost:4000/layout/uncategorized/layout-header-video</id><content type="html" xml:base="http://localhost:4000/layout/uncategorized/layout-header-video/">&lt;p&gt;This post should display a &lt;strong&gt;header with a responsive video&lt;/strong&gt;, if the theme supports it.&lt;/p&gt;
 
 &lt;h2 id=&quot;settings&quot;&gt;Settings&lt;/h2&gt;
 

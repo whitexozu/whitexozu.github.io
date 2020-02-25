@@ -2,9 +2,11 @@
 
 rm -rf ../whitexozu.github.io/*
 cp -r _site/* ../whitexozu.github.io/
-git --git-dir ../whitexozu.github.io/.git add .
-git --git-dir ../whitexozu.github.io/.git commit -m "..."
-git --git-dir ../whitexozu.github.io/.git push origin master
+# git --git-dir ../whitexozu.github.io/.git branch
+git --git-dir ../whitexozu.github.io/.git --work-tree=../whitexozu.github.io status
+git --git-dir ../whitexozu.github.io/.git --work-tree=../whitexozu.github.io add .
+git --git-dir ../whitexozu.github.io/.git --work-tree=../whitexozu.github.io commit -m "..."
+git --git-dir ../whitexozu.github.io/.git --work-tree=../whitexozu.github.io push origin master
 
 # git checkout source
 # git branch -D master
