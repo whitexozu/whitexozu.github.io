@@ -1,0 +1,805 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[GCP] instance 생성 + Mysql + JDK + Jenkins - TMM</title>
+<meta name="description" content="Instance 생성 ">
+
+
+  <meta name="author" content="To much mong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[GCP] instance 생성 + Mysql + JDK + Jenkins">
+<meta property="og:url" content="http://localhost:4000/server/server-gcp-mysql-jdk-jenkins/">
+
+
+  <meta property="og:description" content="Instance 생성 ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-02-10T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-02-25T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/server/server-gcp-mysql-jdk-jenkins/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much mong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[GCP] instance 생성 + Mysql + JDK + Jenkins">
+    <meta itemprop="description" content="Instance 생성">
+    <meta itemprop="datePublished" content="2020-02-10T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-02-25T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[GCP] instance 생성 + Mysql + JDK + Jenkins
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#instance-생성">Instance 생성</a></li>
+  <li><a href="#mysql-57">Mysql 5.7</a></li>
+  <li><a href="#jdk-설치">JDK 설치</a></li>
+  <li><a href="#maven-설치">Maven 설치</a></li>
+  <li><a href="#jenkins-설치">Jenkins 설치</a></li>
+  <li><a href="#jenkins-사용자-변경">Jenkins 사용자 변경</a></li>
+  <li><a href="#git-설치">git 설치</a></li>
+  <li><a href="#gcp-ssh-접속-설정">gcp ssh 접속 설정</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h3 id="instance-생성">Instance 생성</h3>
+
+<ol>
+  <li><a href="https://console.cloud.google.com/">https://console.cloud.google.com/</a></li>
+  <li>좌측 상단 대메뉴 &gt; VM 인스턴스</li>
+  <li>기번정보, 카드정보 입력</li>
+  <li>Compute Engine 화면이 나오면 약 1분간 대기후 “만들기” 버튼 클릭</li>
+  <li>인스턴스 만들기에서 지역 한국 선택, 부팅 디스크 CentOS7 선택, 방화벽 모두 선택</li>
+  <li>VPC 네트워크 설정
+    <ul>
+      <li>외부 IP 주소 목록 &gt; 유형을 고정아이피 선택</li>
+      <li>필요한 방화벽 규칙 등록</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="mysql-57">Mysql 5.7</h3>
+<ol>
+  <li>설치
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+<span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>mysql-community-server
+<span class="nv">$ </span><span class="nb">sudo </span>systemctl <span class="nb">enable </span>mysqld
+<span class="nv">$ </span><span class="nb">sudo </span>systemctl start mysqld
+</code></pre></div>    </div>
+  </li>
+  <li>보안설정
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /usr/bin/mysql_secure_installation  
+
+Set root password? [Y/n] y  
+New password:  
+Re-enter new password:  
+... Success!  
+Remove anonymous users? [Y/n] y  
+... Success!  
+Disallow root login remotely? [Y/n] y  
+... Success!  
+Remove test database and access to it? [Y/n] y  
+... Success!  
+Reload privilege tables now? [Y/n] y  
+... Success!
+</code></pre></div>    </div>
+  </li>
+  <li>사용자 생성
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+
+<span class="o">&gt;</span> CREATE DATABASE mcs<span class="p">;</span>  
+<span class="o">&gt;</span> grant all privileges on mcs.<span class="k">*</span> to <span class="s1">'jhkim'</span>@<span class="s1">'localhost'</span> identified by <span class="s1">'p@ssWord'</span><span class="p">;</span>  
+<span class="o">&gt;</span> grant all privileges on mcs.<span class="k">*</span> to <span class="s1">'jhkim'</span>@<span class="s1">'%'</span> identified by <span class="s1">'p@ssWord'</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>문자열 설정
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/my.cnf
+    
+<span class="o">[</span>clinet]
+default-character-set <span class="o">=</span> utf8
+
+<span class="o">[</span>mysqld]
+character-set-server<span class="o">=</span>utf8
+collation-server<span class="o">=</span>utf8_general_ci
+<span class="nv">init_connect</span><span class="o">=</span>SET collation_connection <span class="o">=</span> utf8_general_ci
+<span class="nv">init_connect</span><span class="o">=</span><span class="nb">set </span>NAMES utf8
+
+<span class="o">[</span>mysqldump]
+default-character-set <span class="o">=</span> utf-8
+<span class="nb">sudo </span>systemctl restart mysqld
+</code></pre></div>    </div>
+  </li>
+  <li>접속
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-u</span> jhkim <span class="nt">-p</span>  
+<span class="nv">$ </span>mysql <span class="nt">-h</span> <span class="o">[</span>server ip] <span class="nt">-P</span> 3306 <span class="nt">-u</span> jhkim <span class="nt">-p</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="jdk-설치">JDK 설치</h3>
+<ol>
+  <li>다운로드<br />
+jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 GCP 서버에 업로드 한다.</li>
+  <li>압축해제
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">gunzip </span>jdk-8u241-linux-x64.tar.gz
+<span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-xvf</span> jdk-8u241-linux-x64.tar
+</code></pre></div>    </div>
+  </li>
+  <li>자바링크 생성
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo mv </span>jdk1.8.0_241 /usr/local  
+<span class="nv">$ </span><span class="nb">cd</span> /usr/local  
+<span class="nv">$ </span><span class="nb">sudo ln</span> <span class="nt">-s</span> jdk1.8.0_241/ java
+</code></pre></div>    </div>
+  </li>
+  <li>환경변수 등록
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile  
+
+<span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/local/java  
+<span class="nv">CLASSPATH</span><span class="o">=</span>.:<span class="nv">$JAVA_HOME</span>/bin/tools.jar  
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin  
+<span class="nb">export </span>JAVA_HOME CLASSPATH PATH
+</code></pre></div>    </div>
+  </li>
+  <li>적용 및 확인
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source</span> /etc/profile  
+<span class="nv">$ </span>java <span class="nt">-version</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="maven-설치">Maven 설치</h3>
+
+<ol>
+  <li>다운로드
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://archive.apache.org/dist/maven/maven-3/3.5.2/binaries/apache-maven-3.5.2-bin.tar.gz
+</code></pre></div>    </div>
+  </li>
+  <li>압축해제
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">gunzip </span>apache-maven-3.5.2-bin.tar.gz
+<span class="nv">$ </span><span class="nb">tar</span> <span class="nt">-xvf</span> apache-maven-3.5.2-bin.tar
+</code></pre></div>    </div>
+  </li>
+  <li>Maven 링크 생성
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo mv </span>apache-maven-3.5.2 /usr/local
+<span class="nv">$ </span><span class="nb">cd</span> /usr/local
+<span class="nv">$ </span><span class="nb">sudo ln</span> <span class="nt">-s</span> apache-maven-3.5.2/ maven
+</code></pre></div>    </div>
+  </li>
+  <li>환경변수 등록
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile
+
+<span class="nv">MAVEN_HOME</span><span class="o">=</span>/usr/local/maven
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$MAVEN_HOME</span>/bin
+<span class="nb">export </span>MAVEN_HOME
+</code></pre></div>    </div>
+  </li>
+  <li>적용 및 확인
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source</span> /etc/profile
+<span class="nv">$ </span>mvn <span class="nt">-version</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="jenkins-설치">Jenkins 설치</h3>
+
+<ol>
+  <li>설치
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>wget
+<span class="nv">$ </span><span class="nb">sudo </span>wget <span class="nt">-O</span> /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+<span class="nv">$ </span><span class="nb">sudo </span>rpm <span class="nt">--import</span> http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+<span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nb">install </span>jenkins
+</code></pre></div>    </div>
+  </li>
+  <li>설치 확인
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rpm <span class="nt">-qa</span> | <span class="nb">grep </span>jenkins
+~ jenkins-2.220-1.1.noarch
+</code></pre></div>    </div>
+  </li>
+  <li>설정
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/sysconfig/jenkins
+<span class="nv">JENKINS_PORT</span><span class="o">=</span><span class="s2">"9100"</span> <span class="c"># port변경</span>
+</code></pre></div>    </div>
+  </li>
+  <li>실행
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start jenkins.service
+<span class="c"># 에러 발생</span>
+<span class="nv">$ </span><span class="nb">sudo </span>systemctl status jenkins.service
+<span class="c"># 에러 확인, 자바 경로가 잘못됐다고 나옴</span>
+</code></pre></div>    </div>
+  </li>
+  <li>java 경로 설정
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/init.d/jenkins
+    
+<span class="c"># jdk 로 검색하면 80 라인 근처에</span>
+/etc/alternatives/java
+/usr/lib/jvm/java-1.8.0/bin/java
+/usr/lib/jvm/jre-1.8.0/bin/java
+/usr/lib/jvm/java-1.7.0/bin/java
+/usr/lib/jvm/jre-1.7.0/bin/java
+/usr/lib/jvm/java-11.0/bin/java
+/usr/lib/jvm/jre-11.0/bin/java
+/usr/lib/jvm/java-11-openjdk-amd64
+/usr/bin/java
+    
+/usr/local/java/bin/java <span class="c"># 한줄 추가</span>
+</code></pre></div>    </div>
+  </li>
+  <li>다시 실행
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start jenkins.service
+</code></pre></div>    </div>
+  </li>
+  <li>접속 및 구성
+    <ul>
+      <li>http://[GCP Server IP]:9100 unlock 후 “Install suggested plugins” 설치 및 관리자 계정 생성</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="jenkins-사용자-변경">Jenkins 사용자 변경</h3>
+
+<p>젠킨스 설치시 기본사용자는 jenkins 입니다. 이걸 내 계정으로 변경하여 ssh접속이 되도록 합니다.</p>
+
+<ol>
+  <li>유저명 변경
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/sysconfig/jenkins
+    
+<span class="nv">JENKINS_USER</span><span class="o">=</span><span class="s2">"jenkins"</span> <span class="c"># 내계정으로 변경</span>
+</code></pre></div>    </div>
+  </li>
+  <li>폴더 소유 변경
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo chown</span> <span class="nt">-R</span> whitexozu:whitexozu /var/lib/jenkins
+<span class="nv">$ </span><span class="nb">sudo chown</span> <span class="nt">-R</span> whitexozu:whitexozu /var/log/jenkins
+<span class="nv">$ </span><span class="nb">sudo chown</span> <span class="nt">-R</span> whitexozu:whitexozu /var/cache/jenkins
+</code></pre></div>    </div>
+  </li>
+  <li>다시 실행
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl restart jenkins.service
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="git-설치">git 설치</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>git
+<span class="nv">$ </span>git <span class="nt">--version</span>
+</code></pre></div></div>
+
+<h3 id="gcp-ssh-접속-설정">gcp ssh 접속 설정</h3>
+<blockquote>
+  <p><a href="https://ruuci.tistory.com/6">https://ruuci.tistory.com/6</a></p>
+</blockquote>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#gcp" class="page__taxonomy-item" rel="tag">GCP</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#jdk" class="page__taxonomy-item" rel="tag">JDK</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#jenkins" class="page__taxonomy-item" rel="tag">Jenkins</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#mysql" class="page__taxonomy-item" rel="tag">Mysql</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#server" class="page__taxonomy-item" rel="tag">Server</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-02-25">February 25, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BGCP%5D+instance+%EC%83%9D%EC%84%B1+%2B+Mysql+%2B+JDK+%2B+Jenkins%20http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-gcp-mysql-jdk-jenkins%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-gcp-mysql-jdk-jenkins%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-gcp-mysql-jdk-jenkins%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/layout/uncategorized/layout-header-video/" class="pagination--pager" title="Layout: Header Video
+">이전</a>
+    
+    
+      <a href="/framework/framework-springboot-swagger/" class="pagination--pager" title="[Swagger] Springboot + swagger
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/scm/scm-create-github-blog/" rel="permalink">[Blog] GitHub에 blog 생성
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.
+312312
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-oauth2-springboot-facebook-google/" rel="permalink">작성중: [OAuth2] Springboot + Facebook, Google
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+  https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md
+https://github.com/TechPrimers/spring-boot-facebook-login-example
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-oauth2-springboot-naver-jsp/" rel="permalink">[OAuth2] Springboot + naver + jsp
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+  
+    Naver developers &gt; Application &gt; Application 등록
+
+    
+      어플리케이션 이름 입력 : naver_sign_in
+      사용 API 선택 : 네아로
+      사용 API 전부 선택
+      로그인 오픈 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ci/ci-centos7-jenkins/" rel="permalink">[Jenkins] CentOS7 Jenkins 설정
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Global Tool Configuration
+
+  Jenkins 관리 &gt; Global Tool Configuration 이동
+  JDK
+Uncheck Install automatically
+Name : jdk1.8
+JAVA_HOME : /usr/local/java
+  MAV...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

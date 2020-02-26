@@ -1,0 +1,889 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[OAuth2] Springboot + naver + jsp - TMM</title>
+<meta name="description" content="        Naver developers &gt; Application &gt; Application 등록             어플리케이션 이름 입력 : naver_sign_in       사용 API 선택 : 네아로       사용 API 전부 선택       로그인 오픈 API 서비스 환경 : PC웹       서비스 URL 입력 : http://localhost:8080/oauth/signin       Callback URL 입력 : http://localhost:8080/oauth/callback       등록하기 버튼 클릭       애플리 케이션 정보 확인                    Client ID : ****           Client Secret : ****                          ">
+
+
+  <meta name="author" content="To much mong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[OAuth2] Springboot + naver + jsp">
+<meta property="og:url" content="http://localhost:4000/framework/framework-oauth2-springboot-naver-jsp/">
+
+
+  <meta property="og:description" content="        Naver developers &gt; Application &gt; Application 등록             어플리케이션 이름 입력 : naver_sign_in       사용 API 선택 : 네아로       사용 API 전부 선택       로그인 오픈 API 서비스 환경 : PC웹       서비스 URL 입력 : http://localhost:8080/oauth/signin       Callback URL 입력 : http://localhost:8080/oauth/callback       등록하기 버튼 클릭       애플리 케이션 정보 확인                    Client ID : ****           Client Secret : ****                          ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-02-19T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-02-25T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/framework/framework-oauth2-springboot-naver-jsp/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much mong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[OAuth2] Springboot + naver + jsp">
+    <meta itemprop="description" content="      Naver developers &gt; Application &gt; Application 등록          어플리케이션 이름 입력 : naver_sign_in      사용 API 선택 : 네아로      사용 API 전부 선택      로그인 오픈 API 서비스 환경 : PC웹      서비스 URL 입력 : http://localhost:8080/oauth/signin      Callback URL 입력 : http://localhost:8080/oauth/callback      등록하기 버튼 클릭      애플리 케이션 정보 확인                  Client ID : ****          Client Secret : ****                    ">
+    <meta itemprop="datePublished" content="2020-02-19T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-02-25T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[OAuth2] Springboot + naver + jsp
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <ol>
+  <li>
+    <p>Naver developers &gt; Application &gt; Application 등록</p>
+
+    <ol>
+      <li>어플리케이션 이름 입력 : naver_sign_in</li>
+      <li>사용 API 선택 : 네아로</li>
+      <li>사용 API 전부 선택</li>
+      <li>로그인 오픈 API 서비스 환경 : PC웹</li>
+      <li>서비스 URL 입력 : <a href="http://localhost:8080/oauth/signin">http://localhost:8080/oauth/signin</a></li>
+      <li>Callback URL 입력 : <a href="http://localhost:8080/oauth/callback">http://localhost:8080/oauth/callback</a></li>
+      <li>등록하기 버튼 클릭</li>
+      <li>애플리 케이션 정보 확인
+        <ul>
+          <li>Client ID : <strong>**</strong><em>**</em></li>
+          <li>Client Secret : <strong>**</strong><em>**</em></li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>소스 작성</p>
+    <ol>
+      <li>navem project 생성</li>
+      <li>pom.xml
+        <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- jstl --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+ <span class="nt">&lt;groupId&gt;</span>javax.servlet<span class="nt">&lt;/groupId&gt;</span>
+ <span class="nt">&lt;artifactId&gt;</span>jstl<span class="nt">&lt;/artifactId&gt;</span>
+ <span class="nt">&lt;version&gt;</span>1.2<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+        
+<span class="c">&lt;!-- jsp --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+ <span class="nt">&lt;groupId&gt;</span>org.apache.tomcat.embed<span class="nt">&lt;/groupId&gt;</span>
+ <span class="nt">&lt;artifactId&gt;</span>tomcat-embed-jasper<span class="nt">&lt;/artifactId&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+        
+<span class="c">&lt;!-- 제이슨 파싱 --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+ <span class="nt">&lt;groupId&gt;</span>com.googlecode.json-simple<span class="nt">&lt;/groupId&gt;</span>
+ <span class="nt">&lt;artifactId&gt;</span>json-simple<span class="nt">&lt;/artifactId&gt;</span>
+ <span class="nt">&lt;version&gt;</span>1.1.1<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+        
+<span class="c">&lt;!-- oauth --&gt;</span>
+<span class="nt">&lt;dependency&gt;</span>
+ <span class="nt">&lt;groupId&gt;</span>com.github.scribejava<span class="nt">&lt;/groupId&gt;</span>
+ <span class="nt">&lt;artifactId&gt;</span>scribejava-core<span class="nt">&lt;/artifactId&gt;</span>
+ <span class="nt">&lt;version&gt;</span>2.8.1<span class="nt">&lt;/version&gt;</span>
+<span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>java/com/example/oauth/config/NaverSigninApi.java
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.oauth.config</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.github.scribejava.core.builder.api.DefaultApi20</span><span class="o">;</span>
+        
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NaverSigninApi</span> <span class="kd">extends</span> <span class="nc">DefaultApi20</span> <span class="o">{</span>
+ <span class="kd">protected</span> <span class="nf">NaverSigninApi</span><span class="o">()</span> <span class="o">{}</span>
+ <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">InstanceHolder</span> <span class="o">{</span>
+     <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">NaverSigninApi</span> <span class="no">INSTANCE</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NaverSigninApi</span><span class="o">();</span>
+ <span class="o">}</span>
+ <span class="kd">public</span> <span class="kd">static</span> <span class="nc">NaverSigninApi</span> <span class="nf">instance</span><span class="o">()</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="nc">InstanceHolder</span><span class="o">.</span><span class="na">INSTANCE</span><span class="o">;</span>
+ <span class="o">}</span>
+ <span class="nd">@Override</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAccessTokenEndpoint</span><span class="o">()</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="s">"https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"</span><span class="o">;</span>
+ <span class="o">}</span>
+ <span class="nd">@Override</span>
+ <span class="kd">protected</span> <span class="nc">String</span> <span class="nf">getAuthorizationBaseUrl</span><span class="o">()</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="s">"https://nid.naver.com/oauth2.0/authorize"</span><span class="o">;</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>java/com/example/oauth/config/NaverSigninBo.java
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.oauth.config</span><span class="o">;</span>
+        
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.UUID</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpSession</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.util.StringUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.github.scribejava.core.builder.ServiceBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.github.scribejava.core.model.OAuth2AccessToken</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.github.scribejava.core.model.OAuthRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.github.scribejava.core.model.Response</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.github.scribejava.core.model.Verb</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.github.scribejava.core.oauth.OAuth20Service</span><span class="o">;</span>
+        
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+        
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">NaverSigninBO</span> <span class="o">{</span>
+ <span class="cm">/* 인증 요청문을 구성하는 파라미터 */</span>
+ <span class="c1">//client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디</span>
+ <span class="c1">//response_type: 인증 과정에 대한 구분값. code로 값이 고정돼 있습니다.</span>
+ <span class="c1">//redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback URL에 설정한 정보입니다.</span>
+ <span class="c1">//state: 애플리케이션이 생성한 상태 토큰</span>
+ <span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="no">CLIENT_ID</span> <span class="o">=</span> <span class="s">"cI_EDT7R0b9SHI5xV8pp"</span><span class="o">;</span>
+ <span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="no">CLIENT_SECRET</span> <span class="o">=</span> <span class="s">"xEzetWVT1b"</span><span class="o">;</span>
+ <span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="no">REDIRECT_URI</span> <span class="o">=</span> <span class="s">"http://localhost:8080/oauth/naver/callback"</span><span class="o">;</span>
+ <span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="no">SESSION_STATE</span> <span class="o">=</span> <span class="s">"oauth_state"</span><span class="o">;</span>
+ <span class="cm">/* 프로필 조회 API URL */</span>
+ <span class="kd">private</span> <span class="kd">final</span> <span class="kd">static</span> <span class="nc">String</span> <span class="no">PROFILE_API_URL</span> <span class="o">=</span> <span class="s">"https://openapi.naver.com/v1/nid/me"</span><span class="o">;</span>
+ <span class="cm">/* 네이버 아이디로 인증 URL 생성 Method */</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getAuthorizationUrl</span><span class="o">(</span><span class="nc">HttpSession</span> <span class="n">session</span><span class="o">)</span> <span class="o">{</span>
+     <span class="cm">/* 세션 유효성 검증을 위하여 난수를 생성 */</span>
+     <span class="nc">String</span> <span class="n">state</span> <span class="o">=</span> <span class="n">generateRandomString</span><span class="o">();</span>
+     <span class="cm">/* 생성한 난수 값을 session에 저장 */</span>
+     <span class="n">setSession</span><span class="o">(</span><span class="n">session</span><span class="o">,</span> <span class="n">state</span><span class="o">);</span>
+     <span class="cm">/* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */</span>
+     <span class="nc">OAuth20Service</span> <span class="n">oauthService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServiceBuilder</span><span class="o">()</span>
+         <span class="o">.</span><span class="na">apiKey</span><span class="o">(</span><span class="no">CLIENT_ID</span><span class="o">)</span>
+         <span class="o">.</span><span class="na">apiSecret</span><span class="o">(</span><span class="no">CLIENT_SECRET</span><span class="o">)</span>
+         <span class="o">.</span><span class="na">callback</span><span class="o">(</span><span class="no">REDIRECT_URI</span><span class="o">)</span>
+         <span class="o">.</span><span class="na">state</span><span class="o">(</span><span class="n">state</span><span class="o">)</span> <span class="c1">//앞서 생성한 난수값을 인증 URL생성시 사용함</span>
+         <span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="nc">NaverSigninApi</span><span class="o">.</span><span class="na">instance</span><span class="o">());</span>
+     <span class="k">return</span> <span class="n">oauthService</span><span class="o">.</span><span class="na">getAuthorizationUrl</span><span class="o">();</span>
+ <span class="o">}</span>
+ <span class="cm">/* 네이버아이디로 Callback 처리 및 AccessToken 획득 Method */</span>
+ <span class="kd">public</span> <span class="nc">OAuth2AccessToken</span> <span class="nf">getAccessToken</span><span class="o">(</span><span class="nc">HttpSession</span> <span class="n">session</span><span class="o">,</span> <span class="nc">String</span> <span class="n">code</span><span class="o">,</span> <span class="nc">String</span> <span class="n">state</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+     <span class="cm">/* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */</span>
+     <span class="nc">String</span> <span class="n">sessionState</span> <span class="o">=</span> <span class="n">getSession</span><span class="o">(</span><span class="n">session</span><span class="o">);</span>
+     <span class="k">if</span> <span class="o">(</span><span class="nc">StringUtils</span><span class="o">.</span><span class="na">pathEquals</span><span class="o">(</span><span class="n">sessionState</span><span class="o">,</span> <span class="n">state</span><span class="o">))</span> <span class="o">{</span>
+         <span class="nc">OAuth20Service</span> <span class="n">oauthService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServiceBuilder</span><span class="o">()</span>
+             <span class="o">.</span><span class="na">apiKey</span><span class="o">(</span><span class="no">CLIENT_ID</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">apiSecret</span><span class="o">(</span><span class="no">CLIENT_SECRET</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">callback</span><span class="o">(</span><span class="no">REDIRECT_URI</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">state</span><span class="o">(</span><span class="n">state</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">build</span><span class="o">(</span><span class="nc">NaverSigninApi</span><span class="o">.</span><span class="na">instance</span><span class="o">());</span>
+         <span class="cm">/* Scribe에서 제공하는 AccessToken 획득 기능으로 네아로 Access Token을 획득 */</span>
+         <span class="nc">OAuth2AccessToken</span> <span class="n">accessToken</span> <span class="o">=</span> <span class="n">oauthService</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">(</span><span class="n">code</span><span class="o">);</span>
+         <span class="k">return</span> <span class="n">accessToken</span><span class="o">;</span>
+     <span class="o">}</span>
+     <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+ <span class="o">}</span>
+ <span class="cm">/* 세션 유효성 검증을 위한 난수 생성기 */</span>
+ <span class="kd">private</span> <span class="nc">String</span> <span class="nf">generateRandomString</span><span class="o">()</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="no">UUID</span><span class="o">.</span><span class="na">randomUUID</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+ <span class="o">}</span>
+ <span class="cm">/* http session에 데이터 저장 */</span>
+ <span class="kd">private</span> <span class="kt">void</span> <span class="nf">setSession</span><span class="o">(</span><span class="nc">HttpSession</span> <span class="n">session</span><span class="o">,</span> <span class="nc">String</span> <span class="n">state</span><span class="o">)</span> <span class="o">{</span>
+     <span class="n">session</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="no">SESSION_STATE</span><span class="o">,</span> <span class="n">state</span><span class="o">);</span>
+ <span class="o">}</span>
+ <span class="cm">/* http session에서 데이터 가져오기 */</span>
+ <span class="kd">private</span> <span class="nc">String</span> <span class="nf">getSession</span><span class="o">(</span><span class="nc">HttpSession</span> <span class="n">session</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">return</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">session</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="no">SESSION_STATE</span><span class="o">);</span>
+ <span class="o">}</span>
+ <span class="cm">/* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">getUserProfile</span><span class="o">(</span><span class="nc">OAuth2AccessToken</span> <span class="n">oauthToken</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+     <span class="nc">OAuth20Service</span> <span class="n">oauthService</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ServiceBuilder</span><span class="o">()</span>
+         <span class="o">.</span><span class="na">apiKey</span><span class="o">(</span><span class="no">CLIENT_ID</span><span class="o">)</span>
+         <span class="o">.</span><span class="na">apiSecret</span><span class="o">(</span><span class="no">CLIENT_SECRET</span><span class="o">)</span>
+         <span class="o">.</span><span class="na">callback</span><span class="o">(</span><span class="no">REDIRECT_URI</span><span class="o">).</span><span class="na">build</span><span class="o">(</span><span class="nc">NaverSigninApi</span><span class="o">.</span><span class="na">instance</span><span class="o">());</span>
+     <span class="nc">OAuthRequest</span> <span class="n">request</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OAuthRequest</span><span class="o">(</span><span class="nc">Verb</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span> <span class="no">PROFILE_API_URL</span><span class="o">,</span> <span class="n">oauthService</span><span class="o">);</span>
+     <span class="n">oauthService</span><span class="o">.</span><span class="na">signRequest</span><span class="o">(</span><span class="n">oauthToken</span><span class="o">,</span> <span class="n">request</span><span class="o">);</span>
+     <span class="nc">Response</span> <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="na">send</span><span class="o">();</span>
+     <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="na">getBody</span><span class="o">();</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>java/com/example/oauth/sign/SignController.java
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.oauth.sign</span><span class="o">;</span>
+        
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpSession</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.simple.JSONObject</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.simple.parser.JSONParser</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.json.simple.parser.ParseException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Controller</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.ui.Model</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestMethod</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestParam</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.github.scribejava.core.model.OAuth2AccessToken</span><span class="o">;</span>
+        
+<span class="kn">import</span> <span class="nn">com.example.oauth.config.NaverSigninBO</span><span class="o">;</span>
+        
+<span class="cm">/**
+* Handles requests for the application home page.
+*/</span>
+<span class="nd">@Controller</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SigninController</span> <span class="o">{</span>
+        
+ <span class="nd">@Autowired</span>
+ <span class="kd">private</span> <span class="nc">NaverSigninBO</span> <span class="n">naverSigninBO</span><span class="o">;</span>
+ <span class="kd">private</span> <span class="nc">String</span> <span class="n">apiResult</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        
+ <span class="c1">//로그인 첫 화면 요청 메소드</span>
+ <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/oauth/signin"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="o">{</span>
+     <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span>
+     <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span>
+ <span class="o">})</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">signin</span><span class="o">(</span><span class="nc">Model</span> <span class="n">model</span><span class="o">,</span> <span class="nc">HttpSession</span> <span class="n">session</span><span class="o">)</span> <span class="o">{</span>
+     <span class="cm">/* 네이버아이디로 인증 URL을 생성하기 위하여 naverSigninBO클래스의 getAuthorizationUrl메소드 호출 */</span>
+     <span class="nc">String</span> <span class="n">naverAuthUrl</span> <span class="o">=</span> <span class="n">naverSigninBO</span><span class="o">.</span><span class="na">getAuthorizationUrl</span><span class="o">(</span><span class="n">session</span><span class="o">);</span>
+     <span class="c1">//https://nid.naver.com/oauth2.0/authorize?response_type=code&amp;client_id=sE***************&amp;</span>
+     <span class="c1">//redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Fsignin_project%2Fcallback&amp;state=e68c269c-5ba9-4c31-85da-54c16c658125</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"네이버:"</span> <span class="o">+</span> <span class="n">naverAuthUrl</span><span class="o">);</span>
+     <span class="c1">//네이버</span>
+     <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"url"</span><span class="o">,</span> <span class="n">naverAuthUrl</span><span class="o">);</span>
+     <span class="k">return</span> <span class="s">"signin"</span><span class="o">;</span>
+ <span class="o">}</span>
+ <span class="c1">//네이버 로그인 성공시 callback호출 메소드</span>
+ <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/oauth/naver/callback"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="o">{</span>
+     <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span>
+     <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span>
+ <span class="o">})</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">callback</span><span class="o">(</span><span class="nc">Model</span> <span class="n">model</span><span class="o">,</span> <span class="nd">@RequestParam</span> <span class="nc">String</span> <span class="n">code</span><span class="o">,</span> <span class="nd">@RequestParam</span> <span class="nc">String</span> <span class="n">state</span><span class="o">,</span> <span class="nc">HttpSession</span> <span class="n">session</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">ParseException</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"여기는 callback"</span><span class="o">);</span>
+     <span class="nc">OAuth2AccessToken</span> <span class="n">oauthToken</span><span class="o">;</span>
+     <span class="n">oauthToken</span> <span class="o">=</span> <span class="n">naverSigninBO</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">(</span><span class="n">session</span><span class="o">,</span> <span class="n">code</span><span class="o">,</span> <span class="n">state</span><span class="o">);</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"oauthToken : "</span> <span class="o">+</span> <span class="n">oauthToken</span><span class="o">);</span>
+     <span class="c1">//1. 로그인 사용자 정보를 읽어온다.</span>
+     <span class="n">apiResult</span> <span class="o">=</span> <span class="n">naverSigninBO</span><span class="o">.</span><span class="na">getUserProfile</span><span class="o">(</span><span class="n">oauthToken</span><span class="o">);</span> <span class="c1">//String형식의 json데이터</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"apiResult : "</span> <span class="o">+</span> <span class="n">apiResult</span><span class="o">);</span>
+     <span class="cm">/** apiResult json 구조
+     {"resultcode":"00",
+     "message":"success",
+     "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
+     **/</span>
+     <span class="c1">//2. String형식인 apiResult를 json형태로 바꿈</span>
+     <span class="nc">JSONParser</span> <span class="n">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JSONParser</span><span class="o">();</span>
+     <span class="nc">Object</span> <span class="n">obj</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="na">parse</span><span class="o">(</span><span class="n">apiResult</span><span class="o">);</span>
+     <span class="nc">JSONObject</span> <span class="n">jsonObj</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JSONObject</span><span class="o">)</span> <span class="n">obj</span><span class="o">;</span>
+     <span class="c1">//3. 데이터 파싱</span>
+     <span class="c1">//Top레벨 단계 _response 파싱</span>
+     <span class="nc">JSONObject</span> <span class="n">response_obj</span> <span class="o">=</span> <span class="o">(</span><span class="nc">JSONObject</span><span class="o">)</span> <span class="n">jsonObj</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"response"</span><span class="o">);</span>
+     <span class="c1">//response의 nickname값 파싱</span>
+     <span class="nc">String</span> <span class="n">nickname</span> <span class="o">=</span> <span class="o">(</span><span class="nc">String</span><span class="o">)</span> <span class="n">response_obj</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"nickname"</span><span class="o">);</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">nickname</span><span class="o">);</span>
+     <span class="c1">//4.파싱 닉네임 세션으로 저장</span>
+     <span class="n">session</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"sessionId"</span><span class="o">,</span> <span class="n">nickname</span><span class="o">);</span> <span class="c1">//세션 생성</span>
+     <span class="n">model</span><span class="o">.</span><span class="na">addAttribute</span><span class="o">(</span><span class="s">"result"</span><span class="o">,</span> <span class="n">apiResult</span><span class="o">);</span>
+     <span class="k">return</span> <span class="s">"signin"</span><span class="o">;</span>
+ <span class="o">}</span>
+ <span class="c1">//로그아웃</span>
+ <span class="nd">@RequestMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/oauth/logout"</span><span class="o">,</span> <span class="n">method</span> <span class="o">=</span> <span class="o">{</span>
+     <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">GET</span><span class="o">,</span>
+     <span class="nc">RequestMethod</span><span class="o">.</span><span class="na">POST</span>
+ <span class="o">})</span>
+ <span class="kd">public</span> <span class="nc">String</span> <span class="nf">logout</span><span class="o">(</span><span class="nc">HttpSession</span> <span class="n">session</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+     <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"여기는 logout"</span><span class="o">);</span>
+     <span class="n">session</span><span class="o">.</span><span class="na">invalidate</span><span class="o">();</span>
+     <span class="k">return</span> <span class="s">"redirect:/"</span><span class="o">;</span>
+ <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>webapp/WEB-INF/views/index.jsp
+        <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na"> pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+        
+<span class="nt">&lt;head&gt;</span>
+ <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;title&gt;</span>NAVER LOGIN TEST<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+        
+<span class="nt">&lt;body&gt;</span>
+ <span class="nt">&lt;h1&gt;</span>메인 페이지 입니다.<span class="nt">&lt;/h1&gt;</span>
+ <span class="nt">&lt;hr&gt;</span>
+ <span class="nt">&lt;br&gt;</span>
+ <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/oauth/signin"</span><span class="nt">&gt;</span>로그인 하러 가기 <span class="nt">&lt;/a&gt;</span>
+ <span class="nt">&lt;hr&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+        
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>webapp/WEB-INF/views/signin.jsp
+        <div class="language-jsp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;%@ page </span><span class="na">language=</span><span class="s">"java"</span><span class="na"> contentType=</span><span class="s">"text/html; charset=UTF-8"</span><span class="na"> pageEncoding=</span><span class="s">"UTF-8"</span><span class="nt">%&gt;</span>
+<span class="nt">&lt;%@ taglib </span><span class="na">prefix=</span><span class="s">"c"</span><span class="na"> uri=</span><span class="s">"http://java.sun.com/jsp/jstl/core"</span><span class="nt">%&gt;</span>
+<span class="cp">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+        
+<span class="nt">&lt;head&gt;</span>
+ <span class="nt">&lt;title&gt;</span>NAVER LOGIN TEST<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+        
+<span class="nt">&lt;body&gt;</span>
+ <span class="nt">&lt;h1&gt;</span>Login Form<span class="nt">&lt;/h1&gt;</span>
+ <span class="nt">&lt;hr&gt;</span>
+ <span class="nt">&lt;br&gt;</span>
+ <span class="nt">&lt;center&gt;</span>
+     <span class="nt">&lt;c:choose&gt;</span>
+         <span class="nt">&lt;c:when </span><span class="na">test=</span><span class="s">"</span><span class="si">${</span><span class="n">sessionId</span> <span class="o">!=</span> <span class="kc">null</span><span class="si">}</span><span class="s">"</span><span class="nt">&gt;</span>
+             <span class="nt">&lt;h2&gt;</span> 네이버 아이디 로그인 성공하셨습니다!! <span class="nt">&lt;/h2&gt;</span>
+             <span class="nt">&lt;h3&gt;</span>'${sessionId}' 님 환영합니다! <span class="nt">&lt;/h3&gt;</span>
+             <span class="nt">&lt;h3&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/oauth/logout"</span><span class="nt">&gt;</span>로그아웃<span class="nt">&lt;/a&gt;&lt;/h3&gt;</span>
+         <span class="nt">&lt;/c:when&gt;</span>
+         <span class="nt">&lt;c:otherwise&gt;</span>
+             <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"login.userdo"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">name=</span><span class="s">"frm"</span> <span class="na">style=</span><span class="s">"width:470px;"</span><span class="nt">&gt;</span>
+                 <span class="nt">&lt;h2&gt;</span>로그인<span class="nt">&lt;/h2&gt;</span>
+                 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"id"</span> <span class="na">id=</span><span class="s">"id"</span> <span class="na">class=</span><span class="s">"w3-input w3-border"</span> <span class="na">placeholder=</span><span class="s">"아이디"</span> <span class="na">value=</span><span class="s">"${id}"</span><span class="nt">&gt;</span>
+                 <span class="nt">&lt;br&gt;</span>
+                 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">id=</span><span class="s">"pwd"</span> <span class="na">name=</span><span class="s">"pwd"</span> <span class="na">class=</span><span class="s">"w3-input w3-border"</span> <span class="na">placeholder=</span><span class="s">"비밀번호"</span><span class="nt">&gt;</span> <span class="nt">&lt;br&gt;</span>
+                 <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"로그인"</span> <span class="na">onclick=</span><span class="s">"#"</span><span class="nt">&gt;</span> <span class="nt">&lt;br&gt;</span>
+             <span class="nt">&lt;/form&gt;</span>
+             <span class="nt">&lt;br&gt;</span>
+             <span class="c">&lt;!-- 네이버 로그인 창으로 이동 --&gt;</span>
+             <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"naver_id_login"</span> <span class="na">style=</span><span class="s">"text-align:center"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"${url}"</span><span class="nt">&gt;</span>
+                     <span class="nt">&lt;img</span> <span class="na">width=</span><span class="s">"223"</span>
+                         <span class="na">src=</span><span class="s">"https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"</span> <span class="nt">/&gt;&lt;/a&gt;</span>
+             <span class="nt">&lt;/div&gt;</span>
+             <span class="nt">&lt;br&gt;</span>
+         <span class="nt">&lt;/c:otherwise&gt;</span>
+     <span class="nt">&lt;/c:choose&gt;</span>
+ <span class="nt">&lt;/center&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+        
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>application.properties
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server.port=8080
+        
+spring.mvc.view.prefix=/WEB-INF/views/
+spring.mvc.view.suffix=.jsp
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<blockquote>
+  <p><a href="https://developers.naver.com/main/">https://developers.naver.com/main/</a><br />
+<a href="https://bumcrush.tistory.com/151">https://bumcrush.tistory.com/151</a><br />
+<a href="https://4urdev.tistory.com/47">https://4urdev.tistory.com/47</a></p>
+</blockquote>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#naver" class="page__taxonomy-item" rel="tag">naver</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#oauth2" class="page__taxonomy-item" rel="tag">OAuth2</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#springboot" class="page__taxonomy-item" rel="tag">Springboot</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#framework" class="page__taxonomy-item" rel="tag">Framework</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-02-25">February 25, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BOAuth2%5D+Springboot+%2B+naver+%2B+jsp%20http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-naver-jsp%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-naver-jsp%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-naver-jsp%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ci/ci-centos7-jenkins/" class="pagination--pager" title="[Jenkins] CentOS7 Jenkins 설정
+">이전</a>
+    
+    
+      <a href="/framework/framework-oauth2-springboot-facebook-google/" class="pagination--pager" title="작성중: [OAuth2] Springboot + Facebook, Google
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/scm/scm-create-github-blog/" rel="permalink">[Blog] GitHub에 blog 생성
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.
+312312
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-oauth2-springboot-facebook-google/" rel="permalink">작성중: [OAuth2] Springboot + Facebook, Google
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+  https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md
+https://github.com/TechPrimers/spring-boot-facebook-login-example
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ci/ci-centos7-jenkins/" rel="permalink">[Jenkins] CentOS7 Jenkins 설정
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Global Tool Configuration
+
+  Jenkins 관리 &gt; Global Tool Configuration 이동
+  JDK
+Uncheck Install automatically
+Name : jdk1.8
+JAVA_HOME : /usr/local/java
+  MAV...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-swagger/" rel="permalink">[Swagger] Springboot + swagger
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+  maven dependency 추가
+     &lt;dependency&gt;
+   &lt;groupId&gt;io.springfox&lt;/groupId&gt;
+   &lt;artifactId&gt;springfox-swagger2&lt;/artifactId&gt;
+   &...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
