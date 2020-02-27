@@ -1,0 +1,716 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[JAVA] Lambda + Stream API  - TMM</title>
+<meta name="description" content="정의    식별자 없이 실행 가능한 함수 표현식입니다.   익명 클래스와 비슷합니다.   자바로 함수형 프로그래밍 개발을 할 수 있습니다.  ">
+
+
+  <meta name="author" content="To much mong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[JAVA] Lambda + Stream API">
+<meta property="og:url" content="http://localhost:4000/language/language-java-lambda-stream/">
+
+
+  <meta property="og:description" content="정의    식별자 없이 실행 가능한 함수 표현식입니다.   익명 클래스와 비슷합니다.   자바로 함수형 프로그래밍 개발을 할 수 있습니다.  ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-02-26T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-02-25T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/language/language-java-lambda-stream/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much mong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[JAVA] Lambda + Stream API">
+    <meta itemprop="description" content="정의  식별자 없이 실행 가능한 함수 표현식입니다.  익명 클래스와 비슷합니다.  자바로 함수형 프로그래밍 개발을 할 수 있습니다.">
+    <meta itemprop="datePublished" content="2020-02-26T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-02-25T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[JAVA] Lambda + Stream API
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#정의">정의</a></li>
+  <li><a href="#관련-지식">관련 지식</a></li>
+  <li><a href="#기본-예제">기본 예제</a></li>
+  <li><a href="#어노테이션">어노테이션</a></li>
+  <li><a href="#lambda의-다양한-함수형-인터페이스">Lambda의 다양한 함수형 인터페이스</a></li>
+  <li><a href="#lambda-함수-예제">Lambda 함수 예제</a></li>
+  <li><a href="#stram-api">Stram API</a></li>
+  <li><a href="#anonymous-class">anonymous class</a></li>
+  <li><a href="#참고-사이트">참고 사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h3 id="정의">정의</h3>
+<ul>
+  <li>식별자 없이 실행 가능한 함수 표현식입니다.</li>
+  <li>익명 클래스와 비슷합니다.</li>
+  <li>자바로 함수형 프로그래밍 개발을 할 수 있습니다.</li>
+</ul>
+
+<h3 id="관련-지식">관련 지식</h3>
+<ul>
+  <li>함수형 인터페이스: 하나의 메소드만 선언되어 있는 인터페이스를 함수형 인터페이스라고 부릅니다.</li>
+  <li>익명 클래스: 이름이 없는 객체입니다. 인터페이스를 구현하기 위해 해당 인터페이스를 구현한 클래스를 생성해야 하는데 일회성이고 재사용할 필요가 없다면 굳이 클래스 파일을 만들 필요가 없습니다.</li>
+</ul>
+
+<h3 id="기본-예제">기본 예제</h3>
+<ul>
+  <li>Calculator.java
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">lambda</span><span class="o">;</span>
+
+  <span class="nd">@FunctionalInterface</span>
+  <span class="kd">public</span> <span class="kd">interface</span> <span class="nc">Calculator</span> <span class="o">{</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="kt">int</span> <span class="n">num1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">num2</span><span class="o">);</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>BasicUsage.java
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">lambda</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">BasicUsage</span> 
+  <span class="o">{</span>
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="kd">final</span> <span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="kd">final</span> <span class="nc">Calculator</span> <span class="n">cal</span> <span class="o">=</span> <span class="o">(</span><span class="n">num1</span><span class="o">,</span> <span class="n">num2</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="o">{</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span><span class="o">);</span> <span class="o">};</span>
+          <span class="n">cal</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="어노테이션">어노테이션</h3>
+<ul>
+  <li>어노테이션 <code class="highlighter-rouge">@FunctionalInterface</code> 을 사용하면 이 인터페이스는 함수형 인터페이스이며 메소드가 두개 이상 만들면 문법 오류가 나게되어 이후에 수정을 방지할 수 있습니다.</li>
+</ul>
+
+<h3 id="lambda의-다양한-함수형-인터페이스">Lambda의 다양한 함수형 인터페이스</h3>
+<blockquote>
+  <p>https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html</p>
+</blockquote>
+
+<h3 id="lambda-함수-예제">Lambda 함수 예제</h3>
+<ul>
+  <li>LambdaTest.java
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">lambda</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+  <span class="kn">import</span> <span class="nn">java.util.function.Predicate</span><span class="o">;</span>
+  <span class="kn">import</span> <span class="nn">java.util.function.Consumer</span><span class="o">;</span>
+
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">LambdaTest</span> <span class="o">{</span>
+    
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="cm">/*
+          * Predicate
+          * 문자열을 받아서 해당 문자열이 빈 문자열인지를 반환
+          */</span>
+          <span class="nc">String</span> <span class="n">str</span> <span class="o">=</span> <span class="s">"asd"</span><span class="o">;</span>
+          <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">lambdaIsEqual</span><span class="o">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">p</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">(),</span> <span class="n">str</span><span class="o">));</span>
+      <span class="o">}</span>
+        
+      <span class="cm">/**
+      * boolean Predicate&lt;T&gt;
+      */</span>
+      <span class="kd">public</span> <span class="kd">static</span> <span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="kt">boolean</span> <span class="nf">lambdaIsEqual</span><span class="o">(</span><span class="nc">Predicate</span><span class="o">&lt;</span><span class="no">T</span><span class="o">&gt;</span> <span class="n">predicate</span><span class="o">,</span><span class="no">T</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span>
+          <span class="k">return</span> <span class="n">predicate</span><span class="o">.</span><span class="na">test</span><span class="o">(</span><span class="n">t</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="stram-api">Stram API</h3>
+<ul>
+  <li>Lambda 를 소개할때 <em>Stream API</em>는 필수인거 같습니다. <em>Stream API</em> 이란 컬렉션, 배열등의 저장 요소를 하나씩 참조하며 함수형 인터페이스(람다식)를 적용하며 반복적으로 처리할 수 있도록 해주는 기능입니다.</li>
+  <li>꼭 알아둘 사항입니다.
+    <ul>
+      <li>Stream 은 재사용 불가</li>
+      <li>병렬 스트림으로 멀티 쓰레드 사용이 가능</li>
+      <li>중개 연산이 아닌 지연 연산 사용</li>
+    </ul>
+  </li>
+  <li>연산자 설명은 하기 링크로 대처하겠습니다. 너무 많아요.
+    <blockquote>
+      <p>https://jeong-pro.tistory.com/165</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="anonymous-class">anonymous class</h3>
+<ul>
+  <li>AnonymousClassTest.java
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">package</span> <span class="nn">anonymous</span><span class="o">;</span>
+
+  <span class="kd">interface</span> <span class="nc">Test</span><span class="o">{</span>
+      <span class="kd">public</span> <span class="kt">void</span> <span class="nf">go</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">);</span>		
+  <span class="o">}</span>
+        
+  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">AnonymousClassTest</span> <span class="o">{</span>
+        
+      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+          <span class="nc">Test</span> <span class="n">test</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Test</span><span class="o">(){</span>
+              <span class="kd">public</span> <span class="kt">void</span> <span class="nf">go</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">){</span>
+                  <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">name</span> <span class="o">+</span> <span class="s">" GO! GO!"</span><span class="o">);</span>
+              <span class="o">}</span>
+          <span class="o">};</span>
+          <span class="n">test</span><span class="o">.</span><span class="na">go</span><span class="o">(</span><span class="s">"aaa"</span><span class="o">);</span>
+      <span class="o">}</span>
+  <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="참고-사이트">참고 사이트</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">lambda</span><span class="pi">:</span> 
+    <span class="s">https://coding-factory.tistory.com/265</span>
+    <span class="s">https://jdm.kr/blog/181</span>
+    <span class="s">http://tcpschool.com/java/java_lambda_concept</span>
+    <span class="s">https://coding-start.tistory.com/131</span>
+
+<span class="na">anonymous class</span><span class="pi">:</span>
+    <span class="s">https://yulsfamily.tistory.com/112</span>
+
+<span class="na">stream</span><span class="pi">:</span>
+    <span class="s">https://jeong-pro.tistory.com/165</span>
+
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#anonymous-class" class="page__taxonomy-item" rel="tag">anonymous class</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#java" class="page__taxonomy-item" rel="tag">JAVA</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#lambda" class="page__taxonomy-item" rel="tag">Lambda</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#stream-api" class="page__taxonomy-item" rel="tag">Stream API</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">Language</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-02-25">February 25, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BJAVA%5D+Lambda+%2B+Stream+API+%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-java-lambda-stream%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-java-lambda-stream%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-java-lambda-stream%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/scm/scm-create-github-blog/" class="pagination--pager" title="[Blog] GitHub에 blog 생성
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/scm/scm-create-github-blog/" rel="permalink">[Blog] GitHub에 blog 생성
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.
+312312
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-oauth2-springboot-facebook-google/" rel="permalink">작성중: [OAuth2] Springboot + Facebook, Google
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+  https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md
+https://github.com/TechPrimers/spring-boot-facebook-login-example
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-oauth2-springboot-naver-jsp/" rel="permalink">[OAuth2] Springboot + naver + jsp
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">
+  
+    Naver developers &gt; Application &gt; Application 등록
+
+    
+      어플리케이션 이름 입력 : naver_sign_in
+      사용 API 선택 : 네아로
+      사용 API 전부 선택
+      로그인 오픈 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ci/ci-centos7-jenkins/" rel="permalink">[Jenkins] CentOS7 Jenkins 설정
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Global Tool Configuration
+
+  Jenkins 관리 &gt; Global Tool Configuration 이동
+  JDK
+Uncheck Install automatically
+Name : jdk1.8
+JAVA_HOME : /usr/local/java
+  MAV...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
