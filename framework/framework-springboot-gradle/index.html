@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>작성중: [OAuth2] Springboot + Facebook, Google  - TMM</title>
-<meta name="description" content="   spring-boot-oauth2 tutorials site social 가입정보 https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/ https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md https://github.com/TechPrimers/spring-boot-facebook-login-example  ">
+<!-- begin _includes/seo.html --><title>[Gradle] Springboot + Gradle - TMM</title>
+<meta name="description" content="VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다. ">
 
 
   <meta name="author" content="To much mong">
@@ -19,19 +19,19 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="작성중: [OAuth2] Springboot + Facebook, Google">
-<meta property="og:url" content="http://localhost:4000/framework/framework-oauth2-springboot-facebook-google/">
+<meta property="og:title" content="[Gradle] Springboot + Gradle">
+<meta property="og:url" content="http://localhost:4000/framework/framework-springboot-gradle/">
 
 
-  <meta property="og:description" content="   spring-boot-oauth2 tutorials site social 가입정보 https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/ https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md https://github.com/TechPrimers/spring-boot-facebook-login-example  ">
-
-
-
+  <meta property="og:description" content="VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다. ">
 
 
 
 
-  <meta property="article:published_time" content="2020-02-20T00:00:00+09:00">
+
+
+
+  <meta property="article:published_time" content="2020-03-02T00:00:00+09:00">
 
 
 
@@ -44,7 +44,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/framework/framework-oauth2-springboot-facebook-google/">
+<link rel="canonical" href="http://localhost:4000/framework/framework-springboot-gradle/">
 
 
 
@@ -272,15 +272,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="작성중: [OAuth2] Springboot + Facebook, Google">
-    <meta itemprop="description" content="  spring-boot-oauth2 tutorials sitesocial 가입정보https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.mdhttps://github.com/TechPrimers/spring-boot-facebook-login-example">
-    <meta itemprop="datePublished" content="2020-02-20T00:00:00+09:00">
+    <meta itemprop="headline" content="[Gradle] Springboot + Gradle">
+    <meta itemprop="description" content="VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.">
+    <meta itemprop="datePublished" content="2020-03-02T00:00:00+09:00">
     <meta itemprop="dateModified" content="2020-02-25T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">작성중: [OAuth2] Springboot + Facebook, Google
+          <h1 id="page-title" class="page__title" itemprop="headline">[Gradle] Springboot + Gradle
 </h1>
           
         </header>
@@ -291,18 +291,123 @@
           <aside class="sidebar__right ">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
-              
+              <ul class="toc__menu">
+  <li><a href="#프로젝트-생성">프로젝트 생성</a></li>
+  <li><a href="#tasks-실행-명령어">tasks 실행 명령어</a></li>
+  <li><a href="#application-실행">application 실행</a></li>
+  <li><a href="#spring-boot-run">spring boot run</a></li>
+  <li><a href="#dependencies-추가">dependencies 추가</a></li>
+  <li><a href="#war-파일-생성">war 파일 생성</a></li>
+  <li><a href="#jar-파일-생성">jar 파일 생성</a></li>
+  <li><a href="#참고사이트">참고사이트</a></li>
+</ul>
 
             </nav>
           </aside>
         
-        <blockquote>
-  <p><a href="https://spring.io/guides/tutorials/spring-boot-oauth2/">spring-boot-oauth2 tutorials site</a>
-<a href="https://engkimbs.tistory.com/849">social 가입정보</a>
-<a href="https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/">https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/</a>
-<a href="https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md">https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md</a><br />
-<a href="https://github.com/TechPrimers/spring-boot-facebook-login-example">https://github.com/TechPrimers/spring-boot-facebook-login-example</a></p>
-</blockquote>
+        <p>VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.</p>
+
+<h3 id="프로젝트-생성">프로젝트 생성</h3>
+<p>vscode extensions 중 <em>Java Extension Pack (Microsoft)</em>, <em>Spring Boot Extension Pack (Pivotal)</em> 를 추가하면 생성이 가능합니다.
+<em>command + shift + p</em> 를 누르고 <em>Spring Initalizr: Generate a Gradle Project</em> 선택 후 추가 정보를 입력 및 선택합니다.
+그럼 bulid.gradle, gradlew 등 관련 파일들이 생성된것을 확인 할 수 있습니다.</p>
+
+<h3 id="tasks-실행-명령어">tasks 실행 명령어</h3>
+<ul>
+  <li>별 설명이 없어도 이해할 수 있는 명령들 입니다.
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./gradlew clean
+<span class="nv">$ </span>./gradlew compileJava
+<span class="nv">$ </span>./gradlew jar
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="application-실행">application 실행</h3>
+<p>gradle 프로젝트 생성시 타입을 java-applicaiton 주면 자동 셋팅 되지만 그렇지 않을경우 몇가지를 추가해야 메인 클레스를 실행 할 수 있습니다. 물론 스프링 메인 함수도 실행 가능 합니다.</p>
+<ul>
+  <li>build.gradle 추가
+    <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugins {
+  id 'org.springframework.boot' version '2.2.5.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  id 'java'
+  id "application"
+}
+
+mainClassName = "com.example.test.DemoApplication"
+</code></pre></div>    </div>
+  </li>
+  <li>실행 명령어
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./gradlew run
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="spring-boot-run">spring boot run</h3>
+<ul>
+  <li>실행 명령어
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./gradlew bootrun
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="dependencies-추가">dependencies 추가</h3>
+<ul>
+  <li>build.gradle 추가
+    <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="war-파일-생성">war 파일 생성</h3>
+<ul>
+  <li>build.gradle 추가
+    <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugins {
+  id "war"
+}
+
+dependencies {
+  providedCompile 'org.springframework.boot:spring-boot-starter-tomcat'
+}
+
+bootWar {
+    baseName = 'spring-boot-war'
+    archiveVersion = "0.0.0"
+    // archiveFileName = '-.war'
+}
+</code></pre></div>    </div>
+  </li>
+  <li>실행 명령어
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./gradlew bootwar
+</code></pre></div>    </div>
+  </li>
+  <li>tomcat 서버에 추가해서 실행</li>
+</ul>
+
+<h3 id="jar-파일-생성">jar 파일 생성</h3>
+<ul>
+  <li>build.gradle 추가
+    <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bootJar {
+    archiveBaseName = 'spring-boot-jar'
+    // archiveFileName = '-.jar'
+    archiveVersion = "0.0.0"
+}
+</code></pre></div>    </div>
+  </li>
+  <li>실행 명령어
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./gradlew bootjar
+
+<span class="nv">$ </span>java <span class="nt">-jar</span> build/libs/spring-boot-jar-0.0.0.jar
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="참고사이트">참고사이트</h3>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">war</span><span class="pi">:</span> <span class="s">https://gigas-blog.tistory.com/115</span>
+<span class="na">jar</span><span class="pi">:</span> <span class="s">https://gigas-blog.tistory.com/114</span>
+<span class="na">build type</span><span class="pi">:</span> <span class="s">http://www.devkuma.com/books/pages/1069</span>
+</code></pre></div></div>
 
         
       </section>
@@ -323,7 +428,7 @@
     
       
       
-      <a href="/tags/#oauth2" class="page__taxonomy-item" rel="tag">OAuth2</a><span class="sep">, </span>
+      <a href="/tags/#gradle" class="page__taxonomy-item" rel="tag">Gradle</a><span class="sep">, </span>
     
       
       
@@ -364,23 +469,22 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%EC%9E%91%EC%84%B1%EC%A4%91%3A+%5BOAuth2%5D+Springboot+%2B+Facebook%2C+Google+%20http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-facebook-google%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BGradle%5D+Springboot+%2B+Gradle%20http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-springboot-gradle%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-facebook-google%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-springboot-gradle%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-facebook-google%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-springboot-gradle%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/framework/framework-oauth2-springboot-naver-jsp/" class="pagination--pager" title="[OAuth2] Springboot + naver + jsp
+      <a href="/scm/scm-create-github-blog/" class="pagination--pager" title="[Blog] GitHub에 blog 생성
 ">이전</a>
     
     
-      <a href="/scm/scm-create-github-blog/" class="pagination--pager" title="[Blog] GitHub에 blog 생성
-">다음</a>
+      <a href="#" class="pagination--pager disabled">다음</a>
     
   </nav>
 
@@ -404,12 +508,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/framework/framework-springboot-gradle/" rel="permalink">[Gradle] Springboot + Gradle
+        <a href="/scm/scm-create-github-blog/" rel="permalink">[Blog] GitHub에 blog 생성
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.
+    <p class="archive__item-excerpt" itemprop="description">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.
 </p>
   </article>
 </div>
@@ -424,13 +528,16 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/scm/scm-create-github-blog/" rel="permalink">[Blog] GitHub에 blog 생성
+        <a href="/framework/framework-oauth2-springboot-facebook-google/" rel="permalink">작성중: [OAuth2] Springboot + Facebook, Google
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.
-</p>
+    <p class="archive__item-excerpt" itemprop="description">
+  spring-boot-oauth2 tutorials site
+social 가입정보
+https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/
+https://github.com/cheese10yun/s...</p>
   </article>
 </div>
 

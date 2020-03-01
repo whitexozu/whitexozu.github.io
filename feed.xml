@@ -1,5 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-26T21:24:24+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Blog] GitHub에 blog 생성</title><link href="http://localhost:4000/scm/scm-create-github-blog/" rel="alternate" type="text/html" title="[Blog] GitHub에 blog 생성" /><published>2020-02-25T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-create-github-blog</id><content type="html" xml:base="http://localhost:4000/scm/scm-create-github-blog/">&lt;p&gt;Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.
-312312&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-02T07:08:20+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Gradle] Springboot + Gradle</title><link href="http://localhost:4000/framework/framework-springboot-gradle/" rel="alternate" type="text/html" title="[Gradle] Springboot + Gradle" /><published>2020-03-02T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-springboot-gradle</id><content type="html" xml:base="http://localhost:4000/framework/framework-springboot-gradle/">&lt;p&gt;VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;프로젝트-생성&quot;&gt;프로젝트 생성&lt;/h3&gt;
+&lt;p&gt;vscode extensions 중 &lt;em&gt;Java Extension Pack (Microsoft)&lt;/em&gt;, &lt;em&gt;Spring Boot Extension Pack (Pivotal)&lt;/em&gt; 를 추가하면 생성이 가능합니다.
+&lt;em&gt;command + shift + p&lt;/em&gt; 를 누르고 &lt;em&gt;Spring Initalizr: Generate a Gradle Project&lt;/em&gt; 선택 후 추가 정보를 입력 및 선택합니다.
+그럼 bulid.gradle, gradlew 등 관련 파일들이 생성된것을 확인 할 수 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;tasks-실행-명령어&quot;&gt;tasks 실행 명령어&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;별 설명이 없어도 이해할 수 있는 명령들 입니다.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew clean
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew compileJava
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;application-실행&quot;&gt;application 실행&lt;/h3&gt;
+&lt;p&gt;gradle 프로젝트 생성시 타입을 java-applicaiton 주면 자동 셋팅 되지만 그렇지 않을경우 몇가지를 추가해야 메인 클레스를 실행 할 수 있습니다. 물론 스프링 메인 함수도 실행 가능 합니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;build.gradle 추가
+    &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;plugins {
+  id 'org.springframework.boot' version '2.2.5.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  id 'java'
+  id &quot;application&quot;
+}
+
+mainClassName = &quot;com.example.test.DemoApplication&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;실행 명령어
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;spring-boot-run&quot;&gt;spring boot run&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;실행 명령어
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew bootrun
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;dependencies-추가&quot;&gt;dependencies 추가&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;build.gradle 추가
+    &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;war-파일-생성&quot;&gt;war 파일 생성&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;build.gradle 추가
+    &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;plugins {
+  id &quot;war&quot;
+}
+
+dependencies {
+  providedCompile 'org.springframework.boot:spring-boot-starter-tomcat'
+}
+
+bootWar {
+    baseName = 'spring-boot-war'
+    archiveVersion = &quot;0.0.0&quot;
+    // archiveFileName = '-.war'
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;실행 명령어
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew bootwar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;tomcat 서버에 추가해서 실행&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;jar-파일-생성&quot;&gt;jar 파일 생성&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;build.gradle 추가
+    &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bootJar {
+    archiveBaseName = 'spring-boot-jar'
+    // archiveFileName = '-.jar'
+    archiveVersion = &quot;0.0.0&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;실행 명령어
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew bootjar
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;java &lt;span class=&quot;nt&quot;&gt;-jar&lt;/span&gt; build/libs/spring-boot-jar-0.0.0.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h3&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;war&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gigas-blog.tistory.com/115&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;jar&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gigas-blog.tistory.com/114&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;build type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://www.devkuma.com/books/pages/1069&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="Springboot" /><category term="Gradle" /><summary type="html">VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.</summary></entry><entry><title type="html">[Blog] GitHub에 blog 생성</title><link href="http://localhost:4000/scm/scm-create-github-blog/" rel="alternate" type="text/html" title="[Blog] GitHub에 blog 생성" /><published>2020-02-25T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-create-github-blog</id><content type="html" xml:base="http://localhost:4000/scm/scm-create-github-blog/">&lt;p&gt;Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;os--app&quot;&gt;OS &amp;amp; App&lt;/h2&gt;
 
@@ -144,10 +245,13 @@ jekyll 4.0.0: Jekyll은 개인, 프로젝트 또는 조직 사이트를위한 �
 https://junhobaik.github.io/jekyll-apply-theme/
 https://rainsound-k.github.io/jekyll-blog/2018/05/02/apply-custom-plugin.html
 https://jetalog.net/86&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="git" /><category term="blog" /><summary type="html">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다. 312312</summary></entry><entry><title type="html">작성중: [OAuth2] Springboot + Facebook, Google</title><link href="http://localhost:4000/framework/framework-oauth2-springboot-facebook-google/" rel="alternate" type="text/html" title="작성중: [OAuth2] Springboot + Facebook, Google " /><published>2020-02-20T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-oauth2-springboot-facebook-google</id><content type="html" xml:base="http://localhost:4000/framework/framework-oauth2-springboot-facebook-google/">&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md&quot;&gt;https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md&lt;/a&gt;&lt;br /&gt;
+&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="git" /><category term="blog" /><summary type="html">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.</summary></entry><entry><title type="html">작성중: [OAuth2] Springboot + Facebook, Google</title><link href="http://localhost:4000/framework/framework-oauth2-springboot-facebook-google/" rel="alternate" type="text/html" title="작성중: [OAuth2] Springboot + Facebook, Google " /><published>2020-02-20T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-oauth2-springboot-facebook-google</id><content type="html" xml:base="http://localhost:4000/framework/framework-oauth2-springboot-facebook-google/">&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://spring.io/guides/tutorials/spring-boot-oauth2/&quot;&gt;spring-boot-oauth2 tutorials site&lt;/a&gt;
+&lt;a href=&quot;https://engkimbs.tistory.com/849&quot;&gt;social 가입정보&lt;/a&gt;
+&lt;a href=&quot;https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/&quot;&gt;https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/&lt;/a&gt;
+&lt;a href=&quot;https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md&quot;&gt;https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://github.com/TechPrimers/spring-boot-facebook-login-example&quot;&gt;https://github.com/TechPrimers/spring-boot-facebook-login-example&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="OAuth2" /><category term="Springboot" /><summary type="html">https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md https://github.com/TechPrimers/spring-boot-facebook-login-example</summary></entry><entry><title type="html">[OAuth2] Springboot + naver + jsp</title><link href="http://localhost:4000/framework/framework-oauth2-springboot-naver-jsp/" rel="alternate" type="text/html" title="[OAuth2] Springboot + naver + jsp" /><published>2020-02-19T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-oauth2-springboot-naver-jsp</id><content type="html" xml:base="http://localhost:4000/framework/framework-oauth2-springboot-naver-jsp/">&lt;ol&gt;
+&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="OAuth2" /><category term="Springboot" /><summary type="html">spring-boot-oauth2 tutorials site social 가입정보 https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/ https://github.com/cheese10yun/spring-security-oauth2-social/blob/master/doc/step-00.md https://github.com/TechPrimers/spring-boot-facebook-login-example</summary></entry><entry><title type="html">[OAuth2] Springboot + naver + jsp</title><link href="http://localhost:4000/framework/framework-oauth2-springboot-naver-jsp/" rel="alternate" type="text/html" title="[OAuth2] Springboot + naver + jsp" /><published>2020-02-19T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-oauth2-springboot-naver-jsp</id><content type="html" xml:base="http://localhost:4000/framework/framework-oauth2-springboot-naver-jsp/">&lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;Naver developers &amp;gt; Application &amp;gt; Application 등록&lt;/p&gt;
 
@@ -968,7 +1072,18 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
 &lt;h3 id=&quot;gcp-ssh-접속-설정&quot;&gt;gcp ssh 접속 설정&lt;/h3&gt;
 &lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;https://ruuci.tistory.com/6&quot;&gt;https://ruuci.tistory.com/6&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="GCP" /><category term="Mysql" /><category term="JDK" /><category term="Jenkins" /><summary type="html">Instance 생성</summary></entry><entry><title type="html">Layout: Header Video</title><link href="http://localhost:4000/layout/uncategorized/layout-header-video/" rel="alternate" type="text/html" title="Layout: Header Video" /><published>2017-01-23T00:00:00+09:00</published><updated>2017-01-23T00:00:00+09:00</updated><id>http://localhost:4000/layout/uncategorized/layout-header-video</id><content type="html" xml:base="http://localhost:4000/layout/uncategorized/layout-header-video/">&lt;p&gt;This post should display a &lt;strong&gt;header with a responsive video&lt;/strong&gt;, if the theme supports it.&lt;/p&gt;
+&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="GCP" /><category term="Mysql" /><category term="JDK" /><category term="Jenkins" /><summary type="html">Instance 생성</summary></entry><entry><title type="html">Layout: Sidebar Custom</title><link href="http://localhost:4000/layout-sidebar-custom/" rel="alternate" type="text/html" title="Layout: Sidebar Custom" /><published>2012-03-15T00:00:00+09:00</published><updated>2012-03-15T00:00:00+09:00</updated><id>http://localhost:4000/layout-sidebar-custom</id><content type="html" xml:base="http://localhost:4000/layout-sidebar-custom/">&lt;p&gt;This post has a custom sidebar set in the post’s YAML Front Matter.&lt;/p&gt;
+
+&lt;p&gt;An example of how that YAML could look is:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;sidebar&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Title&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://placehold.it/350x250&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;image_alt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;image&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Some&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;here.&quot;&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Another&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Title&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;More&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;here.&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><summary type="html">A post with custom sidebar content.</summary></entry><entry><title type="html">Layout: Header Video</title><link href="http://localhost:4000/layout/uncategorized/layout-header-video/" rel="alternate" type="text/html" title="Layout: Header Video" /><published>2012-03-15T00:00:00+09:00</published><updated>2012-03-15T00:00:00+09:00</updated><id>http://localhost:4000/layout/uncategorized/layout-header-video</id><content type="html" xml:base="http://localhost:4000/layout/uncategorized/layout-header-video/">&lt;p&gt;This post should display a &lt;strong&gt;header with a responsive video&lt;/strong&gt;, if the theme supports it.&lt;/p&gt;
 
 &lt;h2 id=&quot;settings&quot;&gt;Settings&lt;/h2&gt;
 
@@ -1036,18 +1151,7 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
   &lt;span class=&quot;na&quot;&gt;video&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;212731897&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;provider&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;vimeo&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="video" /><category term="layout" /><summary type="html">This post should display a header with a responsive video, if the theme supports it.</summary></entry><entry><title type="html">Layout: Sidebar Custom</title><link href="http://localhost:4000/layout-sidebar-custom/" rel="alternate" type="text/html" title="Layout: Sidebar Custom" /><published>2012-03-15T00:00:00+09:00</published><updated>2012-03-15T00:00:00+09:00</updated><id>http://localhost:4000/layout-sidebar-custom</id><content type="html" xml:base="http://localhost:4000/layout-sidebar-custom/">&lt;p&gt;This post has a custom sidebar set in the post’s YAML Front Matter.&lt;/p&gt;
-
-&lt;p&gt;An example of how that YAML could look is:&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;sidebar&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Title&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://placehold.it/350x250&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;image_alt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;image&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Some&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;here.&quot;&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Another&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Title&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;More&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;here.&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><summary type="html">A post with custom sidebar content.</summary></entry><entry><title type="html">Layout: Header Image and Text Readability</title><link href="http://localhost:4000/layout-header-image-text-readability/" rel="alternate" type="text/html" title="Layout: Header Image and Text Readability" /><published>2012-03-15T00:00:00+09:00</published><updated>2012-03-15T00:00:00+09:00</updated><id>http://localhost:4000/layout-header-image-text-readability</id><content type="html" xml:base="http://localhost:4000/layout-header-image-text-readability/">&lt;p&gt;This is a sample post with a large feature image&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; up top and tons of text. Odio ad blue bottle vinyl, 90’s narwhal commodo bitters pour-over nostrud. Ugh est hashtag in, fingerstache adipisicing laboris esse Pinterest shabby chic Portland. Shoreditch bicycle rights anim, flexitarian laboris put a bird on it vinyl cupidatat narwhal. Hashtag artisan skateboard, flannel Bushwick nesciunt salvia aute fixie do plaid post-ironic dolor McSweeney’s. Cliche pour-over chambray nulla four loko skateboard sapiente hashtag.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="video" /><category term="layout" /><summary type="html">This post should display a header with a responsive video, if the theme supports it.</summary></entry><entry><title type="html">Layout: Header Image and Text Readability</title><link href="http://localhost:4000/layout-header-image-text-readability/" rel="alternate" type="text/html" title="Layout: Header Image and Text Readability" /><published>2012-03-15T00:00:00+09:00</published><updated>2012-03-15T00:00:00+09:00</updated><id>http://localhost:4000/layout-header-image-text-readability</id><content type="html" xml:base="http://localhost:4000/layout-header-image-text-readability/">&lt;p&gt;This is a sample post with a large feature image&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; up top and tons of text. Odio ad blue bottle vinyl, 90’s narwhal commodo bitters pour-over nostrud. Ugh est hashtag in, fingerstache adipisicing laboris esse Pinterest shabby chic Portland. Shoreditch bicycle rights anim, flexitarian laboris put a bird on it vinyl cupidatat narwhal. Hashtag artisan skateboard, flannel Bushwick nesciunt salvia aute fixie do plaid post-ironic dolor McSweeney’s. Cliche pour-over chambray nulla four loko skateboard sapiente hashtag.&lt;/p&gt;
 
 &lt;p&gt;Vero laborum commodo occupy. Semiotics voluptate mumblecore pug. Cosby sweater ullamco quinoa ennui assumenda, sapiente occupy delectus lo-fi. &lt;em&gt;Ea fashion axe &lt;a href=&quot;#&quot;&gt;Marfa cillum aliquip&lt;/a&gt;. Retro Bushwick keytar cliche.&lt;/em&gt; Before they sold out sustainable gastropub Marfa readymade, ethical Williamsburg skateboard brunch qui consectetur gentrify semiotics. Mustache cillum irony, fingerstache magna pour-over keffiyeh tousled selfies.&lt;/p&gt;
 
