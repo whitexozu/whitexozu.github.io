@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-02T07:08:20+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Gradle] Springboot + Gradle</title><link href="http://localhost:4000/framework/framework-springboot-gradle/" rel="alternate" type="text/html" title="[Gradle] Springboot + Gradle" /><published>2020-03-02T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-springboot-gradle</id><content type="html" xml:base="http://localhost:4000/framework/framework-springboot-gradle/">&lt;p&gt;VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;프로젝트-생성&quot;&gt;프로젝트 생성&lt;/h3&gt;
@@ -31,10 +32,47 @@ mainClassName = &quot;com.example.test.DemoApplication&quot;
   &lt;/li&gt;
   &lt;li&gt;실행 명령어
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew run
+=======
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-02-28T05:28:51+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[JAVA] Lambda + Stream API</title><link href="http://localhost:4000/language/language-java-lambda-stream/" rel="alternate" type="text/html" title="[JAVA] Lambda + Stream API " /><published>2020-02-26T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-lambda-stream</id><content type="html" xml:base="http://localhost:4000/language/language-java-lambda-stream/">&lt;h3 id=&quot;정의&quot;&gt;정의&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;식별자 없이 실행 가능한 함수 표현식입니다.&lt;/li&gt;
+  &lt;li&gt;익명 클래스와 비슷합니다.&lt;/li&gt;
+  &lt;li&gt;자바로 함수형 프로그래밍 개발을 할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;관련-지식&quot;&gt;관련 지식&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;함수형 인터페이스: 하나의 메소드만 선언되어 있는 인터페이스를 함수형 인터페이스라고 부릅니다.&lt;/li&gt;
+  &lt;li&gt;익명 클래스: 이름이 없는 객체입니다. 인터페이스를 구현하기 위해 해당 인터페이스를 구현한 클래스를 생성해야 하는데 일회성이고 재사용할 필요가 없다면 굳이 클래스 파일을 만들 필요가 없습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;기본-예제&quot;&gt;기본 예제&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Calculator.java
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Calculator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;BasicUsage.java
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BasicUsage&lt;/span&gt; 
+  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Calculator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;cal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+>>>>>>> 3c81a24ce2e7c31ea0d6561354ec667929181bc3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
+<<<<<<< HEAD
 &lt;h3 id=&quot;spring-boot-run&quot;&gt;spring boot run&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;실행 명령어
@@ -49,10 +87,51 @@ mainClassName = &quot;com.example.test.DemoApplication&quot;
     &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
+=======
+&lt;h3 id=&quot;어노테이션&quot;&gt;어노테이션&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;어노테이션 &lt;code class=&quot;highlighter-rouge&quot;&gt;@FunctionalInterface&lt;/code&gt; 을 사용하면 이 인터페이스는 함수형 인터페이스이며 메소드가 두개 이상 만들면 문법 오류가 나게되어 이후에 수정을 방지할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lambda의-다양한-함수형-인터페이스&quot;&gt;Lambda의 다양한 함수형 인터페이스&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;LambdaTest.java
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.function.Predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.function.Consumer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LambdaTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    
+      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;cm&quot;&gt;/*
+          * Predicate
+          * 문자열을 받아서 해당 문자열이 빈 문자열인지를 반환
+          */&lt;/span&gt;
+          &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;asd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lambdaIsEqual&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        
+      &lt;span class=&quot;cm&quot;&gt;/**
+      * boolean Predicate&amp;lt;T&amp;gt;
+      */&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lambdaIsEqual&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+>>>>>>> 3c81a24ce2e7c31ea0d6561354ec667929181bc3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
+<<<<<<< HEAD
 &lt;h3 id=&quot;war-파일-생성&quot;&gt;war 파일 생성&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;build.gradle 추가
@@ -92,15 +171,72 @@ bootWar {
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew bootjar
 
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;java &lt;span class=&quot;nt&quot;&gt;-jar&lt;/span&gt; build/libs/spring-boot-jar-0.0.0.jar
+=======
+&lt;h3 id=&quot;stream-api&quot;&gt;Stream API&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Lambda 를 소개할때 &lt;em&gt;Stream API&lt;/em&gt;는 필수인거 같습니다. &lt;em&gt;Stream API&lt;/em&gt; 이란 컬렉션, 배열등의 저장 요소를 하나씩 참조하며 함수형 인터페이스(람다식)를 적용하며 반복적으로 처리할 수 있도록 해주는 기능입니다.&lt;/li&gt;
+  &lt;li&gt;꼭 알아둘 사항입니다.
+    &lt;ul&gt;
+      &lt;li&gt;Stream 은 재사용 불가&lt;/li&gt;
+      &lt;li&gt;병렬 스트림으로 멀티 쓰레드 사용이 가능&lt;/li&gt;
+      &lt;li&gt;중개 연산이 아닌 지연 연산 사용&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;연산자 설명은 하기 링크로 대처하겠습니다. 너무 많아요.
+    &lt;blockquote&gt;
+      &lt;p&gt;https://jeong-pro.tistory.com/165&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;anonymous-class&quot;&gt;anonymous class&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;AnonymousClassTest.java
+    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;anonymous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;go&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;		
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        
+  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AnonymousClassTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        
+      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;nc&quot;&gt;Test&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+              &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;go&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+                  &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; GO! GO!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+              &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;go&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;aaa&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+>>>>>>> 3c81a24ce2e7c31ea0d6561354ec667929181bc3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
+<<<<<<< HEAD
 &lt;h3 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h3&gt;
 &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;war&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gigas-blog.tistory.com/115&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;jar&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gigas-blog.tistory.com/114&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;build type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://www.devkuma.com/books/pages/1069&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="Springboot" /><category term="Gradle" /><summary type="html">VSCode로 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.</summary></entry><entry><title type="html">[Blog] GitHub에 blog 생성</title><link href="http://localhost:4000/scm/scm-create-github-blog/" rel="alternate" type="text/html" title="[Blog] GitHub에 blog 생성" /><published>2020-02-25T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-create-github-blog</id><content type="html" xml:base="http://localhost:4000/scm/scm-create-github-blog/">&lt;p&gt;Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.&lt;/p&gt;
+=======
+&lt;h3 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h3&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+    &lt;span class=&quot;s&quot;&gt;https://coding-factory.tistory.com/265&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;https://jdm.kr/blog/181&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;http://tcpschool.com/java/java_lambda_concept&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;https://coding-start.tistory.com/131&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;anonymous class&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;https://yulsfamily.tistory.com/112&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;https://jeong-pro.tistory.com/165&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="JAVA" /><category term="Lambda" /><category term="Stream API" /><category term="anonymous class" /><summary type="html">정의 식별자 없이 실행 가능한 함수 표현식입니다. 익명 클래스와 비슷합니다. 자바로 함수형 프로그래밍 개발을 할 수 있습니다.</summary></entry><entry><title type="html">[Blog] GitHub에 blog 생성</title><link href="http://localhost:4000/scm/scm-create-github-blog/" rel="alternate" type="text/html" title="[Blog] GitHub에 blog 생성" /><published>2020-02-25T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-create-github-blog</id><content type="html" xml:base="http://localhost:4000/scm/scm-create-github-blog/">&lt;p&gt;Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.
+312312&lt;/p&gt;
+>>>>>>> 3c81a24ce2e7c31ea0d6561354ec667929181bc3
 
 &lt;h2 id=&quot;os--app&quot;&gt;OS &amp;amp; App&lt;/h2&gt;
 
