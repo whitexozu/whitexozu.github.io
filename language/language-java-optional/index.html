@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[Optional] Java Optional class - TMM</title>
+<!-- begin _includes/seo.html --><title>[JAVA] Optional class - TMM</title>
 <meta name="description" content="클래스 설명    1.8 이상부터 추가된 java.util.Optional Class   복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.   제네릭을 제공해주는 래퍼 클래스(Wrapper class)입니다.   Stream 클래스와 사용 방법이나 기본 사상이 매우 유사합니다.  ">
 
 
@@ -19,7 +19,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[Optional] Java Optional class">
+<meta property="og:title" content="[JAVA] Optional class">
 <meta property="og:url" content="http://localhost:4000/language/language-java-optional/">
 
 
@@ -272,7 +272,7 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[Optional] Java Optional class">
+    <meta itemprop="headline" content="[JAVA] Optional class">
     <meta itemprop="description" content="클래스 설명  1.8 이상부터 추가된 java.util.Optional Class  복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.  제네릭을 제공해주는 래퍼 클래스(Wrapper class)입니다.  Stream 클래스와 사용 방법이나 기본 사상이 매우 유사합니다.">
     <meta itemprop="datePublished" content="2020-03-04T00:00:00+09:00">
     <meta itemprop="dateModified" content="2020-03-04T22:05:34+09:00">
@@ -280,7 +280,7 @@
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[Optional] Java Optional class
+          <h1 id="page-title" class="page__title" itemprop="headline">[JAVA] Optional class
 </h1>
           
         </header>
@@ -307,7 +307,7 @@
             </nav>
           </aside>
         
-        <h3 id="클래스-설명">클래스 설명</h3>
+        <h2 id="클래스-설명">클래스 설명</h2>
 <ul>
   <li>1.8 이상부터 추가된 java.util.Optional Class</li>
   <li>복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.</li>
@@ -315,8 +315,8 @@
   <li>Stream 클래스와 사용 방법이나 기본 사상이 매우 유사합니다.</li>
 </ul>
 
-<h3 id="자주쓰이는-메소드">자주쓰이는 메소드</h3>
-<h4 id="ofnullablevalue">ofNullable(value)</h4>
+<h2 id="자주쓰이는-메소드">자주쓰이는 메소드</h2>
+<h3 id="ofnullablevalue">ofNullable(value)</h3>
 <p>null이 넘어올 경우, NPE를 던지지 않고 Optional.empty()와 동일하게 비어 있는 Optional 객체를 얻어옵니다.</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">optional</span><span class="o">;</span>
 
@@ -344,26 +344,25 @@
 <span class="o">}</span>
 </code></pre></div></div>
 
-<h4 id="orelset-other">orElse(T other)</h4>
+<h3 id="orelset-other">orElse(T other)</h3>
 <p>비어있는 Optional 객체에 대해서, 넘어온 인자를 반환합니다.</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">final</span> <span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">maybeCity</span><span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="nl">String:</span><span class="o">:</span><span class="n">length</span><span class="o">).</span><span class="na">orElse</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span> <span class="c1">// null-safe</span>
 </code></pre></div></div>
 
-<h4 id="get">get()</h4>
+<h3 id="get">get()</h3>
 <p>비어있는 Optional 객체에 대해서, NoSuchElementException을 던집니다.</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">MemberEntity</span> <span class="n">userEntity</span> <span class="o">=</span> <span class="n">userEntityWrapper</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
 </code></pre></div></div>
 
-<h4 id="ifpresentconsumer-super-t-consumer">ifPresent(Consumer&lt;? super T&gt; consumer)</h4>
+<h3 id="ifpresentconsumer-super-t-consumer">ifPresent(Consumer&lt;? super T&gt; consumer)</h3>
 <p>이 메소드는 특정 결과를 반환하는 대신에 Optional 객체가 감싸고 있는 값이 존재할 경우에만 실행될 로직을 함수형 인자로 넘길 수 있습니다.</p>
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">maybeFood</span><span class="o">.</span><span class="na">ifPresent</span><span class="o">(</span><span class="n">city</span> <span class="o">-&gt;</span> <span class="o">{</span>
   <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"length: "</span> <span class="o">+</span> <span class="n">city</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
 <span class="o">});</span>
 </code></pre></div></div>
-
-<h3 id="참고사이트">참고사이트</h3>
+<h2 id="참고사이트">참고사이트</h2>
 <blockquote>
-  <p>https://www.daleseo.com/java8-optional-after/</p>
+  <p><a href="https://www.daleseo.com/java8-optional-after/">https://www.daleseo.com/java8-optional-after/</a></p>
 </blockquote>
 
         
@@ -422,7 +421,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BOptional%5D+Java+Optional+class%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-java-optional%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BJAVA%5D+Optional+class%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-java-optional%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-java-optional%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 

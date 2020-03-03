@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-04T05:43:41+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Optional] Java Optional class</title><link href="http://localhost:4000/language/language-java-optional/" rel="alternate" type="text/html" title="[Optional] Java Optional class" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-optional</id><content type="html" xml:base="http://localhost:4000/language/language-java-optional/">&lt;h3 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-04T05:53:33+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[JAVA] Optional class</title><link href="http://localhost:4000/language/language-java-optional/" rel="alternate" type="text/html" title="[JAVA] Optional class" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-optional</id><content type="html" xml:base="http://localhost:4000/language/language-java-optional/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;1.8 이상부터 추가된 java.util.Optional Class&lt;/li&gt;
   &lt;li&gt;복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.&lt;/li&gt;
@@ -6,8 +6,8 @@
   &lt;li&gt;Stream 클래스와 사용 방법이나 기본 사상이 매우 유사합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;자주쓰이는-메소드&quot;&gt;자주쓰이는 메소드&lt;/h3&gt;
-&lt;h4 id=&quot;ofnullablevalue&quot;&gt;ofNullable(value)&lt;/h4&gt;
+&lt;h2 id=&quot;자주쓰이는-메소드&quot;&gt;자주쓰이는 메소드&lt;/h2&gt;
+&lt;h3 id=&quot;ofnullablevalue&quot;&gt;ofNullable(value)&lt;/h3&gt;
 &lt;p&gt;null이 넘어올 경우, NPE를 던지지 않고 Optional.empty()와 동일하게 비어 있는 Optional 객체를 얻어옵니다.&lt;/p&gt;
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
 
@@ -35,26 +35,25 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;orelset-other&quot;&gt;orElse(T other)&lt;/h4&gt;
+&lt;h3 id=&quot;orelset-other&quot;&gt;orElse(T other)&lt;/h3&gt;
 &lt;p&gt;비어있는 Optional 객체에 대해서, 넘어온 인자를 반환합니다.&lt;/p&gt;
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;maybeCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;String:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orElse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// null-safe&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;get&quot;&gt;get()&lt;/h4&gt;
+&lt;h3 id=&quot;get&quot;&gt;get()&lt;/h3&gt;
 &lt;p&gt;비어있는 Optional 객체에 대해서, NoSuchElementException을 던집니다.&lt;/p&gt;
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;MemberEntity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEntity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEntityWrapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h4 id=&quot;ifpresentconsumer-super-t-consumer&quot;&gt;ifPresent(Consumer&amp;lt;? super T&amp;gt; consumer)&lt;/h4&gt;
+&lt;h3 id=&quot;ifpresentconsumer-super-t-consumer&quot;&gt;ifPresent(Consumer&amp;lt;? super T&amp;gt; consumer)&lt;/h3&gt;
 &lt;p&gt;이 메소드는 특정 결과를 반환하는 대신에 Optional 객체가 감싸고 있는 값이 존재할 경우에만 실행될 로직을 함수형 인자로 넘길 수 있습니다.&lt;/p&gt;
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;maybeFood&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ifPresent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;city&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;length: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h3&gt;
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;https://www.daleseo.com/java8-optional-after/&lt;/p&gt;
+  &lt;p&gt;&lt;a href=&quot;https://www.daleseo.com/java8-optional-after/&quot;&gt;https://www.daleseo.com/java8-optional-after/&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="JAVA" /><summary type="html">클래스 설명 1.8 이상부터 추가된 java.util.Optional Class 복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다. 제네릭을 제공해주는 래퍼 클래스(Wrapper class)입니다. Stream 클래스와 사용 방법이나 기본 사상이 매우 유사합니다.</summary></entry><entry><title type="html">[Gradle] Springboot + Gradle</title><link href="http://localhost:4000/framework/framework-springboot-gradle/" rel="alternate" type="text/html" title="[Gradle] Springboot + Gradle" /><published>2020-03-02T00:00:00+09:00</published><updated>2020-03-02T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-springboot-gradle</id><content type="html" xml:base="http://localhost:4000/framework/framework-springboot-gradle/">&lt;p&gt;VSCode에서 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;프로젝트-생성&quot;&gt;프로젝트 생성&lt;/h3&gt;
