@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-04T05:53:33+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[JAVA] Optional class</title><link href="http://localhost:4000/language/language-java-optional/" rel="alternate" type="text/html" title="[JAVA] Optional class" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-optional</id><content type="html" xml:base="http://localhost:4000/language/language-java-optional/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-05T06:43:22+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Security] Springboot + Security + MySQL</title><link href="http://localhost:4000/framework/framework-springboot-security/" rel="alternate" type="text/html" title="[Security] Springboot + Security + MySQL" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-springboot-security</id><content type="html" xml:base="http://localhost:4000/framework/framework-springboot-security/">&lt;h3 id=&quot;exception-설명&quot;&gt;Exception 설명&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Exception&lt;/th&gt;
+      &lt;th&gt;설명&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;BadCredentialException&lt;/td&gt;
+      &lt;td&gt;비밀번호가 일치하지 않을 때 던지는 예외&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;InternalAuthenticationServiceException&lt;/td&gt;
+      &lt;td&gt;존재하지 않는 아이디일 때 던지는 예외&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AuthenticationCredentialNotFoundException&lt;/td&gt;
+      &lt;td&gt;인증 요구가 거부됐을 때 던지는 예외&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LockedException&lt;/td&gt;
+      &lt;td&gt;인증 거부 - 잠긴 계정&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DisabledException&lt;/td&gt;
+      &lt;td&gt;인증 거부 - 계정 비활성화&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AccountExpiredException&lt;/td&gt;
+      &lt;td&gt;인증 거부 - 계정 유효기간 만료&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CredentialExpiredException&lt;/td&gt;
+      &lt;td&gt;인증 거부 - 비밀번호 유효기간 만료&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;설정 설명&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://victorydntmd.tistory.com/328&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;login fail 처리&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://javadeveloperzone.com/spring-boot/spring-security-custom-success-or-fail-handler/&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://www.baeldung.com/spring-security-custom-authentication-failure-handler&lt;/span&gt;
+    &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://wedul.site/170&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="Springboot" /><category term="Security" /><summary type="html">Exception 설명</summary></entry><entry><title type="html">[JAVA] Optional class</title><link href="http://localhost:4000/language/language-java-optional/" rel="alternate" type="text/html" title="[JAVA] Optional class" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-optional</id><content type="html" xml:base="http://localhost:4000/language/language-java-optional/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;1.8 이상부터 추가된 java.util.Optional Class&lt;/li&gt;
   &lt;li&gt;복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.&lt;/li&gt;
@@ -1262,15 +1311,4 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
 &lt;h3 id=&quot;gcp-ssh-접속-설정&quot;&gt;gcp ssh 접속 설정&lt;/h3&gt;
 &lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;https://ruuci.tistory.com/6&quot;&gt;https://ruuci.tistory.com/6&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="GCP" /><category term="Mysql" /><category term="JDK" /><category term="Jenkins" /><summary type="html">Instance 생성</summary></entry><entry><title type="html">Layout: Sidebar Custom</title><link href="http://localhost:4000/layout-sidebar-custom/" rel="alternate" type="text/html" title="Layout: Sidebar Custom" /><published>2012-03-15T00:00:00+09:00</published><updated>2012-03-15T00:00:00+09:00</updated><id>http://localhost:4000/layout-sidebar-custom</id><content type="html" xml:base="http://localhost:4000/layout-sidebar-custom/">&lt;p&gt;This post has a custom sidebar set in the post’s YAML Front Matter.&lt;/p&gt;
-
-&lt;p&gt;An example of how that YAML could look is:&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;sidebar&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Title&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://placehold.it/350x250&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;image_alt&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;image&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Some&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;here.&quot;&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Another&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Title&quot;&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;More&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;here.&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><summary type="html">A post with custom sidebar content.</summary></entry></feed>
+&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="GCP" /><category term="Mysql" /><category term="JDK" /><category term="Jenkins" /><summary type="html">Instance 생성</summary></entry></feed>
