@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>[Security] Springboot + Security + MySQL - TMM</title>
-<meta name="description" content="Exception 설명 ">
+<meta name="description" content="Spring Security 장점    프로그램 로직보다 설정으로 페이지나 리소스 접근 제어   JDBC, LDAP 등 호환되는 인증 커넥터 다수   CSRF 등 강력한 보안 인증  ">
 
 
   <meta name="author" content="To much mong">
@@ -23,7 +23,7 @@
 <meta property="og:url" content="http://localhost:4000/framework/framework-springboot-security/">
 
 
-  <meta property="og:description" content="Exception 설명 ">
+  <meta property="og:description" content="Spring Security 장점    프로그램 로직보다 설정으로 페이지나 리소스 접근 제어   JDBC, LDAP 등 호환되는 인증 커넥터 다수   CSRF 등 강력한 보안 인증  ">
 
 
 
@@ -273,7 +273,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="[Security] Springboot + Security + MySQL">
-    <meta itemprop="description" content="Exception 설명">
+    <meta itemprop="description" content="Spring Security 장점  프로그램 로직보다 설정으로 페이지나 리소스 접근 제어  JDBC, LDAP 등 호환되는 인증 커넥터 다수  CSRF 등 강력한 보안 인증">
     <meta itemprop="datePublished" content="2020-03-04T00:00:00+09:00">
     <meta itemprop="dateModified" content="2020-03-04T22:05:34+09:00">
 
@@ -292,52 +292,584 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#exception-설명">Exception 설명</a></li>
+  <li><a href="#spring-security-장점">Spring Security 장점</a></li>
+  <li><a href="#폴더구조">폴더구조</a></li>
+  <li><a href="#의존성-추가">의존성 추가</a></li>
+  <li><a href="#spring-security-설정">Spring Security 설정</a>
+    <ul>
+      <li><a href="#securityconfigjava">SecurityConfig.java</a></li>
+      <li><a href="#memberservicejava">MemberService.java</a></li>
+      <li><a href="#customauthenticationfailurehandlerjava">CustomAuthenticationFailureHandler.java</a></li>
+      <li><a href="#indexhtml">index.html</a></li>
+      <li><a href="#loginhtml">login.html</a></li>
+      <li><a href="#loginsuccesshtml">loginSuccess.html</a></li>
+    </ul>
+  </li>
+  <li><a href="#추가해야할-내용">추가해야할 내용</a></li>
+  <li><a href="#참고사이트">참고사이트</a></li>
+  <li><a href="#소스">소스</a></li>
 </ul>
 
             </nav>
           </aside>
         
-        <h3 id="exception-설명">Exception 설명</h3>
+        <h2 id="spring-security-장점">Spring Security 장점</h2>
+<ul>
+  <li>프로그램 로직보다 설정으로 페이지나 리소스 접근 제어</li>
+  <li>JDBC, LDAP 등 호환되는 인증 커넥터 다수</li>
+  <li>CSRF 등 강력한 보안 인증</li>
+</ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>Exception</th>
-      <th>설명</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>BadCredentialException</td>
-      <td>비밀번호가 일치하지 않을 때 던지는 예외</td>
-    </tr>
-    <tr>
-      <td>InternalAuthenticationServiceException</td>
-      <td>존재하지 않는 아이디일 때 던지는 예외</td>
-    </tr>
-    <tr>
-      <td>AuthenticationCredentialNotFoundException</td>
-      <td>인증 요구가 거부됐을 때 던지는 예외</td>
-    </tr>
-    <tr>
-      <td>LockedException</td>
-      <td>인증 거부 - 잠긴 계정</td>
-    </tr>
-    <tr>
-      <td>DisabledException</td>
-      <td>인증 거부 - 계정 비활성화</td>
-    </tr>
-    <tr>
-      <td>AccountExpiredException</td>
-      <td>인증 거부 - 계정 유효기간 만료</td>
-    </tr>
-    <tr>
-      <td>CredentialExpiredException</td>
-      <td>인증 거부 - 비밀번호 유효기간 만료</td>
-    </tr>
-  </tbody>
-</table>
+<h2 id="폴더구조">폴더구조</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span>
+├── build.gradle
+├── gradlew
+├── gradlew.bat
+├── settings.gradle
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── example
+    │   │           └── <span class="nb">test</span>
+    │   │               ├── Application.java
+    │   │               ├── config
+    │   │               │   └── SecurityConfig.java
+    │   │               ├── controller
+    │   │               │   └── MemberController.java
+    │   │               ├── domain
+    │   │               │   ├── Role.java
+    │   │               │   ├── entity
+    │   │               │   │   └── MemberEntity.java
+    │   │               │   └── repository
+    │   │               │       └── MemberRepository.java
+    │   │               ├── dto
+    │   │               │   └── MemberDto.java
+    │   │               ├── handler
+    │   │               │   └── CustomAuthenticationFailureHandler.java
+    │   │               └── service
+    │   │                   └── MemberService.java
+    │   └── resources
+    │       ├── application.yml
+    │       └── templates
+    │           ├── admin.html
+    │           ├── denied.html
+    │           ├── index.html
+    │           ├── login.html
+    │           ├── loginSuccess.html
+    │           ├── logout.html
+    │           ├── myinfo.html
+    │           └── signup.html
+    └── <span class="nb">test</span>
+        └── java
+            └── com
+                └── example
+                    └── <span class="nb">test</span>
+                        └── ApplicationTests.java
+</code></pre></div></div>
+
+<h2 id="의존성-추가">의존성 추가</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+}
+</code></pre></div></div>
+<h2 id="spring-security-설정">Spring Security 설정</h2>
+
+<h3 id="securityconfigjava">SecurityConfig.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.test.config</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.example.test.handler.CustomAuthenticationFailureHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.example.test.service.MemberService</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.builders.WebSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.configuration.EnableWebSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.crypto.password.PasswordEncoder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.web.authentication.AuthenticationFailureHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.web.util.matcher.AntPathRequestMatcher</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+
+<span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">MemberService</span> <span class="n">memberService</span><span class="o">;</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">PasswordEncoder</span> <span class="nf">passwordEncoder</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">BCryptPasswordEncoder</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">WebSecurity</span> <span class="n">web</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span>
+    <span class="o">{</span>
+        <span class="c1">// static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )</span>
+        <span class="n">web</span><span class="o">.</span><span class="na">ignoring</span><span class="o">().</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/css/**"</span><span class="o">,</span> <span class="s">"/js/**"</span><span class="o">,</span> <span class="s">"/img/**"</span><span class="o">,</span> <span class="s">"/lib/**"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">protected</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">http</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">http</span><span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                <span class="c1">// 페이지 권한 설정</span>
+                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/admin/**"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"ADMIN"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/user/myinfo"</span><span class="o">).</span><span class="na">hasRole</span><span class="o">(</span><span class="s">"MEMBER"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/**"</span><span class="o">).</span><span class="na">permitAll</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 로그인 설정</span>
+                <span class="o">.</span><span class="na">formLogin</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">loginPage</span><span class="o">(</span><span class="s">"/user/login"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">defaultSuccessUrl</span><span class="o">(</span><span class="s">"/user/login/result"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">failureHandler</span><span class="o">(</span><span class="n">customAuthenticationFailureHandler</span><span class="o">())</span>
+                <span class="c1">// .successHandler(authSuccessHandler)</span>
+                <span class="o">.</span><span class="na">permitAll</span><span class="o">()</span>
+            <span class="o">.</span><span class="na">and</span><span class="o">()</span> <span class="c1">// 로그아웃 설정</span>
+                <span class="o">.</span><span class="na">logout</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">logoutRequestMatcher</span><span class="o">(</span><span class="k">new</span> <span class="nc">AntPathRequestMatcher</span><span class="o">(</span><span class="s">"/user/logout"</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">logoutSuccessUrl</span><span class="o">(</span><span class="s">"/user/logout/result"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">invalidateHttpSession</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span>
+            <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                <span class="c1">// 403 예외처리 핸들링</span>
+                <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">().</span><span class="na">accessDeniedPage</span><span class="o">(</span><span class="s">"/user/denied"</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">AuthenticationManagerBuilder</span> <span class="n">auth</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">auth</span><span class="o">.</span><span class="na">userDetailsService</span><span class="o">(</span><span class="n">memberService</span><span class="o">).</span><span class="na">passwordEncoder</span><span class="o">(</span><span class="n">passwordEncoder</span><span class="o">());</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">AuthenticationFailureHandler</span> <span class="nf">customAuthenticationFailureHandler</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">CustomAuthenticationFailureHandler</span><span class="o">();</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>@EnableWebSecurity
+    <ul>
+      <li>@Configuration 클래스에 @EnableWebSecurity 어노테이션을 추가하여 Spring Security 설정할 클래스라고 정의합니다.</li>
+      <li>설정은 WebSebSecurityConfigurerAdapter 클래스를 상속받아 메서드를 구현하는 것이 일반적인 방법입니다.</li>
+    </ul>
+  </li>
+  <li>WebSecurityConfigurerAdapter 클래스
+    <ul>
+      <li>WebSecurityConfigurer 인스턴스를 편리하게 생성하기 위한 클래스입니다.</li>
+    </ul>
+  </li>
+  <li>passwordEncoder()
+    <ul>
+      <li>BCryptPasswordEncoder는 Spring Security에서 제공하는 비밀번호 암호화 객체입니다.</li>
+      <li>Service에서 비밀번호를 암호화할 수 있도록 Bean으로 등록합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>다음으로 configure() 메서드를 오버라이딩하여, Security 설정을 잡아줍니다.</p>
+<ul>
+  <li>configure(WebSecurity web)
+    <ul>
+      <li>WebSecurity는 FilterChainProxy를 생성하는 필터입니다.</li>
+      <li>web.ignoring().antMatchers(“/css/<strong>”, “/js/</strong>”, “/img/<strong>”, “/lib/</strong>”);
+        <ul>
+          <li>해당 경로의 파일들은 Spring Security가 무시할 수 있도록 설정합니다.</li>
+          <li>즉, 이 파일들은 무조건 통과하며, 파일 기준은 resources/static 디렉터리입니다. ( css, js 등의 디렉터리를 추가하진 않았습니다. )</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>configure(HttpSecurity http)
+    <ul>
+      <li>HttpSecurity를 통해 HTTP 요청에 대한 웹 기반 보안을 구성할 수 있습니다.</li>
+      <li>authorizeRequests()
+        <ul>
+          <li>HttpServletRequest에 따라 접근(access)을 제한합니다.</li>
+          <li>antMatchers() 메서드로 특정 경로를 지정하며, permitAll(), hasRole() 메서드로 역할(Role)에 따른 접근 설정을 잡아줍니다. 여기서 롤은 권한을 의미합니다. 즉 어떤 페이지는 관리지만 접근해야 하고, 어떤 페이지는 회원만 접근해야할 때 그 권한을 부여하기 위해 역할을 설정하는 것입니다. 예를 들어,
+            <ul>
+              <li>.antMatchers(“/admin/**”).hasRole(“ADMIN”)
+                <ul>
+                  <li>/admin 으로 시작하는 경로는 ADMIN 롤을 가진 사용자만 접근 가능합니다.</li>
+                </ul>
+              </li>
+              <li>.antMatchers(“/user/myinfo”).hasRole(“MEMBER”)
+                <ul>
+                  <li>/user/myinfo 경로는 MEMBER 롤을 가진 사용자만 접근 가능합니다.</li>
+                </ul>
+              </li>
+              <li>.antMatchers(“/**”).permitAll()
+                <ul>
+                  <li>모든 경로에 대해서는 권한없이 접근 가능합니다.</li>
+                </ul>
+              </li>
+              <li>.anyRequest().authenticated()
+                <ul>
+                  <li>모든 요청에 대해, 인증된 사용자만 접근하도록 설정할 수도 있습니다. ( 예제에는 적용 안함 )</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>formlogin()
+        <ul>
+          <li>form 기반으로 인증을 하도록 합니다. 로그인 정보는 기본적으로 HttpSession을 이용합니다.</li>
+          <li>/login 경로로 접근하면, Spring Security에서 제공하는 로그인 form을 사용할 수 있습니다.</li>
+          <li>.loginPage(“/user/login”)
+            <ul>
+              <li>기본 제공되는 form 말고, 커스텀 로그인 폼을 사용하고 싶으면 loginPage() 메서드를 사용합니다.</li>
+              <li>이 때 커스텀 로그인 form의 action 경로와 loginPage()의 파라미터 경로가 일치해야 인증을 처리할 수 있습니다. ( login.html에서 확인 )</li>
+            </ul>
+          </li>
+          <li>.defaultSuccessUrl(“/user/login/result”)
+            <ul>
+              <li>로그인이 성공했을 때 이동되는 페이지이며, 마찬가지로 컨트롤러에서 URL 매핑이 되어 있어야 합니다.</li>
+            </ul>
+          </li>
+          <li>.usernameParameter(“파라미터명”)
+            <ul>
+              <li>로그인 form에서 아이디는 name=username인 input을 기본으로 인식하는데, usernameParameter() 메서드를 통해 파라미터명을 변경할 수 있습니다. ( 예제에는 적용 안함 )</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>logout()
+        <ul>
+          <li>로그아웃을 지원하는 메서드이며, WebSecurityConfigurerAdapter를 사용할 때 자동으로 적용됩니다.</li>
+          <li>기본적으로 “/logout”에 접근하면 HTTP 세션을 제거합니다.</li>
+          <li>.logoutRequestMatcher(new AntPathRequestMatcher(“/user/logout”))
+            <ul>
+              <li>로그아웃의 기본 URL(/logout) 이 아닌 다른 URL로 재정의합니다.</li>
+            </ul>
+          </li>
+          <li>.invalidateHttpSession(true)
+            <ul>
+              <li>HTTP 세션을 초기화하는 작업입니다.</li>
+            </ul>
+          </li>
+          <li>deleteCookies(“KEY명”)
+            <ul>
+              <li>로그아웃 시, 특정 쿠기를 제거하고 싶을 때 사용하는 메서드입니다. ( 예제에는 적용안함 )</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>.exceptionHandling().accessDeniedPage(“/user/denied”);
+      - 예외가 발생했을 때 exceptionHandling() 메서드로 핸들링할 수 있습니다.
+      - 예제에서는 접근권한이 없을 때, 로그인 페이지로 이동하도록 명시해줬습니다</li>
+    </ul>
+  </li>
+  <li>configure(AuthenticationManagerBuilder auth)
+    <ul>
+      <li>Spring Security에서 모든 인증은 AuthenticationManager를 통해 이루어지며 AuthenticationManager를 생성하기 위해서는 AuthenticationManagerBuilder를 사용합니다.
+        <ul>
+          <li>로그인 처리 즉, 인증을 위해서는 UserDetailService를 통해서 필요한 정보들을 가져오는데, 예제에서는 서비스 클래스(memberService)에서 이를 처리합니다.</li>
+          <li>서비스 클래스에서는 UserDetailsService 인터페이스를 implements하여, loadUserByUsername() 메서드를 구현하면 됩니다.</li>
+        </ul>
+      </li>
+      <li>비밀번호 암호화를 위해, passwordEncoder를 사용하고 있습니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="memberservicejava">MemberService.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.test.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.example.test.domain.Role</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.example.test.domain.entity.MemberEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.example.test.domain.repository.MemberRepository</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.example.test.dto.MemberDto</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">lombok.AllArgsConstructor</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.GrantedAuthority</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.authority.SimpleGrantedAuthority</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.userdetails.User</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.userdetails.UserDetails</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.userdetails.UserDetailsService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.userdetails.UsernameNotFoundException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Service</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.transaction.annotation.Transactional</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Optional</span><span class="o">;</span>
+
+<span class="nd">@Service</span>
+<span class="nd">@AllArgsConstructor</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">MemberService</span> <span class="kd">implements</span> <span class="nc">UserDetailsService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="nc">MemberRepository</span> <span class="n">memberRepository</span><span class="o">;</span>
+
+    <span class="nd">@Transactional</span>
+    <span class="kd">public</span> <span class="nc">Long</span> <span class="nf">joinUser</span><span class="o">(</span><span class="nc">MemberDto</span> <span class="n">memberDto</span><span class="o">)</span> <span class="o">{</span>
+        <span class="c1">// 비밀번호 암호화</span>
+        <span class="nc">BCryptPasswordEncoder</span> <span class="n">passwordEncoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BCryptPasswordEncoder</span><span class="o">();</span>
+        <span class="n">memberDto</span><span class="o">.</span><span class="na">setPassword</span><span class="o">(</span><span class="n">passwordEncoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">memberDto</span><span class="o">.</span><span class="na">getPassword</span><span class="o">()));</span>
+
+        <span class="k">return</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">save</span><span class="o">(</span><span class="n">memberDto</span><span class="o">.</span><span class="na">toEntity</span><span class="o">()).</span><span class="na">getId</span><span class="o">();</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">UserDetails</span> <span class="nf">loadUserByUsername</span><span class="o">(</span><span class="nc">String</span> <span class="n">userEmail</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">UsernameNotFoundException</span> <span class="o">{</span>
+        <span class="nc">Optional</span><span class="o">&lt;</span><span class="nc">MemberEntity</span><span class="o">&gt;</span> <span class="n">userEntityWrapper</span> <span class="o">=</span> <span class="n">memberRepository</span><span class="o">.</span><span class="na">findByEmail</span><span class="o">(</span><span class="n">userEmail</span><span class="o">);</span>
+        <span class="nc">MemberEntity</span> <span class="n">userEntity</span> <span class="o">=</span> <span class="n">userEntityWrapper</span><span class="o">.</span><span class="na">get</span><span class="o">();</span>
+
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="n">authorities</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+        <span class="k">if</span> <span class="o">((</span><span class="s">"admin@example.com"</span><span class="o">).</span><span class="na">equals</span><span class="o">(</span><span class="n">userEmail</span><span class="o">))</span> <span class="o">{</span>
+            <span class="n">authorities</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">SimpleGrantedAuthority</span><span class="o">(</span><span class="nc">Role</span><span class="o">.</span><span class="na">ADMIN</span><span class="o">.</span><span class="na">getValue</span><span class="o">()));</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">authorities</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">SimpleGrantedAuthority</span><span class="o">(</span><span class="nc">Role</span><span class="o">.</span><span class="na">MEMBER</span><span class="o">.</span><span class="na">getValue</span><span class="o">()));</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">User</span><span class="o">(</span><span class="n">userEntity</span><span class="o">.</span><span class="na">getEmail</span><span class="o">(),</span> <span class="n">userEntity</span><span class="o">.</span><span class="na">getPassword</span><span class="o">(),</span> <span class="n">authorities</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>joinUser()
+    <ul>
+      <li>회원가입을 처리하는 메서드이며, 비밀번호를 암호화하여 저장합니다.</li>
+    </ul>
+  </li>
+  <li>loadUserByUsername()
+    <ul>
+      <li>상세 정보를 조회하는 메서드이며, 사용자의 계정정보와 권한을 갖는 UserDetails 인터페이스를 반환해야 합니다.</li>
+      <li>매개변수는 로그인 시 입력한 아이디인데, 엔티티의 PK를 뜻하는게 아니고 유저를 식별할 수 있는 어떤 값을 의미합니다. Spring Security에서는 username라는 이름으로 사용합니다.
+        <ul>
+          <li>예제에서는 아이디가 이메일이며, 로그인을 하는 form에서 name=”username”으로 요청해야 합니다.</li>
+        </ul>
+      </li>
+      <li>authorities.add(new SimpleGrantedAuthority());
+        <ul>
+          <li>롤을 부여하는 코드입니다. 롤 부여 방식에는 여러가지가 있겠지만, 회원가입할 때 Role을 정할 수 있도록 Role Entity를 만들어서 매핑해주는 것이 좋은 방법인것 같습니다. ( 참고 )</li>
+          <li>예제에서는 복잡성을 줄이기 위해, 아이디가 “admin@example.com”일 경우에 ADMIN 롤을 부여했습니다.</li>
+        </ul>
+      </li>
+      <li>new User()
+        <ul>
+          <li>return은 SpringSecurity에서 제공하는 UserDetails를 구현한 User를 반환합니다. ( org.springframework.security.core.userdetails.User )</li>
+          <li>생성자의 각 매개변수는 순서대로 아이디, 비밀번호, 권한리스트입니다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="customauthenticationfailurehandlerjava">CustomAuthenticationFailureHandler.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.test.handler</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.io.IOException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Calendar</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">javax.servlet.ServletException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">javax.servlet.http.HttpServletResponse</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.fasterxml.jackson.databind.ObjectMapper</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.AuthenticationException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.web.authentication.AuthenticationFailureHandler</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">lombok.extern.java.Log</span><span class="o">;</span>
+
+<span class="nd">@Log</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomAuthenticationFailureHandler</span> 
+  <span class="kd">implements</span> <span class="nc">AuthenticationFailureHandler</span> <span class="o">{</span>
+  
+    <span class="kd">private</span> <span class="nc">ObjectMapper</span> <span class="n">objectMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ObjectMapper</span><span class="o">();</span>
+ 
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onAuthenticationFailure</span><span class="o">(</span>
+      <span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span>
+      <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">,</span>
+      <span class="nc">AuthenticationException</span> <span class="n">exception</span><span class="o">)</span> 
+      <span class="kd">throws</span> <span class="nc">IOException</span><span class="o">,</span> <span class="nc">ServletException</span> <span class="o">{</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"exception message: "</span> <span class="o">+</span> <span class="n">exception</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"username"</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">"username"</span><span class="o">));</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"password"</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="na">getParameter</span><span class="o">(</span><span class="s">"password"</span><span class="o">));</span>
+
+        <span class="n">response</span><span class="o">.</span><span class="na">setStatus</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">UNAUTHORIZED</span><span class="o">.</span><span class="na">value</span><span class="o">());</span>
+        <span class="n">response</span><span class="o">.</span><span class="na">sendRedirect</span><span class="o">(</span><span class="s">"/user/login?errorMsg="</span> <span class="o">+</span> <span class="n">exception</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>onAuthenticationFailure()
+    <ul>
+      <li>로그인 실패 처리를 합니다.</li>
+      <li>request 에서 로그인 요청 정보를 확인 할 수 있습니다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Login fail Exception 설명</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Exception</th>
+          <th>설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>BadCredentialException</td>
+          <td>비밀번호가 일치하지 않을 때 던지는 예외</td>
+        </tr>
+        <tr>
+          <td>InternalAuthenticationServiceException</td>
+          <td>존재하지 않는 아이디일 때 던지는 예외</td>
+        </tr>
+        <tr>
+          <td>AuthenticationCredentialNotFoundException</td>
+          <td>인증 요구가 거부됐을 때 던지는 예외</td>
+        </tr>
+        <tr>
+          <td>LockedException</td>
+          <td>인증 거부 - 잠긴 계정</td>
+        </tr>
+        <tr>
+          <td>DisabledException</td>
+          <td>인증 거부 - 계정 비활성화</td>
+        </tr>
+        <tr>
+          <td>AccountExpiredException</td>
+          <td>인증 거부 - 계정 유효기간 만료</td>
+        </tr>
+        <tr>
+          <td>CredentialExpiredException</td>
+          <td>인증 거부 - 비밀번호 유효기간 만료</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="indexhtml">index.html</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span> <span class="na">xmlns:th=</span><span class="s">"http://www.w3.org/1999/xhtml"</span> <span class="na">xmlns:sec=</span><span class="s">"http://www.w3.org/1999/xhtml"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>메인<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>메인 페이지<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;hr&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">sec:authorize=</span><span class="s">"isAnonymous()"</span> <span class="na">th:href=</span><span class="s">"@{/user/login}"</span><span class="nt">&gt;</span>로그인<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">sec:authorize=</span><span class="s">"isAuthenticated()"</span> <span class="na">th:href=</span><span class="s">"@{/user/logout}"</span><span class="nt">&gt;</span>로그아웃<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">sec:authorize=</span><span class="s">"isAnonymous()"</span> <span class="na">th:href=</span><span class="s">"@{/user/signup}"</span><span class="nt">&gt;</span>회원가입<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">sec:authorize=</span><span class="s">"hasRole('ROLE_MEMBER')"</span> <span class="na">th:href=</span><span class="s">"@{/user/info}"</span><span class="nt">&gt;</span>내정보<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">sec:authorize=</span><span class="s">"hasRole('ROLE_ADMIN')"</span> <span class="na">th:href=</span><span class="s">"@{/admin}"</span><span class="nt">&gt;</span>어드민<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+
+</code></pre></div></div>
+<ul>
+  <li>sec:authorize를 사용하여, 사용자의 Role에 따라 보이는 메뉴를 다르게 합니다.
+    <ul>
+      <li>isAnonymous()
+        <ul>
+          <li>익명의 사용자일 경우, 로그인, 회원가입 버튼을 노출합니다.</li>
+        </ul>
+      </li>
+      <li>isAuthenticated()
+        <ul>
+          <li>인증된 사용자일 경우, 로그아웃 버튼을 노출줍니다.</li>
+        </ul>
+      </li>
+      <li>hasRole()
+        <ul>
+          <li>특정 롤을 가진 사용자에 대해, 메뉴를 노출합니다.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="loginhtml">login.html</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span> <span class="na">xmlns:th=</span><span class="s">"http://www.w3.org/1999/xhtml"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>로그인 페이지<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>로그인<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;hr&gt;</span>
+
+    <span class="nt">&lt;form</span> <span class="na">th:action=</span><span class="s">"@{/user/login}"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+    <span class="c">&lt;!-- &lt;form action="/user/login" method="post"&gt; --&gt;</span>
+        <span class="c">&lt;!-- &lt;input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /&gt; --&gt;</span>
+
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"username"</span> <span class="na">placeholder=</span><span class="s">"이메일 입력해주세요"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="na">name=</span><span class="s">"password"</span> <span class="na">placeholder=</span><span class="s">"비밀번호"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>로그인<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+
+    <span class="nt">&lt;span</span> <span class="na">th:text=</span><span class="s">"${errorMsg}"</span><span class="nt">&gt;&lt;/span&gt;</span> 
+
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">&lt;input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /&gt;</code>
+    <ul>
+      <li>form에 히든 타입으로 csrf 토큰 값을 넘겨줍니다.</li>
+      <li>input hidden 타입으로 csrf 토큰 값을 넘겨주지 않고 있는데요, th:action을 사용하면 Thymeleaf가 csrf 토큰 값을 자동으로 추가해주므로 편리합니다.</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">&lt;input type="text" name="username" placeholder="이메일 입력해주세요"&gt;</code>
+    <ul>
+      <li>로그인 시 아이디의 name 애트리뷰트 값은 username이어야 합니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="loginsuccesshtml">loginSuccess.html</h3>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span> <span class="na">xmlns:sec=</span><span class="s">""</span> <span class="na">xmlns:th=</span><span class="s">"http://www.w3.org/1999/xhtml"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>로그인 성공<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>로그인 성공!!<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;hr&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">sec:authentication=</span><span class="s">"name"</span><span class="nt">&gt;&lt;/span&gt;</span>님 환영합니다~
+    <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">th:href=</span><span class="s">"@{'/'}"</span><span class="nt">&gt;</span>메인으로 이동<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+<ul>
+  <li>sec:authentication=”name”
+    <ul>
+      <li>useranme 값을 가져옵니다.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="추가해야할-내용">추가해야할 내용</h2>
+<ul>
+  <li>회원정보 수정</li>
+  <li>다양한 권한 추가</li>
+</ul>
 
 <h2 id="참고사이트">참고사이트</h2>
 
@@ -348,6 +880,9 @@
     <span class="pi">-</span> <span class="s">https://www.baeldung.com/spring-security-custom-authentication-failure-handler</span>
     <span class="pi">-</span> <span class="s">https://wedul.site/170</span>
 </code></pre></div></div>
+
+<h2 id="소스">소스</h2>
+<p><a href="https://github.com/whitexozu/Springboot-Example">https://github.com/whitexozu/Springboot-Example</a></p>
 
         
       </section>

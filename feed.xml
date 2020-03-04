@@ -1,43 +1,560 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-05T06:43:22+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Security] Springboot + Security + MySQL</title><link href="http://localhost:4000/framework/framework-springboot-security/" rel="alternate" type="text/html" title="[Security] Springboot + Security + MySQL" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-springboot-security</id><content type="html" xml:base="http://localhost:4000/framework/framework-springboot-security/">&lt;h3 id=&quot;exception-설명&quot;&gt;Exception 설명&lt;/h3&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-05T08:58:31+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Security] Springboot + Security + MySQL</title><link href="http://localhost:4000/framework/framework-springboot-security/" rel="alternate" type="text/html" title="[Security] Springboot + Security + MySQL" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-springboot-security</id><content type="html" xml:base="http://localhost:4000/framework/framework-springboot-security/">&lt;h2 id=&quot;spring-security-장점&quot;&gt;Spring Security 장점&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;프로그램 로직보다 설정으로 페이지나 리소스 접근 제어&lt;/li&gt;
+  &lt;li&gt;JDBC, LDAP 등 호환되는 인증 커넥터 다수&lt;/li&gt;
+  &lt;li&gt;CSRF 등 강력한 보안 인증&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Exception&lt;/th&gt;
-      &lt;th&gt;설명&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;BadCredentialException&lt;/td&gt;
-      &lt;td&gt;비밀번호가 일치하지 않을 때 던지는 예외&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;InternalAuthenticationServiceException&lt;/td&gt;
-      &lt;td&gt;존재하지 않는 아이디일 때 던지는 예외&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AuthenticationCredentialNotFoundException&lt;/td&gt;
-      &lt;td&gt;인증 요구가 거부됐을 때 던지는 예외&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;LockedException&lt;/td&gt;
-      &lt;td&gt;인증 거부 - 잠긴 계정&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;DisabledException&lt;/td&gt;
-      &lt;td&gt;인증 거부 - 계정 비활성화&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AccountExpiredException&lt;/td&gt;
-      &lt;td&gt;인증 거부 - 계정 유효기간 만료&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CredentialExpiredException&lt;/td&gt;
-      &lt;td&gt;인증 거부 - 비밀번호 유효기간 만료&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;h2 id=&quot;폴더구조&quot;&gt;폴더구조&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+├── build.gradle
+├── gradlew
+├── gradlew.bat
+├── settings.gradle
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── example
+    │   │           └── &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+    │   │               ├── Application.java
+    │   │               ├── config
+    │   │               │   └── SecurityConfig.java
+    │   │               ├── controller
+    │   │               │   └── MemberController.java
+    │   │               ├── domain
+    │   │               │   ├── Role.java
+    │   │               │   ├── entity
+    │   │               │   │   └── MemberEntity.java
+    │   │               │   └── repository
+    │   │               │       └── MemberRepository.java
+    │   │               ├── dto
+    │   │               │   └── MemberDto.java
+    │   │               ├── handler
+    │   │               │   └── CustomAuthenticationFailureHandler.java
+    │   │               └── service
+    │   │                   └── MemberService.java
+    │   └── resources
+    │       ├── application.yml
+    │       └── templates
+    │           ├── admin.html
+    │           ├── denied.html
+    │           ├── index.html
+    │           ├── login.html
+    │           ├── loginSuccess.html
+    │           ├── logout.html
+    │           ├── myinfo.html
+    │           └── signup.html
+    └── &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+        └── java
+            └── com
+                └── example
+                    └── &lt;span class=&quot;nb&quot;&gt;test&lt;/span&gt;
+                        └── ApplicationTests.java
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;의존성-추가&quot;&gt;의존성 추가&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;spring-security-설정&quot;&gt;Spring Security 설정&lt;/h2&gt;
+
+&lt;h3 id=&quot;securityconfigjava&quot;&gt;SecurityConfig.java&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.handler.CustomAuthenticationFailureHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.service.MemberService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Bean&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.context.annotation.Configuration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.builders.HttpSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.builders.WebSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.configuration.EnableWebSecurity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.crypto.password.PasswordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.web.authentication.AuthenticationFailureHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.web.util.matcher.AntPathRequestMatcher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.AllArgsConstructor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableWebSecurity&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@AllArgsConstructor&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SecurityConfig&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebSecurityConfigurerAdapter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MemberService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PasswordEncoder&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;passwordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;BCryptPasswordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;WebSecurity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// static 디렉터리의 하위 파일 목록은 인증 무시 ( = 항상통과 )&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;web&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ignoring&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;antMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/css/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/js/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/img/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/lib/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;protected&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpSecurity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authorizeRequests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// 페이지 권한 설정&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;antMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/admin/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasRole&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ADMIN&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;antMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/user/myinfo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasRole&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;MEMBER&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;antMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;permitAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 로그인 설정&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;formLogin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;loginPage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/user/login&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;defaultSuccessUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/user/login/result&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;failureHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customAuthenticationFailureHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// .successHandler(authSuccessHandler)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;permitAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 로그아웃 설정&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;logout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;logoutRequestMatcher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AntPathRequestMatcher&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/user/logout&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;logoutSuccessUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/user/logout/result&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;invalidateHttpSession&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// 403 예외처리 핸들링&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;exceptionHandling&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accessDeniedPage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/user/denied&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;configure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;AuthenticationManagerBuilder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;userDetailsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;memberService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;passwordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;passwordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthenticationFailureHandler&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;customAuthenticationFailureHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;CustomAuthenticationFailureHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;@EnableWebSecurity
+    &lt;ul&gt;
+      &lt;li&gt;@Configuration 클래스에 @EnableWebSecurity 어노테이션을 추가하여 Spring Security 설정할 클래스라고 정의합니다.&lt;/li&gt;
+      &lt;li&gt;설정은 WebSebSecurityConfigurerAdapter 클래스를 상속받아 메서드를 구현하는 것이 일반적인 방법입니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;WebSecurityConfigurerAdapter 클래스
+    &lt;ul&gt;
+      &lt;li&gt;WebSecurityConfigurer 인스턴스를 편리하게 생성하기 위한 클래스입니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;passwordEncoder()
+    &lt;ul&gt;
+      &lt;li&gt;BCryptPasswordEncoder는 Spring Security에서 제공하는 비밀번호 암호화 객체입니다.&lt;/li&gt;
+      &lt;li&gt;Service에서 비밀번호를 암호화할 수 있도록 Bean으로 등록합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;다음으로 configure() 메서드를 오버라이딩하여, Security 설정을 잡아줍니다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;configure(WebSecurity web)
+    &lt;ul&gt;
+      &lt;li&gt;WebSecurity는 FilterChainProxy를 생성하는 필터입니다.&lt;/li&gt;
+      &lt;li&gt;web.ignoring().antMatchers(“/css/&lt;strong&gt;”, “/js/&lt;/strong&gt;”, “/img/&lt;strong&gt;”, “/lib/&lt;/strong&gt;”);
+        &lt;ul&gt;
+          &lt;li&gt;해당 경로의 파일들은 Spring Security가 무시할 수 있도록 설정합니다.&lt;/li&gt;
+          &lt;li&gt;즉, 이 파일들은 무조건 통과하며, 파일 기준은 resources/static 디렉터리입니다. ( css, js 등의 디렉터리를 추가하진 않았습니다. )&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;configure(HttpSecurity http)
+    &lt;ul&gt;
+      &lt;li&gt;HttpSecurity를 통해 HTTP 요청에 대한 웹 기반 보안을 구성할 수 있습니다.&lt;/li&gt;
+      &lt;li&gt;authorizeRequests()
+        &lt;ul&gt;
+          &lt;li&gt;HttpServletRequest에 따라 접근(access)을 제한합니다.&lt;/li&gt;
+          &lt;li&gt;antMatchers() 메서드로 특정 경로를 지정하며, permitAll(), hasRole() 메서드로 역할(Role)에 따른 접근 설정을 잡아줍니다. 여기서 롤은 권한을 의미합니다. 즉 어떤 페이지는 관리지만 접근해야 하고, 어떤 페이지는 회원만 접근해야할 때 그 권한을 부여하기 위해 역할을 설정하는 것입니다. 예를 들어,
+            &lt;ul&gt;
+              &lt;li&gt;.antMatchers(“/admin/**”).hasRole(“ADMIN”)
+                &lt;ul&gt;
+                  &lt;li&gt;/admin 으로 시작하는 경로는 ADMIN 롤을 가진 사용자만 접근 가능합니다.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;.antMatchers(“/user/myinfo”).hasRole(“MEMBER”)
+                &lt;ul&gt;
+                  &lt;li&gt;/user/myinfo 경로는 MEMBER 롤을 가진 사용자만 접근 가능합니다.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;.antMatchers(“/**”).permitAll()
+                &lt;ul&gt;
+                  &lt;li&gt;모든 경로에 대해서는 권한없이 접근 가능합니다.&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+              &lt;li&gt;.anyRequest().authenticated()
+                &lt;ul&gt;
+                  &lt;li&gt;모든 요청에 대해, 인증된 사용자만 접근하도록 설정할 수도 있습니다. ( 예제에는 적용 안함 )&lt;/li&gt;
+                &lt;/ul&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;formlogin()
+        &lt;ul&gt;
+          &lt;li&gt;form 기반으로 인증을 하도록 합니다. 로그인 정보는 기본적으로 HttpSession을 이용합니다.&lt;/li&gt;
+          &lt;li&gt;/login 경로로 접근하면, Spring Security에서 제공하는 로그인 form을 사용할 수 있습니다.&lt;/li&gt;
+          &lt;li&gt;.loginPage(“/user/login”)
+            &lt;ul&gt;
+              &lt;li&gt;기본 제공되는 form 말고, 커스텀 로그인 폼을 사용하고 싶으면 loginPage() 메서드를 사용합니다.&lt;/li&gt;
+              &lt;li&gt;이 때 커스텀 로그인 form의 action 경로와 loginPage()의 파라미터 경로가 일치해야 인증을 처리할 수 있습니다. ( login.html에서 확인 )&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;.defaultSuccessUrl(“/user/login/result”)
+            &lt;ul&gt;
+              &lt;li&gt;로그인이 성공했을 때 이동되는 페이지이며, 마찬가지로 컨트롤러에서 URL 매핑이 되어 있어야 합니다.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;.usernameParameter(“파라미터명”)
+            &lt;ul&gt;
+              &lt;li&gt;로그인 form에서 아이디는 name=username인 input을 기본으로 인식하는데, usernameParameter() 메서드를 통해 파라미터명을 변경할 수 있습니다. ( 예제에는 적용 안함 )&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;logout()
+        &lt;ul&gt;
+          &lt;li&gt;로그아웃을 지원하는 메서드이며, WebSecurityConfigurerAdapter를 사용할 때 자동으로 적용됩니다.&lt;/li&gt;
+          &lt;li&gt;기본적으로 “/logout”에 접근하면 HTTP 세션을 제거합니다.&lt;/li&gt;
+          &lt;li&gt;.logoutRequestMatcher(new AntPathRequestMatcher(“/user/logout”))
+            &lt;ul&gt;
+              &lt;li&gt;로그아웃의 기본 URL(/logout) 이 아닌 다른 URL로 재정의합니다.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;.invalidateHttpSession(true)
+            &lt;ul&gt;
+              &lt;li&gt;HTTP 세션을 초기화하는 작업입니다.&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;deleteCookies(“KEY명”)
+            &lt;ul&gt;
+              &lt;li&gt;로그아웃 시, 특정 쿠기를 제거하고 싶을 때 사용하는 메서드입니다. ( 예제에는 적용안함 )&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;.exceptionHandling().accessDeniedPage(“/user/denied”);
+      - 예외가 발생했을 때 exceptionHandling() 메서드로 핸들링할 수 있습니다.
+      - 예제에서는 접근권한이 없을 때, 로그인 페이지로 이동하도록 명시해줬습니다&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;configure(AuthenticationManagerBuilder auth)
+    &lt;ul&gt;
+      &lt;li&gt;Spring Security에서 모든 인증은 AuthenticationManager를 통해 이루어지며 AuthenticationManager를 생성하기 위해서는 AuthenticationManagerBuilder를 사용합니다.
+        &lt;ul&gt;
+          &lt;li&gt;로그인 처리 즉, 인증을 위해서는 UserDetailService를 통해서 필요한 정보들을 가져오는데, 예제에서는 서비스 클래스(memberService)에서 이를 처리합니다.&lt;/li&gt;
+          &lt;li&gt;서비스 클래스에서는 UserDetailsService 인터페이스를 implements하여, loadUserByUsername() 메서드를 구현하면 됩니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;비밀번호 암호화를 위해, passwordEncoder를 사용하고 있습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;memberservicejava&quot;&gt;MemberService.java&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.domain.Role&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.domain.entity.MemberEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.domain.repository.MemberRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.dto.MemberDto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.AllArgsConstructor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.core.GrantedAuthority&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.core.authority.SimpleGrantedAuthority&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.core.userdetails.User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.core.userdetails.UserDetails&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.core.userdetails.UserDetailsService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.core.userdetails.UsernameNotFoundException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.stereotype.Service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.transaction.annotation.Transactional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Service&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@AllArgsConstructor&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MemberService&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDetailsService&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MemberRepository&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Transactional&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;joinUser&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;MemberDto&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberDto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// 비밀번호 암호화&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;BCryptPasswordEncoder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;passwordEncoder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BCryptPasswordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;memberDto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;passwordEncoder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;memberDto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;memberDto&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;toEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserDetails&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loadUserByUsername&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UsernameNotFoundException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;MemberEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEntityWrapper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memberRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;findByEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;MemberEntity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEntity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEntityWrapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+        &lt;span class=&quot;nc&quot;&gt;List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;GrantedAuthority&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;authorities&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ArrayList&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;admin@example.com&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;authorities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleGrantedAuthority&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Role&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ADMIN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;authorities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SimpleGrantedAuthority&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Role&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MEMBER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;userEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getEmail&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEntity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getPassword&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;authorities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;joinUser()
+    &lt;ul&gt;
+      &lt;li&gt;회원가입을 처리하는 메서드이며, 비밀번호를 암호화하여 저장합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;loadUserByUsername()
+    &lt;ul&gt;
+      &lt;li&gt;상세 정보를 조회하는 메서드이며, 사용자의 계정정보와 권한을 갖는 UserDetails 인터페이스를 반환해야 합니다.&lt;/li&gt;
+      &lt;li&gt;매개변수는 로그인 시 입력한 아이디인데, 엔티티의 PK를 뜻하는게 아니고 유저를 식별할 수 있는 어떤 값을 의미합니다. Spring Security에서는 username라는 이름으로 사용합니다.
+        &lt;ul&gt;
+          &lt;li&gt;예제에서는 아이디가 이메일이며, 로그인을 하는 form에서 name=”username”으로 요청해야 합니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;authorities.add(new SimpleGrantedAuthority());
+        &lt;ul&gt;
+          &lt;li&gt;롤을 부여하는 코드입니다. 롤 부여 방식에는 여러가지가 있겠지만, 회원가입할 때 Role을 정할 수 있도록 Role Entity를 만들어서 매핑해주는 것이 좋은 방법인것 같습니다. ( 참고 )&lt;/li&gt;
+          &lt;li&gt;예제에서는 복잡성을 줄이기 위해, 아이디가 “admin@example.com”일 경우에 ADMIN 롤을 부여했습니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;new User()
+        &lt;ul&gt;
+          &lt;li&gt;return은 SpringSecurity에서 제공하는 UserDetails를 구현한 User를 반환합니다. ( org.springframework.security.core.userdetails.User )&lt;/li&gt;
+          &lt;li&gt;생성자의 각 매개변수는 순서대로 아이디, 비밀번호, 권한리스트입니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;customauthenticationfailurehandlerjava&quot;&gt;CustomAuthenticationFailureHandler.java&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.example.test.handler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.io.IOException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Calendar&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.HashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.servlet.ServletException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.servlet.http.HttpServletRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;javax.servlet.http.HttpServletResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;com.fasterxml.jackson.databind.ObjectMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.http.HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.core.AuthenticationException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;org.springframework.security.web.authentication.AuthenticationFailureHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lombok.extern.java.Log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;nd&quot;&gt;@Log&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CustomAuthenticationFailureHandler&lt;/span&gt; 
+  &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthenticationFailureHandler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+  
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ObjectMapper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;objectMapper&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ObjectMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+ 
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;onAuthenticationFailure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;nc&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nc&quot;&gt;HttpServletResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;nc&quot;&gt;AuthenticationException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 
+      &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServletException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;exception message: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getParameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getParameter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpStatus&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UNAUTHORIZED&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sendRedirect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/user/login?errorMsg=&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;onAuthenticationFailure()
+    &lt;ul&gt;
+      &lt;li&gt;로그인 실패 처리를 합니다.&lt;/li&gt;
+      &lt;li&gt;request 에서 로그인 요청 정보를 확인 할 수 있습니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Login fail Exception 설명&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Exception&lt;/th&gt;
+          &lt;th&gt;설명&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;BadCredentialException&lt;/td&gt;
+          &lt;td&gt;비밀번호가 일치하지 않을 때 던지는 예외&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;InternalAuthenticationServiceException&lt;/td&gt;
+          &lt;td&gt;존재하지 않는 아이디일 때 던지는 예외&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;AuthenticationCredentialNotFoundException&lt;/td&gt;
+          &lt;td&gt;인증 요구가 거부됐을 때 던지는 예외&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;LockedException&lt;/td&gt;
+          &lt;td&gt;인증 거부 - 잠긴 계정&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;DisabledException&lt;/td&gt;
+          &lt;td&gt;인증 거부 - 계정 비활성화&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;AccountExpiredException&lt;/td&gt;
+          &lt;td&gt;인증 거부 - 계정 유효기간 만료&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;CredentialExpiredException&lt;/td&gt;
+          &lt;td&gt;인증 거부 - 비밀번호 유효기간 만료&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;indexhtml&quot;&gt;index.html&lt;/h3&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:th=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:sec=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;메인&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;메인 페이지&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;hr&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sec:authorize=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;isAnonymous()&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;th:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@{/user/login}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;로그인&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sec:authorize=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;isAuthenticated()&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;th:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@{/user/logout}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;로그아웃&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sec:authorize=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;isAnonymous()&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;th:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@{/user/signup}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;회원가입&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sec:authorize=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hasRole('ROLE_MEMBER')&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;th:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@{/user/info}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;내정보&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sec:authorize=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hasRole('ROLE_ADMIN')&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;th:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@{/admin}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;어드민&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;sec:authorize를 사용하여, 사용자의 Role에 따라 보이는 메뉴를 다르게 합니다.
+    &lt;ul&gt;
+      &lt;li&gt;isAnonymous()
+        &lt;ul&gt;
+          &lt;li&gt;익명의 사용자일 경우, 로그인, 회원가입 버튼을 노출합니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;isAuthenticated()
+        &lt;ul&gt;
+          &lt;li&gt;인증된 사용자일 경우, 로그아웃 버튼을 노출줍니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;hasRole()
+        &lt;ul&gt;
+          &lt;li&gt;특정 롤을 가진 사용자에 대해, 메뉴를 노출합니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;loginhtml&quot;&gt;login.html&lt;/h3&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:th=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;로그인 페이지&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;로그인&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;hr&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;th:action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@{/user/login}&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;post&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;form action=&quot;/user/login&quot; method=&quot;post&quot;&amp;gt; --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- &amp;lt;input type=&quot;hidden&quot; th:name=&quot;${_csrf.parameterName}&quot; th:value=&quot;${_csrf.token}&quot; /&amp;gt; --&amp;gt;&lt;/span&gt;
+
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;username&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;이메일 입력해주세요&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;password&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;비밀번호&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;submit&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;로그인&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;th:text=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;${errorMsg}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt; 
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=&quot;hidden&quot; th:name=&quot;${_csrf.parameterName}&quot; th:value=&quot;${_csrf.token}&quot; /&amp;gt;&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;form에 히든 타입으로 csrf 토큰 값을 넘겨줍니다.&lt;/li&gt;
+      &lt;li&gt;input hidden 타입으로 csrf 토큰 값을 넘겨주지 않고 있는데요, th:action을 사용하면 Thymeleaf가 csrf 토큰 값을 자동으로 추가해주므로 편리합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;input type=&quot;text&quot; name=&quot;username&quot; placeholder=&quot;이메일 입력해주세요&quot;&amp;gt;&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;로그인 시 아이디의 name 애트리뷰트 값은 username이어야 합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;loginsuccesshtml&quot;&gt;loginSuccess.html&lt;/h3&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;lang=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;en&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:sec=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;xmlns:th=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://www.w3.org/1999/xhtml&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;UTF-8&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;로그인 성공&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;로그인 성공!!&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;hr&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;span&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sec:authentication=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/span&amp;gt;&lt;/span&gt;님 환영합니다~
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;th:href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@{'/'}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;메인으로 이동&lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;sec:authentication=”name”
+    &lt;ul&gt;
+      &lt;li&gt;useranme 값을 가져옵니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;추가해야할-내용&quot;&gt;추가해야할 내용&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;회원정보 수정&lt;/li&gt;
+  &lt;li&gt;다양한 권한 추가&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
 
@@ -47,7 +564,10 @@
     &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://javadeveloperzone.com/spring-boot/spring-security-custom-success-or-fail-handler/&lt;/span&gt;
     &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://www.baeldung.com/spring-security-custom-authentication-failure-handler&lt;/span&gt;
     &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://wedul.site/170&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="Springboot" /><category term="Security" /><summary type="html">Exception 설명</summary></entry><entry><title type="html">[JAVA] Optional class</title><link href="http://localhost:4000/language/language-java-optional/" rel="alternate" type="text/html" title="[JAVA] Optional class" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-optional</id><content type="html" xml:base="http://localhost:4000/language/language-java-optional/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;소스&quot;&gt;소스&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/whitexozu/Springboot-Example&quot;&gt;https://github.com/whitexozu/Springboot-Example&lt;/a&gt;&lt;/p&gt;</content><author><name>To much mong</name></author><category term="Springboot" /><category term="Security" /><summary type="html">Spring Security 장점 프로그램 로직보다 설정으로 페이지나 리소스 접근 제어 JDBC, LDAP 등 호환되는 인증 커넥터 다수 CSRF 등 강력한 보안 인증</summary></entry><entry><title type="html">[JAVA] Optional class</title><link href="http://localhost:4000/language/language-java-optional/" rel="alternate" type="text/html" title="[JAVA] Optional class" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-optional</id><content type="html" xml:base="http://localhost:4000/language/language-java-optional/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;1.8 이상부터 추가된 java.util.Optional Class&lt;/li&gt;
   &lt;li&gt;복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.&lt;/li&gt;
