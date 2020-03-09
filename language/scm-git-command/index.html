@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Layout: Header Video - TMM</title>
-<meta name="description" content="This post should display a header with a responsive video, if the theme supports it. ">
+<!-- begin _includes/seo.html --><title>[GIT] command +  - TMM</title>
+<meta name="description" content="클래스 설명 ">
 
 
   <meta name="author" content="To much mong">
@@ -19,21 +19,23 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="Layout: Header Video">
-<meta property="og:url" content="http://localhost:4000/layout/uncategorized/layout-header-video/">
+<meta property="og:title" content="[GIT] command +">
+<meta property="og:url" content="http://localhost:4000/language/scm-git-command/">
 
 
-  <meta property="og:description" content="This post should display a header with a responsive video, if the theme supports it. ">
-
-
-
+  <meta property="og:description" content="클래스 설명 ">
 
 
 
 
-  <meta property="article:published_time" content="2012-03-15T00:00:00+09:00">
 
 
+
+  <meta property="article:published_time" content="2020-03-10T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-03-10T22:05:34+09:00">
 
 
 
@@ -42,7 +44,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/layout/uncategorized/layout-header-video/">
+<link rel="canonical" href="http://localhost:4000/language/scm-git-command/">
 
 
 
@@ -156,21 +158,6 @@
 
     <div class="initial-content">
       
-  
-
-
-
-
-
-<!-- Courtesy of embedresponsively.com //-->
-<div class="responsive-video-container">
-
-  <iframe src="https://www.youtube-nocookie.com/embed/XsxDH4HcOWA" frameborder="0" allowfullscreen></iframe>
-
-</div>
-
-
-
 
 
 
@@ -285,15 +272,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Layout: Header Video">
-    <meta itemprop="description" content="This post should display a header with a responsive video, if the theme supports it.">
-    <meta itemprop="datePublished" content="2012-03-15T00:00:00+09:00">
-    
+    <meta itemprop="headline" content="[GIT] command +">
+    <meta itemprop="description" content="클래스 설명">
+    <meta itemprop="datePublished" content="2020-03-10T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-03-10T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Layout: Header Video
+          <h1 id="page-title" class="page__title" itemprop="headline">[GIT] command +
 </h1>
           
         </header>
@@ -301,74 +288,50 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>This post should display a <strong>header with a responsive video</strong>, if the theme supports it.</p>
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#클래스-설명">클래스 설명</a></li>
+  <li><a href="#사용-방법">사용 방법</a>
+    <ul>
+      <li><a href="#기본적인-사용">기본적인 사용</a></li>
+    </ul>
+  </li>
+  <li><a href="#참고사이트">참고사이트</a></li>
+  <li><a href="#참고사이트-1">참고사이트</a></li>
+</ul>
 
-<h2 id="settings">Settings</h2>
+            </nav>
+          </aside>
+        
+        <h2 id="클래스-설명">클래스 설명</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Required</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="highlighter-rouge">id</code></td>
-      <td><strong>Required</strong></td>
-      <td>ID of the video</td>
-    </tr>
-    <tr>
-      <td><code class="highlighter-rouge">provider</code></td>
-      <td><strong>Required</strong></td>
-      <td>Hosting provider of the video, either <code class="highlighter-rouge">youtube</code> or <code class="highlighter-rouge">vimeo</code></td>
-    </tr>
-  </tbody>
-</table>
+<h2 id="사용-방법">사용 방법</h2>
 
-<h3 id="youtube">YouTube</h3>
+<h3 id="기본적인-사용">기본적인 사용</h3>
 
-<p>To embed the following YouTube video at url <code class="highlighter-rouge">https://www.youtube.com/watch?v=XsxDH4HcOWA</code> (long version) or <code class="highlighter-rouge">https://youtu.be/XsxDH4HcOWA</code> (short version) into a post or page’s main content you’d use:</p>
+<p>git remote remove origin
+git remote add origin https://github.com/…</p>
 
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span><span class="nv">video</span><span class="w"> </span><span class="na">id</span><span class="o">=</span><span class="s2">"XsxDH4HcOWA"</span><span class="w"> </span><span class="na">provider</span><span class="o">=</span><span class="s2">"youtube"</span><span class="w"> </span><span class="p">%}</span>
+<p>원격 브런치 접근을 위해 git remote를 갱신 합니다.
+$ git remote update
+원격 저장소의 branch list 확인 합니다.
+$ git branch -r
+-a 옵션을 주면 로컬, 원격 모든 저장소의 branch 리스트를 볼 수 있습니다.
+원격저장소의 branch를 가져옵니다.
+$ git checkout -t origin/[branch name]</p>
+
+<p class="notice--info"><strong>Note:</strong><br />
+branch를 참고만 할 뿐 수정 내용을 원격 저장소에 push 하지 않을 경우 <em>$ git checkout [원격 저장소의 branch 이름]</em> 옵션이 없는 명령어로 checkout 하면 ‘detached HEAD’ 상태의 소스를 확인 및 수정 할 수는 있지만 변경사항들을 commit, push 할 수 없으며 다른 branch로 checkout하면 사라지게 됩니다.</p>
+
+<h2 id="참고사이트">참고사이트</h2>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">checkout</span><span class="pi">:</span> <span class="s">https://cjh5414.github.io/get-git-remote-branch/</span>
 </code></pre></div></div>
 
-<!-- Courtesy of embedresponsively.com //-->
-<div class="responsive-video-container">
-
-  <iframe src="https://www.youtube-nocookie.com/embed/XsxDH4HcOWA" frameborder="0" allowfullscreen=""></iframe>
-
-</div>
-
-<p>To embed it as a video header you’d use the following YAML Front Matter</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">header</span><span class="pi">:</span>
-  <span class="na">video</span><span class="pi">:</span>
-    <span class="na">id</span><span class="pi">:</span> <span class="s">XsxDH4HcOWA</span>
-    <span class="na">provider</span><span class="pi">:</span> <span class="s">youtube</span>
-</code></pre></div></div>
-
-<h3 id="vimeo">Vimeo</h3>
-
-<p>To embed the following Vimeo video at url <code class="highlighter-rouge">https://vimeo.com/212731897</code> into a post or page’s main content you’d use:</p>
-
-<div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{%</span><span class="w"> </span><span class="nt">include</span><span class="w"> </span><span class="nv">video</span><span class="w"> </span><span class="na">id</span><span class="o">=</span><span class="s2">"212731897"</span><span class="w"> </span><span class="na">provider</span><span class="o">=</span><span class="s2">"vimeo"</span><span class="w"> </span><span class="p">%}</span>
-</code></pre></div></div>
-
-<!-- Courtesy of embedresponsively.com //-->
-<div class="responsive-video-container">
-
-  <iframe src="https://player.vimeo.com/video/212731897?dnt=true" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-
-</div>
-
-<p>To embed it as a video header you’d use the following YAML Front Matter</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">header</span><span class="pi">:</span>
-  <span class="na">video</span><span class="pi">:</span>
-    <span class="na">id</span><span class="pi">:</span> <span class="m">212731897</span>
-    <span class="na">provider</span><span class="pi">:</span> <span class="s">vimeo</span>
+<h2 id="참고사이트-1">참고사이트</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://velog.io/@pop8682/Enum-27k067ns4a
+- https://woowabros.github.io/tools/2017/07/10/java-enum-uses.html
 </code></pre></div></div>
 
         
@@ -390,11 +353,7 @@
     
       
       
-      <a href="/tags/#layout" class="page__taxonomy-item" rel="tag">layout</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#video" class="page__taxonomy-item" rel="tag">video</a>
+      <a href="/tags/#java" class="page__taxonomy-item" rel="tag">JAVA</a>
     
     </span>
   </p>
@@ -415,18 +374,14 @@
     
       
       
-      <a href="/categories/#layout" class="page__taxonomy-item" rel="tag">Layout</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/categories/#uncategorized" class="page__taxonomy-item" rel="tag">Uncategorized</a>
+      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">Language</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2012-03-15T00:00:00+09:00">March 15, 2012</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-10">March 10, 2020</time></p>
         
       </footer>
 
@@ -435,23 +390,22 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Layout%3A+Header+Video%20http%3A%2F%2Flocalhost%3A4000%2Flayout%2Funcategorized%2Flayout-header-video%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BGIT%5D+command+%2B+%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Fscm-git-command%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flayout%2Funcategorized%2Flayout-header-video%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Fscm-git-command%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flayout%2Funcategorized%2Flayout-header-video%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Fscm-git-command%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/layout-header-image-text-readability/" class="pagination--pager" title="Layout: Header Image and Text Readability
+      <a href="/language/language-java-enum/" class="pagination--pager" title="[JAVA] enum 데이터 타입
 ">이전</a>
     
     
-      <a href="/layout-sidebar-custom/" class="pagination--pager" title="Layout: Sidebar Custom
-">다음</a>
+      <a href="#" class="pagination--pager disabled">다음</a>
     
   </nav>
 
@@ -465,26 +419,6 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/language/scm-git-command/" rel="permalink">[GIT] command +
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">클래스 설명
-</p>
-  </article>
-</div>
-
         
           
 
@@ -559,6 +493,26 @@
   JDBC, LDAP 등 호환되는 인증 커넥터 다수
   CSRF 등 강력한 보안 인증
 
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-gradle/" rel="permalink">[Gradle] Springboot + Gradle
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">VSCode에서 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.
 </p>
   </article>
 </div>
