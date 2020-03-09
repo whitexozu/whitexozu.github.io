@@ -1,0 +1,939 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[OAuth2] Springboot + Facebook, Google, kakao, naver  - TMM</title>
+<meta name="description" content="facebook 클라이언트 등록 ">
+
+
+  <meta name="author" content="To much mong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[OAuth2] Springboot + Facebook, Google, kakao, naver">
+<meta property="og:url" content="http://localhost:4000/framework/framework-oauth2-springboot-facebook-google-kakao-naver/">
+
+
+  <meta property="og:description" content="facebook 클라이언트 등록 ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-02-20T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-02-20T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/framework/framework-oauth2-springboot-facebook-google-kakao-naver/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much mong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[OAuth2] Springboot + Facebook, Google, kakao, naver">
+    <meta itemprop="description" content="facebook 클라이언트 등록">
+    <meta itemprop="datePublished" content="2020-02-20T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-02-20T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[OAuth2] Springboot + Facebook, Google, kakao, naver
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#facebook-클라이언트-등록">facebook 클라이언트 등록</a></li>
+  <li><a href="#google-클라이언트-등록">google 클라이언트 등록</a></li>
+  <li><a href="#kakao-클라이언트-등록">kakao 클라이언트 등록</a></li>
+  <li><a href="#naver-클라이언트-등록">naver 클라이언트 등록</a></li>
+  <li><a href="#oauth2-설정">OAuth2 설정</a>
+    <ul>
+      <li><a href="#applicationyml">application.yml</a></li>
+      <li><a href="#securityconfigjava">SecurityConfig.java</a></li>
+      <li><a href="#customoauth2providerjava">CustomOAuth2Provider.java</a></li>
+      <li><a href="#customoauth2userservicejava">CustomOAuth2UserService.java</a></li>
+    </ul>
+  </li>
+  <li><a href="#예제-소스">예제 소스</a></li>
+  <li><a href="#참고사이트">참고사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <h2 id="facebook-클라이언트-등록">facebook 클라이언트 등록</h2>
+
+<p>https://engkimbs.tistory.com/849</p>
+
+<h2 id="google-클라이언트-등록">google 클라이언트 등록</h2>
+
+<p>https://engkimbs.tistory.com/849</p>
+
+<h2 id="kakao-클라이언트-등록">kakao 클라이언트 등록</h2>
+
+<p>https://galid1.tistory.com/582</p>
+
+<h2 id="naver-클라이언트-등록">naver 클라이언트 등록</h2>
+
+<p>https://engkimbs.tistory.com/849</p>
+
+<h2 id="oauth2-설정">OAuth2 설정</h2>
+
+<h3 id="applicationyml">application.yml</h3>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">spring</span><span class="pi">:</span>
+  <span class="na">thymeleaf</span><span class="pi">:</span>
+    <span class="na">cache</span><span class="pi">:</span> <span class="no">false</span>
+  <span class="na">security</span><span class="pi">:</span>
+    <span class="na">oauth2</span><span class="pi">:</span>
+      <span class="na">client</span><span class="pi">:</span>
+        <span class="na">registration</span><span class="pi">:</span>
+          <span class="na">google</span><span class="pi">:</span>
+            <span class="na">client-id</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">google id</span><span class="pi">]</span>
+            <span class="na">client-secret</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">google secret</span><span class="pi">]</span>
+          <span class="na">facebook</span><span class="pi">:</span>
+            <span class="na">client-id</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">facebook id</span><span class="pi">]</span>
+            <span class="na">client-secret</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">facebook secret</span><span class="pi">]</span>
+<span class="na">custom</span><span class="pi">:</span>
+  <span class="na">oauth2</span><span class="pi">:</span>
+    <span class="na">kakao</span><span class="pi">:</span>
+      <span class="na">client-id</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">kakao id</span><span class="pi">]</span>
+      <span class="na">client-secret</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">kakao secret</span><span class="pi">]</span>
+    <span class="na">naver</span><span class="pi">:</span>
+      <span class="na">client-id</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">naver id</span><span class="pi">]</span>
+      <span class="na">client-secret</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">naver secret</span><span class="pi">]</span>
+</code></pre></div></div>
+
+<h3 id="securityconfigjava">SecurityConfig.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.oauth2.security</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.example.oauth2.service.CustomOAuth2UserService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Value</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.security.oauth2.client.OAuth2ClientProperties</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Configuration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.builders.HttpSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.configuration.EnableWebSecurity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.config.oauth2.client.CommonOAuth2Provider</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.client.registration.ClientRegistration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.client.registration.ClientRegistrationRepository</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Objects</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.stream.Collectors</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">com</span><span class="o">.</span><span class="na">example</span><span class="o">.</span><span class="na">oauth2</span><span class="o">.</span><span class="na">security</span><span class="o">.</span><span class="na">SocialType</span><span class="o">.*;</span>
+
+<span class="nd">@Configuration</span>
+<span class="nd">@EnableWebSecurity</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SecurityConfig</span> <span class="kd">extends</span> <span class="nc">WebSecurityConfigurerAdapter</span> <span class="o">{</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">configure</span><span class="o">(</span><span class="nc">HttpSecurity</span> <span class="n">httpSecurity</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+        <span class="n">httpSecurity</span><span class="o">.</span><span class="na">authorizeRequests</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/"</span><span class="o">,</span> <span class="s">"/oauth2/**"</span><span class="o">,</span> <span class="s">"/login/**"</span><span class="o">,</span> <span class="s">"/css/**"</span><span class="o">,</span>
+                            <span class="s">"/images/**"</span><span class="o">,</span> <span class="s">"/js/**"</span><span class="o">,</span> <span class="s">"/console/**"</span><span class="o">,</span> <span class="s">"/favicon.ico/**"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">permitAll</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/facebook"</span><span class="o">).</span><span class="na">hasAuthority</span><span class="o">(</span><span class="no">FACEBOOK</span><span class="o">.</span><span class="na">getRoleType</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/google"</span><span class="o">).</span><span class="na">hasAuthority</span><span class="o">(</span><span class="no">GOOGLE</span><span class="o">.</span><span class="na">getRoleType</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/kakao"</span><span class="o">).</span><span class="na">hasAuthority</span><span class="o">(</span><span class="no">KAKAO</span><span class="o">.</span><span class="na">getRoleType</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">antMatchers</span><span class="o">(</span><span class="s">"/naver"</span><span class="o">).</span><span class="na">hasAuthority</span><span class="o">(</span><span class="no">NAVER</span><span class="o">.</span><span class="na">getRoleType</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">anyRequest</span><span class="o">().</span><span class="na">authenticated</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">oauth2Login</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">userInfoEndpoint</span><span class="o">().</span><span class="na">userService</span><span class="o">(</span><span class="k">new</span> <span class="nc">CustomOAuth2UserService</span><span class="o">())</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">defaultSuccessUrl</span><span class="o">(</span><span class="s">"/loginSuccess"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">failureUrl</span><span class="o">(</span><span class="s">"/loginFailure"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">and</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">exceptionHandling</span><span class="o">()</span>
+                    <span class="o">.</span><span class="na">authenticationEntryPoint</span><span class="o">(</span><span class="k">new</span> <span class="nc">LoginUrlAuthenticationEntryPoint</span><span class="o">(</span><span class="s">"/login"</span><span class="o">));</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Bean</span>
+    <span class="kd">public</span> <span class="nc">ClientRegistrationRepository</span> <span class="nf">clientRegistrationRepository</span><span class="o">(</span>
+            <span class="nc">OAuth2ClientProperties</span> <span class="n">oAuth2ClientProperties</span><span class="o">,</span>
+            <span class="nd">@Value</span><span class="o">(</span><span class="s">"${custom.oauth2.kakao.client-id}"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">kakaoClientId</span><span class="o">,</span>
+            <span class="nd">@Value</span><span class="o">(</span><span class="s">"${custom.oauth2.kakao.client-secret}"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">kakaoClientSecret</span><span class="o">,</span>
+            <span class="nd">@Value</span><span class="o">(</span><span class="s">"${custom.oauth2.naver.client-id}"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">naverClientId</span><span class="o">,</span>
+            <span class="nd">@Value</span><span class="o">(</span><span class="s">"${custom.oauth2.naver.client-secret}"</span><span class="o">)</span> <span class="nc">String</span> <span class="n">naverClientSecret</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">List</span><span class="o">&lt;</span><span class="nc">ClientRegistration</span><span class="o">&gt;</span> <span class="n">registrations</span> <span class="o">=</span> <span class="n">oAuth2ClientProperties</span>
+                <span class="o">.</span><span class="na">getRegistration</span><span class="o">().</span><span class="na">keySet</span><span class="o">().</span><span class="na">stream</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">map</span><span class="o">(</span><span class="n">client</span> <span class="o">-&gt;</span> <span class="n">getRegistration</span><span class="o">(</span><span class="n">oAuth2ClientProperties</span><span class="o">,</span> <span class="n">client</span><span class="o">))</span>
+                <span class="o">.</span><span class="na">filter</span><span class="o">(</span><span class="nl">Objects:</span><span class="o">:</span><span class="n">nonNull</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">collect</span><span class="o">(</span><span class="nc">Collectors</span><span class="o">.</span><span class="na">toList</span><span class="o">());</span>
+
+        <span class="n">registrations</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">CustomOAuth2Provider</span><span class="o">.</span><span class="na">KAKAO</span><span class="o">.</span><span class="na">getBuilder</span><span class="o">(</span><span class="s">"kakao"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">clientId</span><span class="o">(</span><span class="n">kakaoClientId</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">clientSecret</span><span class="o">(</span><span class="n">kakaoClientSecret</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">jwkSetUri</span><span class="o">(</span><span class="s">"temp"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">());</span>
+
+        <span class="n">registrations</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="nc">CustomOAuth2Provider</span><span class="o">.</span><span class="na">NAVER</span><span class="o">.</span><span class="na">getBuilder</span><span class="o">(</span><span class="s">"naver"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">clientId</span><span class="o">(</span><span class="n">naverClientId</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">clientSecret</span><span class="o">(</span><span class="n">naverClientSecret</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">jwkSetUri</span><span class="o">(</span><span class="s">"temp"</span><span class="o">)</span>
+                <span class="o">.</span><span class="na">build</span><span class="o">());</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">InMemoryClientRegistrationRepository</span><span class="o">(</span><span class="n">registrations</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="kd">private</span> <span class="nc">ClientRegistration</span> <span class="nf">getRegistration</span><span class="o">(</span><span class="nc">OAuth2ClientProperties</span> <span class="n">clientProperties</span><span class="o">,</span> <span class="nc">String</span> <span class="n">client</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span><span class="o">(</span><span class="s">"google"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">client</span><span class="o">))</span> <span class="o">{</span>
+            <span class="nc">OAuth2ClientProperties</span><span class="o">.</span><span class="na">Registration</span> <span class="n">registration</span> <span class="o">=</span> <span class="n">clientProperties</span><span class="o">.</span><span class="na">getRegistration</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"google"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">CommonOAuth2Provider</span><span class="o">.</span><span class="na">GOOGLE</span><span class="o">.</span><span class="na">getBuilder</span><span class="o">(</span><span class="n">client</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">clientId</span><span class="o">(</span><span class="n">registration</span><span class="o">.</span><span class="na">getClientId</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">clientSecret</span><span class="o">(</span><span class="n">registration</span><span class="o">.</span><span class="na">getClientSecret</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">scope</span><span class="o">(</span><span class="s">"email"</span><span class="o">,</span> <span class="s">"profile"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">if</span><span class="o">(</span><span class="s">"facebook"</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">client</span><span class="o">))</span> <span class="o">{</span>
+            <span class="nc">OAuth2ClientProperties</span><span class="o">.</span><span class="na">Registration</span> <span class="n">registration</span> <span class="o">=</span> <span class="n">clientProperties</span><span class="o">.</span><span class="na">getRegistration</span><span class="o">().</span><span class="na">get</span><span class="o">(</span><span class="s">"facebook"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="nc">CommonOAuth2Provider</span><span class="o">.</span><span class="na">FACEBOOK</span><span class="o">.</span><span class="na">getBuilder</span><span class="o">(</span><span class="n">client</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">clientId</span><span class="o">(</span><span class="n">registration</span><span class="o">.</span><span class="na">getClientId</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">clientSecret</span><span class="o">(</span><span class="n">registration</span><span class="o">.</span><span class="na">getClientSecret</span><span class="o">())</span>
+                    <span class="o">.</span><span class="na">userInfoUri</span><span class="o">(</span><span class="s">"https://graph.facebook.com/me?fields=id,name,email,link"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">scope</span><span class="o">(</span><span class="s">"email"</span><span class="o">)</span>
+                    <span class="o">.</span><span class="na">build</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>OAuth2의 인증 설징시 WebSecurityConfigurerAdapter클래스를 상속받으면 <code class="highlighter-rouge">@Bean</code>으로 ClientRegistrationRepository 메소드를 작성해야 합니다. 그러면 OAuth2 서비스를 제공하는 업체 facebook, google, kakao, naver의 인증에 필요한 정보를 InMemoryClientRegistrationRepository로 반환합니다.</li>
+</ul>
+
+<h3 id="customoauth2providerjava">CustomOAuth2Provider.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.oauth2.security</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.client.registration.ClientRegistration</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.AuthorizationGrantType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.ClientAuthenticationMethod</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">enum</span> <span class="nc">CustomOAuth2Provider</span> <span class="o">{</span>
+
+    <span class="no">KAKAO</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ClientRegistration</span><span class="o">.</span><span class="na">Builder</span> <span class="nf">getBuilder</span><span class="o">(</span><span class="nc">String</span> <span class="n">registrationId</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">ClientRegistration</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">getBuilder</span><span class="o">(</span><span class="n">registrationId</span><span class="o">,</span>
+                    <span class="nc">ClientAuthenticationMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="no">DEFAULT_LOGIN_REDIRECT_URL</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">scope</span><span class="o">(</span><span class="s">"profile"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">authorizationUri</span><span class="o">(</span><span class="s">"https://kauth.kakao.com/oauth/authorize"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">tokenUri</span><span class="o">(</span><span class="s">"https://kauth.kakao.com/oauth/token"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">userInfoUri</span><span class="o">(</span><span class="s">"https://kapi.kakao.com/v2/user/me"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">userNameAttributeName</span><span class="o">(</span><span class="s">"id"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">clientName</span><span class="o">(</span><span class="s">"Kakao"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">builder</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">},</span>
+    <span class="no">NAVER</span> <span class="o">{</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="nc">ClientRegistration</span><span class="o">.</span><span class="na">Builder</span> <span class="nf">getBuilder</span><span class="o">(</span><span class="nc">String</span> <span class="n">registrationId</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">ClientRegistration</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builder</span> <span class="o">=</span> <span class="n">getBuilder</span><span class="o">(</span><span class="n">registrationId</span><span class="o">,</span>
+                    <span class="nc">ClientAuthenticationMethod</span><span class="o">.</span><span class="na">POST</span><span class="o">,</span> <span class="no">DEFAULT_LOGIN_REDIRECT_URL</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">scope</span><span class="o">(</span><span class="s">"profile"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">authorizationUri</span><span class="o">(</span><span class="s">"https://nid.naver.com/oauth2.0/authorize"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">tokenUri</span><span class="o">(</span><span class="s">"https://nid.naver.com/oauth2.0/token"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">userInfoUri</span><span class="o">(</span><span class="s">"https://openapi.naver.com/v1/nid/me"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">userNameAttributeName</span><span class="o">(</span><span class="s">"id"</span><span class="o">);</span>
+            <span class="n">builder</span><span class="o">.</span><span class="na">clientName</span><span class="o">(</span><span class="s">"Naver"</span><span class="o">);</span>
+            <span class="k">return</span> <span class="n">builder</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">};</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">DEFAULT_LOGIN_REDIRECT_URL</span> <span class="o">=</span> <span class="s">"{baseUrl}/login/oauth2/code/{registrationId}"</span><span class="o">;</span>
+
+    <span class="kd">protected</span> <span class="kd">final</span> <span class="nc">ClientRegistration</span><span class="o">.</span><span class="na">Builder</span> <span class="nf">getBuilder</span><span class="o">(</span>
+            <span class="nc">String</span> <span class="n">registrationId</span><span class="o">,</span> <span class="nc">ClientAuthenticationMethod</span> <span class="n">method</span><span class="o">,</span> <span class="nc">String</span> <span class="n">redirectUri</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">ClientRegistration</span><span class="o">.</span><span class="na">Builder</span> <span class="n">builder</span> <span class="o">=</span> <span class="nc">ClientRegistration</span><span class="o">.</span><span class="na">withRegistrationId</span><span class="o">(</span><span class="n">registrationId</span><span class="o">);</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">clientAuthenticationMethod</span><span class="o">(</span><span class="n">method</span><span class="o">);</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">authorizationGrantType</span><span class="o">(</span><span class="nc">AuthorizationGrantType</span><span class="o">.</span><span class="na">AUTHORIZATION_CODE</span><span class="o">);</span>
+        <span class="n">builder</span><span class="o">.</span><span class="na">redirectUriTemplate</span><span class="o">(</span><span class="n">redirectUri</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">builder</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">abstract</span> <span class="nc">ClientRegistration</span><span class="o">.</span><span class="na">Builder</span> <span class="nf">getBuilder</span><span class="o">(</span><span class="nc">String</span> <span class="n">registrationId</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>국내 기업의 인증에 필요한 정보는 별도의 관리가 필요합니다. 관리에 편의성을 위해 enum으로 관리합니다. enum 데이터에서 추상화를 사용하는걸 보실수 있습니다.(저는 처음 봅니다)</li>
+</ul>
+
+<h3 id="customoauth2userservicejava">CustomOAuth2UserService.java</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="nn">com.example.oauth2.service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.core.ParameterizedTypeReference</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.core.convert.converter.Converter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.RequestEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.GrantedAuthority</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.core.authority.SimpleGrantedAuthority</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.client.http.OAuth2ErrorResponseErrorHandler</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.client.userinfo.OAuth2UserRequestEntityConverter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.OAuth2AccessToken</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.OAuth2AuthenticationException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.OAuth2AuthorizationException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.OAuth2Error</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.user.DefaultOAuth2User</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.user.OAuth2User</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.security.oauth2.core.user.OAuth2UserAuthority</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.util.Assert</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.util.StringUtils</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.client.RestClientException</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.client.RestOperations</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.client.RestTemplate</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.LinkedHashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.LinkedHashSet</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Set</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">lombok.extern.java.Log</span><span class="o">;</span>
+
+<span class="nd">@Log</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CustomOAuth2UserService</span> <span class="kd">extends</span> <span class="nc">DefaultOAuth2UserService</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">MISSING_USER_INFO_URI_ERROR_CODE</span> <span class="o">=</span> <span class="s">"missing_user_info_uri"</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE</span> <span class="o">=</span> <span class="s">"missing_user_name_attribute"</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">String</span> <span class="no">INVALID_USER_INFO_RESPONSE_ERROR_CODE</span> <span class="o">=</span> <span class="s">"invalid_user_info_response"</span><span class="o">;</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">final</span> <span class="nc">ParameterizedTypeReference</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="no">PARAMETERIZED_RESPONSE_TYPE</span> <span class="o">=</span>
+            <span class="k">new</span> <span class="nc">ParameterizedTypeReference</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;()</span> <span class="o">{};</span>
+
+    <span class="kd">private</span> <span class="nc">Converter</span><span class="o">&lt;</span><span class="nc">OAuth2UserRequest</span><span class="o">,</span> <span class="nc">RequestEntity</span><span class="o">&lt;?&gt;&gt;</span> <span class="n">requestEntityConverter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OAuth2UserRequestEntityConverter</span><span class="o">();</span>
+
+    <span class="kd">private</span> <span class="nc">RestOperations</span> <span class="n">restOperations</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">CustomOAuth2UserService</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">RestTemplate</span> <span class="n">restTemplate</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RestTemplate</span><span class="o">();</span>
+        <span class="n">restTemplate</span><span class="o">.</span><span class="na">setErrorHandler</span><span class="o">(</span><span class="k">new</span> <span class="nc">OAuth2ErrorResponseErrorHandler</span><span class="o">());</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">restOperations</span> <span class="o">=</span> <span class="n">restTemplate</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="nd">@Override</span>
+    <span class="kd">public</span> <span class="nc">OAuth2User</span> <span class="nf">loadUser</span><span class="o">(</span><span class="nc">OAuth2UserRequest</span> <span class="n">userRequest</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">OAuth2AuthenticationException</span> <span class="o">{</span>
+        <span class="nc">Assert</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">userRequest</span><span class="o">,</span> <span class="s">"userRequest cannot be null"</span><span class="o">);</span>
+
+        <span class="k">if</span> <span class="o">(!</span><span class="nc">StringUtils</span><span class="o">.</span><span class="na">hasText</span><span class="o">(</span><span class="n">userRequest</span><span class="o">.</span><span class="na">getClientRegistration</span><span class="o">().</span><span class="na">getProviderDetails</span><span class="o">().</span><span class="na">getUserInfoEndpoint</span><span class="o">().</span><span class="na">getUri</span><span class="o">()))</span> <span class="o">{</span>
+            <span class="nc">OAuth2Error</span> <span class="n">oauth2Error</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OAuth2Error</span><span class="o">(</span>
+                    <span class="no">MISSING_USER_INFO_URI_ERROR_CODE</span><span class="o">,</span>
+                    <span class="s">"Missing required UserInfo Uri in UserInfoEndpoint for Client Registration: "</span> <span class="o">+</span>
+                            <span class="n">userRequest</span><span class="o">.</span><span class="na">getClientRegistration</span><span class="o">().</span><span class="na">getRegistrationId</span><span class="o">(),</span>
+                    <span class="kc">null</span>
+            <span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">OAuth2AuthenticationException</span><span class="o">(</span><span class="n">oauth2Error</span><span class="o">,</span> <span class="n">oauth2Error</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="o">}</span>
+        <span class="nc">String</span> <span class="n">userNameAttributeName</span> <span class="o">=</span> <span class="n">userRequest</span><span class="o">.</span><span class="na">getClientRegistration</span><span class="o">().</span><span class="na">getProviderDetails</span><span class="o">()</span>
+                <span class="o">.</span><span class="na">getUserInfoEndpoint</span><span class="o">().</span><span class="na">getUserNameAttributeName</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="nc">StringUtils</span><span class="o">.</span><span class="na">hasText</span><span class="o">(</span><span class="n">userNameAttributeName</span><span class="o">))</span> <span class="o">{</span>
+            <span class="nc">OAuth2Error</span> <span class="n">oauth2Error</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OAuth2Error</span><span class="o">(</span>
+                    <span class="no">MISSING_USER_NAME_ATTRIBUTE_ERROR_CODE</span><span class="o">,</span>
+                    <span class="s">"Missing required \"user name\" attribute name in UserInfoEndpoint for Client Registration: "</span> <span class="o">+</span>
+                            <span class="n">userRequest</span><span class="o">.</span><span class="na">getClientRegistration</span><span class="o">().</span><span class="na">getRegistrationId</span><span class="o">(),</span>
+                    <span class="kc">null</span>
+            <span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">OAuth2AuthenticationException</span><span class="o">(</span><span class="n">oauth2Error</span><span class="o">,</span> <span class="n">oauth2Error</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
+        <span class="o">}</span>
+
+        <span class="nc">RequestEntity</span><span class="o">&lt;?&gt;</span> <span class="n">request</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">requestEntityConverter</span><span class="o">.</span><span class="na">convert</span><span class="o">(</span><span class="n">userRequest</span><span class="o">);</span>
+
+        <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="n">response</span><span class="o">;</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"&gt;&gt;&gt;&gt;&gt;&gt; request : "</span> <span class="o">+</span> <span class="n">request</span><span class="o">);</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"&gt;&gt;&gt;&gt;&gt;&gt; userNameAttributeName : "</span> <span class="o">+</span> <span class="n">userNameAttributeName</span><span class="o">);</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"&gt;&gt;&gt;&gt;&gt;&gt; userRequest : "</span> <span class="o">+</span> <span class="n">userRequest</span><span class="o">.</span><span class="na">getClientRegistration</span><span class="o">().</span><span class="na">getProviderDetails</span><span class="o">().</span><span class="na">getUserInfoEndpoint</span><span class="o">());</span>
+            <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"&gt;&gt;&gt;&gt;&gt;&gt; userRequest : "</span> <span class="o">+</span> <span class="n">userRequest</span><span class="o">.</span><span class="na">getClientRegistration</span><span class="o">().</span><span class="na">getProviderDetails</span><span class="o">().</span><span class="na">getUserInfoEndpoint</span><span class="o">().</span><span class="na">getUri</span><span class="o">());</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">restOperations</span><span class="o">.</span><span class="na">exchange</span><span class="o">(</span><span class="n">request</span><span class="o">,</span> <span class="no">PARAMETERIZED_RESPONSE_TYPE</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">OAuth2AuthorizationException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">OAuth2Error</span> <span class="n">oauth2Error</span> <span class="o">=</span> <span class="n">ex</span><span class="o">.</span><span class="na">getError</span><span class="o">();</span>
+            <span class="nc">StringBuilder</span> <span class="n">errorDetails</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">StringBuilder</span><span class="o">();</span>
+            <span class="n">errorDetails</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"Error details: ["</span><span class="o">);</span>
+            <span class="n">errorDetails</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"UserInfo Uri: "</span><span class="o">).</span><span class="na">append</span><span class="o">(</span>
+                    <span class="n">userRequest</span><span class="o">.</span><span class="na">getClientRegistration</span><span class="o">().</span><span class="na">getProviderDetails</span><span class="o">().</span><span class="na">getUserInfoEndpoint</span><span class="o">().</span><span class="na">getUri</span><span class="o">());</span>
+            <span class="n">errorDetails</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">", Error Code: "</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="n">oauth2Error</span><span class="o">.</span><span class="na">getErrorCode</span><span class="o">());</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">oauth2Error</span><span class="o">.</span><span class="na">getDescription</span><span class="o">()</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">errorDetails</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">", Error Description: "</span><span class="o">).</span><span class="na">append</span><span class="o">(</span><span class="n">oauth2Error</span><span class="o">.</span><span class="na">getDescription</span><span class="o">());</span>
+            <span class="o">}</span>
+            <span class="n">errorDetails</span><span class="o">.</span><span class="na">append</span><span class="o">(</span><span class="s">"]"</span><span class="o">);</span>
+            <span class="n">oauth2Error</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OAuth2Error</span><span class="o">(</span><span class="no">INVALID_USER_INFO_RESPONSE_ERROR_CODE</span><span class="o">,</span>
+                    <span class="s">"An error occurred while attempting to retrieve the UserInfo Resource: "</span> <span class="o">+</span> <span class="n">errorDetails</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="kc">null</span><span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">OAuth2AuthenticationException</span><span class="o">(</span><span class="n">oauth2Error</span><span class="o">,</span> <span class="n">oauth2Error</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">RestClientException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">OAuth2Error</span> <span class="n">oauth2Error</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">OAuth2Error</span><span class="o">(</span><span class="no">INVALID_USER_INFO_RESPONSE_ERROR_CODE</span><span class="o">,</span>
+                    <span class="s">"An error occurred while attempting to retrieve the UserInfo Resource: "</span> <span class="o">+</span> <span class="n">ex</span><span class="o">.</span><span class="na">getMessage</span><span class="o">(),</span> <span class="kc">null</span><span class="o">);</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">OAuth2AuthenticationException</span><span class="o">(</span><span class="n">oauth2Error</span><span class="o">,</span> <span class="n">oauth2Error</span><span class="o">.</span><span class="na">toString</span><span class="o">(),</span> <span class="n">ex</span><span class="o">);</span>
+        <span class="o">}</span>
+
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">userAttributes</span> <span class="o">=</span> <span class="n">getUserAttributes</span><span class="o">(</span><span class="n">response</span><span class="o">);</span>
+        <span class="nc">Set</span><span class="o">&lt;</span><span class="nc">GrantedAuthority</span><span class="o">&gt;</span> <span class="n">authorities</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">LinkedHashSet</span><span class="o">&lt;&gt;();</span>
+        <span class="n">authorities</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">OAuth2UserAuthority</span><span class="o">(</span><span class="n">userAttributes</span><span class="o">));</span>
+        <span class="nc">OAuth2AccessToken</span> <span class="n">token</span> <span class="o">=</span> <span class="n">userRequest</span><span class="o">.</span><span class="na">getAccessToken</span><span class="o">();</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">String</span> <span class="n">authority</span> <span class="o">:</span> <span class="n">token</span><span class="o">.</span><span class="na">getScopes</span><span class="o">())</span> <span class="o">{</span>
+            <span class="n">authorities</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="k">new</span> <span class="nc">SimpleGrantedAuthority</span><span class="o">(</span><span class="s">"SCOPE_"</span> <span class="o">+</span> <span class="n">authority</span><span class="o">));</span>
+        <span class="o">}</span>
+
+        <span class="k">return</span> <span class="k">new</span> <span class="nf">DefaultOAuth2User</span><span class="o">(</span><span class="n">authorities</span><span class="o">,</span> <span class="n">userAttributes</span><span class="o">,</span> <span class="n">userNameAttributeName</span><span class="o">);</span>
+    <span class="o">}</span>
+
+    <span class="c1">// 네이버는 HTTP response body에 response 안에 id 값을 포함한 유저정보를 넣어주므로 유저정보를 빼내기 위한 작업을 함</span>
+    <span class="kd">private</span> <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="nf">getUserAttributes</span><span class="o">(</span><span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="n">response</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Map</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">,</span> <span class="nc">Object</span><span class="o">&gt;</span> <span class="n">userAttributes</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="na">getBody</span><span class="o">();</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">userAttributes</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="s">"response"</span><span class="o">))</span> <span class="o">{</span>
+            <span class="nc">LinkedHashMap</span> <span class="n">responseData</span> <span class="o">=</span> <span class="o">(</span><span class="nc">LinkedHashMap</span><span class="o">)</span><span class="n">userAttributes</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"response"</span><span class="o">);</span>
+            <span class="n">userAttributes</span><span class="o">.</span><span class="na">putAll</span><span class="o">(</span><span class="n">responseData</span><span class="o">);</span>
+            <span class="n">userAttributes</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="s">"response"</span><span class="o">);</span>
+        <span class="o">}</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">""</span> <span class="o">+</span> <span class="n">userAttributes</span><span class="o">);</span>
+        <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"</span><span class="o">);</span>
+        <span class="k">return</span> <span class="n">userAttributes</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>획득한 인가 정보를 처리하는 곳입니다.</li>
+</ul>
+
+<h2 id="예제-소스">예제 소스</h2>
+
+<p><a href="https://github.com/whitexozu/Springboot-Example" target="_blank">Github</a></p>
+
+<h2 id="참고사이트">참고사이트</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">facebook, google 가입, 소스설명</span><span class="pi">:</span> <span class="s">https://engkimbs.tistory.com/849</span>
+<span class="s">소스설명</span><span class="pi">:</span> <span class="s">https://m.blog.naver.com/PostView.nhn?blogId=varkiry05&amp;logNo=221313073382&amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F</span>
+<span class="s">kakao 가입 상세, 소스 설명 상세</span><span class="pi">:</span> <span class="s">https://galid1.tistory.com/582</span>
+<span class="s">SPA OAuth2(implicit grant)</span><span class="pi">:</span> <span class="s">https://www.daleseo.com/google-oauth/</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#oauth2" class="page__taxonomy-item" rel="tag">OAuth2</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#springboot" class="page__taxonomy-item" rel="tag">Springboot</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#framework" class="page__taxonomy-item" rel="tag">Framework</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-02-20">February 20, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BOAuth2%5D+Springboot+%2B+Facebook%2C+Google%2C+kakao%2C+naver+%20http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-facebook-google-kakao-naver%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-facebook-google-kakao-naver%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-oauth2-springboot-facebook-google-kakao-naver%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/framework/framework-oauth2-springboot-naver-jsp/" class="pagination--pager" title="[OAuth2] Springboot + naver + jsp
+">이전</a>
+    
+    
+      <a href="/scm/scm-create-github-blog/" class="pagination--pager" title="[Blog] GitHub에 blog 생성
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-java-enum/" rel="permalink">[JAVA] enum 데이터 타입
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">클래스 설명
+
+  상수의 그룹을 나타낼 때 사용한다.
+  허용 가능한 값들을 제한할 수 있습니다.
+  IDE의 적극적인 지원을 받을 수 있습니다.
+    
+      자동완성, 오타검증, 텍스트 리팩토링 등등
+    
+  
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-java-optional/" rel="permalink">[JAVA] Optional class
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">클래스 설명
+
+  1.8 이상부터 추가된 java.util.Optional Class
+  복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.
+  제네릭을 제공해주는 래퍼 클래스(Wrapper class)입니다.
+  ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-security/" rel="permalink">[Security] Springboot + Security + MySQL
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Spring Security 장점
+
+  프로그램 로직보다 설정으로 페이지나 리소스 접근 제어
+  JDBC, LDAP 등 호환되는 인증 커넥터 다수
+  CSRF 등 강력한 보안 인증
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-gradle/" rel="permalink">[Gradle] Springboot + Gradle
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">VSCode에서 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
