@@ -1,31 +1,192 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-10T06:08:00+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[GIT] command +</title><link href="http://localhost:4000/language/scm-git-command/" rel="alternate" type="text/html" title="[GIT] command + " /><published>2020-03-10T00:00:00+09:00</published><updated>2020-03-10T22:05:34+09:00</updated><id>http://localhost:4000/language/scm-git-command</id><content type="html" xml:base="http://localhost:4000/language/scm-git-command/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-11T10:47:42+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[GIT] 명령어, 협업 방법</title><link href="http://localhost:4000/scm/scm-git-command/" rel="alternate" type="text/html" title="[GIT] 명령어, 협업 방법" /><published>2020-03-10T00:00:00+09:00</published><updated>2020-03-10T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-git-command</id><content type="html" xml:base="http://localhost:4000/scm/scm-git-command/">&lt;p&gt;SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)&lt;br /&gt;
+Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다.&lt;br /&gt;
+SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면
+Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다.&lt;br /&gt;
+단, 모든 프로젝트를 복잡하게 관리할 필요는 없습니다. 프로젝트 규모와 목적에 맞는 규칙을 선택해서 사용하는것을 추천드립니다.&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;사용-방법&quot;&gt;사용 방법&lt;/h2&gt;
+&lt;h2 id=&quot;개념잡기&quot;&gt;개념잡기&lt;/h2&gt;
 
-&lt;h3 id=&quot;기본적인-사용&quot;&gt;기본적인 사용&lt;/h3&gt;
+&lt;h3 id=&quot;add-commit-push&quot;&gt;add, commit, push&lt;/h3&gt;
+&lt;p&gt;실제 파일에 수정이 이루어지는 &lt;code class=&quot;highlighter-rouge&quot;&gt;working directory&lt;/code&gt;에서&lt;br /&gt;
+&lt;em&gt;add&lt;/em&gt;룰 하게 되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;index(staging area)&lt;/code&gt;로 넘어가게 됩니다.&lt;br /&gt;
+&lt;em&gt;commit&lt;/em&gt;을 하게되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD&lt;/code&gt;으로 넘어가 최종 확장본이 생성됩니다.&lt;br /&gt;
+&lt;em&gt;push&lt;/em&gt;를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;remote(origin)&lt;/code&gt; 원격저장소에 반영 하게 됩니다.&lt;/p&gt;
 
-&lt;p&gt;git remote remove origin
-git remote add origin https://github.com/…&lt;/p&gt;
+&lt;h3 id=&quot;merge-rebase&quot;&gt;merge, rebase&lt;/h3&gt;
 
-&lt;p&gt;원격 브런치 접근을 위해 git remote를 갱신 합니다.
-$ git remote update
-원격 저장소의 branch list 확인 합니다.
-$ git branch -r
--a 옵션을 주면 로컬, 원격 모든 저장소의 branch 리스트를 볼 수 있습니다.
-원격저장소의 branch를 가져옵니다.
-$ git checkout -t origin/[branch name]&lt;/p&gt;
+&lt;p&gt;merge를 사용할 지, Rebase를 사용할 지는 프로젝트의 히스토리를 어떻게 관리할지에 따라 선택됩니다.&lt;br /&gt;
+merge의 경우 병합되는 브런치의 모든 작업 내용을 기록하게 됩니다.&lt;br /&gt;
+Rebase의 경우 다른 브랜치는 없었던 것처럼 작업 내용이 하나의 흐름으로 기록됩니다.&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;git-연걸&quot;&gt;git 연걸&lt;/h2&gt;
+
+&lt;h3 id=&quot;원격지-변경&quot;&gt;원격지 변경&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote remove origin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote add origin https://github.com/...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;원격지-branch-checkout&quot;&gt;원격지 branch checkout&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 원격 브런치 접근을 위해 git remote를 갱신 합니다.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote update
+
+&lt;span class=&quot;c&quot;&gt;# 원격 저장소의 branch list 확인 합니다.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# -a 옵션을 주면 로컬, 원격 모든 저장소의 branch 리스트를 볼 수 있습니다.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 원격저장소의 branch를 가져옵니다.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; origin/[branch name]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
 branch를 참고만 할 뿐 수정 내용을 원격 저장소에 push 하지 않을 경우 &lt;em&gt;$ git checkout [원격 저장소의 branch 이름]&lt;/em&gt; 옵션이 없는 명령어로 checkout 하면 ‘detached HEAD’ 상태의 소스를 확인 및 수정 할 수는 있지만 변경사항들을 commit, push 할 수 없으며 다른 branch로 checkout하면 사라지게 됩니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;checkout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://cjh5414.github.io/get-git-remote-branch/&lt;/span&gt;
+&lt;h2 id=&quot;명령어&quot;&gt;명령어&lt;/h2&gt;
+
+&lt;h3 id=&quot;git-merge&quot;&gt;git merge&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;다른 branch 수정 사항을 가져올때 사용, 이력이 남음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch issue1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;branch 생성&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;branch 목록 확인&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout issue1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;branch 이동&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# issue1 수정&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;comment&quot;&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merger issue1
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; issue1
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;참고사이트-1&quot;&gt;참고사이트&lt;/h2&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- https://velog.io/@pop8682/Enum-27k067ns4a
-- https://woowabros.github.io/tools/2017/07/10/java-enum-uses.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="JAVA" /><summary type="html">클래스 설명</summary></entry><entry><title type="html">[JAVA] enum 데이터 타입</title><link href="http://localhost:4000/language/language-java-enum/" rel="alternate" type="text/html" title="[JAVA] enum 데이터 타입" /><published>2020-03-06T00:00:00+09:00</published><updated>2020-03-06T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-enum</id><content type="html" xml:base="http://localhost:4000/language/language-java-enum/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
+&lt;h3 id=&quot;git-rebase&quot;&gt;git rebase&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;다른 branch 수정 사항을 가져올때 사용, 이력이 남지 않음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git chekcout &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; issue1 &lt;span class=&quot;c&quot;&gt;# branch 생성과 checkout 을 한번에 하기위해 -b 옵션 사용&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# issue1 수정 후 push&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# master 수정 후 push (pc가 다른경우 master 수정사항 pull, issue1 수정사항 pull)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git chekcout issue1
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git rebase master
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout maser
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge issue1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;한-branch에서-merge&quot;&gt;한 branch에서 merge&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add, git commit
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull origin
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge
+
+&lt;span class=&quot;c&quot;&gt;# 비 충돌시&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin
+
+&lt;span class=&quot;c&quot;&gt;# 충돌시 충돌 내용 정리 후&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add, git commit
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;git-log-정리-방법&quot;&gt;git log 정리 방법&lt;/h2&gt;
+
+&lt;h3 id=&quot;git-crlf-개행-문자-통일&quot;&gt;git CRLF 개행 문자 통일&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; core.eol lf
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; core.autocrlf input
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; core.autocrlf &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;add-alias-git-log&quot;&gt;add alias git log&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; alias.lg &lt;span class=&quot;s2&quot;&gt;&quot;log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold red)%h%C(reset) : %C(bold green)(%ar)%C(reset) - %C(cyan)&amp;lt;%an&amp;gt;%C(reset)%C(bold yellow)%d%C(reset)%n%n%w(90,1,2)%C(white)%B%C(reset)%n'&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git lg  
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log  
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--oneline&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;아직-push되지-않은-commit-목록-보기&quot;&gt;아직 push되지 않은 commit 목록 보기&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--branches&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--not&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--remotes&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;git에서-특정-commit의-변경된-파일-목록-보기&quot;&gt;git에서 특정 commit의 변경된 파일 목록 보기&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--name-only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;branch-의미&quot;&gt;branch 의미&lt;/h2&gt;
+
+&lt;h3 id=&quot;master-branch&quot;&gt;Master Branch&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;제품으로 출시될 수 있는 브랜치&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;배포(Release) 이력을 관리하기 위해 사용. 즉, 배포 가능한 상태만을 관리한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;develop-branch&quot;&gt;Develop Branch&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;다음 출시 버전을 개발하는 브랜치&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;기능 개발을 위한 브랜치들을 병합하기 위해 사용. 즉, 모든 기능이 추가되고 버그가 수정되어 배포 가능한 안정적인 상태라면 develop 브랜치를 ‘master’ 브랜치에 병합(merge)한다.&lt;/li&gt;
+  &lt;li&gt;평소에는 이 브랜치를 기반으로 개발을 진행한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;feature-branch&quot;&gt;Feature branch&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;기능을 개발하는 브랜치&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;feature 브랜치는 새로운 기능 개발 및 버그 수정이 필요할 때마다 ‘develop’ 브랜치로부터 분기한다. feature 브랜치에서의 작업은 기본적으로 공유할 필요가 없기 때문에, 자신의 로컬 저장소에서 관리한다.&lt;/li&gt;
+  &lt;li&gt;개발이 완료되면 ‘develop’ 브랜치로 병합(merge)하여 다른 사람들과 공유한다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;release-branch&quot;&gt;Release Branch&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;이번 출시 버전을 준비하는 브랜치&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;배포를 위한 전용 브랜치를 사용함으로써 한 팀이 해당 배포를 준비하는 동안 다른 팀은 다음 배포를 위한 기능 개발을 계속할 수 있다. 즉, 딱딱 끊어지는 개발 단계를 정의하기에 아주 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;hotfix-branch&quot;&gt;Hotfix Branch&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;출시 버전에서 발생한 버그를 수정 하는 브랜치&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;배포한 버전에 긴급하게 수정을 해야 할 필요가 있을 경우, ‘master’ 브랜치에서 분기하는 브랜치이다. ‘develop’ 브랜치에서 문제가 되는 부분을 수정하여 배포 가능한 버전을 만들기에는 시간도 많이 소요되고 안정성을 보장하기도 어려우므로 바로 배포가 가능한 ‘master’ 브랜치에서 직접 브랜치를 만들어 필요한 부분만을 수정한 후 다시 ‘master’브랜치에 병합하여 이를 배포해야 하는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;협업-방법&quot;&gt;협업 방법&lt;/h2&gt;
+
+&lt;h3 id=&quot;feature-branch-workflow&quot;&gt;Feature Branch Workflow&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;소규모의 프로젝트에서 많이 사용하는 방식&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;forking-workflow&quot;&gt;Forking Workflow&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;오픈 소스 프로젝트에서 많이 사용하는 방식&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;gitflow-workflow&quot;&gt;Gitflow Workflow&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;대규모의 프로젝트에서 사용하는 엄격한 방식&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;git 간편 안내서&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://rogerdudler.github.io/git-guide/index.ko.html&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;git commit message&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://djkeh.github.io/articles/How-to-write-a-git-commit-message-kor/&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;git remote branch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://cjh5414.github.io/get-git-remote-branch/&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;merge vs rebase&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://velog.io/@godori/Git-Rebase&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;branch 설명&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2018/05/11/types-of-git-branch.html&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;Feature Branch Workflow&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2017/10/27/how-to-collaborate-on-GitHub-1.html&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;Forking Workflow&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2018/05/12/how-to-collaborate-on-GitHub-3.html&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;Gitflow Workflow&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2017/10/28/how-to-collaborate-on-GitHub-2.html&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;git add, commit, pusho 취소&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2018/05/25/git-add-cancle.html&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="Git" /><summary type="html">SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다) Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다. SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면 Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다. 단, 모든 프로젝트를 복잡하게 관리할 필요는 없습니다. 프로젝트 규모와 목적에 맞는 규칙을 선택해서 사용하는것을 추천드립니다.</summary></entry><entry><title type="html">[JAVA] enum 데이터 타입</title><link href="http://localhost:4000/language/language-java-enum/" rel="alternate" type="text/html" title="[JAVA] enum 데이터 타입" /><published>2020-03-06T00:00:00+09:00</published><updated>2020-03-06T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-enum</id><content type="html" xml:base="http://localhost:4000/language/language-java-enum/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;상수의 그룹을 나타낼 때 사용한다.&lt;/li&gt;
   &lt;li&gt;허용 가능한 값들을 제한할 수 있습니다.&lt;/li&gt;

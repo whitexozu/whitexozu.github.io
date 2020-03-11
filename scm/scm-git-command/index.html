@@ -1,0 +1,793 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[GIT] 명령어, 협업 방법 - TMM</title>
+<meta name="description" content="SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다) Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다. SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면 Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다. 단, 모든 프로젝트를 복잡하게 관리할 필요는 없습니다. 프로젝트 규모와 목적에 맞는 규칙을 선택해서 사용하는것을 추천드립니다.  ">
+
+
+  <meta name="author" content="To much mong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[GIT] 명령어, 협업 방법">
+<meta property="og:url" content="http://localhost:4000/scm/scm-git-command/">
+
+
+  <meta property="og:description" content="SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다) Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다. SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면 Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다. 단, 모든 프로젝트를 복잡하게 관리할 필요는 없습니다. 프로젝트 규모와 목적에 맞는 규칙을 선택해서 사용하는것을 추천드립니다.  ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-03-10T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-03-10T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/scm/scm-git-command/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much mong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[GIT] 명령어, 협업 방법">
+    <meta itemprop="description" content="SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다.SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다.단, 모든 프로젝트를 복잡하게 관리할 필요는 없습니다. 프로젝트 규모와 목적에 맞는 규칙을 선택해서 사용하는것을 추천드립니다.">
+    <meta itemprop="datePublished" content="2020-03-10T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-03-10T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[GIT] 명령어, 협업 방법
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#개념잡기">개념잡기</a>
+    <ul>
+      <li><a href="#add-commit-push">add, commit, push</a></li>
+      <li><a href="#merge-rebase">merge, rebase</a></li>
+    </ul>
+  </li>
+  <li><a href="#git-연걸">git 연걸</a>
+    <ul>
+      <li><a href="#원격지-변경">원격지 변경</a></li>
+      <li><a href="#원격지-branch-checkout">원격지 branch checkout</a></li>
+    </ul>
+  </li>
+  <li><a href="#명령어">명령어</a>
+    <ul>
+      <li><a href="#git-merge">git merge</a></li>
+      <li><a href="#git-rebase">git rebase</a></li>
+      <li><a href="#한-branch에서-merge">한 branch에서 merge</a></li>
+    </ul>
+  </li>
+  <li><a href="#git-log-정리-방법">git log 정리 방법</a>
+    <ul>
+      <li><a href="#git-crlf-개행-문자-통일">git CRLF 개행 문자 통일</a></li>
+      <li><a href="#add-alias-git-log">add alias git log</a></li>
+      <li><a href="#아직-push되지-않은-commit-목록-보기">아직 push되지 않은 commit 목록 보기</a></li>
+      <li><a href="#git에서-특정-commit의-변경된-파일-목록-보기">git에서 특정 commit의 변경된 파일 목록 보기</a></li>
+    </ul>
+  </li>
+  <li><a href="#branch-의미">branch 의미</a>
+    <ul>
+      <li><a href="#master-branch">Master Branch</a></li>
+      <li><a href="#develop-branch">Develop Branch</a></li>
+      <li><a href="#feature-branch">Feature branch</a></li>
+      <li><a href="#release-branch">Release Branch</a></li>
+      <li><a href="#hotfix-branch">Hotfix Branch</a></li>
+    </ul>
+  </li>
+  <li><a href="#협업-방법">협업 방법</a>
+    <ul>
+      <li><a href="#feature-branch-workflow">Feature Branch Workflow</a></li>
+      <li><a href="#forking-workflow">Forking Workflow</a></li>
+      <li><a href="#gitflow-workflow">Gitflow Workflow</a></li>
+    </ul>
+  </li>
+  <li><a href="#참고사이트">참고사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)<br />
+Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다.<br />
+SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면
+Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다.<br />
+단, 모든 프로젝트를 복잡하게 관리할 필요는 없습니다. 프로젝트 규모와 목적에 맞는 규칙을 선택해서 사용하는것을 추천드립니다.<br />
+<br /></p>
+
+<h2 id="개념잡기">개념잡기</h2>
+
+<h3 id="add-commit-push">add, commit, push</h3>
+<p>실제 파일에 수정이 이루어지는 <code class="highlighter-rouge">working directory</code>에서<br />
+<em>add</em>룰 하게 되면 <code class="highlighter-rouge">index(staging area)</code>로 넘어가게 됩니다.<br />
+<em>commit</em>을 하게되면 <code class="highlighter-rouge">HEAD</code>으로 넘어가 최종 확장본이 생성됩니다.<br />
+<em>push</em>를 통해 <code class="highlighter-rouge">remote(origin)</code> 원격저장소에 반영 하게 됩니다.</p>
+
+<h3 id="merge-rebase">merge, rebase</h3>
+
+<p>merge를 사용할 지, Rebase를 사용할 지는 프로젝트의 히스토리를 어떻게 관리할지에 따라 선택됩니다.<br />
+merge의 경우 병합되는 브런치의 모든 작업 내용을 기록하게 됩니다.<br />
+Rebase의 경우 다른 브랜치는 없었던 것처럼 작업 내용이 하나의 흐름으로 기록됩니다.<br /></p>
+
+<h2 id="git-연걸">git 연걸</h2>
+
+<h3 id="원격지-변경">원격지 변경</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote remove origin
+<span class="nv">$ </span>git remote add origin https://github.com/...
+</code></pre></div></div>
+
+<h3 id="원격지-branch-checkout">원격지 branch checkout</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 원격 브런치 접근을 위해 git remote를 갱신 합니다.</span>
+<span class="nv">$ </span>git remote update
+
+<span class="c"># 원격 저장소의 branch list 확인 합니다.</span>
+<span class="nv">$ </span>git branch <span class="nt">-r</span>
+
+<span class="c"># -a 옵션을 주면 로컬, 원격 모든 저장소의 branch 리스트를 볼 수 있습니다.</span>
+<span class="nv">$ </span>git branch <span class="nt">-a</span>
+
+<span class="c"># 원격저장소의 branch를 가져옵니다.</span>
+<span class="nv">$ </span>git checkout <span class="nt">-t</span> origin/[branch name]
+</code></pre></div></div>
+
+<p class="notice--info"><strong>Note:</strong><br />
+branch를 참고만 할 뿐 수정 내용을 원격 저장소에 push 하지 않을 경우 <em>$ git checkout [원격 저장소의 branch 이름]</em> 옵션이 없는 명령어로 checkout 하면 ‘detached HEAD’ 상태의 소스를 확인 및 수정 할 수는 있지만 변경사항들을 commit, push 할 수 없으며 다른 branch로 checkout하면 사라지게 됩니다.</p>
+
+<h2 id="명령어">명령어</h2>
+
+<h3 id="git-merge">git merge</h3>
+
+<ul>
+  <li>다른 branch 수정 사항을 가져올때 사용, 이력이 남음</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git branch issue1 <span class="o">(</span>branch 생성<span class="o">)</span>
+<span class="nv">$ </span>git branch  <span class="o">(</span>branch 목록 확인<span class="o">)</span>
+<span class="nv">$ </span>git checkout issue1 <span class="o">(</span>branch 이동<span class="o">)</span>
+<span class="c"># issue1 수정</span>
+<span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"comment"</span>
+<span class="nv">$ </span>git checkout master
+<span class="nv">$ </span>git merger issue1
+<span class="nv">$ </span>git branch <span class="nt">-d</span> issue1
+<span class="nv">$ </span>git branch
+</code></pre></div></div>
+
+<h3 id="git-rebase">git rebase</h3>
+
+<ul>
+  <li>다른 branch 수정 사항을 가져올때 사용, 이력이 남지 않음</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git chekcout <span class="nt">-b</span> issue1 <span class="c"># branch 생성과 checkout 을 한번에 하기위해 -b 옵션 사용</span>
+<span class="c"># issue1 수정 후 push</span>
+<span class="c"># master 수정 후 push (pc가 다른경우 master 수정사항 pull, issue1 수정사항 pull)</span>
+<span class="nv">$ </span>git chekcout issue1
+<span class="nv">$ </span>git rebase master
+<span class="nv">$ </span>git checkout maser
+<span class="nv">$ </span>git merge issue1
+</code></pre></div></div>
+
+<h3 id="한-branch에서-merge">한 branch에서 merge</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add, git commit
+<span class="nv">$ </span>git pull origin
+<span class="nv">$ </span>git merge
+
+<span class="c"># 비 충돌시</span>
+<span class="nv">$ </span>git push origin
+
+<span class="c"># 충돌시 충돌 내용 정리 후</span>
+<span class="nv">$ </span>git add, git commit
+<span class="nv">$ </span>git push origin
+</code></pre></div></div>
+
+<h2 id="git-log-정리-방법">git log 정리 방법</h2>
+
+<h3 id="git-crlf-개행-문자-통일">git CRLF 개행 문자 통일</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> core.eol lf
+<span class="nv">$ </span>git config <span class="nt">--global</span> core.autocrlf input
+<span class="nv">$ </span>git config <span class="nt">--global</span> core.autocrlf <span class="nb">true</span>
+</code></pre></div></div>
+
+<h3 id="add-alias-git-log">add alias git log</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> alias.lg <span class="s2">"log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold red)%h%C(reset) : %C(bold green)(%ar)%C(reset) - %C(cyan)&lt;%an&gt;%C(reset)%C(bold yellow)%d%C(reset)%n%n%w(90,1,2)%C(white)%B%C(reset)%n'"</span>
+
+<span class="nv">$ </span>git lg  
+<span class="nv">$ </span>git log  
+<span class="nv">$ </span>git log <span class="nt">--oneline</span>
+</code></pre></div></div>
+
+<h3 id="아직-push되지-않은-commit-목록-보기">아직 push되지 않은 commit 목록 보기</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--branches</span> <span class="nt">--not</span> <span class="nt">--remotes</span>
+</code></pre></div></div>
+
+<h3 id="git에서-특정-commit의-변경된-파일-목록-보기">git에서 특정 commit의 변경된 파일 목록 보기</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--name-only</span> <span class="nt">-1</span>
+</code></pre></div></div>
+
+<h2 id="branch-의미">branch 의미</h2>
+
+<h3 id="master-branch">Master Branch</h3>
+
+<p><em>제품으로 출시될 수 있는 브랜치</em></p>
+<ul>
+  <li>배포(Release) 이력을 관리하기 위해 사용. 즉, 배포 가능한 상태만을 관리한다.</li>
+</ul>
+
+<h3 id="develop-branch">Develop Branch</h3>
+
+<p><em>다음 출시 버전을 개발하는 브랜치</em></p>
+<ul>
+  <li>기능 개발을 위한 브랜치들을 병합하기 위해 사용. 즉, 모든 기능이 추가되고 버그가 수정되어 배포 가능한 안정적인 상태라면 develop 브랜치를 ‘master’ 브랜치에 병합(merge)한다.</li>
+  <li>평소에는 이 브랜치를 기반으로 개발을 진행한다.</li>
+</ul>
+
+<h3 id="feature-branch">Feature branch</h3>
+
+<p><em>기능을 개발하는 브랜치</em></p>
+<ul>
+  <li>feature 브랜치는 새로운 기능 개발 및 버그 수정이 필요할 때마다 ‘develop’ 브랜치로부터 분기한다. feature 브랜치에서의 작업은 기본적으로 공유할 필요가 없기 때문에, 자신의 로컬 저장소에서 관리한다.</li>
+  <li>개발이 완료되면 ‘develop’ 브랜치로 병합(merge)하여 다른 사람들과 공유한다.</li>
+</ul>
+
+<h3 id="release-branch">Release Branch</h3>
+
+<p><em>이번 출시 버전을 준비하는 브랜치</em></p>
+<ul>
+  <li>배포를 위한 전용 브랜치를 사용함으로써 한 팀이 해당 배포를 준비하는 동안 다른 팀은 다음 배포를 위한 기능 개발을 계속할 수 있다. 즉, 딱딱 끊어지는 개발 단계를 정의하기에 아주 좋다.</li>
+</ul>
+
+<h3 id="hotfix-branch">Hotfix Branch</h3>
+
+<p><em>출시 버전에서 발생한 버그를 수정 하는 브랜치</em></p>
+<ul>
+  <li>배포한 버전에 긴급하게 수정을 해야 할 필요가 있을 경우, ‘master’ 브랜치에서 분기하는 브랜치이다. ‘develop’ 브랜치에서 문제가 되는 부분을 수정하여 배포 가능한 버전을 만들기에는 시간도 많이 소요되고 안정성을 보장하기도 어려우므로 바로 배포가 가능한 ‘master’ 브랜치에서 직접 브랜치를 만들어 필요한 부분만을 수정한 후 다시 ‘master’브랜치에 병합하여 이를 배포해야 하는 것이다.</li>
+</ul>
+
+<h2 id="협업-방법">협업 방법</h2>
+
+<h3 id="feature-branch-workflow">Feature Branch Workflow</h3>
+
+<p><em>소규모의 프로젝트에서 많이 사용하는 방식</em></p>
+
+<h3 id="forking-workflow">Forking Workflow</h3>
+
+<p><em>오픈 소스 프로젝트에서 많이 사용하는 방식</em></p>
+
+<h3 id="gitflow-workflow">Gitflow Workflow</h3>
+
+<p><em>대규모의 프로젝트에서 사용하는 엄격한 방식</em></p>
+
+<h2 id="참고사이트">참고사이트</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">git 간편 안내서</span><span class="pi">:</span> <span class="s">https://rogerdudler.github.io/git-guide/index.ko.html</span>
+<span class="na">git commit message</span><span class="pi">:</span> <span class="s">https://djkeh.github.io/articles/How-to-write-a-git-commit-message-kor/</span>
+<span class="na">git remote branch</span><span class="pi">:</span> <span class="s">https://cjh5414.github.io/get-git-remote-branch/</span>
+<span class="na">merge vs rebase</span><span class="pi">:</span> <span class="s">https://velog.io/@godori/Git-Rebase</span>
+<span class="s">branch 설명</span><span class="pi">:</span> <span class="s">https://gmlwjd9405.github.io/2018/05/11/types-of-git-branch.html</span>
+<span class="na">Feature Branch Workflow</span><span class="pi">:</span> <span class="s">https://gmlwjd9405.github.io/2017/10/27/how-to-collaborate-on-GitHub-1.html</span>
+<span class="na">Forking Workflow</span><span class="pi">:</span> <span class="s">https://gmlwjd9405.github.io/2018/05/12/how-to-collaborate-on-GitHub-3.html</span>
+<span class="na">Gitflow Workflow</span><span class="pi">:</span> <span class="s">https://gmlwjd9405.github.io/2017/10/28/how-to-collaborate-on-GitHub-2.html</span>
+<span class="s">git add, commit, pusho 취소</span><span class="pi">:</span> <span class="s">https://gmlwjd9405.github.io/2018/05/25/git-add-cancle.html</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#git" class="page__taxonomy-item" rel="tag">Git</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#scm" class="page__taxonomy-item" rel="tag">SCM</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-10">March 10, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BGIT%5D+%EB%AA%85%EB%A0%B9%EC%96%B4%2C+%ED%98%91%EC%97%85+%EB%B0%A9%EB%B2%95%20http%3A%2F%2Flocalhost%3A4000%2Fscm%2Fscm-git-command%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fscm%2Fscm-git-command%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fscm%2Fscm-git-command%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/language/language-java-enum/" class="pagination--pager" title="[JAVA] enum 데이터 타입
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-java-enum/" rel="permalink">[JAVA] enum 데이터 타입
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">클래스 설명
+
+  상수의 그룹을 나타낼 때 사용한다.
+  허용 가능한 값들을 제한할 수 있습니다.
+  IDE의 적극적인 지원을 받을 수 있습니다.
+    
+      자동완성, 오타검증, 텍스트 리팩토링 등등
+    
+  
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-java-optional/" rel="permalink">[JAVA] Optional class
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">클래스 설명
+
+  1.8 이상부터 추가된 java.util.Optional Class
+  복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.
+  제네릭을 제공해주는 래퍼 클래스(Wrapper class)입니다.
+  ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-security/" rel="permalink">[Security] Springboot + Security + MySQL
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Spring Security 장점
+
+  프로그램 로직보다 설정으로 페이지나 리소스 접근 제어
+  JDBC, LDAP 등 호환되는 인증 커넥터 다수
+  CSRF 등 강력한 보안 인증
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-gradle/" rel="permalink">[Gradle] Springboot + Gradle
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">VSCode에서 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
