@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-12T02:55:56+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Email template] ZURB Foundation</title><link href="http://localhost:4000/framework/framework-email-template-zurbfoundation/" rel="alternate" type="text/html" title="[Email template] ZURB Foundation" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-email-template-zurbfoundation</id><content type="html" xml:base="http://localhost:4000/framework/framework-email-template-zurbfoundation/">&lt;p&gt;사용자에게 뉴스레터, 공지 이메일 등의 이메일을 HTML 형식으로 발송해야 할 때가 있습니다.&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-12T03:11:06+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Email template] ZURB Foundation</title><link href="http://localhost:4000/framework/framework-email-template-zurbfoundation/" rel="alternate" type="text/html" title="[Email template] ZURB Foundation" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-email-template-zurbfoundation</id><content type="html" xml:base="http://localhost:4000/framework/framework-email-template-zurbfoundation/">&lt;p&gt;사용자에게 뉴스레터, 공지 이메일 등의 이메일을 HTML 형식으로 발송해야 할 때가 있습니다.&lt;br /&gt;
 통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다.&lt;br /&gt;
 그럼 퍼블리셔팀에게 요청하게 되고 &lt;code class=&quot;highlighter-rouge&quot;&gt;템플릿 디자인&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;이메일 클라이언트&lt;/code&gt; 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다.&lt;br /&gt;
 생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다)&lt;br /&gt;
@@ -59,9 +59,9 @@ nvm을 사용한 테스트 결과 v12에서는 프로젝트 생성이 되지 않
 
 &lt;ol&gt;
   &lt;li&gt;네이버 메일의 환경설정으로 이동합니다.&lt;br /&gt;
- &lt;img src=&quot;/assets/images/framework-email-template-zurbfoundation_1.PNG&quot; alt=&quot;click setting button&quot; width=&quot;300&quot; class=&quot;center&quot; /&gt;&lt;/li&gt;
+ &lt;img src=&quot;https://whitexozu.github.io/assets/images/framework-email-template-zurbfoundation_1.PNG&quot; alt=&quot;click setting button&quot; width=&quot;300&quot; class=&quot;center&quot; /&gt;&lt;/li&gt;
   &lt;li&gt;smtp 사용을 선택합니다.&lt;br /&gt;
- &lt;img src=&quot;/assets/images/framework-email-template-zurbfoundation_2.PNG&quot; alt=&quot;modify setting&quot; width=&quot;500&quot; class=&quot;center&quot; /&gt;&lt;/li&gt;
+ &lt;img src=&quot;https://whitexozu.github.io/assets/images/framework-email-template-zurbfoundation_2.PNG&quot; alt=&quot;modify setting&quot; width=&quot;500&quot; class=&quot;center&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;config-설정&quot;&gt;config 설정&lt;/h3&gt;
