@@ -1,4 +1,175 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-11T10:47:42+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[GIT] 명령어, 협업 방법</title><link href="http://localhost:4000/scm/scm-git-command/" rel="alternate" type="text/html" title="[GIT] 명령어, 협업 방법" /><published>2020-03-10T00:00:00+09:00</published><updated>2020-03-10T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-git-command</id><content type="html" xml:base="http://localhost:4000/scm/scm-git-command/">&lt;p&gt;SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-12T02:53:18+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Email template] ZURB Foundation</title><link href="http://localhost:4000/framework/framework-email-template-zurbfoundation/" rel="alternate" type="text/html" title="[Email template] ZURB Foundation" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-email-template-zurbfoundation</id><content type="html" xml:base="http://localhost:4000/framework/framework-email-template-zurbfoundation/">&lt;p&gt;사용자에게 뉴스레터, 공지 이메일 등을 HTML 형식으로 보내야 할 때가 있습니다.&lt;br /&gt;
+통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다.&lt;br /&gt;
+그럼 퍼블리셔팀에게 요청하게 되고 &lt;code class=&quot;highlighter-rouge&quot;&gt;템플릿 디자인&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;이메일 클라이언트&lt;/code&gt; 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다.&lt;br /&gt;
+생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다)&lt;br /&gt;
+&lt;br /&gt;
+결론부터 말하자면 이메일은 HTML 표준이 없습니다.&lt;br /&gt;
+이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다.&lt;br /&gt;
+상황이 이러다 보니 &lt;code class=&quot;highlighter-rouge&quot;&gt;ZURB Foundation&lt;/code&gt; 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다.&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;설치-방법-및-실행&quot;&gt;설치 방법 및 실행&lt;/h2&gt;
+
+&lt;p&gt;세상 간단합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; foundation-cli
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;foundation new &lt;span class=&quot;nt&quot;&gt;--framework&lt;/span&gt; emails
+
+&lt;span class=&quot;c&quot;&gt;# project name 입력&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;project name]
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm run start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그럼 브라우저에서 사이트가 열리는것을 확인 할 수 있습니다.&lt;/p&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+nvm을 사용한 테스트 결과 v12에서는 프로젝트 생성이 되지 않았습니다. v10 에서 사용하기를 추천 드립니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;폴더구조&quot;&gt;폴더구조&lt;/h2&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+├── LICENSE
+├── README.md
+├── config.json
+├── dist
+├── etc
+├── example.config.json
+├── gulpfile.babel.js
+├── node_modules
+├── package.json
+└── src
+    ├── assets
+    ├── helpers
+    ├── layouts
+    ├── pages
+    └── partials
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;코딩&quot;&gt;코딩&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;pages 폴더의 예제 소스를 정리하고 코딩을 하게되면 dist폴더에 결과가 생성됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;메일-발송-설정-및-테스트&quot;&gt;메일 발송 설정 및 테스트&lt;/h2&gt;
+
+&lt;h3 id=&quot;smtp-서버-사용을-설정합니다-저는-네이버-smtp-서버를-사용하겠습니다&quot;&gt;smtp 서버 사용을 설정합니다. 저는 네이버 smtp 서버를 사용하겠습니다.&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;네이버 메일의 환경설정으로 이동합니다.&lt;br /&gt;
+ &lt;img src=&quot;/assets/images/framework-email-template-zurbfoundation_1.PNG&quot; alt=&quot;click setting button&quot; width=&quot;300&quot; class=&quot;center&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;smtp 사용을 선택합니다.&lt;br /&gt;
+ &lt;img src=&quot;/assets/images/framework-email-template-zurbfoundation_2.PNG&quot; alt=&quot;modify setting&quot; width=&quot;500&quot; class=&quot;center&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;config-설정&quot;&gt;config 설정&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;example.config.json 파일을 복사하여 config.json 파일을 생성합니다.&lt;/li&gt;
+  &lt;li&gt;smtp 서버 정보를 수정합니다.
+    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;mail&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;to&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[emailId]@naver.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[emailId]@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;from&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[name] &amp;lt;[emailId]@naver.com&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;smtp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;auth&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+             &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[emailId]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+             &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;pass&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[emailPassword]&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;host&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;smtp.naver.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;secureConnection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+         &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;465&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+ &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;메이-발송&quot;&gt;메이 발송&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm run mail
+
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; foundation-emails-template@1.0.0 mail /Users/[user name]/dev/temp/email_test
+&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; gulp mail &lt;span class=&quot;nt&quot;&gt;--production&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:23] Requiring external module babel-register
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Using gulpfile ~/dev/temp/email_coding/email_test/gulpfile.babel.js
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Starting &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Starting &lt;span class=&quot;s1&quot;&gt;'build'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Starting &lt;span class=&quot;s1&quot;&gt;'clean'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Finished &lt;span class=&quot;s1&quot;&gt;'clean'&lt;/span&gt; after 19 ms
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Starting &lt;span class=&quot;s1&quot;&gt;'pages'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:43] Finished &lt;span class=&quot;s1&quot;&gt;'pages'&lt;/span&gt; after 1.08 s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:43] Starting &lt;span class=&quot;s1&quot;&gt;'sass'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:49] Finished &lt;span class=&quot;s1&quot;&gt;'sass'&lt;/span&gt; after 5.96 s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:49] Starting &lt;span class=&quot;s1&quot;&gt;'images'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:51] gulp-imagemin: Minified 0 images
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:51] Finished &lt;span class=&quot;s1&quot;&gt;'images'&lt;/span&gt; after 1.52 s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:51] Starting &lt;span class=&quot;s1&quot;&gt;'inline'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Finished &lt;span class=&quot;s1&quot;&gt;'inline'&lt;/span&gt; after 3.14 s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Finished &lt;span class=&quot;s1&quot;&gt;'build'&lt;/span&gt; after 12 s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Starting &lt;span class=&quot;s1&quot;&gt;'creds'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Finished &lt;span class=&quot;s1&quot;&gt;'creds'&lt;/span&gt; after 1.58 ms
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Starting &lt;span class=&quot;s1&quot;&gt;'aws'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:55] Finished &lt;span class=&quot;s1&quot;&gt;'aws'&lt;/span&gt; after 1.57 s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:55] Starting &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;...
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:57] Send email &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;TEST] basic to &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;emailId]@naver.com,[emailId]@gmail.com
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:57] Finished &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt; after 1.58 s
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:57] Finished &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt; after 15 s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+템플릿에 이미지파일을 사용할경우 개발시에는 assets폴더에 저장후 사용이 가능하나 이메일 발송시에는 aws에 접근하려고 하여 에러가 발생합니다.
+이미지 사용은 별도의 이미지 파일 서버에 업로드 후 사용 할 수 있습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;email-client-종류&quot;&gt;email client 종류&lt;/h2&gt;
+
+&lt;h3 id=&quot;모바일-이메일-클라이언트&quot;&gt;모바일 이메일 클라이언트&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Android 2.3 및 4.0&lt;/li&gt;
+  &lt;li&gt;iPhone 5 iOS 6&lt;/li&gt;
+  &lt;li&gt;iPhone 4S iOS 6&lt;/li&gt;
+  &lt;li&gt;iPhone 3GS iOS 5&lt;/li&gt;
+  &lt;li&gt;iPad 2 iOS 6&lt;/li&gt;
+  &lt;li&gt;BlackBerry OS 4 &amp;amp; 5&lt;/li&gt;
+  &lt;li&gt;Symbian S60&lt;/li&gt;
+  &lt;li&gt;Windows Phone 7.5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;데스크톱-이메일-클라이언트&quot;&gt;데스크톱 이메일 클라이언트&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apple Mail 4, 5, 6&lt;/li&gt;
+  &lt;li&gt;Lotus Notes 8.5&lt;/li&gt;
+  &lt;li&gt;Lotus Notes 8&lt;/li&gt;
+  &lt;li&gt;Thunderbird&lt;/li&gt;
+  &lt;li&gt;Windows Live Mail&lt;/li&gt;
+  &lt;li&gt;Outlook 2013 (v15)&lt;/li&gt;
+  &lt;li&gt;Mac 용 Outlook 2011&lt;/li&gt;
+  &lt;li&gt;Outlook 2010 (v14)&lt;/li&gt;
+  &lt;li&gt;Outlook 2007 (v12)&lt;/li&gt;
+  &lt;li&gt;Outlook 2003 (v11)&lt;/li&gt;
+  &lt;li&gt;Outlook 2002 / XP (v10)&lt;/li&gt;
+  &lt;li&gt;Outlook 2000 (v9)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;웹-메일-클라이언트&quot;&gt;웹 메일 클라이언트&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AOL Mail (on any browser)&lt;/li&gt;
+  &lt;li&gt;Gmail (on any browser)&lt;/li&gt;
+  &lt;li&gt;Outlook.com (on any browser)&lt;/li&gt;
+  &lt;li&gt;Yahoo! (on any browser)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;ZURB Fundation Getting Start&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://get.foundation/emails/docs/sass-guide.html&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="ZURB Foundation" /><category term="email templdate" /><summary type="html">사용자에게 뉴스레터, 공지 이메일 등을 HTML 형식으로 보내야 할 때가 있습니다. 통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다. 그럼 퍼블리셔팀에게 요청하게 되고 템플릿 디자인과 이메일 클라이언트 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다. 생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다) 결론부터 말하자면 이메일은 HTML 표준이 없습니다. 이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다. 상황이 이러다 보니 ZURB Foundation 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다.</summary></entry><entry><title type="html">[GIT] 명령어, 협업 방법</title><link href="http://localhost:4000/scm/scm-git-command/" rel="alternate" type="text/html" title="[GIT] 명령어, 협업 방법" /><published>2020-03-10T00:00:00+09:00</published><updated>2020-03-10T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-git-command</id><content type="html" xml:base="http://localhost:4000/scm/scm-git-command/">&lt;p&gt;SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)&lt;br /&gt;
 Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다.&lt;br /&gt;
 SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면
 Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다.&lt;br /&gt;
@@ -2120,164 +2291,4 @@ spring.mvc.view.suffix=.jsp
   &lt;p&gt;&lt;a href=&quot;https://developers.naver.com/main/&quot;&gt;https://developers.naver.com/main/&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://bumcrush.tistory.com/151&quot;&gt;https://bumcrush.tistory.com/151&lt;/a&gt;&lt;br /&gt;
 &lt;a href=&quot;https://4urdev.tistory.com/47&quot;&gt;https://4urdev.tistory.com/47&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="OAuth2" /><category term="Springboot" /><category term="naver" /><summary type="html">Naver developers &amp;gt; Application &amp;gt; Application 등록 어플리케이션 이름 입력 : naver_sign_in 사용 API 선택 : 네아로 사용 API 전부 선택 로그인 오픈 API 서비스 환경 : PC웹 서비스 URL 입력 : http://localhost:8080/oauth/signin Callback URL 입력 : http://localhost:8080/oauth/callback 등록하기 버튼 클릭 애플리 케이션 정보 확인 Client ID : **** Client Secret : ****</summary></entry><entry><title type="html">[Jenkins] CentOS7 Jenkins 설정</title><link href="http://localhost:4000/ci/ci-centos7-jenkins/" rel="alternate" type="text/html" title="[Jenkins] CentOS7 Jenkins 설정" /><published>2020-02-12T00:00:00+09:00</published><updated>2020-02-12T22:05:34+09:00</updated><id>http://localhost:4000/ci/ci-centos7-jenkins</id><content type="html" xml:base="http://localhost:4000/ci/ci-centos7-jenkins/">&lt;h3 id=&quot;global-tool-configuration&quot;&gt;Global Tool Configuration&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;Jenkins 관리 &amp;gt; Global Tool Configuration 이동&lt;/li&gt;
-  &lt;li&gt;JDK&lt;br /&gt;
-Uncheck Install automatically&lt;br /&gt;
-Name : jdk1.8&lt;br /&gt;
-JAVA_HOME : /usr/local/java&lt;/li&gt;
-  &lt;li&gt;MAVEN&lt;br /&gt;
-Uncheck Install automatically&lt;br /&gt;
-Name : maven3.5.2&lt;br /&gt;
-JAVA_HOME : /usr/local/maven&lt;/li&gt;
-  &lt;li&gt;NodeJS (nvm 사용시)&lt;br /&gt;
-Uncheck Install automatically&lt;br /&gt;
-Name : nodejs12.16.0&lt;br /&gt;
-Installation directory : /home/whitexozu/.nvm/versions/node/v12.16.0&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;build-설정-springboot&quot;&gt;Build 설정 (springboot)&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;새로운 Item 클릭&lt;/li&gt;
-  &lt;li&gt;이름 및 타입 입력&lt;br /&gt;
-Enter an item name 입력 (ex:build)&lt;br /&gt;
-item 타입 선택 (Freestyle project)&lt;/li&gt;
-  &lt;li&gt;build 설정
-    &lt;ol&gt;
-      &lt;li&gt;General&lt;br /&gt;
-GitHub project 선택&lt;br /&gt;
-Project url : &lt;a href=&quot;https://github.com/whitexozu/Springboot-Example.git&quot;&gt;https://github.com/whitexozu/Springboot-Example.git&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;소스 코드 관리&lt;br /&gt;
-Git 선택&lt;br /&gt;
-Repositories &amp;gt; Credentials 의 Add 에서 Jenkins 선택 후 본인 github의 username/password 입력&lt;br /&gt;
-Repositories &amp;gt; Repository URL : &lt;a href=&quot;https://github.com/whitexozu/Springboot-Example.git&quot;&gt;https://github.com/whitexozu/Springboot-Example.git&lt;/a&gt;&lt;br /&gt;
-Repositories &amp;gt; Credentials : whitexozu/&lt;strong&gt;**&lt;/strong&gt;&lt;br /&gt;
-Repository browser : githubweb 선택&lt;br /&gt;
-Repository browser &amp;gt; URL : &lt;a href=&quot;https://github.com/whitexozu/Springboot-Example.git&quot;&gt;https://github.com/whitexozu/Springboot-Example.git&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;빌드유발
-        &lt;blockquote&gt;
-          &lt;p&gt;&lt;a href=&quot;https://kutar37.tistory.com/entry/Jenkins-Github-%EC%97%B0%EB%8F%99-%EC%9E%90%EB%8F%99%EB%B0%B0%ED%8F%AC-3&quot;&gt;https://kutar37.tistory.com/entry/Jenkins-Github-%EC%97%B0%EB%8F%99-%EC%9E%90%EB%8F%99%EB%B0%B0%ED%8F%AC-3&lt;/a&gt;&lt;/p&gt;
-        &lt;/blockquote&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Build&lt;br /&gt;
-kill spring boot tomcat of local server &amp;gt; make jar &amp;gt; run spring boot tomcat 총 3단계로 진행
-        &lt;ol&gt;
-          &lt;li&gt;shell 파일 생성&lt;br /&gt;
-/var/lib/jenkins/workspace/springboot-test/start.sh
-            &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
-            
- &lt;span class=&quot;nv&quot;&gt;BUILD_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;dontKillMe &lt;span class=&quot;nb&quot;&gt;nohup&lt;/span&gt; /usr/local/java/bin/java &lt;span class=&quot;nt&quot;&gt;-jar&lt;/span&gt; /var/lib/jenkins/workspace/springboot-test/Springboot-Swagger2/target/springboot-swagger2-0.0.1-SNAPSHOT.jar &lt;span class=&quot;nt&quot;&gt;-server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; /var/lib/jenkins/workspace/springboot-test/logs/springboot-swagger2.log &amp;amp;
- &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'springboot-swagger2 is running on the server...'&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;            &lt;/div&gt;
-
-            &lt;p&gt;&lt;em&gt;로컬 서버에서 서버기동시 정상적으로 작동하지 않는 이슈가 발생, 원인은 젠킨스 빌드 종료시 진행중인 프로세스가 모두 종료되어 nohup 같은 명령어가 정상적으로 작동하지않는 문제가 있다, 그래서 기동 명령에 BUILD_ID=dontKillMe 를 붙여 주어야 한다.&lt;/em&gt;&lt;/p&gt;
-
-            &lt;blockquote&gt;
-              &lt;p&gt;&lt;a href=&quot;https://jang8584.tistory.com/248&quot;&gt;https://jang8584.tistory.com/248&lt;/a&gt;&lt;/p&gt;
-            &lt;/blockquote&gt;
-
-            &lt;p&gt;/var/lib/jenkins/workspace/springboot-test/stop.sh&lt;/p&gt;
-            &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
-            
- &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-15&lt;/span&gt; &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; ps &lt;span class=&quot;nt&quot;&gt;-ef&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;springboot-swagger2 | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tail&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{ print $2 }'&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
- &lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;springboot-swagger2 has been shutdown...&quot;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;            &lt;/div&gt;
-          &lt;/li&gt;
-          &lt;li&gt;build 명령어 등록
-            &lt;ol&gt;
-              &lt;li&gt;Add build step &amp;gt; Execute shell 선택&lt;br /&gt;
-Command : /var/lib/jenkins/workspace/springboot-test/start.sh&lt;/li&gt;
-              &lt;li&gt;Add build step &amp;gt; Invork top-level Maven targets 선택&lt;br /&gt;
-Invork top-level Maven targets &amp;gt; Maven Version : Global Tool Configuration 에서 입력한 maven name 선택&lt;br /&gt;
-Goals : -f /var/lib/jenkins/workspace/springboot-test/Springboot-Swagger2 spring-boot:run&lt;/li&gt;
-              &lt;li&gt;Add build step &amp;gt; Execute shell 선택&lt;br /&gt;
-Command : /var/lib/jenkins/workspace/springboot-test/stop.sh&lt;/li&gt;
-            &lt;/ol&gt;
-          &lt;/li&gt;
-        &lt;/ol&gt;
-      &lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;build-설정-nodejs&quot;&gt;Build 설정 (nodejs)&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;새로운 Item 클릭&lt;/li&gt;
-  &lt;li&gt;이름 및 타입 입력&lt;br /&gt;
-Enter an item name 입력 (ex:NodeJS-Build)&lt;br /&gt;
-item 타입 선택 (Pipline)&lt;/li&gt;
-  &lt;li&gt;build 설정
-    &lt;ol&gt;
-      &lt;li&gt;General&lt;br /&gt;
-GitHub project 선택&lt;br /&gt;
-Project url : &lt;a href=&quot;https://github.com/whitexozu/Vue3-Koa-Scaffold.git&quot;&gt;https://github.com/whitexozu/Vue3-Koa-Scaffold.git&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;Pipeline
-        &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pipeline {
-agent any
-        
-tools {
-    // Global Tool Configuration 에서 입력한 NodeJs 이름을 입력하면 npm 명령어 사용 가능
-    nodejs &quot;nodejs12.16.0&quot;
-}
-        
-stages {
-    stage('Build') {
-      steps {
-          // Kill process
-          //   pid 를 검색하여 kill 하는 경우 pid 가 있으면 괜찮으나 없는경우 에러 발생으로 이후 진행이 되지않음
-          //   - 2&amp;gt;&amp;amp;1 표준 출력으로 변경해도 해결 되지 않음
-          //     sh label: '', script: 'kill -15 $(ps aux | grep \'Koa-Backend\'| grep -v grep | grep -v tail | awk \'{print $2}\') &amp;gt; /dev/null 2&amp;gt;&amp;amp;1'
-          //   그래서 pid 가 있는 경우 kill 되록 처리
-          //   shell 작성 후 변경은 Pipeline Syntax 버튼을 클릭하여 Generate 하면 편하다
-          sh label: '', script: '''pname=\'Koa-Backend\'
-          pid=`ps -ef | grep $pname | grep -v grep | grep -v tail | awk \'{print $2}\'`
-          if [ $pid ];then
-            echo &quot;process is running&quot;
-            kill -15 $pid
-            echo &quot;${pname} has been shutdown&quot;
-          else
-            echo &quot;process is not running&quot;
-          fi'''
-          echo &quot;Koa-Backend has been shutdown...&quot;
-        
-          // Get some code from a GitHub repository
-          git credentialsId: 'a02dc8c1-d07f-43c9-a225-844410db9031', url: 'https://github.com/whitexozu/Vue3-Koa-Scaffold.git'
-        
-          // Run npm install
-          sh &quot;cd Koa-Backend &amp;amp;&amp;amp; npm i&quot;
-          sh &quot;cd Vue3-Frontend &amp;amp;&amp;amp; npm i&quot;
-        
-          // Run npm build
-          sh &quot;cd Vue3-Frontend &amp;amp;&amp;amp; npm run build&quot;
-        
-          // Run npm serve
-          // 실패
-          //   jenkins가 설치된 서버에서 nodejs 서버 기등하는 방법을 찾을수가 없었음
-          //   - 외부 shell 파일을 실행해도 실패
-          //     sh &quot;/var/lib/jenkins/workspace/start-nodejs.sh&quot;
-          //   - BUILD_ID=dontKillMe 와 nohup 을 적용해도 실패
-          //     sh &quot;BUILD_ID=dontKillMe cd Koa-Backend &amp;amp;&amp;amp; BUILD_ID=dontKillMe nohup npm run serve &amp;gt; ../logs/Koa-Backend.log &amp;amp;&quot;
-          //   - forever package 를 적용해도 실패
-          //     sh &quot;cd Koa-Backend &amp;amp;&amp;amp; forever start -a -l ../logs/forever.log -o ../logs/output.log -e ../logs/error.log src&quot;
-          // echo &quot;Koa-Backend is running on the server...&quot;
-        
-      }
-    }
-}
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
-      &lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;build-실행&quot;&gt;Build 실행&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;My Views 클릭&lt;/li&gt;
-  &lt;li&gt;목록의 아이탬 클릭&lt;/li&gt;
-  &lt;li&gt;Build Now 클릭&lt;/li&gt;
-  &lt;li&gt;좌측 하단의 #num, 프로그래스바 클릭으로 Console Output 로그 확인&lt;/li&gt;
-&lt;/ol&gt;</content><author><name>To much mong</name></author><category term="Jenkins" /><category term="Springboot" /><category term="nodejs" /><summary type="html">Global Tool Configuration Jenkins 관리 &amp;gt; Global Tool Configuration 이동 JDK Uncheck Install automatically Name : jdk1.8 JAVA_HOME : /usr/local/java MAVEN Uncheck Install automatically Name : maven3.5.2 JAVA_HOME : /usr/local/maven NodeJS (nvm 사용시) Uncheck Install automatically Name : nodejs12.16.0 Installation directory : /home/whitexozu/.nvm/versions/node/v12.16.0</summary></entry></feed>
+&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="OAuth2" /><category term="Springboot" /><category term="naver" /><summary type="html">Naver developers &amp;gt; Application &amp;gt; Application 등록 어플리케이션 이름 입력 : naver_sign_in 사용 API 선택 : 네아로 사용 API 전부 선택 로그인 오픈 API 서비스 환경 : PC웹 서비스 URL 입력 : http://localhost:8080/oauth/signin Callback URL 입력 : http://localhost:8080/oauth/callback 등록하기 버튼 클릭 애플리 케이션 정보 확인 Client ID : **** Client Secret : ****</summary></entry></feed>

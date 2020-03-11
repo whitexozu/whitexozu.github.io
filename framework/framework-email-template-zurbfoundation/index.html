@@ -1,0 +1,728 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Email template] ZURB Foundation - TMM</title>
+<meta name="description" content="사용자에게 뉴스레터, 공지 이메일 등을 HTML 형식으로 보내야 할 때가 있습니다. 통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다. 그럼 퍼블리셔팀에게 요청하게 되고 템플릿 디자인과 이메일 클라이언트 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다. 생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다)  결론부터 말하자면 이메일은 HTML 표준이 없습니다. 이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다. 상황이 이러다 보니 ZURB Foundation 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다. ">
+
+
+  <meta name="author" content="To much mong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[Email template] ZURB Foundation">
+<meta property="og:url" content="http://localhost:4000/framework/framework-email-template-zurbfoundation/">
+
+
+  <meta property="og:description" content="사용자에게 뉴스레터, 공지 이메일 등을 HTML 형식으로 보내야 할 때가 있습니다. 통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다. 그럼 퍼블리셔팀에게 요청하게 되고 템플릿 디자인과 이메일 클라이언트 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다. 생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다)  결론부터 말하자면 이메일은 HTML 표준이 없습니다. 이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다. 상황이 이러다 보니 ZURB Foundation 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-03-12T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-03-12T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/framework/framework-email-template-zurbfoundation/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much mong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Email template] ZURB Foundation">
+    <meta itemprop="description" content="사용자에게 뉴스레터, 공지 이메일 등을 HTML 형식으로 보내야 할 때가 있습니다.통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다.그럼 퍼블리셔팀에게 요청하게 되고 템플릿 디자인과 이메일 클라이언트 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다.생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다)결론부터 말하자면 이메일은 HTML 표준이 없습니다.이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다.상황이 이러다 보니 ZURB Foundation 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다.">
+    <meta itemprop="datePublished" content="2020-03-12T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-03-12T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Email template] ZURB Foundation
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>사용자에게 뉴스레터, 공지 이메일 등을 HTML 형식으로 보내야 할 때가 있습니다.<br />
+통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다.<br />
+그럼 퍼블리셔팀에게 요청하게 되고 <code class="highlighter-rouge">템플릿 디자인</code>과 <code class="highlighter-rouge">이메일 클라이언트</code> 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다.<br />
+생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다)<br />
+<br />
+결론부터 말하자면 이메일은 HTML 표준이 없습니다.<br />
+이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다.<br />
+상황이 이러다 보니 <code class="highlighter-rouge">ZURB Foundation</code> 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다.<br /></p>
+
+<h2 id="설치-방법-및-실행">설치 방법 및 실행</h2>
+
+<p>세상 간단합니다.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span> <span class="nt">--global</span> foundation-cli
+
+<span class="nv">$ </span>foundation new <span class="nt">--framework</span> emails
+
+<span class="c"># project name 입력</span>
+
+<span class="nv">$ </span><span class="nb">cd</span> <span class="o">[</span>project name]
+
+<span class="nv">$ </span>npm run start
+</code></pre></div></div>
+
+<p>그럼 브라우저에서 사이트가 열리는것을 확인 할 수 있습니다.</p>
+
+<p class="notice--info"><strong>Note:</strong><br />
+nvm을 사용한 테스트 결과 v12에서는 프로젝트 생성이 되지 않았습니다. v10 에서 사용하기를 추천 드립니다.</p>
+
+<h2 id="폴더구조">폴더구조</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span>
+├── LICENSE
+├── README.md
+├── config.json
+├── dist
+├── etc
+├── example.config.json
+├── gulpfile.babel.js
+├── node_modules
+├── package.json
+└── src
+    ├── assets
+    ├── helpers
+    ├── layouts
+    ├── pages
+    └── partials
+</code></pre></div></div>
+
+<h2 id="코딩">코딩</h2>
+
+<ul>
+  <li>pages 폴더의 예제 소스를 정리하고 코딩을 하게되면 dist폴더에 결과가 생성됩니다.</li>
+</ul>
+
+<h2 id="메일-발송-설정-및-테스트">메일 발송 설정 및 테스트</h2>
+
+<h3 id="smtp-서버-사용을-설정합니다-저는-네이버-smtp-서버를-사용하겠습니다">smtp 서버 사용을 설정합니다. 저는 네이버 smtp 서버를 사용하겠습니다.</h3>
+
+<ol>
+  <li>네이버 메일의 환경설정으로 이동합니다.<br />
+ <img src="/assets/images/framework-email-template-zurbfoundation_1.PNG" alt="click setting button" width="300" class="center" /></li>
+  <li>smtp 사용을 선택합니다.<br />
+ <img src="/assets/images/framework-email-template-zurbfoundation_2.PNG" alt="modify setting" width="500" class="center" /></li>
+</ol>
+
+<h3 id="config-설정">config 설정</h3>
+
+<ol>
+  <li>example.config.json 파일을 복사하여 config.json 파일을 생성합니다.</li>
+  <li>smtp 서버 정보를 수정합니다.
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="nl">"mail"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+         </span><span class="s2">"[emailId]@naver.com"</span><span class="p">,</span><span class="w">
+         </span><span class="s2">"[emailId]@gmail.com"</span><span class="w">
+     </span><span class="p">],</span><span class="w">
+     </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[name] &lt;[emailId]@naver.com&gt;"</span><span class="p">,</span><span class="w">
+     </span><span class="nl">"smtp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+         </span><span class="nl">"auth"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+             </span><span class="nl">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[emailId]"</span><span class="p">,</span><span class="w">
+             </span><span class="nl">"pass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"[emailPassword]"</span><span class="w">
+         </span><span class="p">},</span><span class="w">
+         </span><span class="nl">"host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"smtp.naver.com"</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"secureConnection"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+         </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="mi">465</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="메이-발송">메이 발송</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm run mail
+
+<span class="o">&gt;</span> foundation-emails-template@1.0.0 mail /Users/[user name]/dev/temp/email_test
+<span class="o">&gt;</span> gulp mail <span class="nt">--production</span>
+
+<span class="o">[</span>19:06:23] Requiring external module babel-register
+<span class="o">[</span>19:06:42] Using gulpfile ~/dev/temp/email_coding/email_test/gulpfile.babel.js
+<span class="o">[</span>19:06:42] Starting <span class="s1">'mail'</span>...
+<span class="o">[</span>19:06:42] Starting <span class="s1">'build'</span>...
+<span class="o">[</span>19:06:42] Starting <span class="s1">'clean'</span>...
+<span class="o">[</span>19:06:42] Finished <span class="s1">'clean'</span> after 19 ms
+<span class="o">[</span>19:06:42] Starting <span class="s1">'pages'</span>...
+<span class="o">[</span>19:06:43] Finished <span class="s1">'pages'</span> after 1.08 s
+<span class="o">[</span>19:06:43] Starting <span class="s1">'sass'</span>...
+<span class="o">[</span>19:06:49] Finished <span class="s1">'sass'</span> after 5.96 s
+<span class="o">[</span>19:06:49] Starting <span class="s1">'images'</span>...
+<span class="o">[</span>19:06:51] gulp-imagemin: Minified 0 images
+<span class="o">[</span>19:06:51] Finished <span class="s1">'images'</span> after 1.52 s
+<span class="o">[</span>19:06:51] Starting <span class="s1">'inline'</span>...
+<span class="o">[</span>19:06:54] Finished <span class="s1">'inline'</span> after 3.14 s
+<span class="o">[</span>19:06:54] Finished <span class="s1">'build'</span> after 12 s
+<span class="o">[</span>19:06:54] Starting <span class="s1">'creds'</span>...
+<span class="o">[</span>19:06:54] Finished <span class="s1">'creds'</span> after 1.58 ms
+<span class="o">[</span>19:06:54] Starting <span class="s1">'aws'</span>...
+<span class="o">[</span>19:06:55] Finished <span class="s1">'aws'</span> after 1.57 s
+<span class="o">[</span>19:06:55] Starting <span class="s1">'mail'</span>...
+<span class="o">[</span>19:06:57] Send email <span class="o">[</span>TEST] basic to <span class="o">[</span>emailId]@naver.com,[emailId]@gmail.com
+<span class="o">[</span>19:06:57] Finished <span class="s1">'mail'</span> after 1.58 s
+<span class="o">[</span>19:06:57] Finished <span class="s1">'mail'</span> after 15 s
+</code></pre></div></div>
+
+<p class="notice--info"><strong>Note:</strong><br />
+템플릿에 이미지파일을 사용할경우 개발시에는 assets폴더에 저장후 사용이 가능하나 이메일 발송시에는 aws에 접근하려고 하여 에러가 발생합니다.
+이미지 사용은 별도의 이미지 파일 서버에 업로드 후 사용 할 수 있습니다.</p>
+
+<h2 id="email-client-종류">email client 종류</h2>
+
+<h3 id="모바일-이메일-클라이언트">모바일 이메일 클라이언트</h3>
+
+<ul>
+  <li>Android 2.3 및 4.0</li>
+  <li>iPhone 5 iOS 6</li>
+  <li>iPhone 4S iOS 6</li>
+  <li>iPhone 3GS iOS 5</li>
+  <li>iPad 2 iOS 6</li>
+  <li>BlackBerry OS 4 &amp; 5</li>
+  <li>Symbian S60</li>
+  <li>Windows Phone 7.5</li>
+</ul>
+
+<h3 id="데스크톱-이메일-클라이언트">데스크톱 이메일 클라이언트</h3>
+
+<ul>
+  <li>Apple Mail 4, 5, 6</li>
+  <li>Lotus Notes 8.5</li>
+  <li>Lotus Notes 8</li>
+  <li>Thunderbird</li>
+  <li>Windows Live Mail</li>
+  <li>Outlook 2013 (v15)</li>
+  <li>Mac 용 Outlook 2011</li>
+  <li>Outlook 2010 (v14)</li>
+  <li>Outlook 2007 (v12)</li>
+  <li>Outlook 2003 (v11)</li>
+  <li>Outlook 2002 / XP (v10)</li>
+  <li>Outlook 2000 (v9)</li>
+</ul>
+
+<h3 id="웹-메일-클라이언트">웹 메일 클라이언트</h3>
+
+<ul>
+  <li>AOL Mail (on any browser)</li>
+  <li>Gmail (on any browser)</li>
+  <li>Outlook.com (on any browser)</li>
+  <li>Yahoo! (on any browser)</li>
+</ul>
+
+<h2 id="참고-사이트">참고 사이트</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">ZURB Fundation Getting Start</span><span class="pi">:</span> <span class="s">https://get.foundation/emails/docs/sass-guide.html</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#email-templdate" class="page__taxonomy-item" rel="tag">email templdate</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#zurb-foundation" class="page__taxonomy-item" rel="tag">ZURB Foundation</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#framework" class="page__taxonomy-item" rel="tag">Framework</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-12">March 12, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BEmail+template%5D+ZURB+Foundation%20http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-email-template-zurbfoundation%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-email-template-zurbfoundation%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-email-template-zurbfoundation%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/scm/scm-git-command/" class="pagination--pager" title="[GIT] 명령어, 협업 방법
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/scm/scm-git-command/" rel="permalink">[GIT] 명령어, 협업 방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)
+Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다.
+SVN은 trunk 밑에 하나의 repository를 만들에 모...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-java-enum/" rel="permalink">[JAVA] enum 데이터 타입
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">클래스 설명
+
+  상수의 그룹을 나타낼 때 사용한다.
+  허용 가능한 값들을 제한할 수 있습니다.
+  IDE의 적극적인 지원을 받을 수 있습니다.
+    
+      자동완성, 오타검증, 텍스트 리팩토링 등등
+    
+  
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-java-optional/" rel="permalink">[JAVA] Optional class
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">클래스 설명
+
+  1.8 이상부터 추가된 java.util.Optional Class
+  복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.
+  제네릭을 제공해주는 래퍼 클래스(Wrapper class)입니다.
+  ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-security/" rel="permalink">[Security] Springboot + Security + MySQL
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Spring Security 장점
+
+  프로그램 로직보다 설정으로 페이지나 리소스 접근 제어
+  JDBC, LDAP 등 호환되는 인증 커넥터 다수
+  CSRF 등 강력한 보안 인증
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
