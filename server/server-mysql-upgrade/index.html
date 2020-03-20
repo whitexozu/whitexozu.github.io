@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정 - TMM</title>
-<meta name="description" content="Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다. 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다. ">
+<!-- begin _includes/seo.html --><title>[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드  - TMM</title>
+<meta name="description" content="5.6은 JSON 지원이 안되네요. 그래서 업그레이드를 하기로 했습니다. ">
 
 
   <meta name="author" content="To much mong">
@@ -19,32 +19,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정">
-<meta property="og:url" content="http://localhost:4000/language/language-python-jupyter-matplotlib/">
+<meta property="og:title" content="[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드">
+<meta property="og:url" content="http://localhost:4000/server/server-mysql-upgrade/">
 
 
-  <meta property="og:description" content="Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다. 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다. ">
-
-
-
+  <meta property="og:description" content="5.6은 JSON 지원이 안되네요. 그래서 업그레이드를 하기로 했습니다. ">
 
 
 
 
-  <meta property="article:published_time" content="2020-03-12T00:00:00+09:00">
 
 
 
-  <meta property="article:modified_time" content="2020-03-12T22:05:34+09:00">
+  <meta property="article:published_time" content="2020-03-20T00:00:00+09:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2020-03-20T22:05:34+09:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/language/language-python-jupyter-matplotlib/">
+
+<link rel="canonical" href="http://localhost:4000/server/server-mysql-upgrade/">
 
 
 
@@ -272,15 +272,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정">
-    <meta itemprop="description" content="Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.">
-    <meta itemprop="datePublished" content="2020-03-12T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2020-03-12T22:05:34+09:00">
+    <meta itemprop="headline" content="[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드">
+    <meta itemprop="description" content="5.6은 JSON 지원이 안되네요.그래서 업그레이드를 하기로 했습니다.">
+    <meta itemprop="datePublished" content="2020-03-20T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-03-20T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
+          <h1 id="page-title" class="page__title" itemprop="headline">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드
 </h1>
           
         </header>
@@ -292,73 +292,71 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#명령어">명령어</a></li>
-  <li><a href="#예제-소스">예제 소스</a></li>
-  <li><a href="#추가-내용">추가 내용</a>
-    <ul>
-      <li><a href="#macos-catalina-anaconda-설치">MacOS Catalina anaconda 설치</a></li>
-      <li><a href="#jupyter-설치">jupyter 설치</a></li>
-      <li><a href="#jupyter-실행">jupyter 실행</a></li>
-    </ul>
-  </li>
+  <li><a href="#서비스-중지">서비스 중지</a></li>
+  <li><a href="#mysql56-백업">MySQL5.6 백업</a></li>
+  <li><a href="#mysql56-rpm-삭제">MySQL5.6 RPM 삭제</a></li>
+  <li><a href="#wget-설치">wget 설치</a></li>
+  <li><a href="#mysql57-다운로드">MySQL5.7 다운로드</a></li>
+  <li><a href="#mysql-설치">MySQL 설치</a></li>
+  <li><a href="#mysql-서버-업그레이드">MySQL 서버 업그레이드</a></li>
+  <li><a href="#서비스-시작">서비스 시작</a></li>
+  <li><a href="#확인">확인</a></li>
 </ul>
 
             </nav>
           </aside>
         
-        <p>Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.<br />
-이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.</p>
+        <p>5.6은 JSON 지원이 안되네요.<br />
+그래서 업그레이드를 하기로 했습니다.</p>
 
-<h2 id="명령어">명령어</h2>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="err">%</span><span class="na">matplotlib tk</span><span class="pi">:</span> <span class="s">또는 %matplotlib qt 지정된 대화식 백엔드가있는 노트북 외부에 그림을 보여줍니다.</span>
-<span class="pi">-</span> <span class="err">%</span><span class="na">matplotlib inline</span><span class="pi">:</span> <span class="s">정적 png 이미지로 내부에 표시됩니다.</span>
-<span class="pi">-</span> <span class="err">%</span><span class="na">matplotlib notebook</span><span class="pi">:</span> <span class="s">또는 %matplotlib nbagg는 노트북 내부의 대화식 그림을 보여줍니다.</span>
-<span class="pi">-</span> <span class="err">%</span><span class="na">matplotlib widgets</span><span class="pi">:</span> <span class="s">노트북 내부의 대화 형 그림을 보여줍니다. ( jupyter-matplotlib 을 설치해야 함)</span>
+<h3 id="서비스-중지">서비스 중지</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl stop mysqld
 </code></pre></div></div>
 
-<h2 id="예제-소스">예제 소스</h2>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %matplotlib inline
-</span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">notebook</span>
-<span class="c1"># %matplotlib qt5
-</span></code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">pytesseract</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">'dark_background'</span><span class="p">)</span>
+<h3 id="mysql56-백업">MySQL5.6 백업</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo cp</span> <span class="nt">-r</span> /var/lib/mysql /var/lib/mysql.original
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">img_ori</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span>
-
-<span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">img_ori</span><span class="o">.</span><span class="n">shape</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_ori</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
+<h3 id="mysql56-rpm-삭제">MySQL5.6 RPM 삭제</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum remove mysql-community-release
 </code></pre></div></div>
 
-<h2 id="추가-내용">추가 내용</h2>
-
-<h3 id="macos-catalina-anaconda-설치">MacOS Catalina anaconda 설치</h3>
-<ul>
-  <li>MacOS Catalina 로 업데이트를 했더니 기존 아나콘다가 너무 느려저서 재설치를 했습니다.</li>
-  <li>삭제는 anaconda nevgation application 삭제 후 ~/anaconda, ~/.conda 폴더를 삭제 하고 export 설정을 삭제 하였습니다.</li>
-  <li>설치 방법은 dmg파일을 다운받아서 다음다음 하면 됩니다. 별도의 export 설정은 하지 않았습니다.</li>
-</ul>
-
-<blockquote>
-  <p>https://www.anaconda.com/how-to-restore-anaconda-after-macos-catalina-update/</p>
-</blockquote>
-
-<h3 id="jupyter-설치">jupyter 설치</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>jupyter
+<h3 id="wget-설치">wget 설치</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum <span class="nb">install </span>wget
 </code></pre></div></div>
 
-<h3 id="jupyter-실행">jupyter 실행</h3>
+<h3 id="mysql57-다운로드">MySQL5.7 다운로드</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+</code></pre></div></div>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>jupyter notebook
+<h3 id="mysql-설치">MySQL 설치</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>rpm <span class="nt">-ivh</span> mysql57-community-release-el7-11.noarch.rpm
+</code></pre></div></div>
+
+<h3 id="mysql-서버-업그레이드">MySQL 서버 업그레이드</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum update mysql-server
+</code></pre></div></div>
+
+<h3 id="서비스-시작">서비스 시작</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>systemctl start mysqld
+</code></pre></div></div>
+
+<h3 id="확인">확인</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with <span class="p">;</span> or <span class="se">\g</span><span class="nb">.</span>
+Your MySQL connection <span class="nb">id </span>is 5
+Server version: 5.7.29 MySQL Community Server <span class="o">(</span>GPL<span class="o">)</span>
+
+Copyright <span class="o">(</span>c<span class="o">)</span> 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type <span class="s1">'help;'</span> or <span class="s1">'\h'</span> <span class="k">for </span>help. Type <span class="s1">'\c'</span> to clear the current input statement.
+
+mysql&gt; 
 </code></pre></div></div>
 
         
@@ -380,19 +378,11 @@
     
       
       
-      <a href="/tags/#anaconda" class="page__taxonomy-item" rel="tag">anaconda</a><span class="sep">, </span>
+      <a href="/tags/#mysql" class="page__taxonomy-item" rel="tag">MySQL</a><span class="sep">, </span>
     
       
       
-      <a href="/tags/#jupyter" class="page__taxonomy-item" rel="tag">Jupyter</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#matplotlib" class="page__taxonomy-item" rel="tag">Matplotlib</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#python" class="page__taxonomy-item" rel="tag">Python</a>
+      <a href="/tags/#upgrade" class="page__taxonomy-item" rel="tag">upgrade</a>
     
     </span>
   </p>
@@ -413,14 +403,14 @@
     
       
       
-      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">Language</a>
+      <a href="/categories/#server" class="page__taxonomy-item" rel="tag">Server</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-12">March 12, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-20">March 20, 2020</time></p>
         
       </footer>
 
@@ -429,23 +419,22 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+Jupyter+matplotlib%EB%A1%9C+%EB%82%B4%2F%EC%99%B8%EB%B6%80+%EC%9D%B4%EB%AF%B8%EC%A7%80+%EA%B7%B8%EB%A6%AC%EA%B8%B0+%EC%84%A4%EC%A0%95%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-jupyter-matplotlib%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BMySQL%5D+Centos7+%EC%97%90%EC%84%9C+MySQL+5.6%EC%9D%84+5.7%EB%A1%9C+%EC%97%85%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%9C+%20http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-mysql-upgrade%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-jupyter-matplotlib%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-mysql-upgrade%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-jupyter-matplotlib%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-mysql-upgrade%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/language/language-python-image-processing/" class="pagination--pager" title="[작성중][Python] Image processing
+      <a href="/database/database-mysql-create-table/" class="pagination--pager" title="[MySQL] 테이블 생성시 고려사항
 ">이전</a>
     
     
-      <a href="/database/database-mysql-create-table/" class="pagination--pager" title="[MySQL] 테이블 생성시 고려사항
-">다음</a>
+      <a href="#" class="pagination--pager disabled">다음</a>
     
   </nav>
 
@@ -469,13 +458,14 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/server/server-mysql-upgrade/" rel="permalink">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드
+        <a href="/database/database-mysql-create-table/" rel="permalink">[MySQL] 테이블 생성시 고려사항
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">5.6은 JSON 지원이 안되네요.
-그래서 업그레이드를 하기로 했습니다.
+    <p class="archive__item-excerpt" itemprop="description">프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.
+그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.
+그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.
 </p>
   </article>
 </div>
@@ -490,14 +480,13 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/database/database-mysql-create-table/" rel="permalink">[MySQL] 테이블 생성시 고려사항
+        <a href="/language/language-python-jupyter-matplotlib/" rel="permalink">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.
-그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.
-그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.
+    <p class="archive__item-excerpt" itemprop="description">Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.
+이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.
 </p>
   </article>
 </div>

@@ -1,4 +1,594 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-12T23:33:03+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정</title><link href="http://localhost:4000/language/language-python-jupyter-matplotlib/" rel="alternate" type="text/html" title="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-jupyter-matplotlib</id><content type="html" xml:base="http://localhost:4000/language/language-python-jupyter-matplotlib/">&lt;p&gt;Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-20T16:43:54+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much mong</name></author><entry><title type="html">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드</title><link href="http://localhost:4000/server/server-mysql-upgrade/" rel="alternate" type="text/html" title="[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드 " /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/server/server-mysql-upgrade</id><content type="html" xml:base="http://localhost:4000/server/server-mysql-upgrade/">&lt;p&gt;5.6은 JSON 지원이 안되네요.&lt;br /&gt;
+그래서 업그레이드를 하기로 했습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;서비스-중지&quot;&gt;서비스 중지&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop mysqld
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql56-백업&quot;&gt;MySQL5.6 백업&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; /var/lib/mysql /var/lib/mysql.original
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql56-rpm-삭제&quot;&gt;MySQL5.6 RPM 삭제&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum remove mysql-community-release
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;wget-설치&quot;&gt;wget 설치&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;wget
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql57-다운로드&quot;&gt;MySQL5.7 다운로드&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-설치&quot;&gt;MySQL 설치&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rpm &lt;span class=&quot;nt&quot;&gt;-ivh&lt;/span&gt; mysql57-community-release-el7-11.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-서버-업그레이드&quot;&gt;MySQL 서버 업그레이드&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum update mysql-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;서비스-시작&quot;&gt;서비스 시작&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start mysqld
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;확인&quot;&gt;확인&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; or &lt;span class=&quot;se&quot;&gt;\g&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Your MySQL connection &lt;span class=&quot;nb&quot;&gt;id &lt;/span&gt;is 5
+Server version: 5.7.29 MySQL Community Server &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;GPL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &lt;span class=&quot;s1&quot;&gt;'help;'&lt;/span&gt; or &lt;span class=&quot;s1&quot;&gt;'\h'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;help. Type &lt;span class=&quot;s1&quot;&gt;'\c'&lt;/span&gt; to clear the current input statement.
+
+mysql&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="MySQL" /><category term="upgrade" /><summary type="html">5.6은 JSON 지원이 안되네요. 그래서 업그레이드를 하기로 했습니다.</summary></entry><entry><title type="html">[MySQL] 테이블 생성시 고려사항</title><link href="http://localhost:4000/database/database-mysql-create-table/" rel="alternate" type="text/html" title="[MySQL] 테이블 생성시 고려사항" /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/database/database-mysql-create-table</id><content type="html" xml:base="http://localhost:4000/database/database-mysql-create-table/">&lt;p&gt;프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.&lt;br /&gt;
+그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.&lt;br /&gt;
+그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;data-types&quot;&gt;Data Types&lt;/h2&gt;
+
+&lt;h3 id=&quot;numeric-types&quot;&gt;Numeric types&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Integer Types (정수 타입)&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Type&lt;/td&gt;
+          &lt;td&gt;Storage (Bytes)&lt;/td&gt;
+          &lt;td&gt;Minimum Value Signed&lt;/td&gt;
+          &lt;td&gt;Minimum Value Unsigned&lt;/td&gt;
+          &lt;td&gt;Maximum Value Signed&lt;/td&gt;
+          &lt;td&gt;Maximum Value Unsigned&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;TINYINT&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;-128&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;127&lt;/td&gt;
+          &lt;td&gt;255&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;SMALLINT&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;-32768&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;32767&lt;/td&gt;
+          &lt;td&gt;65535&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;MEDIUMINT&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;-8388608&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;8388607&lt;/td&gt;
+          &lt;td&gt;16777215&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;INT&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;-2147483648&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;2147483647&lt;/td&gt;
+          &lt;td&gt;4294967295&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;BIGINT&lt;/td&gt;
+          &lt;td&gt;8&lt;/td&gt;
+          &lt;td&gt;-2&lt;sup&gt;63&lt;/sup&gt;&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;2&lt;sup&gt;63&lt;/sup&gt; - 1&lt;/td&gt;
+          &lt;td&gt;2&lt;sup&gt;64&lt;/sup&gt; - 1&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;column1&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;column2&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;column1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ENGINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InnoDB&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CHARSET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;latin1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;정수형 데이터 타입을 생성할때 예상되는 최소, 최대 값과 부호를 확인 후 선택해야 합니다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Fixed-Point Types (고정 소수점 타입)
+    &lt;ul&gt;
+      &lt;li&gt;DECIMAL&lt;/li&gt;
+      &lt;li&gt;NUMERIC&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Floating-Point Types (부동 소수점 타입)
+    &lt;ul&gt;
+      &lt;li&gt;FLOAT&lt;/li&gt;
+      &lt;li&gt;DOUBLE&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Bit-Value Type (비트값 타입)
+    &lt;ul&gt;
+      &lt;li&gt;BIT&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;string-types&quot;&gt;String types&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;CHAR and VARCHAR Types&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Value&lt;/td&gt;
+          &lt;td&gt;CHAR(4)&lt;/td&gt;
+          &lt;td&gt;Storage Required&lt;/td&gt;
+          &lt;td&gt;VARCHAR(4)&lt;/td&gt;
+          &lt;td&gt;Storage Required&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;’’&lt;/td&gt;
+          &lt;td&gt;’    ‘&lt;/td&gt;
+          &lt;td&gt;4 bytes&lt;/td&gt;
+          &lt;td&gt;’’&lt;/td&gt;
+          &lt;td&gt;1 byte&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;‘ab’&lt;/td&gt;
+          &lt;td&gt;‘ab  ‘&lt;/td&gt;
+          &lt;td&gt;4 bytes&lt;/td&gt;
+          &lt;td&gt;‘ab’&lt;/td&gt;
+          &lt;td&gt;3 bytes&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;‘abcd’&lt;/td&gt;
+          &lt;td&gt;‘abcd’&lt;/td&gt;
+          &lt;td&gt;4 bytes&lt;/td&gt;
+          &lt;td&gt;‘abcd’&lt;/td&gt;
+          &lt;td&gt;5 bytes&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td&gt;‘abcdefgh’&lt;/td&gt;
+          &lt;td&gt;‘abcd’&lt;/td&gt;
+          &lt;td&gt;4 bytes&lt;/td&gt;
+          &lt;td&gt;‘abcd’&lt;/td&gt;
+          &lt;td&gt;5 bytes&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;p&gt;컬럼 속정 정보 &lt;code class=&quot;highlighter-rouge&quot;&gt;CHAR(M)&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;VARCHAR(M)&lt;/code&gt; 의 M은 저장할 수 있는 문자열의 최대 길이를 나타냅니다.&lt;br /&gt;
+  CHAR는 &lt;em&gt;0~255&lt;/em&gt;까지 설정할 수 있으며, VARCHAR는 &lt;em&gt;0~65,535&lt;/em&gt;까지 설정할 수 있습니다.&lt;br /&gt;&lt;/p&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;VARCHAR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;CHAR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Query&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;affected&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;01&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ab  '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ab  '&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;Query&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OK&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;affected&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;00&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CONCAT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'('&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;')'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CONCAT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'('&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;')'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------+---------------------+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CONCAT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'('&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;')'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CONCAT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'('&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;')'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------+---------------------+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ab&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;              &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;                &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------+---------------------+&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;set&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;06&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sec&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIKE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ab'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIKE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ab  '&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+-------------+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIKE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ab'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;LIKE&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'ab  '&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+-------------+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;          &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;            &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------+-------------+&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;공백 저장시 CHAR, VARCHAR 모두 저장이 되나 조회시 CHAR은 공백을 제거합니다.&lt;br /&gt;
+  CHAR는 EQUAL 검색시 공백이 있어도 검색이되나 LIKE 검색시 공백이 있으면 검색이 되지 않습니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;BINARY and VARBINARY Types&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;BLOB and TEXT Types&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ENUM Type&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;SET Type&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;date-types&quot;&gt;Date types&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;DATE, DATETIME, and TIMESTAMP Types&lt;/p&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;INTEGER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;TIMESTAMP&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;mysql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dt&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;INT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;DATETIME&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;
+      &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;DATE는 날짜 부분만 사용됩니다. 지원 범위는 ‘YYYY-MM-DD’, ‘1000-01-01’, ‘9999-12-31’ 입니다.&lt;br /&gt;
+  DATETIME유형은 날짜와 시간 부분을 모두 포함하는 값에 사용됩니다. DATETIME은 형식으로 값을 검색하고 표시 합니다. 지원 범위는 ‘YYYY-MM-DD hh:mm:ss’, ‘1000-01-01 00:00:00’, ‘9999-12-31 23:59:59’ 입니다.&lt;br /&gt;
+  TIMESTAMP데이터 타입은 날짜와 시간 부분을 모두 포함하는 값에 사용됩니다. UTC ~ UTC TIMESTAMP범위입니다 . ‘1970-01-01 00:00:01’, ‘2038-01-19 03:14:07’&lt;br /&gt;
+  DATETIME또는 TIMESTAMP 값이 마이크로 초(6자리 소수 부분)를 포함 할 수 있습니다. 특히, DATETIME또는 TIMESTAMP열에 삽입 된 값의 소수 부분 은 버리지 않고 저장됩니다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;TIME Type&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;YEAR Type&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;json-type&quot;&gt;Json type&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;JSON 데이터 입력&lt;/p&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;INTEGER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JSON&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;JSON_OBJECT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'key1'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'key2'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'abc'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;JSON_ARRAY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NOW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()));&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;JSON_MERGE_PRESERVE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'[&quot;a&quot;, 1]'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{&quot;key&quot;: &quot;value&quot;}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;SET&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;JSON_OBJECT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'key'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'value'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'{&quot;mascot&quot;: &quot;Our mascot is a dolphin named &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&quot;Sakila&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&quot;.&quot;}'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;JSON Object 조회&lt;/p&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;$.mascot&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------------------------------+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;$.mascot&quot;&lt;/span&gt;                        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------------------------------+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;Our mascot is a dolphin named &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;Sakila&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&quot;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;.&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;---------------------------------------------+&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;$.mascot&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------------------------------------+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&quot;$.mascot&quot;&lt;/span&gt;                   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------------------------------------+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Our&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;mascot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dolphin&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;named&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;Sakila&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;-----------------------------------------+&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;JSON Array 조회&lt;/p&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json_contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sentence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;json_array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;AS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rst&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;WHERE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rst&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;--+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;--+&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;--+&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;naming-conventions&quot;&gt;Naming Conventions&lt;/h2&gt;
+
+&lt;h3 id=&quot;공통&quot;&gt;공통&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;소문자를 사용한다.&lt;/li&gt;
+  &lt;li&gt;단어를 임의로 축약하지 않는다.
+    &lt;ul&gt;
+      &lt;li&gt;register_date (O) / reg_date (X)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;가능하면 약어의 사용을 피한다.
+    &lt;ul&gt;
+      &lt;li&gt;약어를 사용해야 하는 경우, 약어 역시 소문자를 사용한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;동사는 능동태를 사용한다.
+    &lt;ul&gt;
+      &lt;li&gt;register_date (O) / registered_date (X)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;table&quot;&gt;TABLE&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;복수형을 사용한다.&lt;/li&gt;
+  &lt;li&gt;이름을 구성하는 각각의 단어를 underscore 로 연결하는 snake case 를 사용한다.&lt;/li&gt;
+  &lt;li&gt;교차 테이블 (many-to-many) 의 이름에 사용할 수 있는 직관적인 단어가 있다면 해당 단어를 사용한다.
+    &lt;ul&gt;
+      &lt;li&gt;적절한 단어가 없다면 relationship을 맺고 있는 각 테이블의 이름을 “&lt;em&gt;and&lt;/em&gt;” 또는 “&lt;em&gt;has&lt;/em&gt;” 로 연결한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;예
+    &lt;ul&gt;
+      &lt;li&gt;articles, movies : 복수형&lt;/li&gt;
+      &lt;li&gt;vip_members : 약어도 예외 없이 소문자 &amp;amp; 단어의 연결에 underbar를 사용&lt;/li&gt;
+      &lt;li&gt;articles_and_movies : 교차 테이블을 “&lt;em&gt;and&lt;/em&gt;” 로 연결&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;column&quot;&gt;COLUMN&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;auto increment 속성의 PK를 대리키로 사용하는 경우, “테이블 이름의 단수형”_id 의 규칙으로 명명한다.&lt;/li&gt;
+  &lt;li&gt;이름을 구성하는 각각의 단어를 underscore 로 연결하는 snake case 를 사용한다.&lt;/li&gt;
+  &lt;li&gt;foreign key 컬럼은 부모 테이블의 primary key 컬럼 이름을 그대로 사용한다.
+    &lt;ul&gt;
+      &lt;li&gt;self 참조인 경우, primary key 컬럼 이름 앞에 적절한 접두어를 사용한다.&lt;/li&gt;
+      &lt;li&gt;같은 primary key 컬럼을 자식 테이블에서 2번 이상 참조하는 경우, primary key 컬럼 이름 앞에 적절한 접두어를 사용한다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;boolean 유형의 컬럼이면 “_flag” 접미어를 사용한다.&lt;/li&gt;
+  &lt;li&gt;date, datetime 유형의 컬럼이면 “_date” 접미어를 사용한다.&lt;/li&gt;
+  &lt;li&gt;예
+    &lt;ul&gt;
+      &lt;li&gt;article_id, movie_id : “테이블 이름의 단수형” + “_id”&lt;/li&gt;
+      &lt;li&gt;complete_flag : boolean 유형의 컬럼&lt;/li&gt;
+      &lt;li&gt;issue_date : 날짜 유형의 컬럼&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;index&quot;&gt;INDEX&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;이름을 구성하는 각각의 단어를 hyphen 으로 연결하는 snake case 를 사용한다.&lt;/li&gt;
+  &lt;li&gt;접두어
+    &lt;ul&gt;
+      &lt;li&gt;unique index : uix&lt;/li&gt;
+      &lt;li&gt;spatial index : six&lt;/li&gt;
+      &lt;li&gt;index : nix&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“접두어”-“테이블 이름”-“컬럼 이름”-“컬럼 이름”&lt;/li&gt;
+  &lt;li&gt;예
+    &lt;ul&gt;
+      &lt;li&gt;uix-accounts-login_email&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;foreign-key&quot;&gt;FOREIGN KEY&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;이름을 구성하는 각각의 단어를 hyphen 으로 연결하는 snake case 를 사용한다.&lt;/li&gt;
+  &lt;li&gt;“fk”-“부모 테이블 이름”-“자식 테이블 이름”
+    &lt;ul&gt;
+      &lt;li&gt;같은 부모-자식 테이블에 2개 이상의 foreign key가 있는 경우, numbering합니다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;예
+    &lt;ul&gt;
+      &lt;li&gt;fk-movies-articles : article 테이블이 movie 테이블을 참조&lt;/li&gt;
+      &lt;li&gt;fk-admins-notices-1 / fk-admins-notices-2 : notices 테이블이 admins 테이블을 2회 이상 참조하여 numbering&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;view&quot;&gt;VIEW&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;접두어 “v”를 사용한다.&lt;/li&gt;
+  &lt;li&gt;기타 규칙은 TABLE과 동일&lt;/li&gt;
+  &lt;li&gt;예
+    &lt;ul&gt;
+      &lt;li&gt;v_privileges&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;function&quot;&gt;FUNCTION&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;접두어 “usf”를 사용한다.&lt;/li&gt;
+  &lt;li&gt;이름을 구성하는 각각의 단어를 underscore 로 연결하는 snake case 를 사용한다.&lt;/li&gt;
+  &lt;li&gt;예
+    &lt;ul&gt;
+      &lt;li&gt;usf_random_key&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;trigger&quot;&gt;TRIGGER&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;이름을 구성하는 각각의 단어를 underscore 로 연결하는 snake case 를 사용한다.&lt;/li&gt;
+  &lt;li&gt;접두어
+    &lt;ul&gt;
+      &lt;li&gt;tra : AFTER 트리거&lt;/li&gt;
+      &lt;li&gt;trb : BEFORE 트리거&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;“접두어”&lt;em&gt;“테이블 이름”&lt;/em&gt;“트리거 이벤트”&lt;/li&gt;
+  &lt;li&gt;예
+    &lt;ul&gt;
+      &lt;li&gt;tga_movies_ins : AFTER INSERT 트리거&lt;/li&gt;
+      &lt;li&gt;tga_movies_upd : AFTER UPDATE 트리거&lt;/li&gt;
+      &lt;li&gt;tgb_movies_del : BEFORE DELETE 트리거&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;auto_increment&quot;&gt;AUTO_INCREMENT&lt;/h2&gt;
+
+&lt;h3 id=&quot;auto_increment-prefix&quot;&gt;AUTO_INCREMENT prefix&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;하나의 컬럼에 접두사를 넣을수는 없으나 컬럼 두개를 이용하면 가능 합니다.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;MyISAM ENGINE으로 가능합니다.&lt;/p&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animals&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;ENUM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'fish'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mammal'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'bird'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;MEDIUMINT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;CHAR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ENGINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyISAM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;INSERT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INTO&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animals&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;VALUES&lt;/span&gt; 
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mammal'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'dog'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mammal'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'cat'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'bird'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'penguin'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'fish'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'lax'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'mammal'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'whale'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'bird'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'ostrich'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;k&quot;&gt;SELECT&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;animals&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ORDER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;BY&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;grp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;auto_increment-multi&quot;&gt;AUTO_INCREMENT multi&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AUTO_INCREMENT prefix 의 ENUM 설정을 Integer로 사용하면 가능하나 숫자는 직접 입력해야 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;index-1&quot;&gt;Index&lt;/h2&gt;
+
+&lt;h3 id=&quot;create-index&quot;&gt;Create index&lt;/h3&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;`salaries`&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;`id`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;bigint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AUTO_INCREMENT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;`emp_no`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;`salary`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;`from_date`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;`to_date`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NOT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;`is_bonus`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tinyint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;unsigned&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;zerofill&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;`group_no`&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;varchar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;PRIMARY&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;KEY&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;`id`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ENGINE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InnoDB&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CHARSET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INDEX&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDX_SALARIES_INCREASE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salaries&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_bonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from_date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;group_no&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INDEX&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IDX_SALARIES_DECREASE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;ON&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;salaries&lt;/span&gt; 
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;group_no&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from_date&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is_bonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;explain-index&quot;&gt;Explain index&lt;/h3&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;explain&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;select&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;show-index&quot;&gt;Show index&lt;/h3&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SHOW&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INDEX&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;SHOW&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INDEX&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;facts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;drop-index&quot;&gt;Drop index&lt;/h3&gt;
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;ALTER&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;books&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;DROP&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;INDEX&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;idx_test&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;tip&quot;&gt;Tip&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;인덱스가 없는 컬럼을 조건으로 update, delete를 하게 되면 굉장히 느려 많은 양의 데이터를 삭제 해야하는 상황에선 인덱스로 지정된 컬럼을 기준으로 진행하는것을 추천드립니다.&lt;/li&gt;
+  &lt;li&gt;인덱스의 키는 길면 길수록 성능상 이슈가 있습니다.&lt;/li&gt;
+  &lt;li&gt;카디널리티가 높은순에서 낮은순으로 구성하는게 더 성능이 뛰어납니다.&lt;/li&gt;
+  &lt;li&gt;조회 쿼리 사용시 인덱스를 태우려면 최소한 첫번째 인덱스 조건은 조회조건에 포함되어야만 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;engine&quot;&gt;ENGINE&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;SHOW ENGINES&lt;/p&gt;
+
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;k&quot;&gt;SHOW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ENGINES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;------------------|-------|--------------------------------------------------------------|------------|---|----------|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Engine&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Support&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Comment&lt;/span&gt;                                                       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Transactions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;XA&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Savepoints&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;------------------|-------|--------------------------------------------------------------|------------|---|----------|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;InnoDB&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;DEFAULT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Supports&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transactions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;level&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;locking&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;foreign&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keys&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;       &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MRG_MYISAM&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Collection&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;identical&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyISAM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tables&lt;/span&gt;                         &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MEMORY&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Hash&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;based&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stored&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;memory&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;useful&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;temporary&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tables&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BLACKHOLE&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dev&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;storage&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;anything&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;you&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;write&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;it&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;disappears&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyISAM&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyISAM&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;storage&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;                                         &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CSV&lt;/span&gt;               &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CSV&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;storage&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;                                            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ARCHIVE&lt;/span&gt;           &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Archive&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;storage&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;                                        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PERFORMANCE_SCHEMA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;YES&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Performance&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Schema&lt;/span&gt;                                            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FEDERATED&lt;/span&gt;         &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;NO&lt;/span&gt;     &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Federated&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MySQL&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;storage&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;engine&lt;/span&gt;                                &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;   &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;          &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;------------------|-------|--------------------------------------------------------------|------------|---|----------|&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;가장 많이 쓰이는 엔진&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;InnoDB : 따로 스토리지 엔진을 명시하지 않으면 default 로 설정되는 스토리지 엔진이다. InnoDB는 transaction-safe 하며, 커밋과 롤백, 그리고 데이터 복구 기능을 제공하므로 데이터를 효과적으로 보호 할 수 있다.&lt;br /&gt;
+  InnoDB는 기본적으로 row-level locking 제공하며, 또한 데이터를 clustered index에 저장하여 PK 기반의 query의 I/O 비용을 줄인다. 또한 FK 제약을 제공하여 데이터 무결성을 보장한다.&lt;br /&gt;
+  &lt;br /&gt;&lt;/li&gt;
+      &lt;li&gt;MyISAM : 트랜잭션을 지원하지 않고 table-level locking을 제공한다. 따라서 multi-thread 환경에서 성능이 저하 될 수 있다. 특정 세션이 테이블을 변경하는 동안 테이블 단위로 lock이 잡히기 때문이다.&lt;br /&gt;
+  텍스트 전문 검색(Fulltext Searching)과 지리정보 처리 기능도 지원되는데, 이를 사용할 시에는 파티셔닝을 사용할 수 없다는 단점이 있다.&lt;br /&gt;
+  &lt;br /&gt;&lt;/li&gt;
+      &lt;li&gt;Archive : ‘로그 수집’에 적합한 엔진이다. 데이터가 메모리상에서 압축되고 압축된 상태로 디스크에 저장이 되기 때문에 row-level locking이 가능하다.&lt;br /&gt;
+  다만, 한번 INSERT된 데이터는 UPDATE, DELETE를 사용할 수 없으며 인덱스를 지원하지 않는다. 따라서 거의 가공하지 않을 원시 로그 데이터를 관리하는데에 효율적일 수 있고, 테이블 파티셔닝도 지원한다. 다만 트랜잭션은 지원하지 않는다.&lt;br /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;charset&quot;&gt;CHARSET&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SHOW CHARSET&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;SHOW&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CHARSET&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;http://tcpschool.com/mysql/mysql_datatype_numeric&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://dev.mysql.com/doc/refman/8.0/en/integer-types.html&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://purumae.tistory.com/200&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://jojoldu.tistory.com/243&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="MySQL" /><summary type="html">프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다. 그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다. 그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.</summary></entry><entry><title type="html">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정</title><link href="http://localhost:4000/language/language-python-jupyter-matplotlib/" rel="alternate" type="text/html" title="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-jupyter-matplotlib</id><content type="html" xml:base="http://localhost:4000/language/language-python-jupyter-matplotlib/">&lt;p&gt;Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.&lt;br /&gt;
 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;명령어&quot;&gt;명령어&lt;/h2&gt;
@@ -1387,283 +1977,4 @@ bootWar {
 &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;war&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gigas-blog.tistory.com/115&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;jar&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gigas-blog.tistory.com/114&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;build type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://www.devkuma.com/books/pages/1069&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="Springboot" /><category term="Gradle" /><summary type="html">VSCode에서 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.</summary></entry><entry><title type="html">[JAVA] Lambda + Stream API</title><link href="http://localhost:4000/language/language-java-lambda-stream/" rel="alternate" type="text/html" title="[JAVA] Lambda + Stream API " /><published>2020-02-26T00:00:00+09:00</published><updated>2020-02-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-lambda-stream</id><content type="html" xml:base="http://localhost:4000/language/language-java-lambda-stream/">&lt;h3 id=&quot;정의&quot;&gt;정의&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;식별자 없이 실행 가능한 함수 표현식입니다.&lt;/li&gt;
-  &lt;li&gt;익명 클래스와 비슷합니다.&lt;/li&gt;
-  &lt;li&gt;자바로 함수형 프로그래밍 개발을 할 수 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;관련-지식&quot;&gt;관련 지식&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;함수형 인터페이스: 하나의 메소드만 선언되어 있는 인터페이스를 함수형 인터페이스라고 부릅니다.&lt;/li&gt;
-  &lt;li&gt;익명 클래스: 이름이 없는 객체입니다. 인터페이스를 구현하기 위해 해당 인터페이스를 구현한 클래스를 생성해야 하는데 일회성이고 재사용할 필요가 없다면 굳이 클래스 파일을 만들 필요가 없습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;기본-예제&quot;&gt;기본 예제&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Calculator.java
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;nd&quot;&gt;@FunctionalInterface&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Calculator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;BasicUsage.java
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BasicUsage&lt;/span&gt; 
-  &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Calculator&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cal&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;cal&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;어노테이션&quot;&gt;어노테이션&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;어노테이션 &lt;code class=&quot;highlighter-rouge&quot;&gt;@FunctionalInterface&lt;/code&gt; 을 사용하면 이 인터페이스는 함수형 인터페이스이며 메소드가 두개 이상 만들면 문법 오류가 나게되어 이후에 수정을 방지할 수 있습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;lambda의-다양한-함수형-인터페이스&quot;&gt;Lambda의 다양한 함수형 인터페이스&lt;/h3&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;LambdaTest.java
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.List&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.function.Predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.function.Consumer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LambdaTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    
-      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;cm&quot;&gt;/*
-          * Predicate
-          * 문자열을 받아서 해당 문자열이 빈 문자열인지를 반환
-          */&lt;/span&gt;
-          &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;asd&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-          &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lambdaIsEqual&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        
-      &lt;span class=&quot;cm&quot;&gt;/**
-      * boolean Predicate&amp;lt;T&amp;gt;
-      */&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;lambdaIsEqual&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predicate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;stream-api&quot;&gt;Stream API&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Lambda 를 소개할때 &lt;em&gt;Stream API&lt;/em&gt;는 필수인거 같습니다. &lt;em&gt;Stream API&lt;/em&gt; 이란 컬렉션, 배열등의 저장 요소를 하나씩 참조하며 함수형 인터페이스(람다식)를 적용하며 반복적으로 처리할 수 있도록 해주는 기능입니다.&lt;/li&gt;
-  &lt;li&gt;꼭 알아둘 사항입니다.
-    &lt;ul&gt;
-      &lt;li&gt;Stream 은 재사용 불가&lt;/li&gt;
-      &lt;li&gt;병렬 스트림으로 멀티 쓰레드 사용이 가능&lt;/li&gt;
-      &lt;li&gt;중개 연산이 아닌 지연 연산 사용&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;연산자 설명은 하기 링크로 대처하겠습니다. 너무 많아요.
-    &lt;blockquote&gt;
-      &lt;p&gt;https://jeong-pro.tistory.com/165&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;anonymous-class&quot;&gt;anonymous class&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;AnonymousClassTest.java
-    &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;anonymous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;go&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;		
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-        
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AnonymousClassTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        
-      &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-          &lt;span class=&quot;nc&quot;&gt;Test&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
-              &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;go&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
-                  &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; GO! GO!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-              &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-          &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;test&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;go&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;aaa&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-      &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h3&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;lambda&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
-    &lt;span class=&quot;s&quot;&gt;https://coding-factory.tistory.com/265&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;https://jdm.kr/blog/181&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;http://tcpschool.com/java/java_lambda_concept&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;https://coding-start.tistory.com/131&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;anonymous class&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;https://yulsfamily.tistory.com/112&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;https://jeong-pro.tistory.com/165&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="JAVA" /><category term="Lambda" /><category term="Stream API" /><category term="anonymous class" /><summary type="html">정의 식별자 없이 실행 가능한 함수 표현식입니다. 익명 클래스와 비슷합니다. 자바로 함수형 프로그래밍 개발을 할 수 있습니다.</summary></entry><entry><title type="html">[Blog] GitHub에 blog 생성</title><link href="http://localhost:4000/scm/scm-create-github-blog/" rel="alternate" type="text/html" title="[Blog] GitHub에 blog 생성" /><published>2020-02-25T00:00:00+09:00</published><updated>2020-02-25T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-create-github-blog</id><content type="html" xml:base="http://localhost:4000/scm/scm-create-github-blog/">&lt;p&gt;Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;os--app&quot;&gt;OS &amp;amp; App&lt;/h2&gt;
-
-&lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;macOS Catalina 10.15.3
-Ruby 2.6.3: 루비는 마츠모토 유키히로가 개발한 동적 객체 지향 스크립트 프로그래밍 언어입니다.
-gem 3.0.8: RubyGems는 Ruby 프로그램 및 라이브러리 배포를위한 표준 형식, gem 설치를 쉽게 관리하도록 설계된 도구 및 배포 용 서버를 제공하는 Ruby 프로그래밍 언어의 패키지 관리자입니다.
-jekyll 4.0.0: Jekyll은 개인, 프로젝트 또는 조직 사이트를위한 간단한 블로그 인식 정적 사이트 생성기입니다. 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;install&quot;&gt;Install&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;GitHub 에 Repository 생성 및 Clone
-    &lt;ol&gt;
-      &lt;li&gt;github 에서 New Repository 클릭&lt;/li&gt;
-      &lt;li&gt;Repository name : [username].github.io&lt;/li&gt;
-      &lt;li&gt;Public 으로 생성&lt;/li&gt;
-      &lt;li&gt;git clone https://github.com/[username]/[username].github.io.git&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Ruby Version Manager 설치
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-sSL&lt;/span&gt; https://get.rvm.io | bash &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; stable &lt;span class=&quot;nt&quot;&gt;--ruby&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Teminal 재실행&lt;/li&gt;
-  &lt;li&gt;Ruby 선택
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm list
- &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; ruby-2.6.3 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt; x86_64 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
-
- &lt;span class=&quot;c&quot;&gt;# =&amp;gt; - current&lt;/span&gt;
- &lt;span class=&quot;c&quot;&gt;# =* - current &amp;amp;&amp;amp; default&lt;/span&gt;
- &lt;span class=&quot;c&quot;&gt;#  * - default&lt;/span&gt;
-
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm use 2.6.3 &lt;span class=&quot;nt&quot;&gt;--default&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
- ruby 2.6.3p62 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;2019-04-16 revision 67580&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;x86_64-darwin19]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Jekyll 설치
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jekyll bundler
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jekyll &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
- jekyll 4.0.0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Jekyll default site 생성
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;username].github.io.git
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jekyll new ./
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
- ...
- Server address: http://127.0.0.1:4000/
- Server running... press ctrl-c to stop.
- ...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;GitHub 에 반영
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;first commit&quot;&lt;/span&gt;
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin master
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;web site 확인
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; https://[username].github.io/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
-위의 내용으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub [username].github.io&lt;/code&gt; 에 반영하면 깔끔하게 잘 나옵니다.&lt;br /&gt;
-그러나 이후 테마가 적용된 소스를 GitHub 에 커밋하면 404 페이지가 나옵니다.&lt;br /&gt;
-원인은 불확실하나 처리 방법은 테마 적용후 Jekyll 서버를 기동하면 컴파일된 소스들이 &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; 폴더에 생성되는데 생성된 파일을 &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub [username].github.io master&lt;/code&gt; 에 올리면 정상적으로 페이지가 나옵니다.&lt;br /&gt;
-그래서 소스 파일 관리는 &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub [username].github.source&lt;/code&gt; Repository 에서,  배포는 &lt;code class=&quot;highlighter-rouge&quot;&gt;GitHub [username].github.io&lt;/code&gt; Repository 에 하도록 하겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;apply-theme&quot;&gt;Apply theme&lt;/h2&gt;
-&lt;ol&gt;
-  &lt;li&gt;GitHub 에 Repository 생성 및 Clone
-    &lt;ol&gt;
-      &lt;li&gt;github 에서 New Repository 클릭&lt;/li&gt;
-      &lt;li&gt;Repository name : [username].github.source&lt;/li&gt;
-      &lt;li&gt;git clone https://github.com/[username]/[username].github.source.git&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;GitHub 에서 테마 다운로드
-    &lt;ul&gt;
-      &lt;li&gt;Jekyll theme 중 가장 많이 다운받는 &lt;a href=&quot;https://github.com/mmistakes/minimal-mistakes&quot;&gt;minimal-mistakes&lt;/a&gt; 에서 압축파일을 다운받아 풀고 &lt;strong&gt;[username].github.source&lt;/strong&gt; 폴더에 복사합니다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;커스터마이징
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; _config.yml: 파일에는 테마 스킨, locale 선택, 블로그 정보, 사용자 정보, 검색 등의 정보를 설정 합니다.
- _data/navigation.yml: 네이게이션, 사이드바 정보를 설정 합니다.
- _posts: 블로그 게시글들 입니다.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;중요 폴더 복사
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;docs/_pages&lt;/code&gt; 폴더를 최상위 폴더로 복사합니다. 그럼 게시글들을 year, categorise, tags 단위로 그룹지어서 볼수있습니다.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;docs/_posts&lt;/code&gt; 에 글들을 참고하여 최상위 폴더인 &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; 에 파일을 생성합니다. 파일 생성시에는 규칙이 있으며 생성된 파일들이 블로그의 게시글들이 됩니다. 자세한 내용은 링크를 참고바랍니다. 설명할게 너무 많아요.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;불필요한 폴더 목록
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; /docs
- /test
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;자동 배포
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;[username].github.source&lt;/code&gt; 의 &lt;code class=&quot;highlighter-rouge&quot;&gt;_site&lt;/code&gt; 파일들을 &lt;code class=&quot;highlighter-rouge&quot;&gt;[username].github.io&lt;/code&gt; 폴더로 복사후 GitHub 에 커밋까지 하려면 명령어를 조금 많이 입력해야 합니다. 귀찮습니다. 그래서 shell 파일을 만들려 합니다.&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;username].github.source
-
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
- Ctrl + c
-
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vi publish.sh
-
-     &lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
-
-     &lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-rf&lt;/span&gt; ../[username].github.io/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
-     &lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; _site/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; ../[username].github.io/
-     git &lt;span class=&quot;nt&quot;&gt;--git-dir&lt;/span&gt; ../[username].github.io/.git &lt;span class=&quot;nt&quot;&gt;--work-tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;../[username].github.io status
-     git &lt;span class=&quot;nt&quot;&gt;--git-dir&lt;/span&gt; ../[username].github.io/.git &lt;span class=&quot;nt&quot;&gt;--work-tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;../[username].github.io add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-     git &lt;span class=&quot;nt&quot;&gt;--git-dir&lt;/span&gt; ../[username].github.io/.git &lt;span class=&quot;nt&quot;&gt;--work-tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;../[username].github.io commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;...&quot;&lt;/span&gt;
-     git &lt;span class=&quot;nt&quot;&gt;--git-dir&lt;/span&gt; ../[username].github.io/.git &lt;span class=&quot;nt&quot;&gt;--work-tree&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;../[username].github.io push origin master
-
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;chmod &lt;/span&gt;755 publish.sh
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./publish.sh
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;web site 확인
-    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; https://[username].github.io/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;git filter-branch --subdirectory-filter _site/ -f&lt;/code&gt; 명령어로 하나의 Repository 에서 관리를 할 수 있다고하는데 저는 잘 적용되지 않았습니다.&lt;br /&gt;
-혹시 이글을 보시는 분이 있다면 한번 도전해 보시기 바랍니다.&lt;br /&gt;
-참고했던 링크는 &lt;a href=&quot;https://rainsound-k.github.io/jekyll-blog/2018/05/02/apply-custom-plugin.html&quot;&gt;여기&lt;/a&gt;입니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;https://poiemaweb.com/jekyll-basics
-https://junhobaik.github.io/jekyll-apply-theme/
-https://rainsound-k.github.io/jekyll-blog/2018/05/02/apply-custom-plugin.html
-https://jetalog.net/86&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>To much mong</name></author><category term="git" /><category term="blog" /><summary type="html">Tistory 에서 블로그 관리가 편하지 않네요. 미루고 미루던 일을 이제 해볼까 합니다. GitHub에 Jekyll과 minimal-mistakes 테마를 활용하여 블러그를 만들도록 하겠습니다.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much mong</name></author><category term="Springboot" /><category term="Gradle" /><summary type="html">VSCode에서 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.</summary></entry></feed>

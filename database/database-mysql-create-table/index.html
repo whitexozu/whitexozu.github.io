@@ -1,0 +1,1124 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[MySQL] 테이블 생성시 고려사항 - TMM</title>
+<meta name="description" content="프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다. 그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다. 그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다. ">
+
+
+  <meta name="author" content="To much mong">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[MySQL] 테이블 생성시 고려사항">
+<meta property="og:url" content="http://localhost:4000/database/database-mysql-create-table/">
+
+
+  <meta property="og:description" content="프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다. 그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다. 그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-03-20T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-03-20T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/database/database-mysql-create-table/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much mong</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[MySQL] 테이블 생성시 고려사항">
+    <meta itemprop="description" content="프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.">
+    <meta itemprop="datePublished" content="2020-03-20T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-03-20T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[MySQL] 테이블 생성시 고려사항
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#data-types">Data Types</a>
+    <ul>
+      <li><a href="#numeric-types">Numeric types</a></li>
+      <li><a href="#string-types">String types</a></li>
+      <li><a href="#date-types">Date types</a></li>
+      <li><a href="#json-type">Json type</a></li>
+    </ul>
+  </li>
+  <li><a href="#naming-conventions">Naming Conventions</a>
+    <ul>
+      <li><a href="#공통">공통</a></li>
+      <li><a href="#table">TABLE</a></li>
+      <li><a href="#column">COLUMN</a></li>
+      <li><a href="#index">INDEX</a></li>
+      <li><a href="#foreign-key">FOREIGN KEY</a></li>
+      <li><a href="#view">VIEW</a></li>
+      <li><a href="#function">FUNCTION</a></li>
+      <li><a href="#trigger">TRIGGER</a></li>
+    </ul>
+  </li>
+  <li><a href="#auto_increment">AUTO_INCREMENT</a>
+    <ul>
+      <li><a href="#auto_increment-prefix">AUTO_INCREMENT prefix</a></li>
+      <li><a href="#auto_increment-multi">AUTO_INCREMENT multi</a></li>
+    </ul>
+  </li>
+  <li><a href="#index-1">Index</a>
+    <ul>
+      <li><a href="#create-index">Create index</a></li>
+      <li><a href="#explain-index">Explain index</a></li>
+      <li><a href="#show-index">Show index</a></li>
+      <li><a href="#drop-index">Drop index</a></li>
+      <li><a href="#tip">Tip</a></li>
+    </ul>
+  </li>
+  <li><a href="#engine">ENGINE</a></li>
+  <li><a href="#charset">CHARSET</a></li>
+  <li><a href="#참고사이트">참고사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.<br />
+그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.<br />
+그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.</p>
+
+<h2 id="data-types">Data Types</h2>
+
+<h3 id="numeric-types">Numeric types</h3>
+
+<ul>
+  <li>
+    <p>Integer Types (정수 타입)</p>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>Type</td>
+          <td>Storage (Bytes)</td>
+          <td>Minimum Value Signed</td>
+          <td>Minimum Value Unsigned</td>
+          <td>Maximum Value Signed</td>
+          <td>Maximum Value Unsigned</td>
+        </tr>
+        <tr>
+          <td>TINYINT</td>
+          <td>1</td>
+          <td>-128</td>
+          <td>0</td>
+          <td>127</td>
+          <td>255</td>
+        </tr>
+        <tr>
+          <td>SMALLINT</td>
+          <td>2</td>
+          <td>-32768</td>
+          <td>0</td>
+          <td>32767</td>
+          <td>65535</td>
+        </tr>
+        <tr>
+          <td>MEDIUMINT</td>
+          <td>3</td>
+          <td>-8388608</td>
+          <td>0</td>
+          <td>8388607</td>
+          <td>16777215</td>
+        </tr>
+        <tr>
+          <td>INT</td>
+          <td>4</td>
+          <td>-2147483648</td>
+          <td>0</td>
+          <td>2147483647</td>
+          <td>4294967295</td>
+        </tr>
+        <tr>
+          <td>BIGINT</td>
+          <td>8</td>
+          <td>-2<sup>63</sup></td>
+          <td>0</td>
+          <td>2<sup>63</sup> - 1</td>
+          <td>2<sup>64</sup> - 1</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">test</span> <span class="p">(</span>
+  <span class="n">column1</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="n">column2</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="k">DEFAULT</span> <span class="s1">'0'</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">column1</span><span class="p">)</span>
+  <span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">latin1</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>정수형 데이터 타입을 생성할때 예상되는 최소, 최대 값과 부호를 확인 후 선택해야 합니다.</p>
+    </blockquote>
+  </li>
+  <li>Fixed-Point Types (고정 소수점 타입)
+    <ul>
+      <li>DECIMAL</li>
+      <li>NUMERIC</li>
+    </ul>
+  </li>
+  <li>Floating-Point Types (부동 소수점 타입)
+    <ul>
+      <li>FLOAT</li>
+      <li>DOUBLE</li>
+    </ul>
+  </li>
+  <li>Bit-Value Type (비트값 타입)
+    <ul>
+      <li>BIT</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="string-types">String types</h3>
+
+<ul>
+  <li>
+    <p>CHAR and VARCHAR Types</p>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>Value</td>
+          <td>CHAR(4)</td>
+          <td>Storage Required</td>
+          <td>VARCHAR(4)</td>
+          <td>Storage Required</td>
+        </tr>
+        <tr>
+          <td>’’</td>
+          <td>’    ‘</td>
+          <td>4 bytes</td>
+          <td>’’</td>
+          <td>1 byte</td>
+        </tr>
+        <tr>
+          <td>‘ab’</td>
+          <td>‘ab  ‘</td>
+          <td>4 bytes</td>
+          <td>‘ab’</td>
+          <td>3 bytes</td>
+        </tr>
+        <tr>
+          <td>‘abcd’</td>
+          <td>‘abcd’</td>
+          <td>4 bytes</td>
+          <td>‘abcd’</td>
+          <td>5 bytes</td>
+        </tr>
+        <tr>
+          <td>‘abcdefgh’</td>
+          <td>‘abcd’</td>
+          <td>4 bytes</td>
+          <td>‘abcd’</td>
+          <td>5 bytes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>컬럼 속정 정보 <code class="highlighter-rouge">CHAR(M)</code>, <code class="highlighter-rouge">VARCHAR(M)</code> 의 M은 저장할 수 있는 문자열의 최대 길이를 나타냅니다.<br />
+  CHAR는 <em>0~255</em>까지 설정할 수 있으며, VARCHAR는 <em>0~65,535</em>까지 설정할 수 있습니다.<br /></p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">vc</span> <span class="p">(</span><span class="n">v</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="k">c</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
+  <span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">0</span> <span class="k">rows</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">01</span> <span class="n">sec</span><span class="p">)</span>
+
+  <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">vc</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">'ab  '</span><span class="p">,</span> <span class="s1">'ab  '</span><span class="p">);</span>
+  <span class="n">Query</span> <span class="n">OK</span><span class="p">,</span> <span class="mi">1</span> <span class="k">row</span> <span class="n">affected</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">sec</span><span class="p">)</span>
+
+  <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'('</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s1">')'</span><span class="p">),</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'('</span><span class="p">,</span> <span class="k">c</span><span class="p">,</span> <span class="s1">')'</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">vc</span><span class="p">;</span>
+  <span class="o">+</span><span class="c1">---------------------+---------------------+</span>
+  <span class="o">|</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'('</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="s1">')'</span><span class="p">)</span> <span class="o">|</span> <span class="n">CONCAT</span><span class="p">(</span><span class="s1">'('</span><span class="p">,</span> <span class="k">c</span><span class="p">,</span> <span class="s1">')'</span><span class="p">)</span> <span class="o">|</span>
+  <span class="o">+</span><span class="c1">---------------------+---------------------+</span>
+  <span class="o">|</span> <span class="p">(</span><span class="n">ab</span>  <span class="p">)</span>              <span class="o">|</span> <span class="p">(</span><span class="n">ab</span><span class="p">)</span>                <span class="o">|</span>
+  <span class="o">+</span><span class="c1">---------------------+---------------------+</span>
+  <span class="mi">1</span> <span class="k">row</span> <span class="k">in</span> <span class="k">set</span> <span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">06</span> <span class="n">sec</span><span class="p">)</span>
+
+  <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">SELECT</span> <span class="k">c</span> <span class="k">LIKE</span> <span class="s1">'ab'</span><span class="p">,</span> <span class="k">c</span> <span class="k">LIKE</span> <span class="s1">'ab  '</span> <span class="k">FROM</span> <span class="n">vc</span><span class="p">;</span>
+  <span class="o">+</span><span class="c1">-----------+-------------+</span>
+  <span class="o">|</span><span class="k">c</span> <span class="k">LIKE</span> <span class="s1">'ab'</span><span class="o">|</span><span class="k">c</span> <span class="k">LIKE</span> <span class="s1">'ab  '</span><span class="o">|</span>
+  <span class="o">+</span><span class="c1">-----------+-------------+</span>
+  <span class="o">|</span>          <span class="mi">1</span><span class="o">|</span>            <span class="mi">0</span><span class="o">|</span>
+  <span class="o">+</span><span class="c1">-----------+-------------+</span>
+</code></pre></div>    </div>
+
+    <p>공백 저장시 CHAR, VARCHAR 모두 저장이 되나 조회시 CHAR은 공백을 제거합니다.<br />
+  CHAR는 EQUAL 검색시 공백이 있어도 검색이되나 LIKE 검색시 공백이 있으면 검색이 되지 않습니다.</p>
+  </li>
+  <li>
+    <p>BINARY and VARBINARY Types</p>
+  </li>
+  <li>
+    <p>BLOB and TEXT Types</p>
+  </li>
+  <li>
+    <p>ENUM Type</p>
+  </li>
+  <li>
+    <p>SET Type</p>
+  </li>
+</ul>
+
+<h3 id="date-types">Date types</h3>
+
+<ul>
+  <li>
+    <p>DATE, DATETIME, and TIMESTAMP Types</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">ts</span> <span class="p">(</span>
+      <span class="o">-&gt;</span>     <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+      <span class="o">-&gt;</span>     <span class="n">col</span> <span class="nb">TIMESTAMP</span> <span class="k">NOT</span> <span class="k">NULL</span>
+      <span class="o">-&gt;</span> <span class="p">)</span> <span class="n">AUTO_INCREMENT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="n">mysql</span><span class="o">&gt;</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">dt</span> <span class="p">(</span>
+      <span class="o">-&gt;</span>     <span class="n">id</span> <span class="nb">INT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+      <span class="o">-&gt;</span>     <span class="n">col</span> <span class="nb">DATETIME</span> <span class="k">NOT</span> <span class="k">NULL</span>
+      <span class="o">-&gt;</span> <span class="p">)</span> <span class="n">AUTO_INCREMENT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p>DATE는 날짜 부분만 사용됩니다. 지원 범위는 ‘YYYY-MM-DD’, ‘1000-01-01’, ‘9999-12-31’ 입니다.<br />
+  DATETIME유형은 날짜와 시간 부분을 모두 포함하는 값에 사용됩니다. DATETIME은 형식으로 값을 검색하고 표시 합니다. 지원 범위는 ‘YYYY-MM-DD hh:mm:ss’, ‘1000-01-01 00:00:00’, ‘9999-12-31 23:59:59’ 입니다.<br />
+  TIMESTAMP데이터 타입은 날짜와 시간 부분을 모두 포함하는 값에 사용됩니다. UTC ~ UTC TIMESTAMP범위입니다 . ‘1970-01-01 00:00:01’, ‘2038-01-19 03:14:07’<br />
+  DATETIME또는 TIMESTAMP 값이 마이크로 초(6자리 소수 부분)를 포함 할 수 있습니다. 특히, DATETIME또는 TIMESTAMP열에 삽입 된 값의 소수 부분 은 버리지 않고 저장됩니다.</p>
+  </li>
+  <li>
+    <p>TIME Type</p>
+  </li>
+  <li>
+    <p>YEAR Type</p>
+  </li>
+</ul>
+
+<h3 id="json-type">Json type</h3>
+
+<ul>
+  <li>
+    <p>JSON 데이터 입력</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">facts</span> <span class="p">(</span>
+      <span class="n">id</span> <span class="nb">INTEGER</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
+      <span class="n">sentence</span> <span class="n">JSON</span>
+  <span class="p">)</span> <span class="n">AUTO_INCREMENT</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">facts</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="n">JSON_OBJECT</span><span class="p">(</span><span class="s1">'key1'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'key2'</span><span class="p">,</span> <span class="s1">'abc'</span><span class="p">));</span>
+  <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">facts</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="n">JSON_ARRAY</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">NOW</span><span class="p">()));</span>
+  <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">facts</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="n">JSON_MERGE_PRESERVE</span><span class="p">(</span><span class="s1">'["a", 1]'</span><span class="p">,</span> <span class="s1">'{"key": "value"}'</span><span class="p">));</span>
+  <span class="k">SET</span> <span class="o">@</span><span class="n">j</span> <span class="o">=</span> <span class="n">JSON_OBJECT</span><span class="p">(</span><span class="s1">'key'</span><span class="p">,</span> <span class="s1">'value'</span><span class="p">);</span>
+  <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">facts</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="o">@</span><span class="n">j</span><span class="p">);</span>
+  <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">facts</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> <span class="k">VALUES</span><span class="p">(</span><span class="s1">'{"mascot": "Our mascot is a dolphin named </span><span class="se">\\</span><span class="s1">"Sakila</span><span class="se">\\</span><span class="s1">"."}'</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>JSON Object 조회</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="n">sentence</span><span class="o">-&gt;</span><span class="nv">"$.mascot"</span> <span class="k">FROM</span> <span class="n">facts</span><span class="p">;</span>
+  <span class="o">+</span><span class="c1">---------------------------------------------+</span>
+  <span class="o">|</span> <span class="n">sentence</span><span class="o">-&gt;</span><span class="nv">"$.mascot"</span>                        <span class="o">|</span>
+  <span class="o">+</span><span class="c1">---------------------------------------------+</span>
+  <span class="o">|</span> <span class="nv">"Our mascot is a dolphin named </span><span class="se">\"</span><span class="nv">Sakila</span><span class="se">\"</span><span class="nv">."</span> <span class="o">|</span>
+  <span class="o">+</span><span class="c1">---------------------------------------------+</span>
+
+  <span class="k">SELECT</span> <span class="n">sentence</span><span class="o">-&gt;&gt;</span><span class="nv">"$.mascot"</span> <span class="k">FROM</span> <span class="n">facts</span><span class="p">;</span>
+  <span class="o">+</span><span class="c1">-----------------------------------------+</span>
+  <span class="o">|</span> <span class="n">sentence</span><span class="o">-&gt;&gt;</span><span class="nv">"$.mascot"</span>                   <span class="o">|</span>
+  <span class="o">+</span><span class="c1">-----------------------------------------+</span>
+  <span class="o">|</span> <span class="n">Our</span> <span class="n">mascot</span> <span class="k">is</span> <span class="n">a</span> <span class="n">dolphin</span> <span class="n">named</span> <span class="nv">"Sakila"</span><span class="p">.</span> <span class="o">|</span>
+  <span class="o">+</span><span class="c1">-----------------------------------------+</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>JSON Array 조회</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="p">(</span>
+      <span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">json_contains</span><span class="p">(</span><span class="n">sentence</span><span class="p">,</span> <span class="n">json_array</span><span class="p">(</span><span class="s1">'a'</span><span class="p">))</span> <span class="k">AS</span> <span class="n">rst</span> <span class="k">FROM</span> <span class="n">facts</span>
+  <span class="p">)</span> <span class="n">A</span>
+  <span class="k">WHERE</span> <span class="n">rst</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="o">+</span><span class="c1">--+</span>
+  <span class="o">|</span><span class="n">id</span><span class="o">|</span>
+  <span class="o">+</span><span class="c1">--+</span>
+  <span class="o">|</span><span class="mi">3</span> <span class="o">|</span>
+  <span class="o">|</span><span class="mi">5</span> <span class="o">|</span>
+  <span class="o">+</span><span class="c1">--+</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="naming-conventions">Naming Conventions</h2>
+
+<h3 id="공통">공통</h3>
+
+<ol>
+  <li>소문자를 사용한다.</li>
+  <li>단어를 임의로 축약하지 않는다.
+    <ul>
+      <li>register_date (O) / reg_date (X)</li>
+    </ul>
+  </li>
+  <li>가능하면 약어의 사용을 피한다.
+    <ul>
+      <li>약어를 사용해야 하는 경우, 약어 역시 소문자를 사용한다.</li>
+    </ul>
+  </li>
+  <li>동사는 능동태를 사용한다.
+    <ul>
+      <li>register_date (O) / registered_date (X)</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="table">TABLE</h3>
+
+<ol>
+  <li>복수형을 사용한다.</li>
+  <li>이름을 구성하는 각각의 단어를 underscore 로 연결하는 snake case 를 사용한다.</li>
+  <li>교차 테이블 (many-to-many) 의 이름에 사용할 수 있는 직관적인 단어가 있다면 해당 단어를 사용한다.
+    <ul>
+      <li>적절한 단어가 없다면 relationship을 맺고 있는 각 테이블의 이름을 “<em>and</em>” 또는 “<em>has</em>” 로 연결한다.</li>
+    </ul>
+  </li>
+  <li>예
+    <ul>
+      <li>articles, movies : 복수형</li>
+      <li>vip_members : 약어도 예외 없이 소문자 &amp; 단어의 연결에 underbar를 사용</li>
+      <li>articles_and_movies : 교차 테이블을 “<em>and</em>” 로 연결</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="column">COLUMN</h3>
+
+<ol>
+  <li>auto increment 속성의 PK를 대리키로 사용하는 경우, “테이블 이름의 단수형”_id 의 규칙으로 명명한다.</li>
+  <li>이름을 구성하는 각각의 단어를 underscore 로 연결하는 snake case 를 사용한다.</li>
+  <li>foreign key 컬럼은 부모 테이블의 primary key 컬럼 이름을 그대로 사용한다.
+    <ul>
+      <li>self 참조인 경우, primary key 컬럼 이름 앞에 적절한 접두어를 사용한다.</li>
+      <li>같은 primary key 컬럼을 자식 테이블에서 2번 이상 참조하는 경우, primary key 컬럼 이름 앞에 적절한 접두어를 사용한다.</li>
+    </ul>
+  </li>
+  <li>boolean 유형의 컬럼이면 “_flag” 접미어를 사용한다.</li>
+  <li>date, datetime 유형의 컬럼이면 “_date” 접미어를 사용한다.</li>
+  <li>예
+    <ul>
+      <li>article_id, movie_id : “테이블 이름의 단수형” + “_id”</li>
+      <li>complete_flag : boolean 유형의 컬럼</li>
+      <li>issue_date : 날짜 유형의 컬럼</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="index">INDEX</h3>
+
+<ol>
+  <li>이름을 구성하는 각각의 단어를 hyphen 으로 연결하는 snake case 를 사용한다.</li>
+  <li>접두어
+    <ul>
+      <li>unique index : uix</li>
+      <li>spatial index : six</li>
+      <li>index : nix</li>
+    </ul>
+  </li>
+  <li>“접두어”-“테이블 이름”-“컬럼 이름”-“컬럼 이름”</li>
+  <li>예
+    <ul>
+      <li>uix-accounts-login_email</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="foreign-key">FOREIGN KEY</h3>
+
+<ol>
+  <li>이름을 구성하는 각각의 단어를 hyphen 으로 연결하는 snake case 를 사용한다.</li>
+  <li>“fk”-“부모 테이블 이름”-“자식 테이블 이름”
+    <ul>
+      <li>같은 부모-자식 테이블에 2개 이상의 foreign key가 있는 경우, numbering합니다.</li>
+    </ul>
+  </li>
+  <li>예
+    <ul>
+      <li>fk-movies-articles : article 테이블이 movie 테이블을 참조</li>
+      <li>fk-admins-notices-1 / fk-admins-notices-2 : notices 테이블이 admins 테이블을 2회 이상 참조하여 numbering</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="view">VIEW</h3>
+
+<ol>
+  <li>접두어 “v”를 사용한다.</li>
+  <li>기타 규칙은 TABLE과 동일</li>
+  <li>예
+    <ul>
+      <li>v_privileges</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="function">FUNCTION</h3>
+
+<ol>
+  <li>접두어 “usf”를 사용한다.</li>
+  <li>이름을 구성하는 각각의 단어를 underscore 로 연결하는 snake case 를 사용한다.</li>
+  <li>예
+    <ul>
+      <li>usf_random_key</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="trigger">TRIGGER</h3>
+
+<ol>
+  <li>이름을 구성하는 각각의 단어를 underscore 로 연결하는 snake case 를 사용한다.</li>
+  <li>접두어
+    <ul>
+      <li>tra : AFTER 트리거</li>
+      <li>trb : BEFORE 트리거</li>
+    </ul>
+  </li>
+  <li>“접두어”<em>“테이블 이름”</em>“트리거 이벤트”</li>
+  <li>예
+    <ul>
+      <li>tga_movies_ins : AFTER INSERT 트리거</li>
+      <li>tga_movies_upd : AFTER UPDATE 트리거</li>
+      <li>tgb_movies_del : BEFORE DELETE 트리거</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="auto_increment">AUTO_INCREMENT</h2>
+
+<h3 id="auto_increment-prefix">AUTO_INCREMENT prefix</h3>
+
+<ul>
+  <li>하나의 컬럼에 접두사를 넣을수는 없으나 컬럼 두개를 이용하면 가능 합니다.</li>
+  <li>
+    <p>MyISAM ENGINE으로 가능합니다.</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">animals</span> <span class="p">(</span>
+      <span class="n">grp</span> <span class="nb">ENUM</span><span class="p">(</span><span class="s1">'fish'</span><span class="p">,</span><span class="s1">'mammal'</span><span class="p">,</span><span class="s1">'bird'</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+      <span class="n">id</span> <span class="nb">MEDIUMINT</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+      <span class="n">name</span> <span class="nb">CHAR</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+      <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">grp</span><span class="p">,</span><span class="n">id</span><span class="p">)</span>
+  <span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">MyISAM</span><span class="p">;</span>
+
+  <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">animals</span> <span class="p">(</span><span class="n">grp</span><span class="p">,</span><span class="n">name</span><span class="p">)</span> <span class="k">VALUES</span> 
+      <span class="p">(</span><span class="s1">'mammal'</span><span class="p">,</span><span class="s1">'dog'</span><span class="p">),(</span><span class="s1">'mammal'</span><span class="p">,</span><span class="s1">'cat'</span><span class="p">),</span>
+      <span class="p">(</span><span class="s1">'bird'</span><span class="p">,</span><span class="s1">'penguin'</span><span class="p">),(</span><span class="s1">'fish'</span><span class="p">,</span><span class="s1">'lax'</span><span class="p">),(</span><span class="s1">'mammal'</span><span class="p">,</span><span class="s1">'whale'</span><span class="p">),</span>
+      <span class="p">(</span><span class="s1">'bird'</span><span class="p">,</span><span class="s1">'ostrich'</span><span class="p">);</span>
+
+  <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">animals</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">grp</span><span class="p">,</span><span class="n">id</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="auto_increment-multi">AUTO_INCREMENT multi</h3>
+
+<ul>
+  <li>AUTO_INCREMENT prefix 의 ENUM 설정을 Integer로 사용하면 가능하나 숫자는 직접 입력해야 합니다.</li>
+</ul>
+
+<h2 id="index-1">Index</h2>
+
+<h3 id="create-index">Create index</h3>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`salaries`</span> <span class="p">(</span>
+  <span class="nv">`id`</span> <span class="nb">bigint</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="nv">`emp_no`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`salary`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`from_date`</span> <span class="nb">date</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`to_date`</span> <span class="nb">date</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`is_bonus`</span> <span class="nb">tinyint</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="nb">zerofill</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`group_no`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span><span class="p">;</span>
+
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">IDX_SALARIES_INCREASE</span> <span class="k">ON</span> <span class="n">salaries</span> 
+<span class="p">(</span><span class="n">is_bonus</span><span class="p">,</span> <span class="n">from_date</span><span class="p">,</span> <span class="n">group_no</span><span class="p">);</span>
+
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">IDX_SALARIES_DECREASE</span> <span class="k">ON</span> <span class="n">salaries</span> 
+<span class="p">(</span><span class="n">group_no</span><span class="p">,</span> <span class="n">from_date</span><span class="p">,</span> <span class="n">is_bonus</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="explain-index">Explain index</h3>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">explain</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">facts</span> <span class="n">f</span> <span class="k">where</span> <span class="n">id</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="show-index">Show index</h3>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SHOW</span> <span class="k">INDEX</span> <span class="k">FROM</span> <span class="n">test</span><span class="p">;</span>
+<span class="k">SHOW</span> <span class="k">INDEX</span> <span class="k">FROM</span> <span class="n">facts</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="drop-index">Drop index</h3>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">books</span> <span class="k">DROP</span> <span class="k">INDEX</span> <span class="n">idx_test</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="tip">Tip</h3>
+
+<ul>
+  <li>인덱스가 없는 컬럼을 조건으로 update, delete를 하게 되면 굉장히 느려 많은 양의 데이터를 삭제 해야하는 상황에선 인덱스로 지정된 컬럼을 기준으로 진행하는것을 추천드립니다.</li>
+  <li>인덱스의 키는 길면 길수록 성능상 이슈가 있습니다.</li>
+  <li>카디널리티가 높은순에서 낮은순으로 구성하는게 더 성능이 뛰어납니다.</li>
+  <li>조회 쿼리 사용시 인덱스를 태우려면 최소한 첫번째 인덱스 조건은 조회조건에 포함되어야만 합니다.</li>
+</ul>
+
+<h2 id="engine">ENGINE</h2>
+
+<ul>
+  <li>
+    <p>SHOW ENGINES</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SHOW</span> <span class="n">ENGINES</span><span class="p">;</span>
+    
+  <span class="o">|</span><span class="c1">------------------|-------|--------------------------------------------------------------|------------|---|----------|</span>
+  <span class="o">|</span><span class="n">Engine</span>            <span class="o">|</span><span class="n">Support</span><span class="o">|</span><span class="k">Comment</span>                                                       <span class="o">|</span><span class="n">Transactions</span><span class="o">|</span><span class="n">XA</span> <span class="o">|</span><span class="n">Savepoints</span><span class="o">|</span>
+  <span class="o">|</span><span class="c1">------------------|-------|--------------------------------------------------------------|------------|---|----------|</span>
+  <span class="o">|</span><span class="n">InnoDB</span>            <span class="o">|</span><span class="k">DEFAULT</span><span class="o">|</span><span class="n">Supports</span> <span class="n">transactions</span><span class="p">,</span> <span class="k">row</span><span class="o">-</span><span class="k">level</span> <span class="n">locking</span><span class="p">,</span> <span class="k">and</span> <span class="k">foreign</span> <span class="n">keys</span>    <span class="o">|</span><span class="n">YES</span>         <span class="o">|</span><span class="n">YES</span><span class="o">|</span><span class="n">YES</span>       <span class="o">|</span>
+  <span class="o">|</span><span class="n">MRG_MYISAM</span>        <span class="o">|</span><span class="n">YES</span>    <span class="o">|</span><span class="n">Collection</span> <span class="k">of</span> <span class="n">identical</span> <span class="n">MyISAM</span> <span class="n">tables</span>                         <span class="o">|</span><span class="k">NO</span>          <span class="o">|</span><span class="k">NO</span> <span class="o">|</span><span class="k">NO</span>        <span class="o">|</span>
+  <span class="o">|</span><span class="n">MEMORY</span>            <span class="o">|</span><span class="n">YES</span>    <span class="o">|</span><span class="n">Hash</span> <span class="n">based</span><span class="p">,</span> <span class="n">stored</span> <span class="k">in</span> <span class="n">memory</span><span class="p">,</span> <span class="n">useful</span> <span class="k">for</span> <span class="k">temporary</span> <span class="n">tables</span>     <span class="o">|</span><span class="k">NO</span>          <span class="o">|</span><span class="k">NO</span> <span class="o">|</span><span class="k">NO</span>        <span class="o">|</span>
+  <span class="o">|</span><span class="n">BLACKHOLE</span>         <span class="o">|</span><span class="n">YES</span>    <span class="o">|/</span><span class="n">dev</span><span class="o">/</span><span class="k">null</span> <span class="k">storage</span> <span class="n">engine</span> <span class="p">(</span><span class="n">anything</span> <span class="n">you</span> <span class="k">write</span> <span class="k">to</span> <span class="n">it</span> <span class="n">disappears</span><span class="p">)</span><span class="o">|</span><span class="k">NO</span>          <span class="o">|</span><span class="k">NO</span> <span class="o">|</span><span class="k">NO</span>        <span class="o">|</span>
+  <span class="o">|</span><span class="n">MyISAM</span>            <span class="o">|</span><span class="n">YES</span>    <span class="o">|</span><span class="n">MyISAM</span> <span class="k">storage</span> <span class="n">engine</span>                                         <span class="o">|</span><span class="k">NO</span>          <span class="o">|</span><span class="k">NO</span> <span class="o">|</span><span class="k">NO</span>        <span class="o">|</span>
+  <span class="o">|</span><span class="n">CSV</span>               <span class="o">|</span><span class="n">YES</span>    <span class="o">|</span><span class="n">CSV</span> <span class="k">storage</span> <span class="n">engine</span>                                            <span class="o">|</span><span class="k">NO</span>          <span class="o">|</span><span class="k">NO</span> <span class="o">|</span><span class="k">NO</span>        <span class="o">|</span>
+  <span class="o">|</span><span class="n">ARCHIVE</span>           <span class="o">|</span><span class="n">YES</span>    <span class="o">|</span><span class="n">Archive</span> <span class="k">storage</span> <span class="n">engine</span>                                        <span class="o">|</span><span class="k">NO</span>          <span class="o">|</span><span class="k">NO</span> <span class="o">|</span><span class="k">NO</span>        <span class="o">|</span>
+  <span class="o">|</span><span class="n">PERFORMANCE_SCHEMA</span><span class="o">|</span><span class="n">YES</span>    <span class="o">|</span><span class="n">Performance</span> <span class="k">Schema</span>                                            <span class="o">|</span><span class="k">NO</span>          <span class="o">|</span><span class="k">NO</span> <span class="o">|</span><span class="k">NO</span>        <span class="o">|</span>
+  <span class="o">|</span><span class="n">FEDERATED</span>         <span class="o">|</span><span class="k">NO</span>     <span class="o">|</span><span class="n">Federated</span> <span class="n">MySQL</span> <span class="k">storage</span> <span class="n">engine</span>                                <span class="o">|</span>            <span class="o">|</span>   <span class="o">|</span>          <span class="o">|</span>
+  <span class="o">|</span><span class="c1">------------------|-------|--------------------------------------------------------------|------------|---|----------|</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>가장 많이 쓰이는 엔진</p>
+
+    <ul>
+      <li>InnoDB : 따로 스토리지 엔진을 명시하지 않으면 default 로 설정되는 스토리지 엔진이다. InnoDB는 transaction-safe 하며, 커밋과 롤백, 그리고 데이터 복구 기능을 제공하므로 데이터를 효과적으로 보호 할 수 있다.<br />
+  InnoDB는 기본적으로 row-level locking 제공하며, 또한 데이터를 clustered index에 저장하여 PK 기반의 query의 I/O 비용을 줄인다. 또한 FK 제약을 제공하여 데이터 무결성을 보장한다.<br />
+  <br /></li>
+      <li>MyISAM : 트랜잭션을 지원하지 않고 table-level locking을 제공한다. 따라서 multi-thread 환경에서 성능이 저하 될 수 있다. 특정 세션이 테이블을 변경하는 동안 테이블 단위로 lock이 잡히기 때문이다.<br />
+  텍스트 전문 검색(Fulltext Searching)과 지리정보 처리 기능도 지원되는데, 이를 사용할 시에는 파티셔닝을 사용할 수 없다는 단점이 있다.<br />
+  <br /></li>
+      <li>Archive : ‘로그 수집’에 적합한 엔진이다. 데이터가 메모리상에서 압축되고 압축된 상태로 디스크에 저장이 되기 때문에 row-level locking이 가능하다.<br />
+  다만, 한번 INSERT된 데이터는 UPDATE, DELETE를 사용할 수 없으며 인덱스를 지원하지 않는다. 따라서 거의 가공하지 않을 원시 로그 데이터를 관리하는데에 효율적일 수 있고, 테이블 파티셔닝도 지원한다. 다만 트랜잭션은 지원하지 않는다.<br /></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="charset">CHARSET</h2>
+
+<ul>
+  <li>SHOW CHARSET</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SHOW</span> <span class="n">CHARSET</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="참고사이트">참고사이트</h2>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">http://tcpschool.com/mysql/mysql_datatype_numeric</span>
+<span class="s">https://dev.mysql.com/doc/refman/8.0/en/integer-types.html</span>
+<span class="s">https://purumae.tistory.com/200</span>
+<span class="s">https://jojoldu.tistory.com/243</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#mysql" class="page__taxonomy-item" rel="tag">MySQL</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#database" class="page__taxonomy-item" rel="tag">Database</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-20">March 20, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BMySQL%5D+%ED%85%8C%EC%9D%B4%EB%B8%94+%EC%83%9D%EC%84%B1%EC%8B%9C+%EA%B3%A0%EB%A0%A4%EC%82%AC%ED%95%AD%20http%3A%2F%2Flocalhost%3A4000%2Fdatabase%2Fdatabase-mysql-create-table%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdatabase%2Fdatabase-mysql-create-table%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdatabase%2Fdatabase-mysql-create-table%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/language/language-python-jupyter-matplotlib/" class="pagination--pager" title="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
+">이전</a>
+    
+    
+      <a href="/server/server-mysql-upgrade/" class="pagination--pager" title="[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-mysql-upgrade/" rel="permalink">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">5.6은 JSON 지원이 안되네요.
+그래서 업그레이드를 하기로 했습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-jupyter-matplotlib/" rel="permalink">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.
+이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-image-processing/" rel="permalink">[작성중][Python] Image processing
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Image to text
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-email-template-zurbfoundation/" rel="permalink">[Email template] ZURB Foundation
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">사용자에게 뉴스레터, 공지 이메일 등의 이메일을 HTML 형식으로 발송해야 할 때가 있습니다.
+통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다.
+그럼 퍼블리셔팀에게 요청하게 되고 템플릿 디자인과 이메일 클라이언트 확인 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

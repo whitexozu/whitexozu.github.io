@@ -288,6 +288,33 @@
 
       <section class="page__content" itemprop="text">
         
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#설치-방법-및-실행">설치 방법 및 실행</a></li>
+  <li><a href="#폴더구조">폴더구조</a></li>
+  <li><a href="#코딩">코딩</a></li>
+  <li><a href="#메일-발송-설정-및-테스트">메일 발송 설정 및 테스트</a>
+    <ul>
+      <li><a href="#smtp-서버-사용을-설정합니다-저는-네이버-smtp-서버를-사용하겠습니다">smtp 서버 사용을 설정합니다. 저는 네이버 smtp 서버를 사용하겠습니다.</a></li>
+      <li><a href="#config-설정">config 설정</a></li>
+      <li><a href="#메이-발송">메이 발송</a></li>
+    </ul>
+  </li>
+  <li><a href="#email-client-종류">email client 종류</a>
+    <ul>
+      <li><a href="#모바일-이메일-클라이언트">모바일 이메일 클라이언트</a></li>
+      <li><a href="#데스크톱-이메일-클라이언트">데스크톱 이메일 클라이언트</a></li>
+      <li><a href="#웹-메일-클라이언트">웹 메일 클라이언트</a></li>
+    </ul>
+  </li>
+  <li><a href="#참고-사이트">참고 사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
         <p>사용자에게 뉴스레터, 공지 이메일 등의 이메일을 HTML 형식으로 발송해야 할 때가 있습니다.<br />
 통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다.<br />
 그럼 퍼블리셔팀에게 요청하게 되고 <code class="highlighter-rouge">템플릿 디자인</code>과 <code class="highlighter-rouge">이메일 클라이언트</code> 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다.<br />
@@ -561,6 +588,49 @@ nvm을 사용한 테스트 결과 v12에서는 프로젝트 생성이 되지 않
     
     <h2 class="archive__item-title" itemprop="headline">
       
+        <a href="/server/server-mysql-upgrade/" rel="permalink">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">5.6은 JSON 지원이 안되네요.
+그래서 업그레이드를 하기로 했습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/database/database-mysql-create-table/" rel="permalink">[MySQL] 테이블 생성시 고려사항
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.
+그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.
+그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
         <a href="/language/language-python-jupyter-matplotlib/" rel="permalink">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
 </a>
       
@@ -588,56 +658,6 @@ nvm을 사용한 테스트 결과 v12에서는 프로젝트 생성이 되지 않
     </h2>
     
     <p class="archive__item-excerpt" itemprop="description">Image to text
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/scm/scm-git-command/" rel="permalink">[GIT] 명령어, 협업 방법
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)
-Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다.
-SVN은 trunk 밑에 하나의 repository를 만들에 모...</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/language/language-java-enum/" rel="permalink">[JAVA] enum 데이터 타입
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">클래스 설명
-
-  상수의 그룹을 나타낼 때 사용한다.
-  허용 가능한 값들을 제한할 수 있습니다.
-  IDE의 적극적인 지원을 받을 수 있습니다.
-    
-      자동완성, 오타검증, 텍스트 리팩토링 등등
-    
-  
-
 </p>
   </article>
 </div>
