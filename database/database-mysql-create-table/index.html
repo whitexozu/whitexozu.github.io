@@ -343,6 +343,22 @@
       <li><a href="#recommend">Recommend</a></li>
     </ul>
   </li>
+  <li><a href="#procedure">Procedure</a>
+    <ul>
+      <li><a href="#example">Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#function-1">Function</a>
+    <ul>
+      <li><a href="#example-1">Example</a></li>
+    </ul>
+  </li>
+  <li><a href="#load-file">Load file</a>
+    <ul>
+      <li><a href="#example-2">Example</a></li>
+      <li><a href="#error">Error</a></li>
+    </ul>
+  </li>
   <li><a href="#참고사이트">참고사이트</a></li>
 </ul>
 
@@ -932,6 +948,219 @@
     <ol>
       <li>MySQL 5.5.3 이전 = utf8 charset 에, utf8_general_ci collation 사용.</li>
       <li>MySQL 이 최신일 때 = utf8mb4 charset 에, utf8mb4_unicode_ci collation 사용.</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="procedure">Procedure</h2>
+
+<h3 id="example">Example</h3>
+
+<ul>
+  <li>Create table
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`test_reviews`</span> <span class="p">(</span>
+  <span class="nv">`id`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="nv">`p_id`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">unsigned</span><span class="p">,</span>
+  <span class="nv">`b_id`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+  <span class="nv">`memo`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+  <span class="nv">`dt`</span> <span class="nb">timestamp</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+  <span class="k">primary</span> <span class="k">key</span><span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
+  <span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create procedure</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">DROP</span> <span class="k">PROCEDURE</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="n">proc_review_data_insert</span><span class="p">;</span>
+
+  <span class="k">CREATE</span> <span class="k">PROCEDURE</span> <span class="n">proc_review_data_insert</span><span class="p">()</span>
+  <span class="k">BEGIN</span>
+      <span class="k">declare</span> <span class="n">v_max</span> <span class="nb">INTEGER</span> <span class="k">DEFAULT</span> <span class="mi">1000000</span><span class="p">;</span>
+      <span class="k">declare</span> <span class="n">v_num</span> <span class="nb">INTEGER</span> <span class="k">DEFAULT</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">declare</span> <span class="n">v_p_id</span> <span class="nb">INTEGER</span> <span class="k">DEFAULT</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">declare</span> <span class="n">v_b_id</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">'board'</span><span class="p">;</span>
+
+      <span class="n">while</span> <span class="n">v_num</span> <span class="o">&lt;</span> <span class="n">v_max</span> <span class="k">do</span>
+          <span class="k">insert</span> <span class="k">into</span> <span class="n">test_reviews</span><span class="p">(</span><span class="n">p_id</span><span class="p">,</span> <span class="n">b_id</span><span class="p">,</span> <span class="n">memo</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="n">CEIL</span><span class="p">(</span><span class="n">v_num</span><span class="o">/</span><span class="mi">10</span><span class="p">),</span> <span class="n">concat</span><span class="p">(</span><span class="n">v_b_id</span><span class="p">,</span> <span class="n">CEIL</span><span class="p">(</span><span class="n">v_num</span><span class="o">/</span><span class="mi">50</span><span class="p">)),</span> <span class="n">concat</span><span class="p">(</span><span class="s1">'test - '</span><span class="p">,</span> <span class="n">v_num</span><span class="p">)</span> <span class="p">);</span>
+            
+          <span class="k">set</span> <span class="n">v_num</span> <span class="o">=</span> <span class="n">v_num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">end</span> <span class="n">while</span><span class="p">;</span>
+        
+      <span class="k">update</span> <span class="n">test_reviews</span> 
+      <span class="k">set</span> <span class="n">p_id</span> <span class="o">=</span> <span class="mi">1</span>
+      <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="n">p_id</span><span class="p">;</span>
+
+      <span class="k">update</span> <span class="n">test_reviews</span> 
+      <span class="k">set</span> <span class="n">p_id</span> <span class="o">=</span> <span class="mi">0</span>
+      <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">END</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Call procedure</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">call</span> <span class="n">proc_review_data_insert</span><span class="p">();</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="function-1">Function</h2>
+
+<h3 id="example-1">Example</h3>
+
+<ul>
+  <li>
+    <p>Create function</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">DROP</span> <span class="k">FUNCTION</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="n">fnc_reveiw_hierarchi</span><span class="p">;</span>
+
+  <span class="k">CREATE</span> <span class="k">FUNCTION</span>  <span class="n">fnc_reveiw_hierarchi</span><span class="p">()</span> <span class="k">RETURNS</span> <span class="nb">INT</span>
+    
+  <span class="k">NOT</span> <span class="k">DETERMINISTIC</span>
+    
+  <span class="k">READS</span> <span class="k">SQL</span> <span class="k">DATA</span>
+    
+  <span class="k">BEGIN</span>
+    
+      <span class="k">DECLARE</span> <span class="n">v_id</span> <span class="nb">INT</span><span class="p">;</span>
+      <span class="k">DECLARE</span> <span class="n">v_parent</span> <span class="nb">INT</span><span class="p">;</span>    
+      <span class="k">DECLARE</span> <span class="k">CONTINUE</span> <span class="k">HANDLER</span> <span class="k">FOR</span> <span class="k">NOT</span> <span class="k">FOUND</span> <span class="k">SET</span> <span class="o">@</span><span class="n">id</span> <span class="o">=</span> <span class="k">NULL</span><span class="p">;</span>
+    
+      <span class="k">SET</span> <span class="n">v_parent</span> <span class="o">=</span> <span class="o">@</span><span class="n">id</span><span class="p">;</span>
+      <span class="k">SET</span> <span class="n">v_id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    
+      <span class="n">IF</span> <span class="o">@</span><span class="n">id</span> <span class="k">IS</span> <span class="k">NULL</span> <span class="k">THEN</span>
+          <span class="k">RETURN</span> <span class="k">NULL</span><span class="p">;</span>
+      <span class="k">END</span> <span class="n">IF</span><span class="p">;</span> 	
+    
+      <span class="n">LOOP</span>
+        
+      <span class="k">SELECT</span> <span class="k">MIN</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+      <span class="k">INTO</span> <span class="o">@</span><span class="n">id</span> 
+      <span class="k">FROM</span> <span class="n">test_reviews</span>
+      <span class="k">WHERE</span> <span class="n">p_id</span> <span class="o">=</span> <span class="n">v_parent</span>
+      <span class="k">AND</span> <span class="n">id</span> <span class="o">&gt;</span> <span class="n">v_id</span><span class="p">;</span>
+        
+      <span class="n">IF</span> <span class="p">(</span><span class="o">@</span><span class="n">id</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">)</span> <span class="k">OR</span> <span class="p">(</span><span class="n">v_parent</span> <span class="o">=</span> <span class="o">@</span><span class="n">start_with</span><span class="p">)</span> <span class="k">THEN</span>
+      <span class="k">SET</span> <span class="o">@</span><span class="k">level</span> <span class="o">=</span> <span class="o">@</span><span class="k">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">RETURN</span> <span class="o">@</span><span class="n">id</span><span class="p">;</span>
+      <span class="k">END</span> <span class="n">IF</span><span class="p">;</span>
+        
+      <span class="k">SET</span> <span class="o">@</span><span class="k">level</span> <span class="p">:</span><span class="o">=</span> <span class="o">@</span><span class="k">level</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    
+      <span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">p_id</span>
+      <span class="k">INTO</span> <span class="n">v_id</span> <span class="p">,</span> <span class="n">v_parent</span> 
+          <span class="k">FROM</span> <span class="n">test_reviews</span>
+      <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="n">v_parent</span><span class="p">;</span>
+    
+      <span class="k">END</span> <span class="n">LOOP</span><span class="p">;</span>
+    
+  <span class="k">END</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Call function</p>
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> 
+      <span class="k">CASE</span> <span class="k">WHEN</span> <span class="k">LEVEL</span><span class="o">-</span><span class="mi">1</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">CONCAT</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="n">REPEAT</span><span class="p">(</span><span class="s1">'    '</span><span class="p">,</span> <span class="k">level</span>  <span class="o">-</span> <span class="mi">1</span><span class="p">),</span><span class="s1">'┗'</span><span class="p">),</span> <span class="n">ani</span><span class="p">.</span><span class="n">memo</span><span class="p">)</span>
+          <span class="k">ELSE</span> <span class="n">ani</span><span class="p">.</span><span class="n">memo</span>
+      <span class="k">END</span> <span class="k">AS</span> <span class="n">memo</span>
+      <span class="p">,</span> <span class="n">ani</span><span class="p">.</span><span class="n">id</span>
+      <span class="p">,</span> <span class="n">ani</span><span class="p">.</span><span class="n">p_id</span>
+      <span class="p">,</span> <span class="n">fnc</span><span class="p">.</span><span class="k">level</span>
+      <span class="p">,</span> <span class="n">fnc</span><span class="p">.</span><span class="n">rnum</span>
+  <span class="c1">-- 	, ani.pv</span>
+  <span class="k">FROM</span> <span class="p">(</span>
+      <span class="k">SELECT</span> 
+          <span class="n">fnc_reveiw_hierarchi</span><span class="p">()</span> <span class="k">AS</span> <span class="n">id</span><span class="p">,</span> <span class="o">@</span><span class="k">level</span> <span class="k">AS</span> <span class="k">level</span><span class="p">,</span> <span class="o">@</span><span class="n">rownum</span> <span class="p">:</span><span class="o">=</span> <span class="o">@</span><span class="n">rownum</span><span class="o">+</span><span class="mi">1</span> <span class="k">AS</span> <span class="n">rnum</span>
+      <span class="k">FROM</span> <span class="p">(</span><span class="k">SELECT</span> <span class="o">@</span><span class="n">start_with</span><span class="p">:</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">@</span><span class="n">id</span><span class="p">:</span><span class="o">=@</span><span class="n">start_with</span><span class="p">,</span> <span class="o">@</span><span class="k">level</span><span class="p">:</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="n">vars</span>
+      <span class="k">JOIN</span> <span class="n">test_reviews</span>
+      <span class="k">JOIN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="o">@</span><span class="n">rownum</span> <span class="p">:</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">AS</span> <span class="n">r</span>
+      <span class="k">WHERE</span> <span class="o">@</span><span class="n">id</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">NULL</span>
+  <span class="p">)</span> <span class="k">AS</span> <span class="n">fnc</span>
+  <span class="k">JOIN</span> <span class="p">(</span>
+  <span class="k">select</span> <span class="n">id</span><span class="p">,</span> <span class="n">p_id</span><span class="p">,</span> <span class="n">memo</span><span class="p">,</span> <span class="o">@</span><span class="n">pv</span> <span class="k">as</span> <span class="n">pv</span>
+      <span class="k">from</span> <span class="p">(</span>
+          <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">test_reviews</span><span class="p">,</span>
+          <span class="p">(</span><span class="k">select</span> <span class="o">@</span><span class="n">pv</span> <span class="p">:</span><span class="o">=</span> <span class="mi">10</span><span class="p">)</span> <span class="n">init</span>
+      <span class="p">)</span> <span class="n">a</span>
+      <span class="k">where</span>   <span class="n">find_in_set</span><span class="p">(</span><span class="n">p_id</span><span class="p">,</span> <span class="o">@</span><span class="n">pv</span><span class="p">)</span>
+      <span class="k">and</span>     <span class="k">length</span><span class="p">(</span><span class="o">@</span><span class="n">pv</span> <span class="p">:</span><span class="o">=</span> <span class="n">concat</span><span class="p">(</span><span class="o">@</span><span class="n">pv</span><span class="p">,</span> <span class="s1">','</span><span class="p">,</span> <span class="n">id</span><span class="p">))</span>
+  <span class="p">)</span> <span class="n">ani</span> <span class="k">on</span> <span class="n">fnc</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">ani</span><span class="p">.</span><span class="n">id</span>
+  <span class="k">order</span> <span class="k">by</span> <span class="n">rnum</span>
+  <span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="load-file">Load file</h2>
+
+<h3 id="example-2">Example</h3>
+
+<ul>
+  <li>Create table
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`test_reviews`</span> <span class="p">(</span>
+  <span class="nv">`id`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="nv">`p_id`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">unsigned</span><span class="p">,</span>
+  <span class="nv">`b_id`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">25</span><span class="p">),</span>
+  <span class="nv">`memo`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">),</span>
+  <span class="nv">`dt`</span> <span class="nb">timestamp</span> <span class="k">DEFAULT</span> <span class="k">CURRENT_TIMESTAMP</span><span class="p">,</span>
+  <span class="k">primary</span> <span class="k">key</span><span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
+  <span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span>
+</code></pre></div>    </div>
+  </li>
+  <li>CSV
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">id</span><span class="p">,</span><span class="nx">p_id</span><span class="p">,</span><span class="nx">b_id</span><span class="p">,</span><span class="nx">memo</span><span class="p">,</span><span class="nx">dt</span>
+  <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 1</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+  <span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 2</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+  <span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 3</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+  <span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 4</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+  <span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 5</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+  <span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 6</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+  <span class="mi">7</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 7</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+  <span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 8</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+  <span class="mi">9</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="dl">"</span><span class="s2">board1</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">test - 9</span><span class="dl">"</span><span class="p">,</span><span class="nx">NULL</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Query
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">LOAD</span> <span class="k">DATA</span> <span class="k">LOCAL</span> <span class="n">INFILE</span> <span class="s1">'/Users/whitexozu/dev/temp/review.csv'</span> <span class="k">INTO</span> <span class="k">TABLE</span> <span class="n">mcs</span><span class="p">.</span><span class="n">test_reviews</span>
+  <span class="n">FIELDS</span> <span class="n">TERMINATED</span> <span class="k">BY</span> <span class="s1">','</span> <span class="n">ENCLOSED</span> <span class="k">BY</span> <span class="s1">'"'</span>
+  <span class="k">IGNORE</span> <span class="mi">1</span> <span class="n">LINES</span><span class="p">;</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="error">Error</h3>
+
+<ul>
+  <li>
+    <p>ERROR 1290 (HY000): The MySQL server is running with the –secure-file-priv option so it cannot execute this statement</p>
+
+    <p>에러 발생시 secure_file_priv에 특정 경로가 설정되어있어서 해당 경로에 파일만 import 할 수 있습니다.
+  해당 경로에 파일을 넣거나 경로를 삭제하여 모든 경로에 파일을 import 할 수 있도록 하는 방법이 있습니다.
+  후자가 좋을거 같습니다.</p>
+
+    <ol>
+      <li>경록 확인
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; SELECT @@GLOBAL.secure_file_priv;
+ +---------------------------+
+ | @@GLOBAL.secure_file_priv |
+ +---------------------------+
+ | /var/lib/mysql-files/     |
+ +---------------------------+
+</code></pre></div>        </div>
+      </li>
+      <li>설정 변경
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>vi /etc/my.cnf
+
+ <span class="o">[</span>mysqld]
+ secure-file-priv<span class="o">=</span><span class="s2">""</span>
+</code></pre></div>        </div>
+      </li>
+      <li>MySQL 재시작
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>systemctl restart mysqld
+</code></pre></div>        </div>
+      </li>
     </ol>
   </li>
 </ul>
