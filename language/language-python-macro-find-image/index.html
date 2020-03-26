@@ -1,0 +1,836 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python] 이미지를 판단 후 자동 실행하는 메크로 - TMM</title>
+<meta name="description" content="사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다. 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다. 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다.  순서는 간단합니다. ">
+
+
+  <meta name="author" content="To much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[Python] 이미지를 판단 후 자동 실행하는 메크로">
+<meta property="og:url" content="http://localhost:4000/language/language-python-macro-find-image/">
+
+
+  <meta property="og:description" content="사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다. 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다. 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다.  순서는 간단합니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-03-26T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-03-26T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/language/language-python-macro-find-image/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python] 이미지를 판단 후 자동 실행하는 메크로">
+    <meta itemprop="description" content="사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다.팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다.순서는 간단합니다.">
+    <meta itemprop="datePublished" content="2020-03-26T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-03-26T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] 이미지를 판단 후 자동 실행하는 메크로
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#환경">환경</a></li>
+  <li><a href="#설치">설치</a>
+    <ul>
+      <li><a href="#pyaotugui-설치">pyaotugui 설치</a></li>
+      <li><a href="#pyobjc-framework-quartz-설치">pyobjc-framework-Quartz 설치</a></li>
+      <li><a href="#스크린샷-패키지-mss-설치">스크린샷 패키지 mss 설치</a></li>
+      <li><a href="#opencv-python-설치">opencv-python 설치</a></li>
+      <li><a href="#numpy">numpy</a></li>
+    </ul>
+  </li>
+  <li><a href="#주요-기능">주요 기능</a>
+    <ul>
+      <li><a href="#마우스-이동-및-클릭-스크롤">마우스 이동 및 클릭, 스크롤</a></li>
+      <li><a href="#이미지-캡처-후-출력">이미지 캡처 후 출력</a></li>
+      <li><a href="#캡처된-이미지-rgb값-확인">캡처된 이미지 RGB값 확인</a></li>
+    </ul>
+  </li>
+  <li><a href="#전체-소스">전체 소스</a></li>
+  <li><a href="#참고-사이트">참고 사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.<br />
+윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다.<br />
+팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다.<br />
+<br />
+순서는 간단합니다.<br /></p>
+
+<ol>
+  <li>커서를 이동시켜 본인 채팅내용 찾기</li>
+  <li>채팅내용에 마우스 오버시 나오는 옵션 버튼 클릭</li>
+  <li>옵션 버튼 클릭시 생기는 삭제 버튼 클릭</li>
+</ol>
+
+<h2 id="환경">환경</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">OS</span><span class="pi">:</span> <span class="s">MacOS Catalina 10.15.3</span>
+<span class="na">Python</span><span class="pi">:</span> <span class="m">3.5</span>
+<span class="na">pyautogui</span><span class="pi">:</span> <span class="s">0.9.48</span>
+<span class="na">mss</span><span class="pi">:</span> <span class="s">5.0.0</span>
+<span class="na">cv2</span><span class="pi">:</span> <span class="s">4.1.1.26</span>
+<span class="na">pyobjc-framework-Quartz</span><span class="pi">:</span> <span class="m">5.3</span>
+<span class="na">numpy</span><span class="pi">:</span> <span class="s">1.18.1</span>
+</code></pre></div></div>
+
+<h2 id="설치">설치</h2>
+
+<h3 id="pyaotugui-설치">pyaotugui 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>pyaotugui
+</code></pre></div></div>
+
+<h3 id="pyobjc-framework-quartz-설치">pyobjc-framework-Quartz 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>pyobjc-framework-Quartz
+</code></pre></div></div>
+
+<h3 id="스크린샷-패키지-mss-설치">스크린샷 패키지 mss 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>mss
+</code></pre></div></div>
+
+<h3 id="opencv-python-설치">opencv-python 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>opencv-python<span class="o">==</span>4.1.1.26
+</code></pre></div></div>
+
+<h3 id="numpy">numpy</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>numpuy
+</code></pre></div></div>
+
+<h2 id="주요-기능">주요 기능</h2>
+
+<h3 id="마우스-이동-및-클릭-스크롤">마우스 이동 및 클릭, 스크롤</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># position 확인
+</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pag</span><span class="o">.</span><span class="n">position</span><span class="p">()</span> 
+<span class="n">position_str</span> <span class="o">=</span> <span class="s">'X : '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s">' Y : '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">position_str</span><span class="p">)</span>
+<span class="c1"># 이동
+</span><span class="n">pag</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="c1"># 클릭
+</span><span class="n">pag</span><span class="o">.</span><span class="n">mouseDown</span><span class="p">()</span>
+<span class="n">pag</span><span class="o">.</span><span class="n">mouseUp</span><span class="p">()</span>
+<span class="c1"># 스크롤
+</span><span class="n">pag</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>직관적인 내용들 입니다. 아쉬운 부분은 스크롤을 미세하게 할 수 없습니다. 보다 다양한 기능은 참고사이트를 확인 바랍니다.</li>
+</ul>
+
+<h3 id="이미지-캡처-후-출력">이미지 캡처 후 출력</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="n">mss</span><span class="o">.</span><span class="n">mss</span><span class="p">()</span> <span class="k">as</span> <span class="n">sct</span><span class="p">:</span>
+    <span class="n">point_button_img_pos</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s">'top'</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s">'height'</span><span class="p">:</span> <span class="mi">15</span><span class="p">}</span>
+    <span class="n">point_button_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sct</span><span class="o">.</span><span class="n">grab</span><span class="p">(</span><span class="n">point_button_img_pos</span><span class="p">))[:,:,:</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">'point_button_img'</span><span class="p">,</span> <span class="n">point_button_img</span><span class="p">)</span>
+    <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>포지션 정보의 이미지를 캡처하고 cv2를 이용하여 윈도우 창으로 출력합니다. 버튼의 위치를 찾는데 사용합니다.</li>
+</ul>
+
+<h3 id="캡처된-이미지-rgb값-확인">캡처된 이미지 RGB값 확인</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'delete mean[0]: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'delete mean[1]: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'delete mean[2]: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<ul>
+  <li>이미지를 캡처해도 이미지를 비교 할 수 없죠. 그래서 이미지의 평균 RGB값을 이용해서 비슷한 값이면 같은 이미지라고 판단합니다.</li>
+  <li>어쩌다 색감이 비슷한 영역을 캡처 하게되면 버튼이 아닌데 버튼으로 인식할 수도 있는 오류가 많이 발생되는 부분이기도 합니다.</li>
+  <li>태마가 바뀌면 값을 모두 다시 세팅해 줘야 하는 문제도 생길수 있겠네요.</li>
+</ul>
+
+<h2 id="전체-소스">전체 소스</h2>
+
+<p>제 소스보단 참고 사이트의 <em>빵형의 개발도상국 - 집행검키우기</em>의 유투브 시청을 추천 드립니다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pyautogui</span> <span class="k">as</span> <span class="n">pag</span>
+<span class="kn">import</span> <span class="nn">mss</span><span class="p">,</span> <span class="n">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># delay after click 
+</span><span class="n">pag</span><span class="o">.</span><span class="n">PAUSE</span> <span class="o">=</span> <span class="mf">0.08</span>
+<span class="n">coord_mouse</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">wait_time</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="c1"># icon position
+</span><span class="n">point_init</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="mi">657</span><span class="p">,</span> <span class="s">'top'</span><span class="p">:</span> <span class="mi">928</span><span class="p">}</span>
+<span class="n">point_top</span> <span class="o">=</span> <span class="p">{</span><span class="s">'top'</span><span class="p">:</span> <span class="mi">200</span><span class="p">}</span>
+<span class="n">chat_purple</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="mi">640</span><span class="p">,</span> <span class="s">'top'</span><span class="p">:</span> <span class="mi">920</span><span class="p">}</span>
+<span class="n">point_button</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="o">-</span><span class="mi">23</span><span class="p">,</span> <span class="s">'top'</span><span class="p">:</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span> <span class="s">'height'</span><span class="p">:</span> <span class="mi">26</span><span class="p">}</span>
+<span class="n">up_delete_button</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="o">-</span><span class="mi">103</span><span class="p">,</span> <span class="s">'top'</span><span class="p">:</span> <span class="o">-</span><span class="mi">208</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s">'height'</span><span class="p">:</span> <span class="mi">15</span><span class="p">}</span>
+<span class="n">down_delete_button</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="o">-</span><span class="mi">103</span><span class="p">,</span> <span class="s">'top'</span><span class="p">:</span> <span class="mi">94</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span> <span class="s">'height'</span><span class="p">:</span> <span class="mi">15</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">compute_point_icon_type</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># print('point mean[0]: ' + str(mean[0]))
+</span>    <span class="c1"># print('point mean[1]: ' + str(mean[1]))
+</span>    <span class="c1"># print('point mean[2]: ' + str(mean[2]))
+</span>
+    <span class="k">if</span> <span class="n">mean</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">244</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">250</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">244</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">250</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">244</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">250</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s">'ICON'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s">'OTHER'</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">compute_delete_icon_type</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="s">'delete mean[0]: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'delete mean[1]: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'delete mean[2]: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">mean</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="n">mean</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">209</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">211</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">209</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">211</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">210</span> <span class="ow">and</span> <span class="n">mean</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">212</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s">'ICON'</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="s">'OTHER'</span>
+
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">coords</span><span class="p">):</span>
+    <span class="n">pag</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">duration</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
+    <span class="n">pag</span><span class="o">.</span><span class="n">mouseDown</span><span class="p">()</span>
+    <span class="n">pag</span><span class="o">.</span><span class="n">mouseUp</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">mouse_move_scroll</span><span class="p">(</span><span class="n">coords</span><span class="p">):</span>
+    <span class="n">pag</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">coord_mouse</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">coords</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">15</span> <span class="o">&lt;</span> <span class="n">point_top</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="p">):</span>
+        <span class="n">pag</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="mi">17</span><span class="p">)</span>
+        <span class="n">pag</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">chat_purple</span><span class="p">[</span><span class="s">'left'</span><span class="p">],</span> <span class="n">chat_purple</span><span class="p">[</span><span class="s">'top'</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># 앱 활성화
+</span>    <span class="n">pag</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">point_init</span><span class="p">[</span><span class="s">'left'</span><span class="p">],</span> <span class="n">point_init</span><span class="p">[</span><span class="s">'top'</span><span class="p">])</span>
+    <span class="n">pag</span><span class="o">.</span><span class="n">mouseDown</span><span class="p">()</span>
+    <span class="n">pag</span><span class="o">.</span><span class="n">mouseUp</span><span class="p">()</span>
+    <span class="n">pag</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">chat_purple</span><span class="p">[</span><span class="s">'left'</span><span class="p">],</span> <span class="n">chat_purple</span><span class="p">[</span><span class="s">'top'</span><span class="p">])</span>
+
+    
+    <span class="c1"># while True:
+</span>    <span class="c1">#     x, y = pag.position() 
+</span>    <span class="c1">#     position_str = 'X : ' + str(x) + ' Y : ' + str(y)
+</span>    <span class="c1">#     print(position_str)
+</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+
+        <span class="c1"># point icon 이미지 캡처
+</span>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">mss</span><span class="o">.</span><span class="n">mss</span><span class="p">()</span> <span class="k">as</span> <span class="n">sct</span><span class="p">:</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pag</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
+            <span class="n">point_button_img_pos</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">],</span> <span class="s">'top'</span><span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">],</span> <span class="s">'width'</span><span class="p">:</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">],</span> <span class="s">'height'</span><span class="p">:</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]}</span>
+
+            <span class="n">point_button_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sct</span><span class="o">.</span><span class="n">grab</span><span class="p">(</span><span class="n">point_button_img_pos</span><span class="p">))[:,:,:</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">long_point_icon_type</span> <span class="o">=</span> <span class="n">compute_point_icon_type</span><span class="p">(</span><span class="n">point_button_img</span><span class="p">)</span>
+
+            <span class="n">point_button_img_pos</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">],</span> <span class="s">'top'</span><span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="mi">20</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">],</span> <span class="s">'height'</span><span class="p">:</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]}</span>
+
+            <span class="n">point_button_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sct</span><span class="o">.</span><span class="n">grab</span><span class="p">(</span><span class="n">point_button_img_pos</span><span class="p">))[:,:,:</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">short_point_icon_type</span> <span class="o">=</span> <span class="n">compute_point_icon_type</span><span class="p">(</span><span class="n">point_button_img</span><span class="p">)</span>
+            
+            <span class="c1"># cv2.imshow('point_button', point_button_img)
+</span>            <span class="c1"># cv2.waitKey(0)
+</span>            
+            <span class="n">plus_top</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">short_point_icon_type</span> <span class="o">==</span> <span class="s">'ICON'</span><span class="p">:</span>
+                <span class="n">plus_top</span> <span class="o">=</span> <span class="mi">20</span>
+
+            <span class="k">if</span> <span class="n">long_point_icon_type</span> <span class="o">==</span> <span class="s">'ICON'</span> <span class="ow">or</span> <span class="n">short_point_icon_type</span> <span class="o">==</span> <span class="s">'ICON'</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">'icon click'</span><span class="p">)</span>
+
+                <span class="c1"># cv2.imshow('point_button', point_button_img)
+</span>                <span class="c1"># cv2.waitKey(0)
+</span>
+                <span class="c1"># move point button
+</span>                <span class="c1"># click point button
+</span>                <span class="n">click</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">plus_top</span><span class="p">])</span>
+                
+                <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
+
+                <span class="c1"># delete icon 이미지 캡처
+</span>                <span class="n">up_delete_button_pos</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">up_delete_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">],</span> <span class="s">'top'</span><span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">up_delete_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">plus_top</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="n">up_delete_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">],</span> <span class="s">'height'</span><span class="p">:</span> <span class="n">up_delete_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]}</span>
+
+                <span class="n">up_delete_button_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sct</span><span class="o">.</span><span class="n">grab</span><span class="p">(</span><span class="n">up_delete_button_pos</span><span class="p">))[:,:,:</span><span class="mi">3</span><span class="p">]</span>
+                <span class="n">up_delete_icon_type</span> <span class="o">=</span> <span class="n">compute_delete_icon_type</span><span class="p">(</span><span class="n">up_delete_button_img</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">up_delete_icon_type</span> <span class="o">==</span> <span class="s">'ICON'</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">'up delete icon click'</span><span class="p">)</span>
+
+                    <span class="c1"># move delete button
+</span>                    <span class="c1"># click delete button
+</span>                    <span class="n">click</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">up_delete_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">plus_top</span><span class="p">])</span>
+
+                <span class="n">down_delete_button_pos</span> <span class="o">=</span> <span class="p">{</span><span class="s">'left'</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">down_delete_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">],</span> <span class="s">'top'</span><span class="p">:</span> <span class="n">y</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">down_delete_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">plus_top</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="n">down_delete_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">],</span> <span class="s">'height'</span><span class="p">:</span> <span class="n">down_delete_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]}</span>
+
+                <span class="n">down_delete_button_img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sct</span><span class="o">.</span><span class="n">grab</span><span class="p">(</span><span class="n">down_delete_button_pos</span><span class="p">))[:,:,:</span><span class="mi">3</span><span class="p">]</span>
+                <span class="n">down_delete_icon_type</span> <span class="o">=</span> <span class="n">compute_delete_icon_type</span><span class="p">(</span><span class="n">down_delete_button_img</span><span class="p">)</span>
+
+                <span class="c1"># cv2.imshow('up_delete_button_img', up_delete_button_img)
+</span>                <span class="c1"># cv2.imshow('down_delete_button_img', down_delete_button_img)
+</span>                <span class="c1"># cv2.waitKey(0)
+</span>
+                <span class="k">if</span> <span class="n">down_delete_icon_type</span> <span class="o">==</span> <span class="s">'ICON'</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="s">'down delete icon click'</span><span class="p">)</span>
+
+                    <span class="c1"># move delete button
+</span>                    <span class="c1"># click delete button
+</span>                    <span class="n">click</span><span class="p">([</span><span class="n">x</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'left'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">point_button</span><span class="p">[</span><span class="s">'height'</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">down_delete_button</span><span class="p">[</span><span class="s">'top'</span><span class="p">]</span> <span class="o">+</span> <span class="n">plus_top</span><span class="p">])</span>
+
+                <span class="c1"># move mouse &amp; scroll
+</span>                <span class="n">mouse_move_scroll</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">'move mouse'</span><span class="p">)</span>
+
+                <span class="c1"># move mouse &amp; scroll
+</span>                <span class="n">mouse_move_scroll</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+       
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="참고-사이트">참고 사이트</h2>
+
+<ul>
+  <li>빵형의 개발도상국 - 집행검키우기: <a href="https://www.youtube.com/watch?v=1jePlDVw2rQ">https://www.youtube.com/watch?v=1jePlDVw2rQ</a></li>
+  <li>pyautogui: <a href="https://pyautogui.readthedocs.io/en/latest/">https://pyautogui.readthedocs.io/en/latest/</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#macro" class="page__taxonomy-item" rel="tag">Macro</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#python" class="page__taxonomy-item" rel="tag">Python</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">language</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-26">March 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+%EC%9D%B4%EB%AF%B8%EC%A7%80%EB%A5%BC+%ED%8C%90%EB%8B%A8+%ED%9B%84+%EC%9E%90%EB%8F%99+%EC%8B%A4%ED%96%89%ED%95%98%EB%8A%94+%EB%A9%94%ED%81%AC%EB%A1%9C%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-macro-find-image%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-macro-find-image%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-macro-find-image%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/server/server-mysql-upgrade/" class="pagination--pager" title="[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드
+">이전</a>
+    
+    
+      <a href="/language/language-python-tesseract/" class="pagination--pager" title="[Python] Mac tesseract 설치 및 실행
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-tesseract/" rel="permalink">[Python] Mac tesseract 설치 및 실행
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-mysql-upgrade/" rel="permalink">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">5.6은 JSON 지원이 안되네요.
+그래서 업그레이드를 하기로 했습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/database/database-mysql-create-table/" rel="permalink">[MySQL] 테이블 생성시 고려사항
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.
+그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.
+그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-jupyter-matplotlib/" rel="permalink">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.
+이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

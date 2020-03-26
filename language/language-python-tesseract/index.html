@@ -1,0 +1,698 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python] Mac tesseract 설치 및 실행 - TMM</title>
+<meta name="description" content="이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다. ">
+
+
+  <meta name="author" content="To much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[Python] Mac tesseract 설치 및 실행">
+<meta property="og:url" content="http://localhost:4000/language/language-python-tesseract/">
+
+
+  <meta property="og:description" content="이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-03-26T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-03-26T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/language/language-python-tesseract/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python] Mac tesseract 설치 및 실행">
+    <meta itemprop="description" content="이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.">
+    <meta itemprop="datePublished" content="2020-03-26T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-03-26T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] Mac tesseract 설치 및 실행
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#환경">환경</a></li>
+  <li><a href="#설치">설치</a>
+    <ul>
+      <li><a href="#tesseract-설치">tesseract 설치</a></li>
+      <li><a href="#tessdata-다운로드">tessdata 다운로드</a></li>
+    </ul>
+  </li>
+  <li><a href="#실행">실행</a>
+    <ul>
+      <li><a href="#명렁어-입력-실행">명렁어 입력 실행</a></li>
+      <li><a href="#pytesseract-실행">pytesseract 실행</a></li>
+      <li><a href="#옵션-설명">옵션 설명</a></li>
+    </ul>
+  </li>
+  <li><a href="#참고-사이트">참고 사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.</p>
+
+<h2 id="환경">환경</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OS : MacOS Catalina 10.15.3
+Tesseract : 4.1.1
+Python: 3.5
+pytesseract: 0.3.3
+</code></pre></div></div>
+
+<h2 id="설치">설치</h2>
+
+<h3 id="tesseract-설치">tesseract 설치</h3>
+
+<ul>
+  <li>
+    <p>테서렉트를 활용하기 위해서는 테서렉트 먼저 설치해야합니다. <br />
+homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytesseract를 설치하면 설치된 테서렉트를 랩핑하여 사용하는 방식입니다.</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>brew <span class="nb">install </span>tesseract
+
+  <span class="nv">$ </span>brew <span class="nb">install </span>tesseract-lang
+
+  <span class="nv">$ </span>tesseract <span class="nt">--version</span>
+  tesseract 4.1.1
+  leptonica-1.79.0
+  libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1
+  Found AVX2
+  Found AVX
+  Found FMA
+  Found SSE
+
+  <span class="nv">$ </span>pip <span class="nb">install </span>pytesseract
+
+  <span class="nv">$ </span>pip show pytesseract
+  Name: pytesseract
+  Version: 0.3.3
+  Summary: Python-tesseract is a python wrapper <span class="k">for </span>Google<span class="se">\'</span>s Tesseract-OCR
+  Home-page: https://github.com/madmaze/pytesseract
+  Author: Samuel Hoffstaetter
+  Author-email: samuel@hoffstaetter.com
+  License: Apache License 2.0
+  Location: /Users/whitexozu/opt/anaconda3/envs/py35/lib/python3.5/site-packages
+  Requires: Pillow
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="tessdata-다운로드">tessdata 다운로드</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">https://github.com/tesseract-ocr/tessdata</code>에서 tessdata를 다운받은후 <code class="highlighter-rouge">/usr/local/Cellar/tesseract/4.1.1/share/tessdata</code>에 kor.tessdata를 복사합니다.</li>
+</ul>
+
+<h2 id="실행">실행</h2>
+
+<p>두가지 방식으로 실행이 가능합니다.</p>
+
+<h3 id="명렁어-입력-실행">명렁어 입력 실행</h3>
+
+<ul>
+  <li>
+    <p>설치된 텍서렉트에 명령어를 직접 입력하여 실행하는 방식</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>tesseract ~/Pictures/text_image/itemText.png stdout <span class="nt">-l</span> kor <span class="nt">--oem</span> 1 <span class="nt">--psm</span> 3
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="pytesseract-실행">pytesseract 실행</h3>
+
+<ul>
+  <li>
+    <p>python 에서 실행</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kn">import</span> <span class="nn">cv2</span>
+  <span class="kn">import</span> <span class="nn">sys</span>
+  <span class="kn">import</span> <span class="nn">pytesseract</span>
+    
+  <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+    
+  <span class="n">imPath</span> <span class="o">=</span> <span class="s">'itemText.png'</span>
+        
+  <span class="n">config</span> <span class="o">=</span> <span class="p">(</span><span class="s">'-l eng --oem 1 --psm 3'</span><span class="p">)</span>
+    
+  <span class="c1"># Read image from disk
+</span>  <span class="n">im</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">imPath</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_COLOR</span><span class="p">)</span>
+    
+  <span class="c1"># Run tesseract OCR on image
+</span>  <span class="n">text</span> <span class="o">=</span> <span class="n">pytesseract</span><span class="o">.</span><span class="n">image_to_string</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+    
+  <span class="c1"># Print recognized text
+</span>  <span class="k">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>python tesseract_test.py
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="옵션-설명">옵션 설명</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">- stdout / output</code> : 화면 출력, 파일 출력</li>
+  <li><code class="highlighter-rouge">- L</code> : 언어 선택</li>
+  <li><code class="highlighter-rouge">-- oem</code> : OCR Engine Mode
+    <ol>
+      <li>Legacy engine only.</li>
+      <li>Neural nets LSTM engine only.</li>
+      <li>Legacy + LSTM engines.</li>
+      <li>Default, based on what is available.</li>
+    </ol>
+  </li>
+  <li><code class="highlighter-rouge">-- psm</code> : PSM은 텍스트 구조에 대한 추가 정보 선택</li>
+  <li><code class="highlighter-rouge">-- tessdata-dir</code> : tessdata file path 지정</li>
+</ul>
+
+<h2 id="참고-사이트">참고 사이트</h2>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">https://github.com/tesseract-ocr/tessdata</span>
+<span class="s">https://tariat.tistory.com/703</span>
+<span class="s">https://m.blog.naver.com/tommybee/221307497468</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#python" class="page__taxonomy-item" rel="tag">Python</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#tesseract" class="page__taxonomy-item" rel="tag">tesseract</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">language</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-26">March 26, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+Mac+tesseract+%EC%84%A4%EC%B9%98+%EB%B0%8F+%EC%8B%A4%ED%96%89%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-tesseract%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-tesseract%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-tesseract%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/language/language-python-macro-find-image/" class="pagination--pager" title="[Python] 이미지를 판단 후 자동 실행하는 메크로
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-macro-find-image/" rel="permalink">[Python] 이미지를 판단 후 자동 실행하는 메크로
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.
+윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다.
+팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다.
+
+순서는 간단합니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-mysql-upgrade/" rel="permalink">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">5.6은 JSON 지원이 안되네요.
+그래서 업그레이드를 하기로 했습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/database/database-mysql-create-table/" rel="permalink">[MySQL] 테이블 생성시 고려사항
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.
+그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.
+그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-jupyter-matplotlib/" rel="permalink">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.
+이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
