@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-30T14:12:20+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Python] Mac tesseract 설치 및 실행</title><link href="http://localhost:4000/language/language-python-tesseract/" rel="alternate" type="text/html" title="[Python] Mac tesseract 설치 및 실행" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-tesseract</id><content type="html" xml:base="http://localhost:4000/language/language-python-tesseract/">&lt;p&gt;이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-03-30T16:57:48+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Python] Mac tesseract 설치 및 실행</title><link href="http://localhost:4000/language/language-python-tesseract/" rel="alternate" type="text/html" title="[Python] Mac tesseract 설치 및 실행" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-tesseract</id><content type="html" xml:base="http://localhost:4000/language/language-python-tesseract/">&lt;p&gt;이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;환경&quot;&gt;환경&lt;/h2&gt;
 
@@ -52,6 +52,16 @@ homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytes
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/code&gt;에서 tessdata를 다운받은후 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/Cellar/tesseract/4.1.1/share/tessdata&lt;/code&gt;에 kor.tessdata를 복사합니다.&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+tesseract 4.1.1을 설치했는데 trainedata를 기본 경로가&lt;br /&gt;
+&lt;em&gt;/usr/local/Cellar/tesseract-lang/4.0.0/share/tessdata&lt;/em&gt;를 바라보고 있습니다.&lt;br /&gt;
+그리고 당연하게 파일을 못 읽는다는 오류가 납니다. 오류 메시지는 아래과 같습니다.&lt;br /&gt;
+&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Error: Tesseract (legacy) engine requested, but components are not present in /usr/local/share/tessdata/kor.traineddata!! Failed loading language 'kor' Tesseract couldn't load any languages! Could not initialize tesseract.&quot;&lt;/code&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;em&gt;tessdata 다운로드&lt;/em&gt; 를 참고하여 파일을 받았다면 경로를 변경하면 됩니다. 경로를 설정하는 방법은 두가지가 있습니다. 첫번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; 옵션을 사용하는 것이고 두번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zprofile&lt;/code&gt;에 경로 정보를 export 하면 됩니다.&lt;br /&gt;
+export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt;/p&gt;
+
 &lt;h2 id=&quot;실행&quot;&gt;실행&lt;/h2&gt;
 
 &lt;p&gt;두가지 방식으로 실행이 가능합니다.&lt;/p&gt;
@@ -98,21 +108,21 @@ homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytes
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;옵션-설명&quot;&gt;옵션 설명&lt;/h3&gt;
+&lt;h2 id=&quot;옵션-설명&quot;&gt;옵션 설명&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;- stdout / output&lt;/code&gt; : 화면 출력, 파일 출력&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;- L&lt;/code&gt; : 언어 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-- oem&lt;/code&gt; : OCR Engine Mode
-    &lt;ol&gt;
-      &lt;li&gt;Legacy engine only.&lt;/li&gt;
-      &lt;li&gt;Neural nets LSTM engine only.&lt;/li&gt;
-      &lt;li&gt;Legacy + LSTM engines.&lt;/li&gt;
-      &lt;li&gt;Default, based on what is available.&lt;/li&gt;
-    &lt;/ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-stdout / output&lt;/code&gt; : 화면 출력, 파일 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-L&lt;/code&gt; : 언어 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--oem&lt;/code&gt; : OCR Engine Mode
+    &lt;ul&gt;
+      &lt;li&gt;0: Legacy engine only.&lt;/li&gt;
+      &lt;li&gt;1: Neural nets LSTM engine only.&lt;/li&gt;
+      &lt;li&gt;2: Legacy + LSTM engines.&lt;/li&gt;
+      &lt;li&gt;3: Default, based on what is available.&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-- psm&lt;/code&gt; : PSM은 텍스트 구조에 대한 추가 정보 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-- tessdata-dir&lt;/code&gt; : tessdata file path 지정&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--psm&lt;/code&gt; : PSM은 텍스트 구조에 대한 추가 정보 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; : tessdata file path 지정&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
