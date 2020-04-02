@@ -636,6 +636,13 @@
   <span class="o">|</span><span class="mi">5</span> <span class="o">|</span>
   <span class="o">+</span><span class="c1">--+</span>
 </code></pre></div>    </div>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="n">facts</span> <span class="n">f</span> 
+  <span class="k">WHERE</span> <span class="n">JSON_CONTAINS</span><span class="p">(</span><span class="n">sentence</span> <span class="p">,</span> <span class="s1">'"a"'</span><span class="p">,</span> <span class="s1">'$'</span><span class="p">);</span>
+
+  <span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="n">facts</span> <span class="n">f</span>
+  <span class="k">WHERE</span> <span class="n">JSON_CONTAINS</span><span class="p">(</span><span class="n">sentence</span> <span class="p">,</span> <span class="s1">'1'</span><span class="p">,</span> <span class="s1">'$'</span><span class="p">);</span>
+</code></pre></div>    </div>
   </li>
 </ul>
 
