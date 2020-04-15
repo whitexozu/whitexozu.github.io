@@ -1,135 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-06T14:55:37+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Python] Mac tesseract 설치 및 실행</title><link href="http://localhost:4000/language/language-python-tesseract/" rel="alternate" type="text/html" title="[Python] Mac tesseract 설치 및 실행" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-tesseract</id><content type="html" xml:base="http://localhost:4000/language/language-python-tesseract/">&lt;p&gt;이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-16T02:28:54+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Gradle] Springboot + Gradle</title><link href="http://localhost:4000/framework/framework-springboot-jpa/" rel="alternate" type="text/html" title="[Gradle] Springboot + Gradle" /><published>2020-04-10T00:00:00+09:00</published><updated>2020-03-02T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-springboot-jpa</id><content type="html" xml:base="http://localhost:4000/framework/framework-springboot-jpa/">&lt;p&gt;VSCode에서 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.&lt;/p&gt;
 
-&lt;h2 id=&quot;환경&quot;&gt;환경&lt;/h2&gt;
+&lt;h3 id=&quot;프로젝트-생성&quot;&gt;프로젝트 생성&lt;/h3&gt;
+&lt;p&gt;vscode extensions 중 &lt;em&gt;Java Extension Pack (Microsoft)&lt;/em&gt;, &lt;em&gt;Spring Boot Extension Pack (Pivotal)&lt;/em&gt; 를 추가하면 생성이 가능합니다.
+&lt;em&gt;command + shift + p&lt;/em&gt; 를 누르고 &lt;em&gt;Spring Initalizr: Generate a Gradle Project&lt;/em&gt; 선택 후 추가 정보를 입력 및 선택합니다.
+그럼 bulid.gradle, gradlew 등 관련 파일들이 생성된것을 확인 할 수 있습니다.&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OS : MacOS Catalina 10.15.3
-Tesseract : 4.1.1
-Python: 3.5
-pytesseract: 0.3.3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
-
-&lt;h3 id=&quot;tesseract-설치&quot;&gt;tesseract 설치&lt;/h3&gt;
-
+&lt;h3 id=&quot;tasks-실행-명령어&quot;&gt;tasks 실행 명령어&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;테서렉트를 활용하기 위해서는 테서렉트 먼저 설치해야합니다. &lt;br /&gt;
-homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytesseract를 설치하면 설치된 테서렉트를 랩핑하여 사용하는 방식입니다.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract-lang
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
-  tesseract 4.1.1
-  leptonica-1.79.0
-  libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1
-  Found AVX2
-  Found AVX
-  Found FMA
-  Found SSE
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pytesseract
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip show pytesseract
-  Name: pytesseract
-  Version: 0.3.3
-  Summary: Python-tesseract is a python wrapper &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Google&lt;span class=&quot;se&quot;&gt;\'&lt;/span&gt;s Tesseract-OCR
-  Home-page: https://github.com/madmaze/pytesseract
-  Author: Samuel Hoffstaetter
-  Author-email: samuel@hoffstaetter.com
-  License: Apache License 2.0
-  Location: /Users/whitexozu/opt/anaconda3/envs/py35/lib/python3.5/site-packages
-  Requires: Pillow
+  &lt;li&gt;별 설명이 없어도 이해할 수 있는 명령들 입니다.
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew clean
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew compileJava
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew jar
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;tessdata-다운로드&quot;&gt;tessdata 다운로드&lt;/h3&gt;
-
+&lt;h3 id=&quot;application-실행&quot;&gt;application 실행&lt;/h3&gt;
+&lt;p&gt;gradle 프로젝트 생성시 타입을 java-applicaiton 주면 자동 셋팅 되지만 그렇지 않을경우 몇가지를 추가해야 메인 클레스를 실행 할 수 있습니다. 물론 스프링 메인 함수도 실행 가능 합니다.&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/code&gt;에서 tessdata를 다운받은후 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/Cellar/tesseract/4.1.1/share/tessdata&lt;/code&gt;에 kor.tessdata를 복사합니다.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;li&gt;build.gradle 추가
+    &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;plugins {
+  id 'org.springframework.boot' version '2.2.5.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+  id 'java'
+  id &quot;application&quot;
+}
 
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
-tesseract 4.1.1을 설치했는데 trainedata를 기본 경로가&lt;br /&gt;
-&lt;em&gt;/usr/local/Cellar/tesseract-lang/4.0.0/share/tessdata&lt;/em&gt;를 바라보고 있습니다.&lt;br /&gt;
-그리고 당연하게 파일을 못 읽는다는 오류가 납니다. 오류 메시지는 아래과 같습니다.&lt;br /&gt;
-&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Error: Tesseract (legacy) engine requested, but components are not present in /usr/local/share/tessdata/kor.traineddata!! Failed loading language 'kor' Tesseract couldn't load any languages! Could not initialize tesseract.&quot;&lt;/code&gt;&lt;br /&gt;
-&lt;br /&gt;
-&lt;em&gt;tessdata 다운로드&lt;/em&gt; 를 참고하여 파일을 받았다면 경로를 변경하면 됩니다. 경로를 설정하는 방법은 두가지가 있습니다. 첫번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; 옵션을 사용하는 것이고 두번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zprofile&lt;/code&gt;에 경로 정보를 export 하면 됩니다.&lt;br /&gt;
-export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt;/p&gt;
-
-&lt;h2 id=&quot;실행&quot;&gt;실행&lt;/h2&gt;
-
-&lt;p&gt;두가지 방식으로 실행이 가능합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;명렁어-입력-실행&quot;&gt;명렁어 입력 실행&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;설치된 텍서렉트에 명령어를 직접 입력하여 실행하는 방식&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract ~/Pictures/text_image/itemText.png stdout &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; kor &lt;span class=&quot;nt&quot;&gt;--oem&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--psm&lt;/span&gt; 3
+mainClassName = &quot;com.example.test.DemoApplication&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;실행 명령어
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew run
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;pytesseract-실행&quot;&gt;pytesseract 실행&lt;/h3&gt;
-
+&lt;h3 id=&quot;spring-boot-run&quot;&gt;spring boot run&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;python 에서 실행&lt;/p&gt;
-
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytesseract&lt;/span&gt;
-    
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    
-  &lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itemText.png'&lt;/span&gt;
-        
-  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'-l eng --oem 1 --psm 3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Read image from disk
-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;im&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMREAD_COLOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Run tesseract OCR on image
-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pytesseract&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Print recognized text
-&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python tesseract_test.py
+  &lt;li&gt;실행 명령어
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew bootrun
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;옵션-설명&quot;&gt;옵션 설명&lt;/h2&gt;
-
+&lt;h3 id=&quot;dependencies-추가&quot;&gt;dependencies 추가&lt;/h3&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-stdout / output&lt;/code&gt; : 화면 출력, 파일 출력&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-L&lt;/code&gt; : 언어 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--oem&lt;/code&gt; : OCR Engine Mode
-    &lt;ul&gt;
-      &lt;li&gt;0: Legacy engine only.&lt;/li&gt;
-      &lt;li&gt;1: Neural nets LSTM engine only.&lt;/li&gt;
-      &lt;li&gt;2: Legacy + LSTM engines.&lt;/li&gt;
-      &lt;li&gt;3: Default, based on what is available.&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li&gt;build.gradle 추가
+    &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--psm&lt;/code&gt; : PSM은 텍스트 구조에 대한 추가 정보 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; : tessdata file path 지정&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;https://tariat.tistory.com/703&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;https://m.blog.naver.com/tommybee/221307497468&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="tesseract" /><summary type="html">이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.</summary></entry><entry><title type="html">[Python] 이미지를 판단 후 자동 실행하는 메크로</title><link href="http://localhost:4000/language/language-python-macro-find-image/" rel="alternate" type="text/html" title="[Python] 이미지를 판단 후 자동 실행하는 메크로" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-macro-find-image</id><content type="html" xml:base="http://localhost:4000/language/language-python-macro-find-image/">&lt;p&gt;사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.&lt;br /&gt;
+&lt;h3 id=&quot;war-파일-생성&quot;&gt;war 파일 생성&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;build.gradle 추가
+    &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;plugins {
+  id &quot;war&quot;
+}
+
+dependencies {
+  providedCompile 'org.springframework.boot:spring-boot-starter-tomcat'
+}
+
+bootWar {
+    baseName = 'spring-boot-war'
+    archiveVersion = &quot;0.0.0&quot;
+    // archiveFileName = '-.war'
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;실행 명령어
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew bootwar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;tomcat 서버에 추가해서 실행&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;jar-파일-생성&quot;&gt;jar 파일 생성&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;build.gradle 추가
+    &lt;div class=&quot;language-liquid highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bootJar {
+    archiveBaseName = 'spring-boot-jar'
+    // archiveFileName = '-.jar'
+    archiveVersion = &quot;0.0.0&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;실행 명령어
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./gradlew bootjar
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;java &lt;span class=&quot;nt&quot;&gt;-jar&lt;/span&gt; build/libs/spring-boot-jar-0.0.0.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h3&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;war&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gigas-blog.tistory.com/115&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;jar&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gigas-blog.tistory.com/114&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;build type&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://www.devkuma.com/books/pages/1069&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Springboot" /><category term="Gradle" /><summary type="html">VSCode에서 Springboot Gradle 프로젝트를 생성 후 관련 명령어들을 실행 하도록 하겠습니다.</summary></entry><entry><title type="html">[Python] 이미지를 판단 후 자동 실행하는 메크로</title><link href="http://localhost:4000/language/language-python-macro-find-image/" rel="alternate" type="text/html" title="[Python] 이미지를 판단 후 자동 실행하는 메크로" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-macro-find-image</id><content type="html" xml:base="http://localhost:4000/language/language-python-macro-find-image/">&lt;p&gt;사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.&lt;br /&gt;
 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다.&lt;br /&gt;
 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다.&lt;br /&gt;
 &lt;br /&gt;
@@ -387,58 +358,138 @@ export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt
 &lt;ul&gt;
   &lt;li&gt;빵형의 개발도상국 - 집행검키우기: &lt;a href=&quot;https://www.youtube.com/watch?v=1jePlDVw2rQ&quot;&gt;https://www.youtube.com/watch?v=1jePlDVw2rQ&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;pyautogui: &lt;a href=&quot;https://pyautogui.readthedocs.io/en/latest/&quot;&gt;https://pyautogui.readthedocs.io/en/latest/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Macro" /><summary type="html">사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다. 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다. 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다. 순서는 간단합니다.</summary></entry><entry><title type="html">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드</title><link href="http://localhost:4000/server/server-mysql-upgrade/" rel="alternate" type="text/html" title="[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드" /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/server/server-mysql-upgrade</id><content type="html" xml:base="http://localhost:4000/server/server-mysql-upgrade/">&lt;p&gt;5.6은 JSON 지원이 안되네요.&lt;br /&gt;
-그래서 업그레이드를 하기로 했습니다.&lt;/p&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Macro" /><summary type="html">사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다. 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다. 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다. 순서는 간단합니다.</summary></entry><entry><title type="html">[Python] Mac tesseract 설치 및 실행</title><link href="http://localhost:4000/language/language-python-tesseract/" rel="alternate" type="text/html" title="[Python] Mac tesseract 설치 및 실행" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-tesseract</id><content type="html" xml:base="http://localhost:4000/language/language-python-tesseract/">&lt;p&gt;이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.&lt;/p&gt;
 
-&lt;h3 id=&quot;서비스-중지&quot;&gt;서비스 중지&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop mysqld
+&lt;h2 id=&quot;환경&quot;&gt;환경&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OS : MacOS Catalina 10.15.3
+Tesseract : 4.1.1
+Python: 3.5
+pytesseract: 0.3.3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;mysql56-백업&quot;&gt;MySQL5.6 백업&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; /var/lib/mysql /var/lib/mysql.original
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
 
-&lt;h3 id=&quot;mysql56-rpm-삭제&quot;&gt;MySQL5.6 RPM 삭제&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum remove mysql-community-release
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;tesseract-설치&quot;&gt;tesseract 설치&lt;/h3&gt;
 
-&lt;h3 id=&quot;wget-설치&quot;&gt;wget 설치&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;wget
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;테서렉트를 활용하기 위해서는 테서렉트 먼저 설치해야합니다. &lt;br /&gt;
+homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytesseract를 설치하면 설치된 테서렉트를 랩핑하여 사용하는 방식입니다.&lt;/p&gt;
 
-&lt;h3 id=&quot;mysql57-다운로드&quot;&gt;MySQL5.7 다운로드&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract
 
-&lt;h3 id=&quot;mysql-설치&quot;&gt;MySQL 설치&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rpm &lt;span class=&quot;nt&quot;&gt;-ivh&lt;/span&gt; mysql57-community-release-el7-11.noarch.rpm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract-lang
 
-&lt;h3 id=&quot;mysql-서버-업그레이드&quot;&gt;MySQL 서버 업그레이드&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum update mysql-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+  tesseract 4.1.1
+  leptonica-1.79.0
+  libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1
+  Found AVX2
+  Found AVX
+  Found FMA
+  Found SSE
 
-&lt;h3 id=&quot;서비스-시작&quot;&gt;서비스 시작&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start mysqld
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pytesseract
 
-&lt;h3 id=&quot;확인&quot;&gt;확인&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
-Enter password: 
-Welcome to the MySQL monitor.  Commands end with &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; or &lt;span class=&quot;se&quot;&gt;\g&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-Your MySQL connection &lt;span class=&quot;nb&quot;&gt;id &lt;/span&gt;is 5
-Server version: 5.7.29 MySQL Community Server &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;GPL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip show pytesseract
+  Name: pytesseract
+  Version: 0.3.3
+  Summary: Python-tesseract is a python wrapper &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Google&lt;span class=&quot;se&quot;&gt;\'&lt;/span&gt;s Tesseract-OCR
+  Home-page: https://github.com/madmaze/pytesseract
+  Author: Samuel Hoffstaetter
+  Author-email: samuel@hoffstaetter.com
+  License: Apache License 2.0
+  Location: /Users/whitexozu/opt/anaconda3/envs/py35/lib/python3.5/site-packages
+  Requires: Pillow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
-Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+&lt;h3 id=&quot;tessdata-다운로드&quot;&gt;tessdata 다운로드&lt;/h3&gt;
 
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/code&gt;에서 tessdata를 다운받은후 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/Cellar/tesseract/4.1.1/share/tessdata&lt;/code&gt;에 kor.tessdata를 복사합니다.&lt;/li&gt;
+&lt;/ul&gt;
 
-Type &lt;span class=&quot;s1&quot;&gt;'help;'&lt;/span&gt; or &lt;span class=&quot;s1&quot;&gt;'\h'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;help. Type &lt;span class=&quot;s1&quot;&gt;'\c'&lt;/span&gt; to clear the current input statement.
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+tesseract 4.1.1을 설치했는데 trainedata를 기본 경로가&lt;br /&gt;
+&lt;em&gt;/usr/local/Cellar/tesseract-lang/4.0.0/share/tessdata&lt;/em&gt;를 바라보고 있습니다.&lt;br /&gt;
+그리고 당연하게 파일을 못 읽는다는 오류가 납니다. 오류 메시지는 아래과 같습니다.&lt;br /&gt;
+&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Error: Tesseract (legacy) engine requested, but components are not present in /usr/local/share/tessdata/kor.traineddata!! Failed loading language 'kor' Tesseract couldn't load any languages! Could not initialize tesseract.&quot;&lt;/code&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;em&gt;tessdata 다운로드&lt;/em&gt; 를 참고하여 파일을 받았다면 경로를 변경하면 됩니다. 경로를 설정하는 방법은 두가지가 있습니다. 첫번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; 옵션을 사용하는 것이고 두번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zprofile&lt;/code&gt;에 경로 정보를 export 하면 됩니다.&lt;br /&gt;
+export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt;/p&gt;
 
-mysql&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="MySQL" /><category term="upgrade" /><summary type="html">5.6은 JSON 지원이 안되네요. 그래서 업그레이드를 하기로 했습니다.</summary></entry><entry><title type="html">[MySQL] 테이블 생성시 고려사항</title><link href="http://localhost:4000/database/database-mysql-create-table/" rel="alternate" type="text/html" title="[MySQL] 테이블 생성시 고려사항" /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/database/database-mysql-create-table</id><content type="html" xml:base="http://localhost:4000/database/database-mysql-create-table/">&lt;p&gt;프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.&lt;br /&gt;
+&lt;h2 id=&quot;실행&quot;&gt;실행&lt;/h2&gt;
+
+&lt;p&gt;두가지 방식으로 실행이 가능합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;명렁어-입력-실행&quot;&gt;명렁어 입력 실행&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치된 텍서렉트에 명령어를 직접 입력하여 실행하는 방식&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract ~/Pictures/text_image/itemText.png stdout &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; kor &lt;span class=&quot;nt&quot;&gt;--oem&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--psm&lt;/span&gt; 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pytesseract-실행&quot;&gt;pytesseract 실행&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;python 에서 실행&lt;/p&gt;
+
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytesseract&lt;/span&gt;
+    
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    
+  &lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itemText.png'&lt;/span&gt;
+        
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'-l eng --oem 1 --psm 3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Read image from disk
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;im&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMREAD_COLOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Run tesseract OCR on image
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pytesseract&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Print recognized text
+&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python tesseract_test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;옵션-설명&quot;&gt;옵션 설명&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-stdout / output&lt;/code&gt; : 화면 출력, 파일 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-L&lt;/code&gt; : 언어 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--oem&lt;/code&gt; : OCR Engine Mode
+    &lt;ul&gt;
+      &lt;li&gt;0: Legacy engine only.&lt;/li&gt;
+      &lt;li&gt;1: Neural nets LSTM engine only.&lt;/li&gt;
+      &lt;li&gt;2: Legacy + LSTM engines.&lt;/li&gt;
+      &lt;li&gt;3: Default, based on what is available.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--psm&lt;/code&gt; : PSM은 텍스트 구조에 대한 추가 정보 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; : tessdata file path 지정&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://tariat.tistory.com/703&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://m.blog.naver.com/tommybee/221307497468&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="tesseract" /><summary type="html">이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.</summary></entry><entry><title type="html">[MySQL] 테이블 생성시 고려사항</title><link href="http://localhost:4000/database/database-mysql-create-table/" rel="alternate" type="text/html" title="[MySQL] 테이블 생성시 고려사항" /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/database/database-mysql-create-table</id><content type="html" xml:base="http://localhost:4000/database/database-mysql-create-table/">&lt;p&gt;프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.&lt;br /&gt;
 그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.&lt;br /&gt;
 그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.&lt;/p&gt;
 
@@ -1253,7 +1304,109 @@ mysql&amp;gt;
 &lt;span class=&quot;na&quot;&gt;Create Functoin&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
     &lt;span class=&quot;s&quot;&gt;https://shlee0882.tistory.com/242&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;https://m.blog.naver.com/PostView.nhn?blogId=sthwin&amp;amp;logNo=221150189755&amp;amp;proxyReferer=https%3A%2F%2Fwww.google.com%2F&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="MySQL" /><summary type="html">프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다. 그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다. 그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.</summary></entry><entry><title type="html">[작성중][Python] Image processing</title><link href="http://localhost:4000/language/language-python-image-processing/" rel="alternate" type="text/html" title="[작성중][Python] Image processing" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-image-processing</id><content type="html" xml:base="http://localhost:4000/language/language-python-image-processing/">&lt;p&gt;Image to text&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="MySQL" /><summary type="html">프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다. 그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다. 그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.</summary></entry><entry><title type="html">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드</title><link href="http://localhost:4000/server/server-mysql-upgrade/" rel="alternate" type="text/html" title="[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드" /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/server/server-mysql-upgrade</id><content type="html" xml:base="http://localhost:4000/server/server-mysql-upgrade/">&lt;p&gt;5.6은 JSON 지원이 안되네요.&lt;br /&gt;
+그래서 업그레이드를 하기로 했습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;서비스-중지&quot;&gt;서비스 중지&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop mysqld
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql56-백업&quot;&gt;MySQL5.6 백업&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; /var/lib/mysql /var/lib/mysql.original
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql56-rpm-삭제&quot;&gt;MySQL5.6 RPM 삭제&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum remove mysql-community-release
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;wget-설치&quot;&gt;wget 설치&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;wget
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql57-다운로드&quot;&gt;MySQL5.7 다운로드&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-설치&quot;&gt;MySQL 설치&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rpm &lt;span class=&quot;nt&quot;&gt;-ivh&lt;/span&gt; mysql57-community-release-el7-11.noarch.rpm
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;mysql-서버-업그레이드&quot;&gt;MySQL 서버 업그레이드&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum update mysql-server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;서비스-시작&quot;&gt;서비스 시작&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start mysqld
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;확인&quot;&gt;확인&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; or &lt;span class=&quot;se&quot;&gt;\g&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+Your MySQL connection &lt;span class=&quot;nb&quot;&gt;id &lt;/span&gt;is 5
+Server version: 5.7.29 MySQL Community Server &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;GPL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type &lt;span class=&quot;s1&quot;&gt;'help;'&lt;/span&gt; or &lt;span class=&quot;s1&quot;&gt;'\h'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;help. Type &lt;span class=&quot;s1&quot;&gt;'\c'&lt;/span&gt; to clear the current input statement.
+
+mysql&amp;gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="MySQL" /><category term="upgrade" /><summary type="html">5.6은 JSON 지원이 안되네요. 그래서 업그레이드를 하기로 했습니다.</summary></entry><entry><title type="html">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정</title><link href="http://localhost:4000/language/language-python-jupyter-matplotlib/" rel="alternate" type="text/html" title="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-jupyter-matplotlib</id><content type="html" xml:base="http://localhost:4000/language/language-python-jupyter-matplotlib/">&lt;p&gt;Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.&lt;br /&gt;
+이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;명령어&quot;&gt;명령어&lt;/h2&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matplotlib tk&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;또는 %matplotlib qt 지정된 대화식 백엔드가있는 노트북 외부에 그림을 보여줍니다.&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matplotlib inline&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;정적 png 이미지로 내부에 표시됩니다.&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matplotlib notebook&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;또는 %matplotlib nbagg는 노트북 내부의 대화식 그림을 보여줍니다.&lt;/span&gt;
+&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matplotlib widgets&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;노트북 내부의 대화 형 그림을 보여줍니다. ( jupyter-matplotlib 을 설치해야 함)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;예제-소스&quot;&gt;예제 소스&lt;/h2&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# %matplotlib inline
+&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matplotlib&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notebook&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# %matplotlib qt5
+&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytesseract&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'dark_background'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;img_ori&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;channel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_ori&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img_ori&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cmap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'gray'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;추가-내용&quot;&gt;추가 내용&lt;/h2&gt;
+
+&lt;h3 id=&quot;macos-catalina-anaconda-설치&quot;&gt;MacOS Catalina anaconda 설치&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;MacOS Catalina 로 업데이트를 했더니 기존 아나콘다가 너무 느려저서 재설치를 했습니다.&lt;/li&gt;
+  &lt;li&gt;삭제는 anaconda nevgation application 삭제 후 ~/anaconda, ~/.conda 폴더를 삭제 하고 export 설정을 삭제 하였습니다.&lt;/li&gt;
+  &lt;li&gt;설치 방법은 dmg파일을 다운받아서 다음다음 하면 됩니다. 별도의 export 설정은 하지 않았습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;https://www.anaconda.com/how-to-restore-anaconda-after-macos-catalina-update/&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;jupyter-설치&quot;&gt;jupyter 설치&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jupyter
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;jupyter-실행&quot;&gt;jupyter 실행&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jupyter notebook
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Jupyter" /><category term="Matplotlib" /><category term="anaconda" /><summary type="html">Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다. 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.</summary></entry><entry><title type="html">[작성중][Python] Image processing</title><link href="http://localhost:4000/language/language-python-image-processing/" rel="alternate" type="text/html" title="[작성중][Python] Image processing" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-image-processing</id><content type="html" xml:base="http://localhost:4000/language/language-python-image-processing/">&lt;p&gt;Image to text&lt;/p&gt;
 
 &lt;h2 id=&quot;사용-라이브러리&quot;&gt;사용 라이브러리&lt;/h2&gt;
 &lt;p&gt;pytesseract
@@ -1437,58 +1590,7 @@ nvm을 사용한 테스트 결과 v12에서는 프로젝트 생성이 되지 않
 &lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
 
 &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;ZURB Fundation Getting Start&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://get.foundation/emails/docs/sass-guide.html&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ZURB Foundation" /><category term="email templdate" /><summary type="html">사용자에게 뉴스레터, 공지 이메일 등의 이메일을 HTML 형식으로 발송해야 할 때가 있습니다. 통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다. 그럼 퍼블리셔팀에게 요청하게 되고 템플릿 디자인과 이메일 클라이언트 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다. 생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다) 결론부터 말하자면 이메일은 HTML 표준이 없습니다. 이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다. 상황이 이러다 보니 ZURB Foundation 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다.</summary></entry><entry><title type="html">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정</title><link href="http://localhost:4000/language/language-python-jupyter-matplotlib/" rel="alternate" type="text/html" title="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-jupyter-matplotlib</id><content type="html" xml:base="http://localhost:4000/language/language-python-jupyter-matplotlib/">&lt;p&gt;Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.&lt;br /&gt;
-이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;명령어&quot;&gt;명령어&lt;/h2&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matplotlib tk&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;또는 %matplotlib qt 지정된 대화식 백엔드가있는 노트북 외부에 그림을 보여줍니다.&lt;/span&gt;
-&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matplotlib inline&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;정적 png 이미지로 내부에 표시됩니다.&lt;/span&gt;
-&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matplotlib notebook&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;또는 %matplotlib nbagg는 노트북 내부의 대화식 그림을 보여줍니다.&lt;/span&gt;
-&lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;matplotlib widgets&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;노트북 내부의 대화 형 그림을 보여줍니다. ( jupyter-matplotlib 을 설치해야 함)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;예제-소스&quot;&gt;예제 소스&lt;/h2&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# %matplotlib inline
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;matplotlib&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notebook&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# %matplotlib qt5
-&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytesseract&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;use&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'dark_background'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;img_ori&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;channel&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img_ori&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img_ori&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cmap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'gray'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;추가-내용&quot;&gt;추가 내용&lt;/h2&gt;
-
-&lt;h3 id=&quot;macos-catalina-anaconda-설치&quot;&gt;MacOS Catalina anaconda 설치&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;MacOS Catalina 로 업데이트를 했더니 기존 아나콘다가 너무 느려저서 재설치를 했습니다.&lt;/li&gt;
-  &lt;li&gt;삭제는 anaconda nevgation application 삭제 후 ~/anaconda, ~/.conda 폴더를 삭제 하고 export 설정을 삭제 하였습니다.&lt;/li&gt;
-  &lt;li&gt;설치 방법은 dmg파일을 다운받아서 다음다음 하면 됩니다. 별도의 export 설정은 하지 않았습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;https://www.anaconda.com/how-to-restore-anaconda-after-macos-catalina-update/&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;jupyter-설치&quot;&gt;jupyter 설치&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jupyter
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;jupyter-실행&quot;&gt;jupyter 실행&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jupyter notebook
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Jupyter" /><category term="Matplotlib" /><category term="anaconda" /><summary type="html">Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다. 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.</summary></entry><entry><title type="html">[GIT] 명령어, 협업 방법</title><link href="http://localhost:4000/scm/scm-git-command/" rel="alternate" type="text/html" title="[GIT] 명령어, 협업 방법" /><published>2020-03-10T00:00:00+09:00</published><updated>2020-03-10T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-git-command</id><content type="html" xml:base="http://localhost:4000/scm/scm-git-command/">&lt;p&gt;SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)&lt;br /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ZURB Foundation" /><category term="email templdate" /><summary type="html">사용자에게 뉴스레터, 공지 이메일 등의 이메일을 HTML 형식으로 발송해야 할 때가 있습니다. 통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다. 그럼 퍼블리셔팀에게 요청하게 되고 템플릿 디자인과 이메일 클라이언트 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다. 생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다) 결론부터 말하자면 이메일은 HTML 표준이 없습니다. 이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다. 상황이 이러다 보니 ZURB Foundation 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다.</summary></entry><entry><title type="html">[GIT] 명령어, 협업 방법</title><link href="http://localhost:4000/scm/scm-git-command/" rel="alternate" type="text/html" title="[GIT] 명령어, 협업 방법" /><published>2020-03-10T00:00:00+09:00</published><updated>2020-03-10T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-git-command</id><content type="html" xml:base="http://localhost:4000/scm/scm-git-command/">&lt;p&gt;SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)&lt;br /&gt;
 Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다.&lt;br /&gt;
 SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면
 Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다.&lt;br /&gt;
@@ -1913,60 +2015,4 @@ branch를 참고만 할 뿐 수정 내용을 원격 저장소에 push 하지 않
 &lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- https://velog.io/@pop8682/Enum-27k067ns4a
 - https://woowabros.github.io/tools/2017/07/10/java-enum-uses.html
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="JAVA" /><summary type="html">클래스 설명 상수의 그룹을 나타낼 때 사용한다. 허용 가능한 값들을 제한할 수 있습니다. IDE의 적극적인 지원을 받을 수 있습니다. 자동완성, 오타검증, 텍스트 리팩토링 등등</summary></entry><entry><title type="html">[JAVA] Optional class</title><link href="http://localhost:4000/language/language-java-optional/" rel="alternate" type="text/html" title="[JAVA] Optional class" /><published>2020-03-04T00:00:00+09:00</published><updated>2020-03-04T22:05:34+09:00</updated><id>http://localhost:4000/language/language-java-optional</id><content type="html" xml:base="http://localhost:4000/language/language-java-optional/">&lt;h2 id=&quot;클래스-설명&quot;&gt;클래스 설명&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;1.8 이상부터 추가된 java.util.Optional Class&lt;/li&gt;
-  &lt;li&gt;복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다.&lt;/li&gt;
-  &lt;li&gt;제네릭을 제공해주는 래퍼 클래스(Wrapper class)입니다.&lt;/li&gt;
-  &lt;li&gt;Stream 클래스와 사용 방법이나 기본 사상이 매우 유사합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;자주쓰이는-메소드&quot;&gt;자주쓰이는 메소드&lt;/h2&gt;
-&lt;h3 id=&quot;ofnullablevalue&quot;&gt;ofNullable(value)&lt;/h3&gt;
-&lt;p&gt;null이 넘어올 경우, NPE를 던지지 않고 Optional.empty()와 동일하게 비어 있는 Optional 객체를 얻어옵니다.&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.HashMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;java.util.Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OptionalTest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-
-  &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Map&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HashMap&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Seoul&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Busan&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Daejeon&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;cm&quot;&gt;/* 
-      cities 의 4번째 값이 null이면 Optional.empty 반환, null이 아니면 Optional.[value] 반환
-      값이 있으면 length 반환, 없으면 0 반환
-    */&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Optional&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;maybeCity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Optional&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofNullable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cities&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Optional&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;maybeCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;String:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orElse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// null-safe&lt;/span&gt;
-    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;length: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;orelset-other&quot;&gt;orElse(T other)&lt;/h3&gt;
-&lt;p&gt;비어있는 Optional 객체에 대해서, 넘어온 인자를 반환합니다.&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;maybeCity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;String:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;orElse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// null-safe&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;get&quot;&gt;get()&lt;/h3&gt;
-&lt;p&gt;비어있는 Optional 객체에 대해서, NoSuchElementException을 던집니다.&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nc&quot;&gt;MemberEntity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEntity&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userEntityWrapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;ifpresentconsumer-super-t-consumer&quot;&gt;ifPresent(Consumer&amp;lt;? super T&amp;gt; consumer)&lt;/h3&gt;
-&lt;p&gt;이 메소드는 특정 결과를 반환하는 대신에 Optional 객체가 감싸고 있는 값이 존재할 경우에만 실행될 로직을 함수형 인자로 넘길 수 있습니다.&lt;/p&gt;
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;maybeFood&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ifPresent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;city&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;length: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;city&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;https://www.daleseo.com/java8-optional-after/&quot;&gt;https://www.daleseo.com/java8-optional-after/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="JAVA" /><summary type="html">클래스 설명 1.8 이상부터 추가된 java.util.Optional Class 복잡한 조건문 없이도 런타임에 널(null) 값으로 인해 발생하는 NullPointerException을 처리합니다. 제네릭을 제공해주는 래퍼 클래스(Wrapper class)입니다. Stream 클래스와 사용 방법이나 기본 사상이 매우 유사합니다.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="JAVA" /><summary type="html">클래스 설명 상수의 그룹을 나타낼 때 사용한다. 허용 가능한 값들을 제한할 수 있습니다. IDE의 적극적인 지원을 받을 수 있습니다. 자동완성, 오타검증, 텍스트 리팩토링 등등</summary></entry></feed>
