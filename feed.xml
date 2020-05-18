@@ -1,4 +1,395 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-27T03:57:58+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Python] Design pattern</title><link href="http://localhost:4000/language/language-python-design-pattern/" rel="alternate" type="text/html" title="[Python] Design pattern" /><published>2020-04-27T00:00:00+09:00</published><updated>2020-04-27T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-design-pattern</id><content type="html" xml:base="http://localhost:4000/language/language-python-design-pattern/">&lt;p&gt;디자인 패턴은 GoF (Gang of Four)가 문제 해결책으로 처음 제시한 개념입니다. GoF 란 &lt;code class=&quot;highlighter-rouge&quot;&gt;GOF의 디자인 패턴&lt;/code&gt;을 집필한 네 명의 저자를 지칭합니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-05-18T19:11:12+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[작성중][selenium] 간단한 사용 방법</title><link href="http://localhost:4000/open%20api/language-python-java-selenium/" rel="alternate" type="text/html" title="[작성중][selenium] 간단한 사용 방법" /><published>2020-05-15T00:00:00+09:00</published><updated>2020-05-15T22:05:34+09:00</updated><id>http://localhost:4000/open%20api/language-python-java-selenium</id><content type="html" xml:base="http://localhost:4000/open%20api/language-python-java-selenium/">&lt;p&gt;크롤링을 위해 selenium을 쓰면서 알게된 것들을 정리하기 하려고 합니다. 추가로 naver cookie를 용한 자동 로그인 테스트를 하겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;목표&quot;&gt;목표&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Robots.txt 확인&lt;/li&gt;
+  &lt;li&gt;java, python에서 selenimu 실행&lt;/li&gt;
+  &lt;li&gt;selenium 으로 iframe 코드 확인&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Google Apps Script" /><summary type="html">크롤링을 위해 selenium을 쓰면서 알게된 것들을 정리하기 하려고 합니다. 추가로 naver cookie를 용한 자동 로그인 테스트를 하겠습니다.</summary></entry><entry><title type="html">[google apps script] 사용 방법 조사</title><link href="http://localhost:4000/open%20api/openapi-google-apps-script/" rel="alternate" type="text/html" title="[google apps script] 사용 방법 조사" /><published>2020-05-11T00:00:00+09:00</published><updated>2020-05-11T22:05:34+09:00</updated><id>http://localhost:4000/open%20api/openapi-google-apps-script</id><content type="html" xml:base="http://localhost:4000/open%20api/openapi-google-apps-script/">&lt;p&gt;google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;목표&quot;&gt;목표&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;지정 열/행을 기준으로 수정시 전체 데이터 확인&lt;/li&gt;
+  &lt;li&gt;지정 열/행을 기준으로 수정시 수정된 데이터만 확인&lt;/li&gt;
+  &lt;li&gt;REST API 전달&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;스크립트-작성&quot;&gt;스크립트 작성&lt;/h2&gt;
+
+&lt;h3 id=&quot;함수-생성&quot;&gt;함수 생성&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;em&gt;spreadsheet &amp;gt; 도구 &amp;gt; 스크립트 편집기&lt;/em&gt; 편집 화면으로 이동합니다.&lt;/li&gt;
+  &lt;li&gt;초기 화면입니다.
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;myFunction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;push 함수를 추가합니다.
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;트리거-추가&quot;&gt;트리거 추가&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;스크립트 편집기 &amp;gt; 수정 &amp;gt; 모든 트리거 보기&lt;/em&gt; 설정 화면으로 이동합니다. 발생 주기와 발생 함수를 선택합니다.&lt;/li&gt;
+  &lt;li&gt;발생 주기: 수정시, 발생 함수: push&lt;/li&gt;
+  &lt;li&gt;이벤트 유형 선택
+    &lt;ul&gt;
+      &lt;li&gt;열릴 시: 파일이 열린 경우&lt;/li&gt;
+      &lt;li&gt;수정 시: 데이터가 수정된 경우&lt;/li&gt;
+      &lt;li&gt;변경 시: 데이터가 수정된 경우&lt;/li&gt;
+      &lt;li&gt;양식 제출 시: 설문지 전달 후 설문 내용을 제출한 경우 발생&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;수정된-내용-확인&quot;&gt;수정된 내용 확인&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;스크립트 편집 화면으로 이동합니다.&lt;/li&gt;
+  &lt;li&gt;push 함수를 수정해 범위 지정 후 수정된 부분을 확인 할 수 있도록 작성해 보겠습니다. ECMA6 문법으로 작성합니다.
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sheet_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;apps_script_test_sheet&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range_value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;B5:E15&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;start_row_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+       &lt;span class=&quot;nx&quot;&gt;start_column_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+       &lt;span class=&quot;nx&quot;&gt;end_row_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+       &lt;span class=&quot;nx&quot;&gt;end_column_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+          
+   &lt;span class=&quot;c1&quot;&gt;// 활성화 된 sheet name을 구합니다.&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;SpreadsheetApp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getActiveSpreadsheet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sheet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getActiveSheet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+   &lt;span class=&quot;nx&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;activate sheet name: &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sheet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getSheetName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+      
+   &lt;span class=&quot;c1&quot;&gt;// sheet name을 비교합니다.&lt;/span&gt;
+   &lt;span class=&quot;c1&quot;&gt;// 비교하지 않으면 모든 sheet의 range 데이터를 출력합니다.&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sheet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sheet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getSheetName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sheet_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        
+     &lt;span class=&quot;c1&quot;&gt;// get update range index&lt;/span&gt;
+     &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sheet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getRange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;range_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;range: &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getA1Notation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+     &lt;span class=&quot;c1&quot;&gt;// range 값을 사용자 편의상 알파벳과 숫자로 입력했지만 비교는 index값으로 해야하기 때문에 index값으로 변환을 해줍니다.&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;start_column_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;start_row_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;end_column_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;start_column_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getValues&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;end_row_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;start_row_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getValues&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        
+     &lt;span class=&quot;c1&quot;&gt;// 입력한 cell의 정보를 구합니다.&lt;/span&gt;
+     &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ac&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sheet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getActiveCell&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+     &lt;span class=&quot;c1&quot;&gt;// range index와 수정한 cell정보를 비교합니다.&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;start_row_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getRow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;end_row_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;start_column_index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getColumn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;end_column_index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;c1&quot;&gt;// get update data&lt;/span&gt;
+       &lt;span class=&quot;nx&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+       &lt;span class=&quot;c1&quot;&gt;// get range datas&lt;/span&gt;
+       &lt;span class=&quot;nx&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getValues&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;nx&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;not in range&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;other the sheet&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;logger-확인&quot;&gt;Logger 확인&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Browser.msgBox로 alert과 비슷한 방식으로 로그를 찍을 수 있습니다. 그러나 여러 줄을 한번에 찍고 로그 관리를 할 수 있는 Logger class를 사용 합니다.&lt;/li&gt;
+  &lt;li&gt;편집화면에 log 추가
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nx&quot;&gt;Logger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;log message&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;스크립트 편집기 &amp;gt; 보기 &amp;gt; Stackdriver 로깅&lt;/em&gt; 로깅 확인 화면으로 이동 하여 로그 목록을 확인 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;rest-api-call&quot;&gt;REST API Call&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;UrlFetchApp class를 활용합니다.
+    &lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;c1&quot;&gt;// get method api request&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;baseUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;http://[ip]:8081/feed/?feedId=3&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;UrlFetchApp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;baseUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;// post method api request&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;baseUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;http://[ip]:8081/feed/?feedId=2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parameters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;arg1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;a1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;arg2&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sheet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getRange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;A3:D7&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getDisplayValues&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;POST&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;payload&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;parameters&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;UrlFetchApp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;baseUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://developers.google.com/apps-script&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Google Apps Script" /><summary type="html">google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다.</summary></entry><entry><title type="html">[google sheets api] get, update, replace 사용 방법 조사</title><link href="http://localhost:4000/open%20api/openapi-google-sheets-api/" rel="alternate" type="text/html" title="[google sheets api] get, update, replace 사용 방법 조사" /><published>2020-05-07T00:00:00+09:00</published><updated>2020-05-07T22:05:34+09:00</updated><id>http://localhost:4000/open%20api/openapi-google-sheets-api</id><content type="html" xml:base="http://localhost:4000/open%20api/openapi-google-sheets-api/">&lt;p&gt;자동화를 지향하다보니 chatbot에게 요청을 통해 정보 조회, 외부 API연동 등을 하고 싶어하는 사용자가 생겼습니다. 유행이될지 혁신이 된지 사용해봐야 알거 같습니다.&lt;br /&gt;
+이번 포스팅에서는 google spreadsheet api를 여러 방법으로 활용해 보겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;목표&quot;&gt;목표&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;지정 열/행을 기준으로 키워드 검색 후 해당 키워드가 몇개가 있는지 카운트 후 결과 값 출력&lt;/li&gt;
+  &lt;li&gt;지정 열/행을 기준으로 키워드 검색 후 해당 키워드가 있는 행/열의 지정 위치의 값을 입력받은 값으로 변경&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;개발-환경&quot;&gt;개발 환경&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Python 3.5&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;oauth2&quot;&gt;oauth2&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://console.developers.google.com/projectselector/permissions/serviceaccounts&quot;&gt;console developers&lt;/a&gt;에 접속후 &lt;a href=&quot;http://hleecaster.com/python-google-drive-spreadsheet-api/&quot;&gt;참고사이트&lt;/a&gt;를 참고하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;사용자 인증 정보 &amp;gt; 서비스 계정 관리&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;서비스 계정 생성&lt;/code&gt;하여 json 파일을 다운 받습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;파일-권한-주기&quot;&gt;파일 권한 주기&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;생성된 서비스 계정의 이메일 주소를 공유할 Spreadsheet의 공유 계정에 추가합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;개발&quot;&gt;개발&lt;/h2&gt;
+
+&lt;h3 id=&quot;requirementstxt&quot;&gt;requirements.txt&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;api&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;python&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.7.9&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;httplib2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.0.3&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;google&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;oauthlib&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.4.0&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;oauth2client&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;4.1.3&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;getpy&quot;&gt;get.py&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_function&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pickle&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os.path&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;httplib2&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Http&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;googleapiclient.discovery&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;google.auth.transport.requests&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;oauth2client.service_account&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceAccountCredentials&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://www.googleapis.com/auth/spreadsheets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;credentials&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'application_credentials.json'&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;# 서비스 생성 계정으로 다운받은 json 파일
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1ZrF6mT4EWwCgWL0JpLjitA7rmO3tb9LqnXDcPw3Wuo8'&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# spread sheet id
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'class data!A3:E7'&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# sheet name, range
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;search_keyword&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Female'&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# search keyword
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# Create credentials
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceAccountCredentials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_json_keyfile_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;credentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;http_auth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sheets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'v4'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http_auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# Call get
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'values'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'{0} rows retrieved.'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rows&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;search_keyword&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'{}, {}, {}'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ri&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ci&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;col&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'cnt: {}'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cnt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;batch_getpy&quot;&gt;batch_get.py&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_function&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pickle&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os.path&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;httplib2&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Http&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;googleapiclient.discovery&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;google.auth.transport.requests&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;oauth2client.service_account&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceAccountCredentials&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://www.googleapis.com/auth/spreadsheets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;credentials&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'application_credentials.json'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1ZrF6mT4EWwCgWL0JpLjitA7rmO3tb9LqnXDcPw3Wuo8'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'class data!A3:E7'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;search_keyword&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'Female'&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# Create credentials
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceAccountCredentials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_json_keyfile_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;credentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;http_auth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sheets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'v4'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http_auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# Call batch get
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batchGet&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'valueRanges'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'{0} ranges retrieved.'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ranges&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;updatepy&quot;&gt;update.py&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_function&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pickle&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os.path&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;httplib2&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Http&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;googleapiclient.discovery&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;google.auth.transport.requests&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;oauth2client.service_account&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceAccountCredentials&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://www.googleapis.com/auth/spreadsheets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;credentials&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'application_credentials.json'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1ZrF6mT4EWwCgWL0JpLjitA7rmO3tb9LqnXDcPw3Wuo8'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'class data!B7'&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# Create credentials
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceAccountCredentials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_json_keyfile_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;credentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;http_auth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sheets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'v4'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http_auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;sheet&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# Call values
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sheet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;values&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'values'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[])&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+
+    &lt;span class=&quot;c1&quot;&gt;# Call update
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;value_input_option&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'USER_ENTERED'&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'values'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Female'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sheet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;valueInputOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value_input_option&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+        &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'{0} cells updated.'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'updatedCells'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;replacepy&quot;&gt;replace.py&lt;/h3&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;__future__&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;print_function&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pickle&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os.path&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;httplib2&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Http&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;googleapiclient.discovery&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;google.auth.transport.requests&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;oauth2client.service_account&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceAccountCredentials&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://www.googleapis.com/auth/spreadsheets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;credentials&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'application_credentials.json'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'1ZrF6mT4EWwCgWL0JpLjitA7rmO3tb9LqnXDcPw3Wuo8'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'class data!B7'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'sheet api test'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'hi123'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;replacement&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'hi1234'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;sheetId&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;startRowIndex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;endRowIndex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;startColumnIndex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;&quot;endColumnIndex&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;# Create credentials
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ServiceAccountCredentials&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;from_json_keyfile_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;credentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;http_auth&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;creds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authorize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'sheets'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'v4'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http_auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Change the spreadsheet's title.
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'updateSpreadsheetProperties'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'properties'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'fields'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Find and replace text
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'findReplace'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'find'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'replacement'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;replacement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;'range'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;range_name&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;# 'allSheets': True
+&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Add additional requests (operations) ...
+&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;'requests'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requests&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;# Call batchUpdate for replace
+&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batchUpdate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;spreadsheetId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;spreadsheet_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;find_replace_response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'replies'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'findReplace'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_replace_response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'{0} replacements made.'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;find_replace_response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'occurrencesChanged'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;value-input-option&quot;&gt;value input option&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;RAW: 사용자가 입력 한 값은 구문 분석되지 않으며 그대로 저장됩니다.&lt;/li&gt;
+  &lt;li&gt;USER_ENTERED: 사용자가 UI에 입력 한 것처럼 값이 구문 분석됩니다. 숫자는 숫자로 유지되지만 Google 스프레드 시트 UI를 통해 셀에 텍스트를 입력 할 때 적용되는 것과 동일한 규칙에 따라 문자열이 숫자, 날짜 등으로 변환 될 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;결론&quot;&gt;결론&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;예제 소스가 직관적이여서 따로 설명도 필요 없어 보입니다.&lt;/li&gt;
+  &lt;li&gt;검색 키워드와 일치하는 데이터 위치를 자세하게 알려주는 API는 없어 보이네요. Range 시작점과 검색 결과의 배열 Index 정보를 어찌어찌 해서 해결 하겠습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;Google Sheet API v4&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://developers.google.com/sheets/api/guides/concepts&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;Python3.5 구글 드라이브/스프레드시트 API 활용&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://hleecaster.com/python-google-drive-spreadsheet-api/&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;OAuth2&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://yuda.dev/267&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Google Sheets API" /><summary type="html">자동화를 지향하다보니 chatbot에게 요청을 통해 정보 조회, 외부 API연동 등을 하고 싶어하는 사용자가 생겼습니다. 유행이될지 혁신이 된지 사용해봐야 알거 같습니다. 이번 포스팅에서는 google spreadsheet api를 여러 방법으로 활용해 보겠습니다.</summary></entry><entry><title type="html">[Python] Design pattern</title><link href="http://localhost:4000/language/language-python-design-pattern/" rel="alternate" type="text/html" title="[Python] Design pattern" /><published>2020-04-27T00:00:00+09:00</published><updated>2020-04-27T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-design-pattern</id><content type="html" xml:base="http://localhost:4000/language/language-python-design-pattern/">&lt;p&gt;디자인 패턴은 GoF (Gang of Four)가 문제 해결책으로 처음 제시한 개념입니다. GoF 란 &lt;code class=&quot;highlighter-rouge&quot;&gt;GOF의 디자인 패턴&lt;/code&gt;을 집필한 네 명의 저자를 지칭합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;디자인-패턴의-장점&quot;&gt;디자인 패턴의 장점&lt;/h2&gt;
 &lt;ul&gt;
@@ -460,138 +851,7 @@
 
 &lt;span class=&quot;s&quot;&gt;https://galid1.tistory.com/531&lt;/span&gt;
 &lt;span class=&quot;s&quot;&gt;https://goddaehee.tistory.com/95&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Springboot" /><category term="JPA" /><summary type="html">많이 늦었지만 JPA를 써볼려고 합니다.</summary></entry><entry><title type="html">[Python] Mac tesseract 설치 및 실행</title><link href="http://localhost:4000/language/language-python-tesseract/" rel="alternate" type="text/html" title="[Python] Mac tesseract 설치 및 실행" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-tesseract</id><content type="html" xml:base="http://localhost:4000/language/language-python-tesseract/">&lt;p&gt;이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;환경&quot;&gt;환경&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OS : MacOS Catalina 10.15.3
-Tesseract : 4.1.1
-Python: 3.5
-pytesseract: 0.3.3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
-
-&lt;h3 id=&quot;tesseract-설치&quot;&gt;tesseract 설치&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;테서렉트를 활용하기 위해서는 테서렉트 먼저 설치해야합니다. &lt;br /&gt;
-homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytesseract를 설치하면 설치된 테서렉트를 랩핑하여 사용하는 방식입니다.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract-lang
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
-  tesseract 4.1.1
-  leptonica-1.79.0
-  libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1
-  Found AVX2
-  Found AVX
-  Found FMA
-  Found SSE
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pytesseract
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip show pytesseract
-  Name: pytesseract
-  Version: 0.3.3
-  Summary: Python-tesseract is a python wrapper &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Google&lt;span class=&quot;se&quot;&gt;\'&lt;/span&gt;s Tesseract-OCR
-  Home-page: https://github.com/madmaze/pytesseract
-  Author: Samuel Hoffstaetter
-  Author-email: samuel@hoffstaetter.com
-  License: Apache License 2.0
-  Location: /Users/whitexozu/opt/anaconda3/envs/py35/lib/python3.5/site-packages
-  Requires: Pillow
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;tessdata-다운로드&quot;&gt;tessdata 다운로드&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/code&gt;에서 tessdata를 다운받은후 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/Cellar/tesseract/4.1.1/share/tessdata&lt;/code&gt;에 kor.tessdata를 복사합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
-tesseract 4.1.1을 설치했는데 trainedata를 기본 경로가&lt;br /&gt;
-&lt;em&gt;/usr/local/Cellar/tesseract-lang/4.0.0/share/tessdata&lt;/em&gt;를 바라보고 있습니다.&lt;br /&gt;
-그리고 당연하게 파일을 못 읽는다는 오류가 납니다. 오류 메시지는 아래과 같습니다.&lt;br /&gt;
-&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Error: Tesseract (legacy) engine requested, but components are not present in /usr/local/share/tessdata/kor.traineddata!! Failed loading language 'kor' Tesseract couldn't load any languages! Could not initialize tesseract.&quot;&lt;/code&gt;&lt;br /&gt;
-&lt;br /&gt;
-&lt;em&gt;tessdata 다운로드&lt;/em&gt; 를 참고하여 파일을 받았다면 경로를 변경하면 됩니다. 경로를 설정하는 방법은 두가지가 있습니다. 첫번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; 옵션을 사용하는 것이고 두번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zprofile&lt;/code&gt;에 경로 정보를 export 하면 됩니다.&lt;br /&gt;
-export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt;/p&gt;
-
-&lt;h2 id=&quot;실행&quot;&gt;실행&lt;/h2&gt;
-
-&lt;p&gt;두가지 방식으로 실행이 가능합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;명렁어-입력-실행&quot;&gt;명렁어 입력 실행&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;설치된 텍서렉트에 명령어를 직접 입력하여 실행하는 방식&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract ~/Pictures/text_image/itemText.png stdout &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; kor &lt;span class=&quot;nt&quot;&gt;--oem&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--psm&lt;/span&gt; 3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;pytesseract-실행&quot;&gt;pytesseract 실행&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;python 에서 실행&lt;/p&gt;
-
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytesseract&lt;/span&gt;
-    
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    
-  &lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itemText.png'&lt;/span&gt;
-        
-  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'-l eng --oem 1 --psm 3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Read image from disk
-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;im&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMREAD_COLOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Run tesseract OCR on image
-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pytesseract&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Print recognized text
-&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python tesseract_test.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;옵션-설명&quot;&gt;옵션 설명&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-stdout / output&lt;/code&gt; : 화면 출력, 파일 출력&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-L&lt;/code&gt; : 언어 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--oem&lt;/code&gt; : OCR Engine Mode
-    &lt;ul&gt;
-      &lt;li&gt;0: Legacy engine only.&lt;/li&gt;
-      &lt;li&gt;1: Neural nets LSTM engine only.&lt;/li&gt;
-      &lt;li&gt;2: Legacy + LSTM engines.&lt;/li&gt;
-      &lt;li&gt;3: Default, based on what is available.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--psm&lt;/code&gt; : PSM은 텍스트 구조에 대한 추가 정보 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; : tessdata file path 지정&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;https://tariat.tistory.com/703&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;https://m.blog.naver.com/tommybee/221307497468&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="tesseract" /><summary type="html">이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.</summary></entry><entry><title type="html">[Python] 이미지를 판단 후 자동 실행하는 메크로</title><link href="http://localhost:4000/language/language-python-macro-find-image/" rel="alternate" type="text/html" title="[Python] 이미지를 판단 후 자동 실행하는 메크로" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-macro-find-image</id><content type="html" xml:base="http://localhost:4000/language/language-python-macro-find-image/">&lt;p&gt;사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.&lt;br /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Springboot" /><category term="JPA" /><summary type="html">많이 늦었지만 JPA를 써볼려고 합니다.</summary></entry><entry><title type="html">[Python] 이미지를 판단 후 자동 실행하는 메크로</title><link href="http://localhost:4000/language/language-python-macro-find-image/" rel="alternate" type="text/html" title="[Python] 이미지를 판단 후 자동 실행하는 메크로" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-macro-find-image</id><content type="html" xml:base="http://localhost:4000/language/language-python-macro-find-image/">&lt;p&gt;사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.&lt;br /&gt;
 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다.&lt;br /&gt;
 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다.&lt;br /&gt;
 &lt;br /&gt;
@@ -849,7 +1109,138 @@ export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt
 &lt;ul&gt;
   &lt;li&gt;빵형의 개발도상국 - 집행검키우기: &lt;a href=&quot;https://www.youtube.com/watch?v=1jePlDVw2rQ&quot;&gt;https://www.youtube.com/watch?v=1jePlDVw2rQ&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;pyautogui: &lt;a href=&quot;https://pyautogui.readthedocs.io/en/latest/&quot;&gt;https://pyautogui.readthedocs.io/en/latest/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Macro" /><summary type="html">사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다. 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다. 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다. 순서는 간단합니다.</summary></entry><entry><title type="html">[MySQL] 테이블 생성시 고려사항</title><link href="http://localhost:4000/database/database-mysql-create-table/" rel="alternate" type="text/html" title="[MySQL] 테이블 생성시 고려사항" /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/database/database-mysql-create-table</id><content type="html" xml:base="http://localhost:4000/database/database-mysql-create-table/">&lt;p&gt;프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.&lt;br /&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Macro" /><summary type="html">사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다. 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다. 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다. 순서는 간단합니다.</summary></entry><entry><title type="html">[Python] Mac tesseract 설치 및 실행</title><link href="http://localhost:4000/language/language-python-tesseract/" rel="alternate" type="text/html" title="[Python] Mac tesseract 설치 및 실행" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-tesseract</id><content type="html" xml:base="http://localhost:4000/language/language-python-tesseract/">&lt;p&gt;이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;환경&quot;&gt;환경&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OS : MacOS Catalina 10.15.3
+Tesseract : 4.1.1
+Python: 3.5
+pytesseract: 0.3.3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
+
+&lt;h3 id=&quot;tesseract-설치&quot;&gt;tesseract 설치&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;테서렉트를 활용하기 위해서는 테서렉트 먼저 설치해야합니다. &lt;br /&gt;
+homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytesseract를 설치하면 설치된 테서렉트를 랩핑하여 사용하는 방식입니다.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract-lang
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+  tesseract 4.1.1
+  leptonica-1.79.0
+  libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1
+  Found AVX2
+  Found AVX
+  Found FMA
+  Found SSE
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pytesseract
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip show pytesseract
+  Name: pytesseract
+  Version: 0.3.3
+  Summary: Python-tesseract is a python wrapper &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Google&lt;span class=&quot;se&quot;&gt;\'&lt;/span&gt;s Tesseract-OCR
+  Home-page: https://github.com/madmaze/pytesseract
+  Author: Samuel Hoffstaetter
+  Author-email: samuel@hoffstaetter.com
+  License: Apache License 2.0
+  Location: /Users/whitexozu/opt/anaconda3/envs/py35/lib/python3.5/site-packages
+  Requires: Pillow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tessdata-다운로드&quot;&gt;tessdata 다운로드&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/code&gt;에서 tessdata를 다운받은후 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/Cellar/tesseract/4.1.1/share/tessdata&lt;/code&gt;에 kor.tessdata를 복사합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+tesseract 4.1.1을 설치했는데 trainedata를 기본 경로가&lt;br /&gt;
+&lt;em&gt;/usr/local/Cellar/tesseract-lang/4.0.0/share/tessdata&lt;/em&gt;를 바라보고 있습니다.&lt;br /&gt;
+그리고 당연하게 파일을 못 읽는다는 오류가 납니다. 오류 메시지는 아래과 같습니다.&lt;br /&gt;
+&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Error: Tesseract (legacy) engine requested, but components are not present in /usr/local/share/tessdata/kor.traineddata!! Failed loading language 'kor' Tesseract couldn't load any languages! Could not initialize tesseract.&quot;&lt;/code&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;em&gt;tessdata 다운로드&lt;/em&gt; 를 참고하여 파일을 받았다면 경로를 변경하면 됩니다. 경로를 설정하는 방법은 두가지가 있습니다. 첫번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; 옵션을 사용하는 것이고 두번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zprofile&lt;/code&gt;에 경로 정보를 export 하면 됩니다.&lt;br /&gt;
+export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt;/p&gt;
+
+&lt;h2 id=&quot;실행&quot;&gt;실행&lt;/h2&gt;
+
+&lt;p&gt;두가지 방식으로 실행이 가능합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;명렁어-입력-실행&quot;&gt;명렁어 입력 실행&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치된 텍서렉트에 명령어를 직접 입력하여 실행하는 방식&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract ~/Pictures/text_image/itemText.png stdout &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; kor &lt;span class=&quot;nt&quot;&gt;--oem&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--psm&lt;/span&gt; 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pytesseract-실행&quot;&gt;pytesseract 실행&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;python 에서 실행&lt;/p&gt;
+
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytesseract&lt;/span&gt;
+    
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    
+  &lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itemText.png'&lt;/span&gt;
+        
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'-l eng --oem 1 --psm 3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Read image from disk
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;im&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMREAD_COLOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Run tesseract OCR on image
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pytesseract&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Print recognized text
+&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python tesseract_test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;옵션-설명&quot;&gt;옵션 설명&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-stdout / output&lt;/code&gt; : 화면 출력, 파일 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-L&lt;/code&gt; : 언어 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--oem&lt;/code&gt; : OCR Engine Mode
+    &lt;ul&gt;
+      &lt;li&gt;0: Legacy engine only.&lt;/li&gt;
+      &lt;li&gt;1: Neural nets LSTM engine only.&lt;/li&gt;
+      &lt;li&gt;2: Legacy + LSTM engines.&lt;/li&gt;
+      &lt;li&gt;3: Default, based on what is available.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--psm&lt;/code&gt; : PSM은 텍스트 구조에 대한 추가 정보 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; : tessdata file path 지정&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://tariat.tistory.com/703&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://m.blog.naver.com/tommybee/221307497468&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="tesseract" /><summary type="html">이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.</summary></entry><entry><title type="html">[MySQL] 테이블 생성시 고려사항</title><link href="http://localhost:4000/database/database-mysql-create-table/" rel="alternate" type="text/html" title="[MySQL] 테이블 생성시 고려사항" /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/database/database-mysql-create-table</id><content type="html" xml:base="http://localhost:4000/database/database-mysql-create-table/">&lt;p&gt;프로젝트를 설계를 할때면 리셋되어 있는 지식들이 있습니다.&lt;br /&gt;
 그중에 DB 설계 관련 지식들은 거의 신생아로 돌아간거 같습니다.&lt;br /&gt;
 그래서 나중에 찾아볼 것들을 미리 정리해 보았습니다.&lt;/p&gt;
 
@@ -1766,376 +2157,4 @@ mysql&amp;gt;
 &lt;h3 id=&quot;jupyter-실행&quot;&gt;jupyter 실행&lt;/h3&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jupyter notebook
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Jupyter" /><category term="Matplotlib" /><category term="anaconda" /><summary type="html">Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다. 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.</summary></entry><entry><title type="html">[작성중][Python] Image processing</title><link href="http://localhost:4000/language/language-python-image-processing/" rel="alternate" type="text/html" title="[작성중][Python] Image processing" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-image-processing</id><content type="html" xml:base="http://localhost:4000/language/language-python-image-processing/">&lt;p&gt;Image to text&lt;/p&gt;
-
-&lt;h2 id=&quot;사용-라이브러리&quot;&gt;사용 라이브러리&lt;/h2&gt;
-&lt;p&gt;pytesseract
-cv2
-numpy
-matplotlib&lt;/p&gt;
-
-&lt;h2 id=&quot;설치-방법-및-실행&quot;&gt;설치 방법 및 실행&lt;/h2&gt;
-
-&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;OpenCV 설치&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://dejavuqa.tistory.com/228&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Image processing" /><summary type="html">Image to text</summary></entry><entry><title type="html">[Email template] ZURB Foundation</title><link href="http://localhost:4000/framework/framework-email-template-zurbfoundation/" rel="alternate" type="text/html" title="[Email template] ZURB Foundation" /><published>2020-03-12T00:00:00+09:00</published><updated>2020-03-12T22:05:34+09:00</updated><id>http://localhost:4000/framework/framework-email-template-zurbfoundation</id><content type="html" xml:base="http://localhost:4000/framework/framework-email-template-zurbfoundation/">&lt;p&gt;사용자에게 뉴스레터, 공지 이메일 등의 이메일을 HTML 형식으로 발송해야 할 때가 있습니다.&lt;br /&gt;
-통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다.&lt;br /&gt;
-그럼 퍼블리셔팀에게 요청하게 되고 &lt;code class=&quot;highlighter-rouge&quot;&gt;템플릿 디자인&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;이메일 클라이언트&lt;/code&gt; 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다.&lt;br /&gt;
-생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다)&lt;br /&gt;
-&lt;br /&gt;
-결론부터 말하자면 이메일은 HTML 표준이 없습니다.&lt;br /&gt;
-이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다.&lt;br /&gt;
-상황이 이러다 보니 &lt;code class=&quot;highlighter-rouge&quot;&gt;ZURB Foundation&lt;/code&gt; 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다.&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;설치-방법-및-실행&quot;&gt;설치 방법 및 실행&lt;/h2&gt;
-
-&lt;p&gt;세상 간단합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; foundation-cli
-
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;foundation new &lt;span class=&quot;nt&quot;&gt;--framework&lt;/span&gt; emails
-
-&lt;span class=&quot;c&quot;&gt;# project name 입력&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;project name]
-
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm run start
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;그럼 브라우저에서 사이트가 열리는것을 확인 할 수 있습니다.&lt;/p&gt;
-
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
-nvm을 사용한 테스트 결과 v12에서는 프로젝트 생성이 되지 않았습니다. v10 에서 사용하기를 추천 드립니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;폴더구조&quot;&gt;폴더구조&lt;/h2&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-├── LICENSE
-├── README.md
-├── config.json
-├── dist
-├── etc
-├── example.config.json
-├── gulpfile.babel.js
-├── node_modules
-├── package.json
-└── src
-    ├── assets
-    ├── helpers
-    ├── layouts
-    ├── pages
-    └── partials
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;코딩&quot;&gt;코딩&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;pages 폴더의 예제 소스를 정리하고 코딩을 하게되면 dist폴더에 결과가 생성됩니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;메일-발송-설정-및-테스트&quot;&gt;메일 발송 설정 및 테스트&lt;/h2&gt;
-
-&lt;h3 id=&quot;smtp-서버-사용을-설정합니다-저는-네이버-smtp-서버를-사용하겠습니다&quot;&gt;smtp 서버 사용을 설정합니다. 저는 네이버 smtp 서버를 사용하겠습니다.&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;네이버 메일의 환경설정으로 이동합니다.&lt;br /&gt;
- &lt;img src=&quot;https://whitexozu.github.io/assets/images/framework-email-template-zurbfoundation_1.PNG&quot; alt=&quot;click setting button&quot; width=&quot;300&quot; class=&quot;center&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;smtp 사용을 선택합니다.&lt;br /&gt;
- &lt;img src=&quot;https://whitexozu.github.io/assets/images/framework-email-template-zurbfoundation_2.PNG&quot; alt=&quot;modify setting&quot; width=&quot;500&quot; class=&quot;center&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;config-설정&quot;&gt;config 설정&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;example.config.json 파일을 복사하여 config.json 파일을 생성합니다.&lt;/li&gt;
-  &lt;li&gt;smtp 서버 정보를 수정합니다.
-    &lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;mail&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;to&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[emailId]@naver.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[emailId]@gmail.com&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;from&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[name] &amp;lt;[emailId]@naver.com&amp;gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;smtp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;auth&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-             &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[emailId]&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-             &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;pass&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;[emailPassword]&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;host&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;smtp.naver.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;secureConnection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-         &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;port&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;465&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
- &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;메이-발송&quot;&gt;메이 발송&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm run mail
-
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; foundation-emails-template@1.0.0 mail /Users/[user name]/dev/temp/email_test
-&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; gulp mail &lt;span class=&quot;nt&quot;&gt;--production&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:23] Requiring external module babel-register
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Using gulpfile ~/dev/temp/email_coding/email_test/gulpfile.babel.js
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Starting &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Starting &lt;span class=&quot;s1&quot;&gt;'build'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Starting &lt;span class=&quot;s1&quot;&gt;'clean'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Finished &lt;span class=&quot;s1&quot;&gt;'clean'&lt;/span&gt; after 19 ms
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:42] Starting &lt;span class=&quot;s1&quot;&gt;'pages'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:43] Finished &lt;span class=&quot;s1&quot;&gt;'pages'&lt;/span&gt; after 1.08 s
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:43] Starting &lt;span class=&quot;s1&quot;&gt;'sass'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:49] Finished &lt;span class=&quot;s1&quot;&gt;'sass'&lt;/span&gt; after 5.96 s
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:49] Starting &lt;span class=&quot;s1&quot;&gt;'images'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:51] gulp-imagemin: Minified 0 images
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:51] Finished &lt;span class=&quot;s1&quot;&gt;'images'&lt;/span&gt; after 1.52 s
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:51] Starting &lt;span class=&quot;s1&quot;&gt;'inline'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Finished &lt;span class=&quot;s1&quot;&gt;'inline'&lt;/span&gt; after 3.14 s
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Finished &lt;span class=&quot;s1&quot;&gt;'build'&lt;/span&gt; after 12 s
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Starting &lt;span class=&quot;s1&quot;&gt;'creds'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Finished &lt;span class=&quot;s1&quot;&gt;'creds'&lt;/span&gt; after 1.58 ms
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:54] Starting &lt;span class=&quot;s1&quot;&gt;'aws'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:55] Finished &lt;span class=&quot;s1&quot;&gt;'aws'&lt;/span&gt; after 1.57 s
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:55] Starting &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt;...
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:57] Send email &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;TEST] basic to &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;emailId]@naver.com,[emailId]@gmail.com
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:57] Finished &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt; after 1.58 s
-&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;19:06:57] Finished &lt;span class=&quot;s1&quot;&gt;'mail'&lt;/span&gt; after 15 s
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
-템플릿에 이미지파일을 사용할경우 개발시에는 assets폴더에 저장후 사용이 가능하나 이메일 발송시에는 aws에 접근하려고 하여 에러가 발생합니다.
-이미지 사용은 별도의 이미지 파일 서버에 업로드 후 사용 할 수 있습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;email-client-종류&quot;&gt;email client 종류&lt;/h2&gt;
-
-&lt;h3 id=&quot;모바일-이메일-클라이언트&quot;&gt;모바일 이메일 클라이언트&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Android 2.3 및 4.0&lt;/li&gt;
-  &lt;li&gt;iPhone 5 iOS 6&lt;/li&gt;
-  &lt;li&gt;iPhone 4S iOS 6&lt;/li&gt;
-  &lt;li&gt;iPhone 3GS iOS 5&lt;/li&gt;
-  &lt;li&gt;iPad 2 iOS 6&lt;/li&gt;
-  &lt;li&gt;BlackBerry OS 4 &amp;amp; 5&lt;/li&gt;
-  &lt;li&gt;Symbian S60&lt;/li&gt;
-  &lt;li&gt;Windows Phone 7.5&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;데스크톱-이메일-클라이언트&quot;&gt;데스크톱 이메일 클라이언트&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Apple Mail 4, 5, 6&lt;/li&gt;
-  &lt;li&gt;Lotus Notes 8.5&lt;/li&gt;
-  &lt;li&gt;Lotus Notes 8&lt;/li&gt;
-  &lt;li&gt;Thunderbird&lt;/li&gt;
-  &lt;li&gt;Windows Live Mail&lt;/li&gt;
-  &lt;li&gt;Outlook 2013 (v15)&lt;/li&gt;
-  &lt;li&gt;Mac 용 Outlook 2011&lt;/li&gt;
-  &lt;li&gt;Outlook 2010 (v14)&lt;/li&gt;
-  &lt;li&gt;Outlook 2007 (v12)&lt;/li&gt;
-  &lt;li&gt;Outlook 2003 (v11)&lt;/li&gt;
-  &lt;li&gt;Outlook 2002 / XP (v10)&lt;/li&gt;
-  &lt;li&gt;Outlook 2000 (v9)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;웹-메일-클라이언트&quot;&gt;웹 메일 클라이언트&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;AOL Mail (on any browser)&lt;/li&gt;
-  &lt;li&gt;Gmail (on any browser)&lt;/li&gt;
-  &lt;li&gt;Outlook.com (on any browser)&lt;/li&gt;
-  &lt;li&gt;Yahoo! (on any browser)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;ZURB Fundation Getting Start&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://get.foundation/emails/docs/sass-guide.html&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ZURB Foundation" /><category term="email templdate" /><summary type="html">사용자에게 뉴스레터, 공지 이메일 등의 이메일을 HTML 형식으로 발송해야 할 때가 있습니다. 통이미지로 보내면 편하겠지만 텍스트가 수시로 바뀌거나 다국어가 지원돼야 하는 경우 HTML로 작성해야 합니다. 그럼 퍼블리셔팀에게 요청하게 되고 템플릿 디자인과 이메일 클라이언트 확인 후 단순한 페이지도 최소 2일 정도에 시간이 필요하다고 합니다. 생각보다 오래 걸리네 라는 생각이 듭니다. 그리고 템플릿 코드를 받아보면 무지의 소치에서 나온 생각임을 깨닫게 됩니다.(제 이야기 입니다) 결론부터 말하자면 이메일은 HTML 표준이 없습니다. 이메일 클라이언트에 따라 허용되는 HTML에 대중이 없습니다. 필수 클라이언트의 종류가 많아질수록 코드는 예외 처리와 핵이 난무하게 됩니다. 상황이 이러다 보니 ZURB Foundation 같은 웹 및 이메일 템플릿을 쉽게 디자인 할 수 있는 프레임워크를 사용하게 됩니다.</summary></entry><entry><title type="html">[GIT] 명령어, 협업 방법</title><link href="http://localhost:4000/scm/scm-git-command/" rel="alternate" type="text/html" title="[GIT] 명령어, 협업 방법" /><published>2020-03-10T00:00:00+09:00</published><updated>2020-03-10T22:05:34+09:00</updated><id>http://localhost:4000/scm/scm-git-command</id><content type="html" xml:base="http://localhost:4000/scm/scm-git-command/">&lt;p&gt;SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다)&lt;br /&gt;
-Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다.&lt;br /&gt;
-SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면
-Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다.&lt;br /&gt;
-단, 모든 프로젝트를 복잡하게 관리할 필요는 없습니다. 프로젝트 규모와 목적에 맞는 규칙을 선택해서 사용하는것을 추천드립니다.&lt;br /&gt;
-&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;개념잡기&quot;&gt;개념잡기&lt;/h2&gt;
-
-&lt;h3 id=&quot;add-commit-push&quot;&gt;add, commit, push&lt;/h3&gt;
-&lt;p&gt;실제 파일에 수정이 이루어지는 &lt;code class=&quot;highlighter-rouge&quot;&gt;working directory&lt;/code&gt;에서&lt;br /&gt;
-&lt;em&gt;add&lt;/em&gt;룰 하게 되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;index(staging area)&lt;/code&gt;로 넘어가게 됩니다.&lt;br /&gt;
-&lt;em&gt;commit&lt;/em&gt;을 하게되면 &lt;code class=&quot;highlighter-rouge&quot;&gt;HEAD&lt;/code&gt;으로 넘어가 최종 확장본이 생성됩니다.&lt;br /&gt;
-&lt;em&gt;push&lt;/em&gt;를 통해 &lt;code class=&quot;highlighter-rouge&quot;&gt;remote(origin)&lt;/code&gt; 원격저장소에 반영 하게 됩니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;merge-rebase&quot;&gt;merge, rebase&lt;/h3&gt;
-
-&lt;p&gt;merge를 사용할 지, Rebase를 사용할 지는 프로젝트의 히스토리를 어떻게 관리할지에 따라 선택됩니다.&lt;br /&gt;
-merge의 경우 병합되는 브런치의 모든 작업 내용을 기록하게 됩니다.&lt;br /&gt;
-Rebase의 경우 다른 브랜치는 없었던 것처럼 작업 내용이 하나의 흐름으로 기록됩니다.&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;git-연걸&quot;&gt;git 연걸&lt;/h2&gt;
-
-&lt;h3 id=&quot;원격지-변경&quot;&gt;원격지 변경&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote remove origin
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote add origin https://github.com/...
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;원격지-branch-checkout&quot;&gt;원격지 branch checkout&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;# 원격 브런치 접근을 위해 git remote를 갱신 합니다.&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git remote update
-
-&lt;span class=&quot;c&quot;&gt;# 원격 저장소의 branch list 확인 합니다.&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# -a 옵션을 주면 로컬, 원격 모든 저장소의 branch 리스트를 볼 수 있습니다.&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch &lt;span class=&quot;nt&quot;&gt;-a&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# 원격저장소의 branch를 가져옵니다.&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout &lt;span class=&quot;nt&quot;&gt;-t&lt;/span&gt; origin/[branch name]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
-branch를 참고만 할 뿐 수정 내용을 원격 저장소에 push 하지 않을 경우 &lt;em&gt;$ git checkout [원격 저장소의 branch 이름]&lt;/em&gt; 옵션이 없는 명령어로 checkout 하면 ‘detached HEAD’ 상태의 소스를 확인 및 수정 할 수는 있지만 변경사항들을 commit, push 할 수 없으며 다른 branch로 checkout하면 사라지게 됩니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;명령어&quot;&gt;명령어&lt;/h2&gt;
-
-&lt;h3 id=&quot;git-merge&quot;&gt;git merge&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;다른 branch 수정 사항을 가져올때 사용, 이력이 남음&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch issue1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;branch 생성&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch  &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;branch 목록 확인&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout issue1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;branch 이동&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# issue1 수정&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add &lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git commit &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;comment&quot;&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout master
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merger issue1
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; issue1
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git branch
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;git-rebase&quot;&gt;git rebase&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;다른 branch 수정 사항을 가져올때 사용, 이력이 남지 않음&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git chekcout &lt;span class=&quot;nt&quot;&gt;-b&lt;/span&gt; issue1 &lt;span class=&quot;c&quot;&gt;# branch 생성과 checkout 을 한번에 하기위해 -b 옵션 사용&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# issue1 수정 후 push&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;# master 수정 후 push (pc가 다른경우 master 수정사항 pull, issue1 수정사항 pull)&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git chekcout issue1
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git rebase master
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git checkout maser
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge issue1
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;한-branch에서-merge&quot;&gt;한 branch에서 merge&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add, git commit
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git pull origin
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git merge
-
-&lt;span class=&quot;c&quot;&gt;# 비 충돌시&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin
-
-&lt;span class=&quot;c&quot;&gt;# 충돌시 충돌 내용 정리 후&lt;/span&gt;
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git add, git commit
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git push origin
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;git-log-정리-방법&quot;&gt;git log 정리 방법&lt;/h2&gt;
-
-&lt;h3 id=&quot;git-crlf-개행-문자-통일&quot;&gt;git CRLF 개행 문자 통일&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; core.eol lf
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; core.autocrlf input
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; core.autocrlf &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;add-alias-git-log&quot;&gt;add alias git log&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git config &lt;span class=&quot;nt&quot;&gt;--global&lt;/span&gt; alias.lg &lt;span class=&quot;s2&quot;&gt;&quot;log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold red)%h%C(reset) : %C(bold green)(%ar)%C(reset) - %C(cyan)&amp;lt;%an&amp;gt;%C(reset)%C(bold yellow)%d%C(reset)%n%n%w(90,1,2)%C(white)%B%C(reset)%n'&quot;&lt;/span&gt;
-
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git lg  
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log  
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--oneline&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;아직-push되지-않은-commit-목록-보기&quot;&gt;아직 push되지 않은 commit 목록 보기&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--branches&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--not&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--remotes&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;git에서-특정-commit의-변경된-파일-목록-보기&quot;&gt;git에서 특정 commit의 변경된 파일 목록 보기&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git log &lt;span class=&quot;nt&quot;&gt;--name-only&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-1&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;branch-의미&quot;&gt;branch 의미&lt;/h2&gt;
-
-&lt;h3 id=&quot;master-branch&quot;&gt;Master Branch&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;제품으로 출시될 수 있는 브랜치&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;배포(Release) 이력을 관리하기 위해 사용. 즉, 배포 가능한 상태만을 관리한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;develop-branch&quot;&gt;Develop Branch&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;다음 출시 버전을 개발하는 브랜치&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;기능 개발을 위한 브랜치들을 병합하기 위해 사용. 즉, 모든 기능이 추가되고 버그가 수정되어 배포 가능한 안정적인 상태라면 develop 브랜치를 ‘master’ 브랜치에 병합(merge)한다.&lt;/li&gt;
-  &lt;li&gt;평소에는 이 브랜치를 기반으로 개발을 진행한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;feature-branch&quot;&gt;Feature branch&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;기능을 개발하는 브랜치&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;feature 브랜치는 새로운 기능 개발 및 버그 수정이 필요할 때마다 ‘develop’ 브랜치로부터 분기한다. feature 브랜치에서의 작업은 기본적으로 공유할 필요가 없기 때문에, 자신의 로컬 저장소에서 관리한다.&lt;/li&gt;
-  &lt;li&gt;개발이 완료되면 ‘develop’ 브랜치로 병합(merge)하여 다른 사람들과 공유한다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;release-branch&quot;&gt;Release Branch&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;이번 출시 버전을 준비하는 브랜치&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;배포를 위한 전용 브랜치를 사용함으로써 한 팀이 해당 배포를 준비하는 동안 다른 팀은 다음 배포를 위한 기능 개발을 계속할 수 있다. 즉, 딱딱 끊어지는 개발 단계를 정의하기에 아주 좋다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;hotfix-branch&quot;&gt;Hotfix Branch&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;출시 버전에서 발생한 버그를 수정 하는 브랜치&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;배포한 버전에 긴급하게 수정을 해야 할 필요가 있을 경우, ‘master’ 브랜치에서 분기하는 브랜치이다. ‘develop’ 브랜치에서 문제가 되는 부분을 수정하여 배포 가능한 버전을 만들기에는 시간도 많이 소요되고 안정성을 보장하기도 어려우므로 바로 배포가 가능한 ‘master’ 브랜치에서 직접 브랜치를 만들어 필요한 부분만을 수정한 후 다시 ‘master’브랜치에 병합하여 이를 배포해야 하는 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;협업-방법&quot;&gt;협업 방법&lt;/h2&gt;
-
-&lt;h3 id=&quot;feature-branch-workflow&quot;&gt;Feature Branch Workflow&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;소규모의 프로젝트에서 많이 사용하는 방식&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;forking-workflow&quot;&gt;Forking Workflow&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;오픈 소스 프로젝트에서 많이 사용하는 방식&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;gitflow-workflow&quot;&gt;Gitflow Workflow&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;대규모의 프로젝트에서 사용하는 엄격한 방식&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;git 간편 안내서&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://rogerdudler.github.io/git-guide/index.ko.html&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;git commit message&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://djkeh.github.io/articles/How-to-write-a-git-commit-message-kor/&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;git remote branch&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://cjh5414.github.io/get-git-remote-branch/&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;merge vs rebase&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://velog.io/@godori/Git-Rebase&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;branch 설명&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2018/05/11/types-of-git-branch.html&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;Feature Branch Workflow&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2017/10/27/how-to-collaborate-on-GitHub-1.html&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;Forking Workflow&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2018/05/12/how-to-collaborate-on-GitHub-3.html&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;Gitflow Workflow&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2017/10/28/how-to-collaborate-on-GitHub-2.html&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;git add, commit, pusho 취소&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://gmlwjd9405.github.io/2018/05/25/git-add-cancle.html&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Git" /><summary type="html">SVN을 주로쓰다가 Git을 처음 사용하게되면 개념잡는데 생각보다 많은 시간이 필요합니다.(제 이야기 입니다) Git을 SVN 처럼 사용하여 매번 충돌이 나고 충돌을 stach로만 처리하는 프로젝트도 본적이 있습니다. SVN은 trunk 밑에 하나의 repository를 만들에 모든 사용자들이 merge후 commit만 사용하는 비교적 단순한 방식이라면 Git은 merge또는 rebase후에 add, commit, push단계로 관리하고 다양한 의미에 branch를 만들어 사용 할 수 있는 복잡한 구조입니다. 단, 모든 프로젝트를 복잡하게 관리할 필요는 없습니다. 프로젝트 규모와 목적에 맞는 규칙을 선택해서 사용하는것을 추천드립니다.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Jupyter" /><category term="Matplotlib" /><category term="anaconda" /><summary type="html">Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다. 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.</summary></entry></feed>

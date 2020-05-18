@@ -1,0 +1,689 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[google apps script] 사용 방법 조사 - TMM</title>
+<meta name="description" content="google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다. ">
+
+
+  <meta name="author" content="To much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[google apps script] 사용 방법 조사">
+<meta property="og:url" content="http://localhost:4000/open%20api/openapi-google-apps-script/">
+
+
+  <meta property="og:description" content="google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-05-11T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-05-11T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/open%20api/openapi-google-apps-script/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[google apps script] 사용 방법 조사">
+    <meta itemprop="description" content="google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다.">
+    <meta itemprop="datePublished" content="2020-05-11T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-05-11T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[google apps script] 사용 방법 조사
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#목표">목표</a></li>
+  <li><a href="#스크립트-작성">스크립트 작성</a>
+    <ul>
+      <li><a href="#함수-생성">함수 생성</a></li>
+      <li><a href="#트리거-추가">트리거 추가</a></li>
+      <li><a href="#수정된-내용-확인">수정된 내용 확인</a></li>
+      <li><a href="#logger-확인">Logger 확인</a></li>
+      <li><a href="#rest-api-call">REST API Call</a></li>
+    </ul>
+  </li>
+  <li><a href="#참고사이트">참고사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다.</p>
+
+<h2 id="목표">목표</h2>
+<ul>
+  <li>지정 열/행을 기준으로 수정시 전체 데이터 확인</li>
+  <li>지정 열/행을 기준으로 수정시 수정된 데이터만 확인</li>
+  <li>REST API 전달</li>
+</ul>
+
+<h2 id="스크립트-작성">스크립트 작성</h2>
+
+<h3 id="함수-생성">함수 생성</h3>
+<ol>
+  <li><em>spreadsheet &gt; 도구 &gt; 스크립트 편집기</em> 편집 화면으로 이동합니다.</li>
+  <li>초기 화면입니다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">function</span> <span class="nx">myFunction</span><span class="p">()</span> <span class="p">{</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>push 함수를 추가합니다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">function</span> <span class="nx">push</span><span class="p">()</span> <span class="p">{</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="트리거-추가">트리거 추가</h3>
+<ul>
+  <li><em>스크립트 편집기 &gt; 수정 &gt; 모든 트리거 보기</em> 설정 화면으로 이동합니다. 발생 주기와 발생 함수를 선택합니다.</li>
+  <li>발생 주기: 수정시, 발생 함수: push</li>
+  <li>이벤트 유형 선택
+    <ul>
+      <li>열릴 시: 파일이 열린 경우</li>
+      <li>수정 시: 데이터가 수정된 경우</li>
+      <li>변경 시: 데이터가 수정된 경우</li>
+      <li>양식 제출 시: 설문지 전달 후 설문 내용을 제출한 경우 발생</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="수정된-내용-확인">수정된 내용 확인</h3>
+<ol>
+  <li>스크립트 편집 화면으로 이동합니다.</li>
+  <li>push 함수를 수정해 범위 지정 후 수정된 부분을 확인 할 수 있도록 작성해 보겠습니다. ECMA6 문법으로 작성합니다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">function</span> <span class="nx">push</span><span class="p">()</span> <span class="p">{</span>
+   <span class="kd">var</span> <span class="nx">sheet_name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">apps_script_test_sheet</span><span class="dl">'</span>
+   <span class="kd">var</span> <span class="nx">range_value</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">B5:E15</span><span class="dl">'</span><span class="p">;</span>
+   <span class="kd">var</span> <span class="nx">start_row_index</span><span class="p">,</span> 
+       <span class="nx">start_column_index</span><span class="p">,</span> 
+       <span class="nx">end_row_index</span><span class="p">,</span> 
+       <span class="nx">end_column_index</span><span class="p">;</span>
+          
+   <span class="c1">// 활성화 된 sheet name을 구합니다.</span>
+   <span class="kd">var</span> <span class="nx">ss</span> <span class="o">=</span> <span class="nx">SpreadsheetApp</span><span class="p">.</span><span class="nx">getActiveSpreadsheet</span><span class="p">();</span>
+   <span class="kd">var</span> <span class="nx">sheet</span> <span class="o">=</span> <span class="nx">ss</span><span class="p">.</span><span class="nx">getActiveSheet</span><span class="p">();</span>
+   <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">activate sheet name: </span><span class="dl">'</span><span class="p">,</span> <span class="nx">sheet</span><span class="p">.</span><span class="nx">getSheetName</span><span class="p">());</span>
+      
+   <span class="c1">// sheet name을 비교합니다.</span>
+   <span class="c1">// 비교하지 않으면 모든 sheet의 range 데이터를 출력합니다.</span>
+   <span class="k">if</span> <span class="p">(</span><span class="nx">sheet</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">sheet</span><span class="p">.</span><span class="nx">getSheetName</span><span class="p">()</span> <span class="o">==</span> <span class="nx">sheet_name</span><span class="p">)</span> <span class="p">{</span>
+        
+     <span class="c1">// get update range index</span>
+     <span class="kd">var</span> <span class="nx">range</span> <span class="o">=</span> <span class="nx">sheet</span><span class="p">.</span><span class="nx">getRange</span><span class="p">(</span><span class="nx">range_value</span><span class="p">);</span>
+     <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">range: </span><span class="dl">'</span><span class="p">,</span> <span class="nx">range</span><span class="p">.</span><span class="nx">getA1Notation</span><span class="p">())</span>
+
+     <span class="c1">// range 값을 사용자 편의상 알파벳과 숫자로 입력했지만 비교는 index값으로 해야하기 때문에 index값으로 변환을 해줍니다.</span>
+     <span class="nx">start_column_index</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">getColumn</span><span class="p">();</span>
+     <span class="nx">start_row_index</span> <span class="o">=</span> <span class="nx">range</span><span class="p">.</span><span class="nx">getRow</span><span class="p">();</span>
+     <span class="nx">end_column_index</span> <span class="o">=</span> <span class="nx">start_column_index</span> <span class="o">+</span> <span class="nx">range</span><span class="p">.</span><span class="nx">getValues</span><span class="p">()[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+     <span class="nx">end_row_index</span> <span class="o">=</span> <span class="nx">start_row_index</span> <span class="o">+</span> <span class="nx">range</span><span class="p">.</span><span class="nx">getValues</span><span class="p">().</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        
+     <span class="c1">// 입력한 cell의 정보를 구합니다.</span>
+     <span class="kd">var</span> <span class="nx">ac</span> <span class="o">=</span> <span class="nx">sheet</span><span class="p">.</span><span class="nx">getActiveCell</span><span class="p">();</span>
+     <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ac</span><span class="p">.</span><span class="nx">getColumn</span><span class="p">(),</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">getRow</span><span class="p">())</span>
+
+     <span class="c1">// range index와 수정한 cell정보를 비교합니다.</span>
+     <span class="k">if</span> <span class="p">(</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">getRow</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="nx">start_row_index</span> <span class="o">&amp;&amp;</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">getRow</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="nx">end_row_index</span> <span class="o">&amp;&amp;</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">getColumn</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="nx">start_column_index</span> <span class="o">&amp;&amp;</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">getColumn</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="nx">end_column_index</span><span class="p">)</span> <span class="p">{</span>
+       <span class="c1">// get update data</span>
+       <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">&gt;&gt;&gt;&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">getValue</span><span class="p">());</span>
+       <span class="c1">// get range datas</span>
+       <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">&gt;&gt;&gt;&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="nx">range</span><span class="p">.</span><span class="nx">getValues</span><span class="p">());</span>
+     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+       <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">&gt;&gt;&gt;&gt;not in range</span><span class="dl">'</span><span class="p">);</span>
+     <span class="p">}</span>
+   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+     <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">other the sheet</span><span class="dl">'</span><span class="p">);</span>
+   <span class="p">}</span>
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="logger-확인">Logger 확인</h3>
+<ul>
+  <li>Browser.msgBox로 alert과 비슷한 방식으로 로그를 찍을 수 있습니다. 그러나 여러 줄을 한번에 찍고 로그 관리를 할 수 있는 Logger class를 사용 합니다.</li>
+  <li>편집화면에 log 추가
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">Logger</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">log message</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+  <li><em>스크립트 편집기 &gt; 보기 &gt; Stackdriver 로깅</em> 로깅 확인 화면으로 이동 하여 로그 목록을 확인 합니다.</li>
+</ul>
+
+<h3 id="rest-api-call">REST API Call</h3>
+<ul>
+  <li>UrlFetchApp class를 활용합니다.
+    <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// get method api request</span>
+  <span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">http://[ip]:8081/feed/?feedId=3</span><span class="dl">'</span><span class="p">;</span>
+  <span class="nx">UrlFetchApp</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">baseUrl</span><span class="p">);</span>
+
+  <span class="c1">// post method api request</span>
+  <span class="kd">var</span> <span class="nx">baseUrl</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">http://[ip]:8081/feed/?feedId=2</span><span class="dl">'</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">arg1</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">a1</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">arg2</span><span class="dl">'</span> <span class="p">:</span> <span class="nx">sheet</span><span class="p">.</span><span class="nx">getRange</span><span class="p">(</span><span class="dl">'</span><span class="s1">A3:D7</span><span class="dl">'</span><span class="p">).</span><span class="nx">getDisplayValues</span><span class="p">()</span>
+  <span class="p">};</span>
+  <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="dl">'</span><span class="s1">method</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">payload</span><span class="dl">'</span> <span class="p">:</span> <span class="nx">parameters</span>
+  <span class="p">};</span>
+  <span class="nx">UrlFetchApp</span><span class="p">.</span><span class="nx">fetch</span><span class="p">(</span><span class="nx">baseUrl</span><span class="p">,</span><span class="nx">options</span><span class="p">);</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="참고사이트">참고사이트</h2>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">site</span><span class="pi">:</span> <span class="s">https://developers.google.com/apps-script</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#google-apps-script" class="page__taxonomy-item" rel="tag">Google Apps Script</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#open-api" class="page__taxonomy-item" rel="tag">Open API</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-05-11">May 11, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5Bgoogle+apps+script%5D+%EC%82%AC%EC%9A%A9+%EB%B0%A9%EB%B2%95+%EC%A1%B0%EC%82%AC%20http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fopenapi-google-apps-script%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fopenapi-google-apps-script%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fopenapi-google-apps-script%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/open%20api/openapi-google-sheets-api/" class="pagination--pager" title="[google sheets api] get, update, replace 사용 방법 조사
+">이전</a>
+    
+    
+      <a href="/open%20api/language-python-java-selenium/" class="pagination--pager" title="[작성중][selenium] 간단한 사용 방법
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/open%20api/language-python-java-selenium/" rel="permalink">[작성중][selenium] 간단한 사용 방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">크롤링을 위해 selenium을 쓰면서 알게된 것들을 정리하기 하려고 합니다. 추가로 naver cookie를 용한 자동 로그인 테스트를 하겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/open%20api/openapi-google-sheets-api/" rel="permalink">[google sheets api] get, update, replace 사용 방법 조사
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">자동화를 지향하다보니 chatbot에게 요청을 통해 정보 조회, 외부 API연동 등을 하고 싶어하는 사용자가 생겼습니다. 유행이될지 혁신이 된지 사용해봐야 알거 같습니다.
+이번 포스팅에서는 google spreadsheet api를 여러 방법으로 활용해 보겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-design-pattern/" rel="permalink">[Python] Design pattern
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">디자인 패턴은 GoF (Gang of Four)가 문제 해결책으로 처음 제시한 개념입니다. GoF 란 GOF의 디자인 패턴을 집필한 네 명의 저자를 지칭합니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-jpa/" rel="permalink">[JPA] Springboot + JPA + MySql
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">많이 늦었지만 JPA를 써볼려고 합니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
