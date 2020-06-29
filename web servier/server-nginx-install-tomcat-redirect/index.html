@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[작성중][selenium] 간단한 사용 방법 - TMM</title>
-<meta name="description" content="Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다. ">
+<!-- begin _includes/seo.html --><title>[Nginx] Nginx 설치 및 Tomcat 연동 - TMM</title>
+<meta name="description" content="Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다.  목표    Ubuntu 16에 Eginx 설치   8080 포트 eginx 연결   옵션 설정   권한 변경   Nginx 설치  설치 sudo apt-get install nginx   제거 sudo apt-get remove nginx   버전확인 nginx -v nginx version: nginx/1.10.3 (Ubuntu)  ">
 
 
   <meta name="author" content="To much meng">
@@ -19,11 +19,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[작성중][selenium] 간단한 사용 방법">
-<meta property="og:url" content="http://localhost:4000/open%20api/server-nginx-install-tomcat-redirect/">
+<meta property="og:title" content="[Nginx] Nginx 설치 및 Tomcat 연동">
+<meta property="og:url" content="http://localhost:4000/web%20servier/server-nginx-install-tomcat-redirect/">
 
 
-  <meta property="og:description" content="Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다. ">
+  <meta property="og:description" content="Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다.  목표    Ubuntu 16에 Eginx 설치   8080 포트 eginx 연결   옵션 설정   권한 변경   Nginx 설치  설치 sudo apt-get install nginx   제거 sudo apt-get remove nginx   버전확인 nginx -v nginx version: nginx/1.10.3 (Ubuntu)  ">
 
 
 
@@ -35,7 +35,7 @@
 
 
 
-  <meta property="article:modified_time" content="2020-05-15T22:05:34+09:00">
+  <meta property="article:modified_time" content="2020-06-29T22:05:34+09:00">
 
 
 
@@ -44,7 +44,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/open%20api/server-nginx-install-tomcat-redirect/">
+<link rel="canonical" href="http://localhost:4000/web%20servier/server-nginx-install-tomcat-redirect/">
 
 
 
@@ -279,15 +279,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[작성중][selenium] 간단한 사용 방법">
-    <meta itemprop="description" content="Nginx란 Apache같은 웹 서버입니다.Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다.방화벽이 없는 상태에서 진행 했습니다.">
+    <meta itemprop="headline" content="[Nginx] Nginx 설치 및 Tomcat 연동">
+    <meta itemprop="description" content="Nginx란 Apache같은 웹 서버입니다.Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다.방화벽이 없는 상태에서 진행 했습니다.목표  Ubuntu 16에 Eginx 설치  8080 포트 eginx 연결  옵션 설정  권한 변경Nginx 설치설치sudo apt-get install nginx제거sudo apt-get remove nginx버전확인nginx -vnginx version: nginx/1.10.3 (Ubuntu)">
     <meta itemprop="datePublished" content="2020-06-29T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2020-05-15T22:05:34+09:00">
+    <meta itemprop="dateModified" content="2020-06-29T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[작성중][selenium] 간단한 사용 방법
+          <h1 id="page-title" class="page__title" itemprop="headline">[Nginx] Nginx 설치 및 Tomcat 연동
 </h1>
           
         </header>
@@ -303,6 +303,7 @@
   <li><a href="#nginx-설치">Nginx 설치</a>
     <ul>
       <li><a href="#설치">설치</a></li>
+      <li><a href="#제거">제거</a></li>
       <li><a href="#버전확인">버전확인</a></li>
       <li><a href="#기본-화면-접속">기본 화면 접속</a></li>
       <li><a href="#서비스-시작">서비스 시작</a></li>
@@ -311,8 +312,9 @@
   <li><a href="#설정">설정</a>
     <ul>
       <li><a href="#nginx-설치-위치">Nginx 설치 위치</a></li>
+      <li><a href="#폴더-구조">폴더 구조</a></li>
       <li><a href="#설정-파일">설정 파일</a></li>
-      <li><a href="#8008-포트-연결">8008 포트 연결</a></li>
+      <li><a href="#8080-포트-연결">8080 포트 연결</a></li>
       <li><a href="#기본-설정-제거">기본 설정 제거</a></li>
       <li><a href="#nginx-reload">nginx reload</a></li>
     </ul>
@@ -341,6 +343,10 @@ Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>nginx
 </code></pre></div></div>
 
+<h3 id="제거">제거</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get remove nginx
+</code></pre></div></div>
+
 <h3 id="버전확인">버전확인</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nginx <span class="nt">-v</span>
 nginx version: nginx/1.10.3 <span class="o">(</span>Ubuntu<span class="o">)</span>
@@ -360,51 +366,75 @@ nginx version: nginx/1.10.3 <span class="o">(</span>Ubuntu<span class="o">)</spa
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/nginx
 </code></pre></div></div>
 
+<h3 id="폴더-구조">폴더 구조</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── conf.d <span class="c"># (디렉토리) nginx.conf에서 불러들일 수 있는 파일을 저장</span>
+├── fastcgi.conf <span class="c"># (파일) FastCGI 환경설정 파일</span>
+├── fastcgi_params
+├── koi-utf
+├── koi-win
+├── mime.types
+├── nginx.conf <span class="c"># 접속자 수, 동작 프로세스 수 등 퍼포먼스에 관한 설정들</span>
+├── proxy_params
+├── scgi_params
+├── sites-available <span class="c"># 비활성화된 사이트들의 설정 파일들이 위치한다.</span>
+│   └── default
+├── sites-enabled <span class="c"># 활성화된 사이트들의 설정 파일들이 위치한다. 존재하지 않은 경우에는 디렉토리를 직접 만들 수도 있다.</span>
+│   └── default -&gt; /etc/nginx/sites-available/default
+├── snippets
+│   ├── fastcgi-php.conf
+│   └── snakeoil.conf
+├── uwsgi_params
+└── win-utf
+</code></pre></div></div>
+
 <h3 id="설정-파일">설정 파일</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/nginx/nginx.cnf
 </code></pre></div></div>
 
-<h3 id="8008-포트-연결">8008 포트 연결</h3>
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/nginx/conf.d/tomcat.conf
+<h3 id="8080-포트-연결">8080 포트 연결</h3>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/nginx/sites-enabled/tomcat.conf
 </code></pre></div></div>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream tomcat <span class="o">{</span>
-    ip_hash<span class="p">;</span>
-    server 127.0.0.1:8080<span class="p">;</span>
+   ip_hash<span class="p">;</span>
+   server 127.0.0.1:8080<span class="p">;</span>
 <span class="o">}</span>
-
+ 
 server <span class="o">{</span>
-    listen       80<span class="p">;</span>
-    server_name  localhost<span class="p">;</span>
-
-    access_log   /var/log/nginx/tomcat_access.log<span class="p">;</span>
-
-    location / <span class="o">{</span>
-        proxy_set_header        Host <span class="nv">$http_host</span><span class="p">;</span>
-        proxy_set_header        X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
-        proxy_set_header        X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
-        proxy_set_header        X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
-        proxy_set_header        X-NginX-Proxy <span class="nb">true</span><span class="p">;</span>
-
-        proxy_pass http://localhost:8080<span class="p">;</span>
-        proxy_redirect          off<span class="p">;</span>
-        charset utf-8<span class="p">;</span>
-    <span class="o">}</span>
+   listen       80<span class="p">;</span>
+   server_name  localhost<span class="p">;</span>
+ 
+   access_log   /var/log/nginx/tomcat_access.log<span class="p">;</span>
+ 
+   location / <span class="o">{</span>
+       proxy_set_header        Host <span class="nv">$http_host</span><span class="p">;</span>
+       proxy_set_header        X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
+       proxy_set_header        X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+       proxy_set_header        X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
+       proxy_set_header        X-NginX-Proxy <span class="nb">true</span><span class="p">;</span>
+ 
+       proxy_pass http://localhost:8080<span class="p">;</span>
+       proxy_redirect          off<span class="p">;</span>
+       charset utf-8<span class="p">;</span>
+   <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>
 
 <h3 id="기본-설정-제거">기본 설정 제거</h3>
 <ul>
-  <li>nginx.conf의 include /etc/nginx/sites-enabled/*; 를 주석처리 해서 default 설정을 꺼준다.</li>
+  <li>default 심볼릭링크 삭제</li>
 </ul>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /etc/nginx/sites-enabled
+<span class="nv">$ </span><span class="nb">rm</span> <span class="nt">-f</span> default
+</code></pre></div></div>
 
 <h3 id="nginx-reload">nginx reload</h3>
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nginx <span class="nt">-s</span> reload
 </code></pre></div></div>
 
 <h2 id="참고사이트">참고사이트</h2>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">site</span><span class="pi">:</span> 
-  <span class="s">install &amp; description</span><span class="pi">:</span> <span class="s">https://twpower.github.io/39-install-nginx-on-ubuntu-by-using-apt-get-and-brief-explanation</span>
-  <span class="na">tomcat redirect</span><span class="pi">:</span> <span class="s">https://storyofdream.tistory.com/124</span>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">site</span><span class="pi">:</span>
+ <span class="s">install &amp; description</span><span class="pi">:</span> <span class="s">https://whatisthenext.tistory.com/123</span>
 </code></pre></div></div>
 
         
@@ -426,7 +456,7 @@ server <span class="o">{</span>
     
       
       
-      <a href="/tags/#google-apps-script" class="page__taxonomy-item" rel="tag">Google Apps Script</a>
+      <a href="/tags/#nginx" class="page__taxonomy-item" rel="tag">Nginx</a>
     
     </span>
   </p>
@@ -447,14 +477,14 @@ server <span class="o">{</span>
     
       
       
-      <a href="/categories/#open-api" class="page__taxonomy-item" rel="tag">Open API</a>
+      <a href="/categories/#web-servier" class="page__taxonomy-item" rel="tag">Web Servier</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-05-15">May 15, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-06-29">June 29, 2020</time></p>
         
       </footer>
 
@@ -463,11 +493,11 @@ server <span class="o">{</span>
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D%5Bselenium%5D+%EA%B0%84%EB%8B%A8%ED%95%9C+%EC%82%AC%EC%9A%A9+%EB%B0%A9%EB%B2%95%20http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fserver-nginx-install-tomcat-redirect%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BNginx%5D+Nginx+%EC%84%A4%EC%B9%98+%EB%B0%8F+Tomcat+%EC%97%B0%EB%8F%99%20http%3A%2F%2Flocalhost%3A4000%2Fweb%2520servier%2Fserver-nginx-install-tomcat-redirect%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fserver-nginx-install-tomcat-redirect%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fweb%2520servier%2Fserver-nginx-install-tomcat-redirect%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fserver-nginx-install-tomcat-redirect%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fweb%2520servier%2Fserver-nginx-install-tomcat-redirect%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
