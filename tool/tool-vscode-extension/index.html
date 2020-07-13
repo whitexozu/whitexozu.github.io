@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[JPA] Springboot + JPA + MySql - TMM</title>
-<meta name="description" content="많이 늦었지만 JPA를 써볼려고 합니다. ">
+<!-- begin _includes/seo.html --><title>[작성중][VSCode] Frontend 개발을 위한 확장 프로그램 - TMM</title>
+<meta name="description" content="Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다. Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다. ">
 
 
   <meta name="author" content="To much meng">
@@ -19,32 +19,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[JPA] Springboot + JPA + MySql">
-<meta property="og:url" content="http://localhost:4000/framework/framework-springboot-jpa/">
+<meta property="og:title" content="[작성중][VSCode] Frontend 개발을 위한 확장 프로그램">
+<meta property="og:url" content="http://localhost:4000/tool/tool-vscode-extension/">
 
 
-  <meta property="og:description" content="많이 늦었지만 JPA를 써볼려고 합니다. ">
-
-
-
+  <meta property="og:description" content="Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다. Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다. ">
 
 
 
 
-  <meta property="article:published_time" content="2020-04-10T00:00:00+09:00">
 
 
 
-  <meta property="article:modified_time" content="2020-04-10T22:05:34+09:00">
+  <meta property="article:published_time" content="2020-06-29T00:00:00+09:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2020-07-13T22:05:34+09:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/framework/framework-springboot-jpa/">
+
+<link rel="canonical" href="http://localhost:4000/tool/tool-vscode-extension/">
 
 
 
@@ -279,15 +279,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[JPA] Springboot + JPA + MySql">
-    <meta itemprop="description" content="많이 늦었지만 JPA를 써볼려고 합니다.">
-    <meta itemprop="datePublished" content="2020-04-10T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2020-04-10T22:05:34+09:00">
+    <meta itemprop="headline" content="[작성중][VSCode] Frontend 개발을 위한 확장 프로그램">
+    <meta itemprop="description" content="Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다.Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다.">
+    <meta itemprop="datePublished" content="2020-06-29T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-07-13T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[JPA] Springboot + JPA + MySql
+          <h1 id="page-title" class="page__title" itemprop="headline">[작성중][VSCode] Frontend 개발을 위한 확장 프로그램
 </h1>
           
         </header>
@@ -299,57 +299,58 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#개발-환경">개발 환경</a></li>
-  <li><a href="#dependency-추가">dependency 추가</a></li>
-  <li><a href="#applicationyml-수정">application.yml 수정</a></li>
-  <li><a href="#entity-생성">Entity 생성</a></li>
-  <li><a href="#repository-생성">Repository 생성</a></li>
-  <li><a href="#contorller-service-생성">Contorller, Service 생성</a></li>
-  <li><a href="#column-옵션">Column 옵션</a></li>
+  <li><a href="#목표">목표</a></li>
+  <li><a href="#prettier">Prettier</a>
+    <ul>
+      <li><a href="#설치">설치</a></li>
+      <li><a href="#설정">설정</a></li>
+    </ul>
+  </li>
+  <li><a href="#eslint-설치">Eslint 설치</a></li>
   <li><a href="#참고사이트">참고사이트</a></li>
 </ul>
 
             </nav>
           </aside>
         
-        <p>많이 늦었지만 JPA를 써볼려고 합니다.</p>
+        <p>Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다.
+Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다.</p>
 
-<h3 id="개발-환경">개발 환경</h3>
-<p>gradle + lombok + mysql + jpa</p>
+<h2 id="목표">목표</h2>
 
-<h3 id="dependency-추가">dependency 추가</h3>
-<p>dependencies {
-    implementation ‘org.springframework.boot:spring-boot-starter-data-jpa’
-    implementation ‘org.springframework.boot:spring-boot-starter-oauth2-client’
-    implementation ‘org.springframework.boot:spring-boot-starter-security’
-    implementation ‘org.springframework.boot:spring-boot-starter-thymeleaf’
-    implementation ‘org.springframework.boot:spring-boot-starter-web’
-    compileOnly ‘org.projectlombok:lombok’
-    developmentOnly ‘org.springframework.boot:spring-boot-devtools’
-    runtimeOnly ‘mysql:mysql-connector-java’
-    annotationProcessor ‘org.projectlombok:lombok’
-    testImplementation ‘org.springframework.boot:spring-boot-starter-test’
-    testImplementation ‘org.springframework.security:spring-security-test’
-}</p>
+<ul>
+  <li>Perttier 설치 및 설정</li>
+  <li>ESlint 설치</li>
+</ul>
 
-<h3 id="applicationyml-수정">application.yml 수정</h3>
+<h2 id="prettier">Prettier</h2>
 
-<h3 id="entity-생성">Entity 생성</h3>
+<h3 id="설치">설치</h3>
 
-<h3 id="repository-생성">Repository 생성</h3>
+<ul>
+  <li>VSCode Extensions 메뉴에서 “Prettier - Code formatter” 를 검색 해서 설치합니다.</li>
+</ul>
 
-<h3 id="contorller-service-생성">Contorller, Service 생성</h3>
+<h3 id="설정">설정</h3>
 
-<h3 id="column-옵션">Column 옵션</h3>
+<ul>
+  <li>설정 화면으로 이동해서 UI로 설정이 가능하지만 settings.json 파일을 열어 한번에 입력합니다.</li>
+</ul>
 
-<h3 id="참고사이트">참고사이트</h3>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">https://velog.io/@junwoo4690/Spring-Boot-JPA-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0-erjpw41nl7</span>
-<span class="s">https://blog.woniper.net/255?category=531455</span>
-<span class="s">https://joont92.github.io/jpa/%EC%97%94%ED%8B%B0%ED%8B%B0-%EA%B0%92%EC%9D%84-%EB%B3%80%ED%99%98%ED%95%B4%EC%84%9C-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0-Converter/</span>
-<span class="s">언더바</span><span class="pi">:</span> <span class="s">https://sunpil.tistory.com/302</span>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"editor.formatOnSave"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="err">,</span><span class="w">
+</span><span class="nl">"editor.formatOnType"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="err">,</span><span class="w">
+</span><span class="nl">"prettier.tabWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="err">,</span><span class="w">
+</span><span class="nl">"prettier.printWidth"</span><span class="p">:</span><span class="w"> </span><span class="mi">160</span><span class="err">,</span><span class="w">
+</span><span class="nl">"prettier.singleQuote"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="err">,</span><span class="w">
+</span><span class="nl">"prettier.semi"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></code></pre></div></div>
 
-<span class="s">https://galid1.tistory.com/531</span>
-<span class="s">https://goddaehee.tistory.com/95</span>
+<h2 id="eslint-설치">Eslint 설치</h2>
+
+<h2 id="참고사이트">참고사이트</h2>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">site</span><span class="pi">:</span>
+    <span class="na">prettier options</span><span class="pi">:</span> <span class="s">https://ux.stories.pe.kr/150</span>
 </code></pre></div></div>
 
         
@@ -371,11 +372,7 @@
     
       
       
-      <a href="/tags/#jpa" class="page__taxonomy-item" rel="tag">JPA</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#springboot" class="page__taxonomy-item" rel="tag">Springboot</a>
+      <a href="/tags/#vscode" class="page__taxonomy-item" rel="tag">vscode</a>
     
     </span>
   </p>
@@ -396,14 +393,14 @@
     
       
       
-      <a href="/categories/#framework" class="page__taxonomy-item" rel="tag">Framework</a>
+      <a href="/categories/#tool" class="page__taxonomy-item" rel="tag">Tool</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-04-10">April 10, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-07-13">July 13, 2020</time></p>
         
       </footer>
 
@@ -412,23 +409,22 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BJPA%5D+Springboot+%2B+JPA+%2B+MySql%20http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-springboot-jpa%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D%5BVSCode%5D+Frontend+%EA%B0%9C%EB%B0%9C%EC%9D%84+%EC%9C%84%ED%95%9C+%ED%99%95%EC%9E%A5+%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%20http%3A%2F%2Flocalhost%3A4000%2Ftool%2Ftool-vscode-extension%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-springboot-jpa%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Ftool%2Ftool-vscode-extension%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fframework%2Fframework-springboot-jpa%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Ftool%2Ftool-vscode-extension%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/language/language-python-tesseract/" class="pagination--pager" title="[Python] Mac tesseract 설치 및 실행
+      <a href="/web%20servier/server-nginx-install-tomcat-redirect/" class="pagination--pager" title="[Nginx] Nginx 설치 및 Tomcat 연동
 ">이전</a>
     
     
-      <a href="/language/language-python-design-pattern/" class="pagination--pager" title="[Python] Design pattern
-">다음</a>
+      <a href="#" class="pagination--pager disabled">다음</a>
     
   </nav>
 
@@ -442,27 +438,6 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/tool/tool-vscode-extension/" rel="permalink">[작성중][VSCode] Frontend 개발을 위한 확장 프로그램
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다.
-Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다.
-</p>
-  </article>
-</div>
-
         
           
 
@@ -526,6 +501,27 @@ Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결
     </h2>
     
     <p class="archive__item-excerpt" itemprop="description">google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/open%20api/openapi-google-sheets-api/" rel="permalink">[google sheets api] get, update, replace 사용 방법 조사
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">자동화를 지향하다보니 chatbot에게 요청을 통해 정보 조회, 외부 API연동 등을 하고 싶어하는 사용자가 생겼습니다. 유행이될지 혁신이 된지 사용해봐야 알거 같습니다.
+이번 포스팅에서는 google spreadsheet api를 여러 방법으로 활용해 보겠습니다.
 </p>
   </article>
 </div>
