@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[작성중][Python] Image processing - TMM</title>
-<meta name="description" content="Image to text ">
+<!-- begin _includes/seo.html --><title>[NVM] Window10에 NVM 설치 - TMM</title>
+<meta name="description" content="프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다. ">
 
 
   <meta name="author" content="To much meng">
@@ -19,32 +19,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[작성중][Python] Image processing">
-<meta property="og:url" content="http://localhost:4000/language/language-python-image-processing/">
+<meta property="og:title" content="[NVM] Window10에 NVM 설치">
+<meta property="og:url" content="http://localhost:4000/vm/vm-nvm-window-install/">
 
 
-  <meta property="og:description" content="Image to text ">
-
-
-
+  <meta property="og:description" content="프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다. ">
 
 
 
 
-  <meta property="article:published_time" content="2020-03-12T00:00:00+09:00">
 
 
 
-  <meta property="article:modified_time" content="2020-03-12T22:05:34+09:00">
+  <meta property="article:published_time" content="2020-07-16T00:00:00+09:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2020-07-16T22:05:34+09:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/language/language-python-image-processing/">
+
+<link rel="canonical" href="http://localhost:4000/vm/vm-nvm-window-install/">
 
 
 
@@ -279,15 +279,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[작성중][Python] Image processing">
-    <meta itemprop="description" content="Image to text">
-    <meta itemprop="datePublished" content="2020-03-12T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2020-03-12T22:05:34+09:00">
+    <meta itemprop="headline" content="[NVM] Window10에 NVM 설치">
+    <meta itemprop="description" content="프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다.">
+    <meta itemprop="datePublished" content="2020-07-16T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-07-16T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[작성중][Python] Image processing
+          <h1 id="page-title" class="page__title" itemprop="headline">[NVM] Window10에 NVM 설치
 </h1>
           
         </header>
@@ -299,29 +299,88 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#사용-라이브러리">사용 라이브러리</a></li>
-  <li><a href="#설치-방법-및-실행">설치 방법 및 실행</a></li>
-  <li><a href="#참고-사이트">참고 사이트</a></li>
+  <li><a href="#목표">목표</a></li>
+  <li><a href="#nvm-설치">NVM 설치</a></li>
+  <li><a href="#nodejs-npm-설치-및-버전-변경">nodejs, npm 설치 및 버전 변경</a>
+    <ul>
+      <li><a href="#nodejs-버전-확인">nodejs 버전 확인</a></li>
+      <li><a href="#nodejs-npm-설치">nodejs, npm 설치</a></li>
+      <li><a href="#nodejs-npm-설치-확인-및-사용">nodejs, npm 설치 확인 및 사용</a></li>
+    </ul>
+  </li>
+  <li><a href="#참고사이트">참고사이트</a></li>
 </ul>
 
             </nav>
           </aside>
         
-        <p>Image to text</p>
+        <p>프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다.</p>
 
-<h2 id="사용-라이브러리">사용 라이브러리</h2>
-<p>pytesseract
-cv2
-numpy
-matplotlib</p>
+<h2 id="목표">목표</h2>
 
-<h2 id="설치-방법-및-실행">설치 방법 및 실행</h2>
+<ul>
+  <li>Window10에 NVM 설치</li>
+  <li>nodejs, npm 설치 및 버전 변경</li>
+</ul>
 
-<h2 id="참고-사이트">참고 사이트</h2>
+<h2 id="nvm-설치">NVM 설치</h2>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">OpenCV 설치</span><span class="pi">:</span> <span class="s">https://dejavuqa.tistory.com/228</span>
+<ol>
+  <li>https://github.com/coreybutler/nvm-windows/releases 에서 nvm-setup.zip 파일을 다운로드 받습니다.</li>
+  <li>압출을 풀고 설치를 시작합니다.</li>
+  <li>버전 확인</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nvm version
+v12.1.0
 </code></pre></div></div>
 
+<h2 id="nodejs-npm-설치-및-버전-변경">nodejs, npm 설치 및 버전 변경</h2>
+
+<h3 id="nodejs-버전-확인">nodejs 버전 확인</h3>
+
+<ul>
+  <li><a href="https://nodejs.org/ko/download/releases/">https://nodejs.org/ko/download/releases/</a></li>
+</ul>
+
+<h3 id="nodejs-npm-설치">nodejs, npm 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nvm <span class="nb">help</span>
+<span class="nv">$ </span>nvm <span class="nb">install </span>v12.18.0
+</code></pre></div></div>
+
+<h3 id="nodejs-npm-설치-확인-및-사용">nodejs, npm 설치 확인 및 사용</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>nvm <span class="nb">install </span>v12.18.0
+<span class="nv">$ </span>nvm use v12.18.0
+<span class="nv">$ </span>nvm list
+        v8.16.0
+       v10.15.3
+        v12.1.0
+-&gt;     v12.18.0
+       v13.14.0
+default -&gt; node <span class="o">(</span>-&gt; v13.14.0<span class="o">)</span>
+node -&gt; stable <span class="o">(</span>-&gt; v13.14.0<span class="o">)</span> <span class="o">(</span>default<span class="o">)</span>
+stable -&gt; 13.14 <span class="o">(</span>-&gt; v13.14.0<span class="o">)</span> <span class="o">(</span>default<span class="o">)</span>
+iojs -&gt; N/A <span class="o">(</span>default<span class="o">)</span>
+lts/<span class="k">*</span> -&gt; lts/erbium <span class="o">(</span>-&gt; N/A<span class="o">)</span>
+lts/argon -&gt; v4.9.1 <span class="o">(</span>-&gt; N/A<span class="o">)</span>
+lts/boron -&gt; v6.17.1 <span class="o">(</span>-&gt; N/A<span class="o">)</span>
+lts/carbon -&gt; v8.17.0 <span class="o">(</span>-&gt; N/A<span class="o">)</span>
+lts/dubnium -&gt; v10.21.0 <span class="o">(</span>-&gt; N/A<span class="o">)</span>
+lts/erbium -&gt; v12.18.2 <span class="o">(</span>-&gt; N/A<span class="o">)</span>
+
+<span class="nv">$ </span>node <span class="nt">-v</span>
+v12.18.0
+<span class="nv">$ </span>npm <span class="nt">-v</span>
+6.14.4
+</code></pre></div></div>
+
+<h2 id="참고사이트">참고사이트</h2>
+
+<ul>
+  <li><a href="https://seunghyun90.tistory.com/52">https://seunghyun90.tistory.com/52</a></li>
+</ul>
 
         
       </section>
@@ -342,11 +401,7 @@ matplotlib</p>
     
       
       
-      <a href="/tags/#image-processing" class="page__taxonomy-item" rel="tag">Image processing</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#python" class="page__taxonomy-item" rel="tag">Python</a>
+      <a href="/tags/#nvm" class="page__taxonomy-item" rel="tag">nvm</a>
     
     </span>
   </p>
@@ -367,14 +422,14 @@ matplotlib</p>
     
       
       
-      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">Language</a>
+      <a href="/categories/#vm" class="page__taxonomy-item" rel="tag">VM</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-12">March 12, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-07-16">July 16, 2020</time></p>
         
       </footer>
 
@@ -383,23 +438,22 @@ matplotlib</p>
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D%5BPython%5D+Image+processing%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-image-processing%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BNVM%5D+Window10%EC%97%90+NVM+%EC%84%A4%EC%B9%98%20http%3A%2F%2Flocalhost%3A4000%2Fvm%2Fvm-nvm-window-install%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-image-processing%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fvm%2Fvm-nvm-window-install%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-image-processing%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fvm%2Fvm-nvm-window-install%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/framework/framework-email-template-zurbfoundation/" class="pagination--pager" title="[Email template] ZURB Foundation
+      <a href="/tool/tool-vscode-extension/" class="pagination--pager" title="[작성중][VSCode] Frontend 개발을 위한 확장 프로그램
 ">이전</a>
     
     
-      <a href="/language/language-python-jupyter-matplotlib/" class="pagination--pager" title="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
-">다음</a>
+      <a href="#" class="pagination--pager disabled">다음</a>
     
   </nav>
 
@@ -413,26 +467,6 @@ matplotlib</p>
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/vm/vm-nvm-window-install/" rel="permalink">[NVM] Window10에 NVM 설치
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다.
-</p>
-  </article>
-</div>
-
         
           
 
@@ -497,6 +531,26 @@ Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결
     </h2>
     
     <p class="archive__item-excerpt" itemprop="description">크롤링을 위해 selenium을 쓰면서 알게된 것들을 정리하기 하려고 합니다. 추가로 naver cookie를 용한 자동 로그인 테스트를 하겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/open%20api/openapi-google-apps-script/" rel="permalink">[google apps script] 사용 방법 조사
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다.
 </p>
   </article>
 </div>

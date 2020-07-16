@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-13T11:15:07+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[작성중][VSCode] Frontend 개발을 위한 확장 프로그램</title><link href="http://localhost:4000/tool/tool-vscode-extension/" rel="alternate" type="text/html" title="[작성중][VSCode] Frontend 개발을 위한 확장 프로그램" /><published>2020-06-29T00:00:00+09:00</published><updated>2020-07-13T22:05:34+09:00</updated><id>http://localhost:4000/tool/tool-vscode-extension</id><content type="html" xml:base="http://localhost:4000/tool/tool-vscode-extension/">&lt;p&gt;Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-07-16T17:19:23+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[NVM] Window10에 NVM 설치</title><link href="http://localhost:4000/vm/vm-nvm-window-install/" rel="alternate" type="text/html" title="[NVM] Window10에 NVM 설치" /><published>2020-07-16T00:00:00+09:00</published><updated>2020-07-16T22:05:34+09:00</updated><id>http://localhost:4000/vm/vm-nvm-window-install</id><content type="html" xml:base="http://localhost:4000/vm/vm-nvm-window-install/">&lt;p&gt;프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;목표&quot;&gt;목표&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Window10에 NVM 설치&lt;/li&gt;
+  &lt;li&gt;nodejs, npm 설치 및 버전 변경&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;nvm-설치&quot;&gt;NVM 설치&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;https://github.com/coreybutler/nvm-windows/releases 에서 nvm-setup.zip 파일을 다운로드 받습니다.&lt;/li&gt;
+  &lt;li&gt;압출을 풀고 설치를 시작합니다.&lt;/li&gt;
+  &lt;li&gt;버전 확인&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nvm version
+v12.1.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;nodejs-npm-설치-및-버전-변경&quot;&gt;nodejs, npm 설치 및 버전 변경&lt;/h2&gt;
+
+&lt;h3 id=&quot;nodejs-버전-확인&quot;&gt;nodejs 버전 확인&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://nodejs.org/ko/download/releases/&quot;&gt;https://nodejs.org/ko/download/releases/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;nodejs-npm-설치&quot;&gt;nodejs, npm 설치&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nvm &lt;span class=&quot;nb&quot;&gt;help&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nvm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;v12.18.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;nodejs-npm-설치-확인-및-사용&quot;&gt;nodejs, npm 설치 확인 및 사용&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nvm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;v12.18.0
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nvm use v12.18.0
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;nvm list
+        v8.16.0
+       v10.15.3
+        v12.1.0
+-&amp;gt;     v12.18.0
+       v13.14.0
+default -&amp;gt; node &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; v13.14.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+node -&amp;gt; stable &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; v13.14.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+stable -&amp;gt; 13.14 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; v13.14.0&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+iojs -&amp;gt; N/A &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;default&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+lts/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; -&amp;gt; lts/erbium &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; N/A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+lts/argon -&amp;gt; v4.9.1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; N/A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+lts/boron -&amp;gt; v6.17.1 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; N/A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+lts/carbon -&amp;gt; v8.17.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; N/A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+lts/dubnium -&amp;gt; v10.21.0 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; N/A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+lts/erbium -&amp;gt; v12.18.2 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;-&amp;gt; N/A&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+v12.18.0
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+6.14.4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://seunghyun90.tistory.com/52&quot;&gt;https://seunghyun90.tistory.com/52&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="nvm" /><summary type="html">프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다.</summary></entry><entry><title type="html">[작성중][VSCode] Frontend 개발을 위한 확장 프로그램</title><link href="http://localhost:4000/tool/tool-vscode-extension/" rel="alternate" type="text/html" title="[작성중][VSCode] Frontend 개발을 위한 확장 프로그램" /><published>2020-07-13T00:00:00+09:00</published><updated>2020-07-13T22:05:34+09:00</updated><id>http://localhost:4000/tool/tool-vscode-extension</id><content type="html" xml:base="http://localhost:4000/tool/tool-vscode-extension/">&lt;p&gt;Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다.
 Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;목표&quot;&gt;목표&lt;/h2&gt;
@@ -999,7 +1065,138 @@ server &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 
 &lt;span class=&quot;s&quot;&gt;https://galid1.tistory.com/531&lt;/span&gt;
 &lt;span class=&quot;s&quot;&gt;https://goddaehee.tistory.com/95&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Springboot" /><category term="JPA" /><summary type="html">많이 늦었지만 JPA를 써볼려고 합니다.</summary></entry><entry><title type="html">[Python] 이미지를 판단 후 자동 실행하는 메크로</title><link href="http://localhost:4000/language/language-python-macro-find-image/" rel="alternate" type="text/html" title="[Python] 이미지를 판단 후 자동 실행하는 메크로" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-macro-find-image</id><content type="html" xml:base="http://localhost:4000/language/language-python-macro-find-image/">&lt;p&gt;사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.&lt;br /&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Springboot" /><category term="JPA" /><summary type="html">많이 늦었지만 JPA를 써볼려고 합니다.</summary></entry><entry><title type="html">[Python] Mac tesseract 설치 및 실행</title><link href="http://localhost:4000/language/language-python-tesseract/" rel="alternate" type="text/html" title="[Python] Mac tesseract 설치 및 실행" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-tesseract</id><content type="html" xml:base="http://localhost:4000/language/language-python-tesseract/">&lt;p&gt;이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;환경&quot;&gt;환경&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OS : MacOS Catalina 10.15.3
+Tesseract : 4.1.1
+Python: 3.5
+pytesseract: 0.3.3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
+
+&lt;h3 id=&quot;tesseract-설치&quot;&gt;tesseract 설치&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;테서렉트를 활용하기 위해서는 테서렉트 먼저 설치해야합니다. &lt;br /&gt;
+homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytesseract를 설치하면 설치된 테서렉트를 랩핑하여 사용하는 방식입니다.&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract-lang
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
+  tesseract 4.1.1
+  leptonica-1.79.0
+  libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1
+  Found AVX2
+  Found AVX
+  Found FMA
+  Found SSE
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pytesseract
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip show pytesseract
+  Name: pytesseract
+  Version: 0.3.3
+  Summary: Python-tesseract is a python wrapper &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Google&lt;span class=&quot;se&quot;&gt;\'&lt;/span&gt;s Tesseract-OCR
+  Home-page: https://github.com/madmaze/pytesseract
+  Author: Samuel Hoffstaetter
+  Author-email: samuel@hoffstaetter.com
+  License: Apache License 2.0
+  Location: /Users/whitexozu/opt/anaconda3/envs/py35/lib/python3.5/site-packages
+  Requires: Pillow
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;tessdata-다운로드&quot;&gt;tessdata 다운로드&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/code&gt;에서 tessdata를 다운받은후 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/Cellar/tesseract/4.1.1/share/tessdata&lt;/code&gt;에 kor.tessdata를 복사합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
+tesseract 4.1.1을 설치했는데 trainedata를 기본 경로가&lt;br /&gt;
+&lt;em&gt;/usr/local/Cellar/tesseract-lang/4.0.0/share/tessdata&lt;/em&gt;를 바라보고 있습니다.&lt;br /&gt;
+그리고 당연하게 파일을 못 읽는다는 오류가 납니다. 오류 메시지는 아래과 같습니다.&lt;br /&gt;
+&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Error: Tesseract (legacy) engine requested, but components are not present in /usr/local/share/tessdata/kor.traineddata!! Failed loading language 'kor' Tesseract couldn't load any languages! Could not initialize tesseract.&quot;&lt;/code&gt;&lt;br /&gt;
+&lt;br /&gt;
+&lt;em&gt;tessdata 다운로드&lt;/em&gt; 를 참고하여 파일을 받았다면 경로를 변경하면 됩니다. 경로를 설정하는 방법은 두가지가 있습니다. 첫번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; 옵션을 사용하는 것이고 두번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zprofile&lt;/code&gt;에 경로 정보를 export 하면 됩니다.&lt;br /&gt;
+export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt;/p&gt;
+
+&lt;h2 id=&quot;실행&quot;&gt;실행&lt;/h2&gt;
+
+&lt;p&gt;두가지 방식으로 실행이 가능합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;명렁어-입력-실행&quot;&gt;명렁어 입력 실행&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치된 텍서렉트에 명령어를 직접 입력하여 실행하는 방식&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract ~/Pictures/text_image/itemText.png stdout &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; kor &lt;span class=&quot;nt&quot;&gt;--oem&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--psm&lt;/span&gt; 3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pytesseract-실행&quot;&gt;pytesseract 실행&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;python 에서 실행&lt;/p&gt;
+
+    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytesseract&lt;/span&gt;
+    
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    
+  &lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itemText.png'&lt;/span&gt;
+        
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'-l eng --oem 1 --psm 3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Read image from disk
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;im&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMREAD_COLOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Run tesseract OCR on image
+&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pytesseract&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    
+  &lt;span class=&quot;c1&quot;&gt;# Print recognized text
+&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python tesseract_test.py
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;옵션-설명&quot;&gt;옵션 설명&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-stdout / output&lt;/code&gt; : 화면 출력, 파일 출력&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-L&lt;/code&gt; : 언어 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--oem&lt;/code&gt; : OCR Engine Mode
+    &lt;ul&gt;
+      &lt;li&gt;0: Legacy engine only.&lt;/li&gt;
+      &lt;li&gt;1: Neural nets LSTM engine only.&lt;/li&gt;
+      &lt;li&gt;2: Legacy + LSTM engines.&lt;/li&gt;
+      &lt;li&gt;3: Default, based on what is available.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--psm&lt;/code&gt; : PSM은 텍스트 구조에 대한 추가 정보 선택&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; : tessdata file path 지정&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://tariat.tistory.com/703&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;https://m.blog.naver.com/tommybee/221307497468&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="tesseract" /><summary type="html">이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.</summary></entry><entry><title type="html">[Python] 이미지를 판단 후 자동 실행하는 메크로</title><link href="http://localhost:4000/language/language-python-macro-find-image/" rel="alternate" type="text/html" title="[Python] 이미지를 판단 후 자동 실행하는 메크로" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-macro-find-image</id><content type="html" xml:base="http://localhost:4000/language/language-python-macro-find-image/">&lt;p&gt;사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다.&lt;br /&gt;
 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다.&lt;br /&gt;
 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다.&lt;br /&gt;
 &lt;br /&gt;
@@ -1257,186 +1454,4 @@ server &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 &lt;ul&gt;
   &lt;li&gt;빵형의 개발도상국 - 집행검키우기: &lt;a href=&quot;https://www.youtube.com/watch?v=1jePlDVw2rQ&quot;&gt;https://www.youtube.com/watch?v=1jePlDVw2rQ&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;pyautogui: &lt;a href=&quot;https://pyautogui.readthedocs.io/en/latest/&quot;&gt;https://pyautogui.readthedocs.io/en/latest/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Macro" /><summary type="html">사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다. 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다. 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다. 순서는 간단합니다.</summary></entry><entry><title type="html">[Python] Mac tesseract 설치 및 실행</title><link href="http://localhost:4000/language/language-python-tesseract/" rel="alternate" type="text/html" title="[Python] Mac tesseract 설치 및 실행" /><published>2020-03-26T00:00:00+09:00</published><updated>2020-03-26T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-tesseract</id><content type="html" xml:base="http://localhost:4000/language/language-python-tesseract/">&lt;p&gt;이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;환경&quot;&gt;환경&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;OS : MacOS Catalina 10.15.3
-Tesseract : 4.1.1
-Python: 3.5
-pytesseract: 0.3.3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
-
-&lt;h3 id=&quot;tesseract-설치&quot;&gt;tesseract 설치&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;테서렉트를 활용하기 위해서는 테서렉트 먼저 설치해야합니다. &lt;br /&gt;
-homebrew를 통해서 설치가 가능하며 파이선은 pip를 통해서 pytesseract를 설치하면 설치된 테서렉트를 랩핑하여 사용하는 방식입니다.&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tesseract-lang
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
-  tesseract 4.1.1
-  leptonica-1.79.0
-  libgif 5.2.1 : libjpeg 9d : libpng 1.6.37 : libtiff 4.1.0 : zlib 1.2.11 : libwebp 1.1.0 : libopenjp2 2.3.1
-  Found AVX2
-  Found AVX
-  Found FMA
-  Found SSE
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pytesseract
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip show pytesseract
-  Name: pytesseract
-  Version: 0.3.3
-  Summary: Python-tesseract is a python wrapper &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;Google&lt;span class=&quot;se&quot;&gt;\'&lt;/span&gt;s Tesseract-OCR
-  Home-page: https://github.com/madmaze/pytesseract
-  Author: Samuel Hoffstaetter
-  Author-email: samuel@hoffstaetter.com
-  License: Apache License 2.0
-  Location: /Users/whitexozu/opt/anaconda3/envs/py35/lib/python3.5/site-packages
-  Requires: Pillow
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;tessdata-다운로드&quot;&gt;tessdata 다운로드&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/code&gt;에서 tessdata를 다운받은후 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/local/Cellar/tesseract/4.1.1/share/tessdata&lt;/code&gt;에 kor.tessdata를 복사합니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p class=&quot;notice--info&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt;&lt;br /&gt;
-tesseract 4.1.1을 설치했는데 trainedata를 기본 경로가&lt;br /&gt;
-&lt;em&gt;/usr/local/Cellar/tesseract-lang/4.0.0/share/tessdata&lt;/em&gt;를 바라보고 있습니다.&lt;br /&gt;
-그리고 당연하게 파일을 못 읽는다는 오류가 납니다. 오류 메시지는 아래과 같습니다.&lt;br /&gt;
-&lt;br /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;Error: Tesseract (legacy) engine requested, but components are not present in /usr/local/share/tessdata/kor.traineddata!! Failed loading language 'kor' Tesseract couldn't load any languages! Could not initialize tesseract.&quot;&lt;/code&gt;&lt;br /&gt;
-&lt;br /&gt;
-&lt;em&gt;tessdata 다운로드&lt;/em&gt; 를 참고하여 파일을 받았다면 경로를 변경하면 됩니다. 경로를 설정하는 방법은 두가지가 있습니다. 첫번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; 옵션을 사용하는 것이고 두번째는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt; 또는 &lt;code class=&quot;highlighter-rouge&quot;&gt;.zprofile&lt;/code&gt;에 경로 정보를 export 하면 됩니다.&lt;br /&gt;
-export TESSDATA_PREFIX=”/usr/local/Cellar/tesseract/4.1.1/share/tessdata”&lt;/p&gt;
-
-&lt;h2 id=&quot;실행&quot;&gt;실행&lt;/h2&gt;
-
-&lt;p&gt;두가지 방식으로 실행이 가능합니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;명렁어-입력-실행&quot;&gt;명렁어 입력 실행&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;설치된 텍서렉트에 명령어를 직접 입력하여 실행하는 방식&lt;/p&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;tesseract ~/Pictures/text_image/itemText.png stdout &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt; kor &lt;span class=&quot;nt&quot;&gt;--oem&lt;/span&gt; 1 &lt;span class=&quot;nt&quot;&gt;--psm&lt;/span&gt; 3
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;pytesseract-실행&quot;&gt;pytesseract 실행&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;python 에서 실행&lt;/p&gt;
-
-    &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
-  &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pytesseract&lt;/span&gt;
-    
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'__main__'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    
-  &lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'itemText.png'&lt;/span&gt;
-        
-  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'-l eng --oem 1 --psm 3'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Read image from disk
-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;im&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IMREAD_COLOR&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Run tesseract OCR on image
-&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pytesseract&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    
-  &lt;span class=&quot;c1&quot;&gt;# Print recognized text
-&lt;/span&gt;  &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python tesseract_test.py
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;옵션-설명&quot;&gt;옵션 설명&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-stdout / output&lt;/code&gt; : 화면 출력, 파일 출력&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-L&lt;/code&gt; : 언어 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--oem&lt;/code&gt; : OCR Engine Mode
-    &lt;ul&gt;
-      &lt;li&gt;0: Legacy engine only.&lt;/li&gt;
-      &lt;li&gt;1: Neural nets LSTM engine only.&lt;/li&gt;
-      &lt;li&gt;2: Legacy + LSTM engines.&lt;/li&gt;
-      &lt;li&gt;3: Default, based on what is available.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--psm&lt;/code&gt; : PSM은 텍스트 구조에 대한 추가 정보 선택&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;--tessdata-dir&lt;/code&gt; : tessdata file path 지정&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;참고-사이트&quot;&gt;참고 사이트&lt;/h2&gt;
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;https://github.com/tesseract-ocr/tessdata&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;https://tariat.tistory.com/703&lt;/span&gt;
-&lt;span class=&quot;s&quot;&gt;https://m.blog.naver.com/tommybee/221307497468&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="tesseract" /><summary type="html">이미지를 택스트로 변경 할 수 있는 테슬렉트를 설치후 실행해 보겠습니다.</summary></entry><entry><title type="html">[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드</title><link href="http://localhost:4000/server/server-mysql-upgrade/" rel="alternate" type="text/html" title="[MySQL] Centos7 에서 MySQL 5.6을 5.7로 업그레이드" /><published>2020-03-20T00:00:00+09:00</published><updated>2020-03-20T22:05:34+09:00</updated><id>http://localhost:4000/server/server-mysql-upgrade</id><content type="html" xml:base="http://localhost:4000/server/server-mysql-upgrade/">&lt;p&gt;5.6은 JSON 지원이 안되네요.&lt;br /&gt;
-그래서 업그레이드를 하기로 했습니다.&lt;/p&gt;
-
-&lt;h3 id=&quot;서비스-중지&quot;&gt;서비스 중지&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl stop mysqld
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql56-백업&quot;&gt;MySQL5.6 백업&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo cp&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; /var/lib/mysql /var/lib/mysql.original
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql56-rpm-삭제&quot;&gt;MySQL5.6 RPM 삭제&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum remove mysql-community-release
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;wget-설치&quot;&gt;wget 설치&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;yum &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;wget
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql57-다운로드&quot;&gt;MySQL5.7 다운로드&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql-설치&quot;&gt;MySQL 설치&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rpm &lt;span class=&quot;nt&quot;&gt;-ivh&lt;/span&gt; mysql57-community-release-el7-11.noarch.rpm
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mysql-서버-업그레이드&quot;&gt;MySQL 서버 업그레이드&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;yum update mysql-server
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;서비스-시작&quot;&gt;서비스 시작&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;systemctl start mysqld
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;확인&quot;&gt;확인&lt;/h3&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mysql &lt;span class=&quot;nt&quot;&gt;-u&lt;/span&gt; root &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt;
-Enter password: 
-Welcome to the MySQL monitor.  Commands end with &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; or &lt;span class=&quot;se&quot;&gt;\g&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
-Your MySQL connection &lt;span class=&quot;nb&quot;&gt;id &lt;/span&gt;is 5
-Server version: 5.7.29 MySQL Community Server &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;GPL&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-
-Copyright &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;c&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; 2000, 2020, Oracle and/or its affiliates. All rights reserved.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type &lt;span class=&quot;s1&quot;&gt;'help;'&lt;/span&gt; or &lt;span class=&quot;s1&quot;&gt;'\h'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;help. Type &lt;span class=&quot;s1&quot;&gt;'\c'&lt;/span&gt; to clear the current input statement.
-
-mysql&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="MySQL" /><category term="upgrade" /><summary type="html">5.6은 JSON 지원이 안되네요. 그래서 업그레이드를 하기로 했습니다.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="Macro" /><summary type="html">사내메신저로 MS Temas를 쓰는데 모든 채팅방을 공유하라는 지시가 내려왔습니다. 윗분 칭찬한 내용들이 많은데 보여드리면 어색해 질까봐 다 지우려고 합니다. 팀즈는 방파 기능이 없는거 같아 채팅 내용을 하나하나 지우는 메크로를 만들었습니다. 순서는 간단합니다.</summary></entry></feed>

@@ -143,4 +143,9 @@ var store = [{
         "excerpt":"Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다. Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다.   목표      Perttier 설치 및 설정   ESlint 설치   Prettier   설치      VSCode Extensions 메뉴에서 “Prettier - Code formatter” 를 검색 해서 설치합니다.   설정      설정 화면으로 이동해서 UI로 설정이 가능하지만 settings.json 파일을 열어 한번에 입력합니다.   \"editor.formatOnSave\": true, \"editor.formatOnType\": true, \"prettier.tabWidth\": 4, \"prettier.printWidth\": 160, \"prettier.singleQuote\": true, \"prettier.semi\": false   Eslint 설치   참고사이트   site:     prettier options: https://ux.stories.pe.kr/150  ","categories": ["Tool"],
         "tags": ["vscode"],
         "url": "http://localhost:4000/tool/tool-vscode-extension/",
+        "teaser":null},{
+        "title": "[NVM] Window10에 NVM 설치",
+        "excerpt":"프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다.   목표      Window10에 NVM 설치   nodejs, npm 설치 및 버전 변경   NVM 설치      https://github.com/coreybutler/nvm-windows/releases 에서 nvm-setup.zip 파일을 다운로드 받습니다.   압출을 풀고 설치를 시작합니다.   버전 확인   $ nvm version v12.1.0   nodejs, npm 설치 및 버전 변경   nodejs 버전 확인      https://nodejs.org/ko/download/releases/   nodejs, npm 설치   $ nvm help $ nvm install v12.18.0   nodejs, npm 설치 확인 및 사용   $ nvm install v12.18.0 $ nvm use v12.18.0 $ nvm list         v8.16.0        v10.15.3         v12.1.0 -&gt;     v12.18.0        v13.14.0 default -&gt; node (-&gt; v13.14.0) node -&gt; stable (-&gt; v13.14.0) (default) stable -&gt; 13.14 (-&gt; v13.14.0) (default) iojs -&gt; N/A (default) lts/* -&gt; lts/erbium (-&gt; N/A) lts/argon -&gt; v4.9.1 (-&gt; N/A) lts/boron -&gt; v6.17.1 (-&gt; N/A) lts/carbon -&gt; v8.17.0 (-&gt; N/A) lts/dubnium -&gt; v10.21.0 (-&gt; N/A) lts/erbium -&gt; v12.18.2 (-&gt; N/A)  $ node -v v12.18.0 $ npm -v 6.14.4   참고사이트      https://seunghyun90.tistory.com/52  ","categories": ["VM"],
+        "tags": ["nvm"],
+        "url": "http://localhost:4000/vm/vm-nvm-window-install/",
         "teaser":null}]
