@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>[Nginx] Nginx 설치 및 Tomcat 연동 - TMM</title>
-<meta name="description" content="Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다.  목표    Ubuntu 16에 Eginx 설치   8080 포트 eginx 연결   옵션 설정   권한 변경   Nginx 설치  설치 sudo apt-get install nginx   제거 sudo apt-get remove nginx   버전확인 nginx -v nginx version: nginx/1.10.3 (Ubuntu)  ">
+<meta name="description" content="Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다. ">
 
 
   <meta name="author" content="To much meng">
@@ -23,7 +23,7 @@
 <meta property="og:url" content="http://localhost:4000/web%20servier/server-nginx-install-tomcat-redirect/">
 
 
-  <meta property="og:description" content="Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다.  목표    Ubuntu 16에 Eginx 설치   8080 포트 eginx 연결   옵션 설정   권한 변경   Nginx 설치  설치 sudo apt-get install nginx   제거 sudo apt-get remove nginx   버전확인 nginx -v nginx version: nginx/1.10.3 (Ubuntu)  ">
+  <meta property="og:description" content="Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다. ">
 
 
 
@@ -280,7 +280,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="[Nginx] Nginx 설치 및 Tomcat 연동">
-    <meta itemprop="description" content="Nginx란 Apache같은 웹 서버입니다.Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다.방화벽이 없는 상태에서 진행 했습니다.목표  Ubuntu 16에 Eginx 설치  8080 포트 eginx 연결  옵션 설정  권한 변경Nginx 설치설치sudo apt-get install nginx제거sudo apt-get remove nginx버전확인nginx -vnginx version: nginx/1.10.3 (Ubuntu)">
+    <meta itemprop="description" content="Nginx란 Apache같은 웹 서버입니다.Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다.방화벽이 없는 상태에서 진행 했습니다.">
     <meta itemprop="datePublished" content="2020-06-29T00:00:00+09:00">
     <meta itemprop="dateModified" content="2020-06-29T22:05:34+09:00">
 
@@ -314,9 +314,17 @@
       <li><a href="#nginx-설치-위치">Nginx 설치 위치</a></li>
       <li><a href="#폴더-구조">폴더 구조</a></li>
       <li><a href="#설정-파일">설정 파일</a></li>
-      <li><a href="#8080-포트-연결">8080 포트 연결</a></li>
+      <li><a href="#upstream-설정">upstream 설정</a></li>
+      <li><a href="#upstream-방식으로-8080-포트-연결">upstream 방식으로 8080 포트 연결</a></li>
       <li><a href="#기본-설정-제거">기본 설정 제거</a></li>
       <li><a href="#nginx-reload">nginx reload</a></li>
+    </ul>
+  </li>
+  <li><a href="#nginx-load-balancer">nginx load balancer</a>
+    <ul>
+      <li><a href="#기존-upstream-파일에-서버-추가">기존 upstream 파일에 서버 추가</a></li>
+      <li><a href="#load-balancing-methods부하-부산-규칙">Load balancing methods(부하 부산 규칙)</a></li>
+      <li><a href="#method-options">method options</a></li>
     </ul>
   </li>
   <li><a href="#참고사이트">참고사이트</a></li>
@@ -330,6 +338,7 @@ Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결
 방화벽이 없는 상태에서 진행 했습니다.</p>
 
 <h2 id="목표">목표</h2>
+
 <ul>
   <li>Ubuntu 16에 Eginx 설치</li>
   <li>8080 포트 eginx 연결</li>
@@ -340,22 +349,27 @@ Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결
 <h2 id="nginx-설치">Nginx 설치</h2>
 
 <h3 id="설치">설치</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get <span class="nb">install </span>nginx
 </code></pre></div></div>
 
 <h3 id="제거">제거</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>apt-get remove nginx
 </code></pre></div></div>
 
 <h3 id="버전확인">버전확인</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nginx <span class="nt">-v</span>
 nginx version: nginx/1.10.3 <span class="o">(</span>Ubuntu<span class="o">)</span>
 </code></pre></div></div>
 
 <h3 id="기본-화면-접속">기본 화면 접속</h3>
+
 <p><a href="http://localhost">http://localhost</a></p>
 
 <h3 id="서비스-시작">서비스 시작</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service nginx status
 <span class="nb">sudo </span>service nginx restart
 </code></pre></div></div>
@@ -363,10 +377,12 @@ nginx version: nginx/1.10.3 <span class="o">(</span>Ubuntu<span class="o">)</spa
 <h2 id="설정">설정</h2>
 
 <h3 id="nginx-설치-위치">Nginx 설치 위치</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/nginx
 </code></pre></div></div>
 
 <h3 id="폴더-구조">폴더 구조</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── conf.d <span class="c"># (디렉토리) nginx.conf에서 불러들일 수 있는 파일을 저장</span>
 ├── fastcgi.conf <span class="c"># (파일) FastCGI 환경설정 파일</span>
 ├── fastcgi_params
@@ -388,31 +404,51 @@ nginx version: nginx/1.10.3 <span class="o">(</span>Ubuntu<span class="o">)</spa
 </code></pre></div></div>
 
 <h3 id="설정-파일">설정 파일</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/nginx/nginx.cnf
 </code></pre></div></div>
 
-<h3 id="8080-포트-연결">8080 포트 연결</h3>
+<h3 id="upstream-설정">upstream 설정</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream &lt;업스트림 이름&gt; <span class="o">{</span>
+  &lt;로드밸런스 타입: defulat는 round-robin&gt;
+  server &lt;host1&gt;:&lt;port1&gt;
+  ...
+  server &lt;host2&gt;:&lt;port2&gt;
+<span class="o">}</span>
+server <span class="o">{</span>
+  ...
+  location &lt;url&gt;<span class="o">{</span>
+    proxy_pass http://&lt;업스트림 이름&gt;
+  <span class="o">}</span>
+  ...
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="upstream-방식으로-8080-포트-연결">upstream 방식으로 8080 포트 연결</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/nginx/sites-enabled/tomcat.conf
 </code></pre></div></div>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream tomcat <span class="o">{</span>
    ip_hash<span class="p">;</span>
    server 127.0.0.1:8080<span class="p">;</span>
 <span class="o">}</span>
- 
+
 server <span class="o">{</span>
    listen       80<span class="p">;</span>
    server_name  localhost<span class="p">;</span>
- 
+
    access_log   /var/log/nginx/tomcat_access.log<span class="p">;</span>
- 
+
    location / <span class="o">{</span>
        proxy_set_header        Host <span class="nv">$http_host</span><span class="p">;</span>
        proxy_set_header        X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
        proxy_set_header        X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
        proxy_set_header        X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
        proxy_set_header        X-NginX-Proxy <span class="nb">true</span><span class="p">;</span>
- 
-       proxy_pass http://localhost:8080<span class="p">;</span>
+
+       proxy_pass http://tomcat<span class="p">;</span>
        proxy_redirect          off<span class="p">;</span>
        charset utf-8<span class="p">;</span>
    <span class="o">}</span>
@@ -420,6 +456,7 @@ server <span class="o">{</span>
 </code></pre></div></div>
 
 <h3 id="기본-설정-제거">기본 설정 제거</h3>
+
 <ul>
   <li>default 심볼릭링크 삭제</li>
 </ul>
@@ -429,13 +466,80 @@ server <span class="o">{</span>
 </code></pre></div></div>
 
 <h3 id="nginx-reload">nginx reload</h3>
+
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nginx <span class="nt">-s</span> reload
 </code></pre></div></div>
 
-<h2 id="참고사이트">참고사이트</h2>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">site</span><span class="pi">:</span>
- <span class="s">install &amp; description</span><span class="pi">:</span> <span class="s">https://whatisthenext.tistory.com/123</span>
+<h2 id="nginx-load-balancer">nginx load balancer</h2>
+
+<h3 id="기존-upstream-파일에-서버-추가">기존 upstream 파일에 서버 추가</h3>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/nginx/sites-enabled/tomcat.conf
 </code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upstream tomcat <span class="o">{</span>
+   ip_hash<span class="p">;</span>
+   server 127.0.0.1:8080<span class="p">;</span>
+   server 127.0.0.1:8081<span class="p">;</span>
+<span class="o">}</span>
+
+server <span class="o">{</span>
+   listen       80<span class="p">;</span>
+   server_name  localhost<span class="p">;</span>
+
+   access_log   /var/log/nginx/tomcat_access.log<span class="p">;</span>
+
+   location / <span class="o">{</span>
+       proxy_set_header        Host <span class="nv">$http_host</span><span class="p">;</span>
+       proxy_set_header        X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
+       proxy_set_header        X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+       proxy_set_header        X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
+       proxy_set_header        X-NginX-Proxy <span class="nb">true</span><span class="p">;</span>
+
+       proxy_pass http://tomcat<span class="p">;</span>
+       proxy_redirect          off<span class="p">;</span>
+       charset utf-8<span class="p">;</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="load-balancing-methods부하-부산-규칙">Load balancing methods(부하 부산 규칙)</h3>
+
+<ul>
+  <li>round-robin(디폴트) - 그냥 돌아가면서 분배한다.</li>
+  <li>hash - 해시한 값으로 분배한다 쓰려면 hash <키> 형태로 쓴다. ex)hash \$remote_addr &lt;- 이는 ip_hash와 같다.</키></li>
+  <li>ip_hash - 아이피로 해싱해서 분배한다.</li>
+  <li>random - 그냥 랜덤으로 분배한다.</li>
+  <li>least_conn - 연결수가 가장 적은 서버를 선택해서 분배, 근데 가중치를 고려함</li>
+  <li>least_time - 연결수가 가자 적으면서 평균 응답시간이 가장 적은 쪽을 선택해서분배</li>
+</ul>
+
+<h3 id="method-options">method options</h3>
+
+<ul>
+  <li>weight - 가중치를 둬서 더많이 가게 한다.</li>
+  <li>max_conns - 최대 연결 한계를 정한다</li>
+  <li>max_fails - 최대 실패 한계를 정한다. 최대 실패횟수에 도달하면 서버가 죽은것으로 간주한다.</li>
+  <li>fail_timeout - 시간을 정한다. 이 시간을 넘어서도 응답하지 않으면 서버가 죽은것으로 간주한다.</li>
+  <li>backup - 이 서버는 백업서버로 간주하고 다른 메인 서버가 죽었을때 동작한다. load balancing methods가 hash나 random일때는 무의미</li>
+  <li>down - 표시한 서버는 사용치 않는다.</li>
+</ul>
+
+<h2 id="참고사이트">참고사이트</h2>
+
+<ul>
+  <li>install &amp; description:
+    <ul>
+      <li>https://whatisthenext.tistory.com/123</li>
+    </ul>
+  </li>
+  <li>load balancer:
+    <ul>
+      <li>https://kamang-it.tistory.com/entry/WebServernginxnginx%EB%A1%9C-%EB%A1%9C%EB%93%9C%EB%B0%B8%EB%9F%B0%EC%8B%B1-%ED%95%98%EA%B8%B0</li>
+      <li>https://velog.io/@minholee_93/Nginx-Load-Balancer</li>
+    </ul>
+  </li>
+</ul>
 
         
       </section>
