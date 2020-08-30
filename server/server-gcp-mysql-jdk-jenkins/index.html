@@ -329,6 +329,7 @@
 </ol>
 
 <h3 id="mysql-57">Mysql 5.7</h3>
+
 <ol>
   <li>설치
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
@@ -337,34 +338,40 @@
 <span class="nv">$ </span><span class="nb">sudo </span>systemctl start mysqld
 </code></pre></div>    </div>
   </li>
-  <li>보안설정
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /usr/bin/mysql_secure_installation  
+  <li>
+    <p>보안설정</p>
 
-Set root password? [Y/n] y  
-New password:  
-Re-enter new password:  
-... Success!  
-Remove anonymous users? [Y/n] y  
-... Success!  
-Disallow root login remotely? [Y/n] y  
-... Success!  
-Remove test database and access to it? [Y/n] y  
-... Success!  
-Reload privilege tables now? [Y/n] y  
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ /usr/bin/mysql_secure_installation
+
+Set root password? [Y/n] y
+New password:
+Re-enter new password:
+... Success!
+Remove anonymous users? [Y/n] y
+... Success!
+Disallow root login remotely? [Y/n] y
+... Success!
+Remove test database and access to it? [Y/n] y
+... Success!
+Reload privilege tables now? [Y/n] y
 ... Success!
 </code></pre></div>    </div>
   </li>
-  <li>사용자 생성
+  <li>
+    <p>사용자 생성</p>
+
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-u</span> root <span class="nt">-p</span>
 
-<span class="o">&gt;</span> CREATE DATABASE mcs<span class="p">;</span>  
-<span class="o">&gt;</span> grant all privileges on mcs.<span class="k">*</span> to <span class="s1">'jhkim'</span>@<span class="s1">'localhost'</span> identified by <span class="s1">'p@ssWord'</span><span class="p">;</span>  
+<span class="o">&gt;</span> CREATE DATABASE mcs<span class="p">;</span>
+<span class="o">&gt;</span> grant all privileges on mcs.<span class="k">*</span> to <span class="s1">'jhkim'</span>@<span class="s1">'localhost'</span> identified by <span class="s1">'p@ssWord'</span><span class="p">;</span>
 <span class="o">&gt;</span> grant all privileges on mcs.<span class="k">*</span> to <span class="s1">'jhkim'</span>@<span class="s1">'%'</span> identified by <span class="s1">'p@ssWord'</span><span class="p">;</span>
 </code></pre></div>    </div>
   </li>
-  <li>문자열 설정
+  <li>
+    <p>문자열 설정</p>
+
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/my.cnf
-    
+
 <span class="o">[</span>clinet]
 default-character-set <span class="o">=</span> utf8
 
@@ -380,13 +387,14 @@ default-character-set <span class="o">=</span> utf-8
 </code></pre></div>    </div>
   </li>
   <li>접속
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-u</span> jhkim <span class="nt">-p</span>  
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mysql <span class="nt">-u</span> jhkim <span class="nt">-p</span>
 <span class="nv">$ </span>mysql <span class="nt">-h</span> <span class="o">[</span>server ip] <span class="nt">-P</span> 3306 <span class="nt">-u</span> jhkim <span class="nt">-p</span>
 </code></pre></div>    </div>
   </li>
 </ol>
 
 <h3 id="jdk-설치">JDK 설치</h3>
+
 <ol>
   <li>다운로드<br />
 jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 GCP 서버에 업로드 한다.</li>
@@ -396,22 +404,24 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
 </code></pre></div>    </div>
   </li>
   <li>자바링크 생성
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo mv </span>jdk1.8.0_241 /usr/local  
-<span class="nv">$ </span><span class="nb">cd</span> /usr/local  
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo mv </span>jdk1.8.0_241 /usr/local
+<span class="nv">$ </span><span class="nb">cd</span> /usr/local
 <span class="nv">$ </span><span class="nb">sudo ln</span> <span class="nt">-s</span> jdk1.8.0_241/ java
 </code></pre></div>    </div>
   </li>
-  <li>환경변수 등록
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile  
+  <li>
+    <p>환경변수 등록</p>
 
-<span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/local/java  
-<span class="nv">CLASSPATH</span><span class="o">=</span>.:<span class="nv">$JAVA_HOME</span>/bin/tools.jar  
-<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin  
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile
+
+<span class="nv">JAVA_HOME</span><span class="o">=</span>/usr/local/java
+<span class="nv">CLASSPATH</span><span class="o">=</span>.:<span class="nv">$JAVA_HOME</span>/bin/tools.jar
+<span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin
 <span class="nb">export </span>JAVA_HOME CLASSPATH PATH
 </code></pre></div>    </div>
   </li>
   <li>적용 및 확인
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source</span> /etc/profile  
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">source</span> /etc/profile
 <span class="nv">$ </span>java <span class="nt">-version</span>
 </code></pre></div>    </div>
   </li>
@@ -435,7 +445,9 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
 <span class="nv">$ </span><span class="nb">sudo ln</span> <span class="nt">-s</span> apache-maven-3.5.2/ maven
 </code></pre></div>    </div>
   </li>
-  <li>환경변수 등록
+  <li>
+    <p>환경변수 등록</p>
+
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/profile
 
 <span class="nv">MAVEN_HOME</span><span class="o">=</span>/usr/local/maven
@@ -477,9 +489,11 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
 <span class="c"># 에러 확인, 자바 경로가 잘못됐다고 나옴</span>
 </code></pre></div>    </div>
   </li>
-  <li>java 경로 설정
+  <li>
+    <p>java 경로 설정</p>
+
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/init.d/jenkins
-    
+
 <span class="c"># jdk 로 검색하면 80 라인 근처에</span>
 /etc/alternatives/java
 /usr/lib/jvm/java-1.8.0/bin/java
@@ -490,7 +504,7 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
 /usr/lib/jvm/jre-11.0/bin/java
 /usr/lib/jvm/java-11-openjdk-amd64
 /usr/bin/java
-    
+
 /usr/local/java/bin/java <span class="c"># 한줄 추가</span>
 </code></pre></div>    </div>
   </li>
@@ -510,9 +524,11 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
 <p>젠킨스 설치시 기본사용자는 jenkins 입니다. 이걸 내 계정으로 변경하여 ssh접속이 되도록 합니다.</p>
 
 <ol>
-  <li>유저명 변경
+  <li>
+    <p>유저명 변경</p>
+
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/sysconfig/jenkins
-    
+
 <span class="nv">JENKINS_USER</span><span class="o">=</span><span class="s2">"jenkins"</span> <span class="c"># 내계정으로 변경</span>
 </code></pre></div>    </div>
   </li>
@@ -529,14 +545,23 @@ jdk-8u241-linux-x64.tar.gz 랑 비슷한 버젼을 오라클에서 다운받아 
 </ol>
 
 <h3 id="git-설치">git 설치</h3>
+
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>git
 <span class="nv">$ </span>git <span class="nt">--version</span>
 </code></pre></div></div>
 
 <h3 id="gcp-ssh-접속-설정">gcp ssh 접속 설정</h3>
-<blockquote>
-  <p><a href="https://ruuci.tistory.com/6">https://ruuci.tistory.com/6</a></p>
-</blockquote>
+
+<ol>
+  <li>ssh key 생성
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>ssh-keygen <span class="nt">-t</span> rsa <span class="nt">-f</span> rsa-gcp-key <span class="nt">-C</span> <span class="s2">"whitexozu@gmail.com"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>GCP 사이트 &gt; Compute Engin &gt; 메타데이터 메뉴로 이동</li>
+  <li>SSH키 텝 클릭 &gt; 수정 버튼 클릭 &gt; pub 키 등록</li>
+  <li>기존에 키를 등록한 적이 있다면 ~/.ssh/known_hosts 파일내의 GCP IP정보를 검색해서 삭제합니다.</li>
+  <li>ssh -i ~/.ssh/rsa-gcp-key [계정]@[GCP IP] 로 접속</li>
+</ol>
 
         
       </section>
