@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[작성중][selenium] 간단한 사용 방법 - TMM</title>
-<meta name="description" content="크롤링을 위해 selenium을 쓰면서 알게된 것들을 정리하기 하려고 합니다. 추가로 naver cookie를 용한 자동 로그인 테스트를 하겠습니다. ">
+<!-- begin _includes/seo.html --><title>[Ubuntu 18] Initial install package - TMM</title>
+<meta name="description" content="ubuntu 18 설치 후 초기 설치들입니다. ">
 
 
   <meta name="author" content="To much meng">
@@ -19,32 +19,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[작성중][selenium] 간단한 사용 방법">
-<meta property="og:url" content="http://localhost:4000/open%20api/language-python-java-selenium/">
+<meta property="og:title" content="[Ubuntu 18] Initial install package">
+<meta property="og:url" content="http://localhost:4000/server/server-ubuntu-init-package/">
 
 
-  <meta property="og:description" content="크롤링을 위해 selenium을 쓰면서 알게된 것들을 정리하기 하려고 합니다. 추가로 naver cookie를 용한 자동 로그인 테스트를 하겠습니다. ">
-
-
-
+  <meta property="og:description" content="ubuntu 18 설치 후 초기 설치들입니다. ">
 
 
 
 
-  <meta property="article:published_time" content="2020-05-15T00:00:00+09:00">
 
 
 
-  <meta property="article:modified_time" content="2020-05-15T22:05:34+09:00">
+  <meta property="article:published_time" content="2020-09-10T00:00:00+09:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2020-09-10T22:05:34+09:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/open%20api/language-python-java-selenium/">
+
+<link rel="canonical" href="http://localhost:4000/server/server-ubuntu-init-package/">
 
 
 
@@ -279,15 +279,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[작성중][selenium] 간단한 사용 방법">
-    <meta itemprop="description" content="크롤링을 위해 selenium을 쓰면서 알게된 것들을 정리하기 하려고 합니다. 추가로 naver cookie를 용한 자동 로그인 테스트를 하겠습니다.">
-    <meta itemprop="datePublished" content="2020-05-15T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2020-05-15T22:05:34+09:00">
+    <meta itemprop="headline" content="[Ubuntu 18] Initial install package">
+    <meta itemprop="description" content="ubuntu 18 설치 후 초기 설치들입니다.">
+    <meta itemprop="datePublished" content="2020-09-10T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-09-10T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[작성중][selenium] 간단한 사용 방법
+          <h1 id="page-title" class="page__title" itemprop="headline">[Ubuntu 18] Initial install package
 </h1>
           
         </header>
@@ -299,26 +299,143 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#목표">목표</a></li>
-  <li><a href="#참고사이트">참고사이트</a></li>
+  <li><a href="#노트북-전원유지">노트북 전원유지</a></li>
+  <li><a href="#root-비밀번호-설정">root 비밀번호 설정</a></li>
+  <li><a href="#network">network</a></li>
+  <li><a href="#ssh">ssh</a></li>
+  <li><a href="#add-user">add user</a></li>
+  <li><a href="#git">git</a></li>
+  <li><a href="#dockr">dockr</a></li>
+  <li><a href="#docker-compose">docker-compose</a></li>
+  <li><a href="#nvm">nvm</a></li>
+  <li><a href="#참고-사이트">참고 사이트</a></li>
 </ul>
 
             </nav>
           </aside>
         
-        <p>크롤링을 위해 selenium을 쓰면서 알게된 것들을 정리하기 하려고 합니다. 추가로 naver cookie를 용한 자동 로그인 테스트를 하겠습니다.</p>
+        <p>ubuntu 18 설치 후 초기 설치들입니다.</p>
 
-<h2 id="목표">목표</h2>
+<h2 id="노트북-전원유지">노트북 전원유지</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/systemd/logind.conf
+
+...
+<span class="c">#HandleLidSwitch=suspend</span>
+<span class="c"># 위 내용을 아래 내용으로 변경</span>
+<span class="nv">HandleLidSwitch</span><span class="o">=</span>ignore
+...
+
+<span class="nv">$ </span>systemctl restart systemd-logind
+</code></pre></div></div>
+
+<h2 id="root-비밀번호-설정">root 비밀번호 설정</h2>
+
 <ul>
-  <li>Robots.txt 확인</li>
-  <li>java, python에서 selenimu 실행</li>
-  <li>selenium 으로 iframe 코드 확인</li>
-  <li></li>
+  <li>sudo passwd</li>
 </ul>
 
-<h2 id="참고사이트">참고사이트</h2>
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">site</span><span class="pi">:</span> 
+<h2 id="network">network</h2>
+
+<ul>
+  <li>sudo lshw -C Network
+    <ul>
+      <li>네트워크 확인</li>
+    </ul>
+  </li>
+  <li>/etc/netplan</li>
+</ul>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">network</span><span class="pi">:</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">renderer</span><span class="pi">:</span> <span class="s">networkd</span>
+  <span class="na">ethernets</span><span class="pi">:</span>
+    <span class="na">enp2s0</span><span class="pi">:</span>
+     <span class="na">dhcp4</span><span class="pi">:</span> <span class="s">no</span>
+     <span class="na">addresses</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">192.168.1.101/24</span><span class="pi">]</span>
+     <span class="na">gateway4</span><span class="pi">:</span> <span class="s">192.168.1.1</span>
+     <span class="na">nameservers</span><span class="pi">:</span>
+       <span class="na">addresses</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">210.220.163.82</span><span class="pi">,</span><span class="nv">219.250.36.130</span><span class="pi">]</span>
+  <span class="na">wifis</span><span class="pi">:</span>
+    <span class="na">wlp2s0</span><span class="pi">:</span>
+      <span class="na">dhcp4</span><span class="pi">:</span> <span class="s">no</span>
+      <span class="na">dhcp6</span><span class="pi">:</span> <span class="s">no</span>
+      <span class="na">addresses</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">192.168.0.102/24</span><span class="pi">]</span>
+      <span class="na">gateway4</span><span class="pi">:</span> <span class="s">192.168.0.1</span>
+      <span class="na">nameservers</span><span class="pi">:</span>
+        <span class="na">addresses</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">210.220.163.82</span><span class="pi">,</span><span class="nv">219.250.36.130</span><span class="pi">]</span>
+      <span class="na">access-points</span><span class="pi">:</span>
+        <span class="s">MGHouse</span>
+          <span class="s">password</span><span class="pi">:</span> <span class="m">04010501</span>
 </code></pre></div></div>
+
+<h2 id="ssh">ssh</h2>
+
+<ul>
+  <li>sudo agt-get install ssh</li>
+  <li>sudo service ssh start</li>
+</ul>
+
+<h2 id="add-user">add user</h2>
+
+<ul>
+  <li>sudo adduser meetphin</li>
+  <li>sudo passwd meetphin</li>
+  <li>sudo groupadd dev</li>
+  <li>sudo usermod -a -G sudo meetphin</li>
+  <li>sudo usermod -d /var/dev/python user</li>
+</ul>
+
+<h2 id="git">git</h2>
+
+<ul>
+  <li>sudo apt-get install git</li>
+</ul>
+
+<h2 id="dockr">dockr</h2>
+
+<ul>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>curl -fsSL https://get.docker.com/</td>
+          <td>sudo sh</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h2 id="docker-compose">docker-compose</h2>
+
+<ul>
+  <li>sudo curl -L “https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)” -o /usr/local/bin/docker-compose</li>
+  <li>sudo chmod +x /usr/local/bin/docker-compose</li>
+</ul>
+
+<h2 id="nvm">nvm</h2>
+
+<ul>
+  <li>sudo apt-get install build-essential libssl-dev</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh</td>
+          <td>bash</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>source ~/.bashrc</li>
+</ul>
+
+<h2 id="참고-사이트">참고 사이트</h2>
+
+<ul>
+  <li>usermod: https://blog.leocat.kr/notes/2018/01/22/linux-add-user-to-groups</li>
+</ul>
 
         
       </section>
@@ -339,7 +456,7 @@
     
       
       
-      <a href="/tags/#google-apps-script" class="page__taxonomy-item" rel="tag">Google Apps Script</a>
+      <a href="/tags/#ubuntu-18" class="page__taxonomy-item" rel="tag">ubuntu 18</a>
     
     </span>
   </p>
@@ -360,14 +477,14 @@
     
       
       
-      <a href="/categories/#open-api" class="page__taxonomy-item" rel="tag">Open API</a>
+      <a href="/categories/#server" class="page__taxonomy-item" rel="tag">SERVER</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-05-15">May 15, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-09-10">September 10, 2020</time></p>
         
       </footer>
 
@@ -376,22 +493,22 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D%5Bselenium%5D+%EA%B0%84%EB%8B%A8%ED%95%9C+%EC%82%AC%EC%9A%A9+%EB%B0%A9%EB%B2%95%20http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Flanguage-python-java-selenium%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BUbuntu+18%5D+Initial+install+package%20http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-ubuntu-init-package%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Flanguage-python-java-selenium%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-ubuntu-init-package%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Flanguage-python-java-selenium%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-ubuntu-init-package%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/open%20api/openapi-google-apps-script/" class="pagination--pager" title="[google apps script] 사용 방법 조사
+      <a href="/server/server-webrtc/" class="pagination--pager" title="[WebRTC] gitsi 분석 및 설치
 ">이전</a>
     
     
-      <a href="/web%20servier/server-nginx-install-tomcat-redirect/" class="pagination--pager" title="[Nginx] Nginx 설치 및 Tomcat 연동
+      <a href="/language/language-python-crawler-selenium/" class="pagination--pager" title="[Python] Linux 18에서 selenium을 이용한 crawler
 ">다음</a>
     
   </nav>
@@ -416,12 +533,33 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/vm/vm-nvm-window-install/" rel="permalink">[NVM] Window10에 NVM 설치
+        <a href="/language/language-python-sklearn/" rel="permalink">[Python] pandas 사용방법
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">프로젝트에 따라 nodejs 버전이 다른 경우가 왕왕 있습니다. 그래서 NVM은 필수인거 같습니다.
+    <p class="archive__item-excerpt" itemprop="description">순서에 상관없이 Document-Term에서 중요한 단어, 혹은 중요하지 않은 단어를 찾는 방법중 TF-IDF(Term Frequency - Inverse Document Frequency)를 sklearn을 활용하여 간단하게 사용한 예제입니다.
+그리고 TF-IDF결과를 clust...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-pandas/" rel="permalink">[Python] pandas 사용방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">데이터 분석을 위해 pandas를 사용해 보았습니다.
+한동안 안쓰면 또 잊어버릴 것 같아서 자주 쓰는것들만 정리해 놓으려 합니다.
 </p>
   </article>
 </div>
@@ -436,13 +574,13 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/tool/tool-vscode-extension/" rel="permalink">[작성중][VSCode] Frontend 개발을 위한 확장 프로그램
+        <a href="/language/language-python-crawler-selenium/" rel="permalink">[Python] Linux 18에서 selenium을 이용한 crawler
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다.
-Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다.
+    <p class="archive__item-excerpt" itemprop="description">백을 사기위해 크롤링을 해야하는 세상에 사신다면 믿으시겠습니까?
+루이비똥을 사기위해서 만들었고 5일만에 구매 할 수 있었습니다.
 </p>
   </article>
 </div>
@@ -457,34 +595,13 @@ Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/web%20servier/server-nginx-install-tomcat-redirect/" rel="permalink">[Nginx] Nginx 설치 및 Tomcat 연동
+        <a href="/server/server-webrtc/" rel="permalink">[WebRTC] gitsi 분석 및 설치
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">Nginx란 Apache같은 웹 서버입니다.
-Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다.
-방화벽이 없는 상태에서 진행 했습니다.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/open%20api/openapi-google-apps-script/" rel="permalink">[google apps script] 사용 방법 조사
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">google spreadsheet가 수정되면 자동 알림 기능을 개발해야 합니다. apps script를 등록하면 바로바로 알람을 받을 수 있다고 해서 신기해서 찾아보기로 했습니다.
+    <p class="archive__item-excerpt" itemprop="description">비대면 서비스가 보편화 되고 있습니다.
+그래서 비대면 서비스를 개발 하려고 합니다.
 </p>
   </article>
 </div>

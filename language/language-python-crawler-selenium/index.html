@@ -1,0 +1,715 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python] Linux 18에서 selenium을 이용한 crawler - TMM</title>
+<meta name="description" content="백을 사기위해 크롤링을 해야하는 세상에 사신다면 믿으시겠습니까? 루이비똥을 사기위해서 만들었고 5일만에 구매 할 수 있었습니다. ">
+
+
+  <meta name="author" content="To much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[Python] Linux 18에서 selenium을 이용한 crawler">
+<meta property="og:url" content="http://localhost:4000/language/language-python-crawler-selenium/">
+
+
+  <meta property="og:description" content="백을 사기위해 크롤링을 해야하는 세상에 사신다면 믿으시겠습니까? 루이비똥을 사기위해서 만들었고 5일만에 구매 할 수 있었습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-11-29T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-11-29T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/language/language-python-crawler-selenium/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python] Linux 18에서 selenium을 이용한 crawler">
+    <meta itemprop="description" content="백을 사기위해 크롤링을 해야하는 세상에 사신다면 믿으시겠습니까?루이비똥을 사기위해서 만들었고 5일만에 구매 할 수 있었습니다.">
+    <meta itemprop="datePublished" content="2020-11-29T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-11-29T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] Linux 18에서 selenium을 이용한 crawler
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#설치">설치</a>
+    <ul>
+      <li><a href="#python-3--pip3-설치">python 3 &amp; pip3 설치</a></li>
+      <li><a href="#chrome-설치">chrome 설치</a></li>
+      <li><a href="#chrome-driver-설치">chrome driver 설치</a></li>
+      <li><a href="#python-package">python package</a></li>
+    </ul>
+  </li>
+  <li><a href="#소스">소스</a></li>
+  <li><a href="#crontab-에-등록">crontab 에 등록</a></li>
+  <li><a href="#참고">참고</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>백을 사기위해 크롤링을 해야하는 세상에 사신다면 믿으시겠습니까?<br />
+루이비똥을 사기위해서 만들었고 5일만에 구매 할 수 있었습니다.</p>
+
+<h2 id="설치">설치</h2>
+
+<h3 id="python-3--pip3-설치">python 3 &amp; pip3 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>python3
+<span class="nv">$ </span><span class="nb">sudo </span>apt update
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>python3-pip
+<span class="nv">$ </span>python3 <span class="nt">-V</span>
+<span class="nv">$ </span>pip3 <span class="nt">-V</span>
+</code></pre></div></div>
+
+<h3 id="chrome-설치">chrome 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget <span class="nt">-q</span> <span class="nt">-O</span> - https://dl-ssl.google.com/linux/linux_signing_key.pub | <span class="nb">sudo </span>apt-key add -
+<span class="nv">$ </span><span class="nb">sudo </span>sh <span class="nt">-c</span> <span class="s1">'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" &gt;&gt; /etc/apt/sources.list.d/google.list'</span>
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>google-chrome-stable
+<span class="nv">$ </span>google-chrome <span class="nt">--version</span>
+</code></pre></div></div>
+
+<h3 id="chrome-driver-설치">chrome driver 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>wget <span class="nt">-N</span> https://chromedriver.storage.googleapis.com/86.0.4240.22/chromedriver_linux64.zip
+<span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>unzip
+<span class="nv">$ </span>unzip chromedriver_linux64.zip
+</code></pre></div></div>
+
+<h3 id="python-package">python package</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip3 <span class="nb">install </span>xlrd
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>xvfb
+<span class="nv">$ </span>pip3 <span class="nb">install </span>pyvirtualdisplay
+<span class="nv">$ </span>pip3 <span class="nb">install </span>selenium
+<span class="nv">$ </span>pip3 <span class="nb">install </span>bs4
+</code></pre></div></div>
+
+<h2 id="소스">소스</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">pyvirtualdisplay</span> <span class="kn">import</span> <span class="n">Display</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="k">def</span> <span class="nf">sendMail</span><span class="p">(</span><span class="n">sendEmail</span><span class="p">,</span> <span class="n">recvEmailList</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">smtpName</span> <span class="o">=</span> <span class="s">"smtp.naver.com"</span> <span class="c1">#smtp 서버 주소
+</span>        <span class="n">smtpPort</span> <span class="o">=</span> <span class="mi">587</span> <span class="c1">#smtp 포트 번호
+</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+        <span class="n">msg</span><span class="p">[</span><span class="s">'Subject'</span><span class="p">]</span> <span class="o">=</span> <span class="n">subject</span>
+        <span class="n">msg</span><span class="p">[</span><span class="s">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sendEmail</span>
+
+        <span class="c1"># logging.debug(msg.as_string())
+</span>
+        <span class="n">s</span><span class="o">=</span><span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span> <span class="n">smtpName</span> <span class="p">,</span> <span class="n">smtpPort</span> <span class="p">)</span> <span class="c1">#메일 서버 연결
+</span>        <span class="n">s</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span> <span class="c1">#TLS 보안 처리
+</span>        <span class="n">s</span><span class="o">.</span><span class="n">login</span><span class="p">(</span> <span class="n">sendEmail</span> <span class="p">,</span> <span class="n">password</span> <span class="p">)</span> <span class="c1">#로그인
+</span>        <span class="k">for</span> <span class="n">recvEmail</span> <span class="ow">in</span> <span class="n">recvEmailList</span><span class="p">:</span>
+            <span class="n">msg</span><span class="p">[</span><span class="s">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="n">recvEmail</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span> <span class="n">sendEmail</span><span class="p">,</span> <span class="n">recvEmail</span><span class="p">,</span> <span class="n">msg</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span> <span class="p">)</span> <span class="c1">#메일 전송, 문자열로 변환하여 보냅니다.
+</span>
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">'{}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1">#smtp 서버 연결을 종료합니다.
+</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+        <span class="n">filename</span><span class="o">=</span><span class="s">'~/dev/crawler/lv/crawler.log'</span><span class="p">,</span>
+        <span class="nb">format</span> <span class="o">=</span> <span class="s">'</span><span class="si">%(asctime)</span><span class="s">s:</span><span class="si">%(levelname)</span><span class="s">s:</span><span class="si">%(message)</span><span class="s">s'</span><span class="p">,</span>
+        <span class="n">datefmt</span> <span class="o">=</span> <span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">I:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S </span><span class="si">%</span><span class="s">p'</span><span class="p">,</span>
+        <span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span>
+    <span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">display</span> <span class="o">=</span> <span class="n">Display</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">))</span>
+        <span class="n">display</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+        <span class="c1"># 옵션 생성
+</span>        <span class="n">options</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">ChromeOptions</span><span class="p">()</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'headless'</span><span class="p">)</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'window-size=1920x1080'</span><span class="p">)</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">"disable-gpu"</span><span class="p">)</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.22 Safari/537.36'</span><span class="p">)</span>
+        <span class="c1"># options.add_argument("--no-sandbox")
+</span>        <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">executable_path</span><span class="o">=</span><span class="n">crawler_path</span> <span class="o">+</span> <span class="s">"/chromedriver"</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+
+        <span class="n">driver</span><span class="o">.</span><span class="n">implicitly_wait</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'[루이비똥 가방 URL]'</span><span class="p">)</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span>
+
+        <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+
+        <span class="n">text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">class_</span><span class="o">=</span><span class="s">'lv-product-purchase-button'</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s">'쇼핑백에 추가'</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'!!!emergency!!!!'</span><span class="p">)</span>
+
+            <span class="n">sendEmail</span> <span class="o">=</span> <span class="s">"[your naver email address]"</span>
+            <span class="n">recvEmail</span> <span class="o">=</span> <span class="p">[</span><span class="s">"[your email address]"</span><span class="p">,</span> <span class="s">"[another email address]"</span><span class="p">]</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="s">"[your email password]"</span>
+            <span class="n">subject</span> <span class="o">=</span> <span class="s">"[email title]"</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s">"[email message]"</span>
+
+            <span class="n">sendMail</span><span class="p">(</span><span class="n">sendEmail</span><span class="p">,</span> <span class="n">recvEmail</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'next time'</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">'{}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
+
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>   <span class="c1"># driver 종료
+</span>        <span class="n">display</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h2 id="crontab-에-등록">crontab 에 등록</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>crontab <span class="nt">-e</span>
+
+<span class="k">*</span>/1 <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> <span class="k">*</span> python3 ~/dev/crawler/lv/app.py
+</code></pre></div></div>
+
+<h2 id="참고">참고</h2>
+
+<ul>
+  <li>https://somjang.tistory.com/entry/Ubuntu-Ubuntu-%EC%84%9C%EB%B2%84%EC%97%90-Selenium-%EC%84%A4%EC%B9%98%ED%95%98%EA%B3%A0-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0</li>
+  <li>https://medium.com/@chullino/sudo-%EC%A0%88%EB%8C%80-%EC%93%B0%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94-8544aa3fb0e7</li>
+  <li>https://beomi.github.io/2017/09/28/HowToMakeWebCrawler-Headless-Chrome/</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#cralwer" class="page__taxonomy-item" rel="tag">cralwer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#email" class="page__taxonomy-item" rel="tag">email</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#python" class="page__taxonomy-item" rel="tag">Python</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#selenium" class="page__taxonomy-item" rel="tag">selenium</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">language</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-11-29">November 29, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+Linux+18%EC%97%90%EC%84%9C+selenium%EC%9D%84+%EC%9D%B4%EC%9A%A9%ED%95%9C+crawler%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-crawler-selenium%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-crawler-selenium%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-crawler-selenium%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/server/server-ubuntu-init-package/" class="pagination--pager" title="[Ubuntu 18] Initial install package
+">이전</a>
+    
+    
+      <a href="/language/language-python-pandas/" class="pagination--pager" title="[Python] pandas 사용방법
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-sklearn/" rel="permalink">[Python] pandas 사용방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">순서에 상관없이 Document-Term에서 중요한 단어, 혹은 중요하지 않은 단어를 찾는 방법중 TF-IDF(Term Frequency - Inverse Document Frequency)를 sklearn을 활용하여 간단하게 사용한 예제입니다.
+그리고 TF-IDF결과를 clust...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-pandas/" rel="permalink">[Python] pandas 사용방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">데이터 분석을 위해 pandas를 사용해 보았습니다.
+한동안 안쓰면 또 잊어버릴 것 같아서 자주 쓰는것들만 정리해 놓으려 합니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-ubuntu-init-package/" rel="permalink">[Ubuntu 18] Initial install package
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">ubuntu 18 설치 후 초기 설치들입니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-webrtc/" rel="permalink">[WebRTC] gitsi 분석 및 설치
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">비대면 서비스가 보편화 되고 있습니다.
+그래서 비대면 서비스를 개발 하려고 합니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
