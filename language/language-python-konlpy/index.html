@@ -1,0 +1,653 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[Python] window10에 KoNLPy 설치 및 테스트 - TMM</title>
+<meta name="description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다. ">
+
+
+  <meta name="author" content="To much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[Python] window10에 KoNLPy 설치 및 테스트">
+<meta property="og:url" content="http://localhost:4000/language/language-python-konlpy/">
+
+
+  <meta property="og:description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-12-05T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-12-05T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/language/language-python-konlpy/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[Python] window10에 KoNLPy 설치 및 테스트">
+    <meta itemprop="description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다.mecab은 설치 실패 했습니다.">
+    <meta itemprop="datePublished" content="2020-12-05T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-12-05T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] window10에 KoNLPy 설치 및 테스트
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#설치">설치</a>
+    <ul>
+      <li><a href="#jpype1-설치">JPype1 설치</a></li>
+      <li><a href="#konlpy-설치">koNLPy 설치</a></li>
+    </ul>
+  </li>
+  <li><a href="#테스트">테스트</a>
+    <ul>
+      <li><a href="#jupyter-실행">jupyter 실행</a></li>
+      <li><a href="#konlpy-실행">KoNLPy 실행</a></li>
+    </ul>
+  </li>
+  <li><a href="#참고">참고</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>window10에서 토큰화를 위해 KoNLPy를 설치했습니다.<br />
+mecab은 설치 실패 했습니다.<br /></p>
+
+<h2 id="설치">설치</h2>
+
+<h3 id="jpype1-설치">JPype1 설치</h3>
+
+<ol>
+  <li>https://www.lfd.uci.edu/~gohlke/pythonlibs/#jpype</li>
+  <li>운영체제 bit와 파이썬 버전에 맞는 whl 파일을 다운 받습니다.
+    <ul>
+      <li>저는 파이썬 3.5, 64bit 이기 때문에 <code class="highlighter-rouge">JPype1‑0.7.1‑cp35‑cp35m‑win_amd64.whl</code> 를 받았습나다.</li>
+    </ul>
+  </li>
+  <li>whl 파일 설치
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>pip <span class="nb">install </span>JPype1‑0.7.1‑cp35‑cp35m‑win_amd64.whl
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="konlpy-설치">koNLPy 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>konlpy
+</code></pre></div></div>
+
+<h2 id="테스트">테스트</h2>
+
+<h3 id="jupyter-실행">jupyter 실행</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>jupyter notebook
+</code></pre></div></div>
+
+<h3 id="konlpy-실행">KoNLPy 실행</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Hannanum</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Kkma</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Komoran</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Okt</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Twitter</span>
+
+<span class="n">hannanum</span> <span class="o">=</span> <span class="n">Hannanum</span><span class="p">()</span>
+<span class="n">kkma</span> <span class="o">=</span> <span class="n">Kkma</span><span class="p">()</span>
+<span class="n">komoran</span> <span class="o">=</span><span class="n">Komoran</span><span class="p">()</span>
+<span class="n">okt</span> <span class="o">=</span> <span class="n">Okt</span><span class="p">()</span>
+<span class="n">twitter</span> <span class="o">=</span> <span class="n">Twitter</span><span class="p">()</span>
+
+<span class="n">titleList</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'❤ 💜  테스트 데이터 💚 💛 이모지 포함 </span><span class="se">\U0001f970</span><span class="s">'</span><span class="p">,</span>
+    <span class="s">'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ'</span><span class="p">,</span>
+    <span class="s">'이미지 이름.jpg'</span><span class="p">,</span>
+    <span class="s">'💙🎁 공유가능 💙🎁 문의👌'</span><span class="p">,</span>
+    <span class="s">'●▅▇█▇▆▅▄산 모양의 텍스트'</span>
+    <span class="p">]</span>
+
+
+<span class="n">emoji_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">'[</span><span class="se">\U00010000</span><span class="s">-</span><span class="se">\U0010ffff</span><span class="s">]'</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">titleList</span><span class="p">:</span>
+
+    <span class="c1"># kkma, kororan의 경우 이모지 입력시 오류가 발생해 이모지 필터 처리
+</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">emoji_pattern</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">' title: {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'''
+        hannanum: {}
+        kkma: {}
+        komoran: {}
+        okt: {}
+        '''</span> <span class="o">.</span><span class="nb">format</span><span class="p">(</span>
+            <span class="n">hannanum</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+            <span class="n">kkma</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+            <span class="n">komoran</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+            <span class="n">okt</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="p">)</span>
+
+</code></pre></div></div>
+
+<h2 id="참고">참고</h2>
+
+<ul>
+  <li>https://webnautes.tistory.com/1394</li>
+  <li>https://cleancode-ws.tistory.com/97</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#konlpy" class="page__taxonomy-item" rel="tag">konlpy</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#python" class="page__taxonomy-item" rel="tag">Python</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">language</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-12-05">December 5, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+window10%EC%97%90+KoNLPy+%EC%84%A4%EC%B9%98+%EB%B0%8F+%ED%85%8C%EC%8A%A4%ED%8A%B8%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/language/language-python-sklearn-copy/" class="pagination--pager" title="[Python] sklearn tf-idf, clustering
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-sklearn-copy/" rel="permalink">[Python] sklearn tf-idf, clustering
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">순서에 상관없이 Document-Term에서 중요한 단어, 혹은 중요하지 않은 단어를 찾는 방법중 TF-IDF(Term Frequency - Inverse Document Frequency)를 sklearn을 활용하여 간단하게 사용한 예제입니다.
+그리고 TF-IDF결과를 clust...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-pandas/" rel="permalink">[Python] pandas 사용방법
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">데이터 분석을 위해 pandas를 사용해 보았습니다.
+한동안 안쓰면 또 잊어버릴 것 같아서 자주 쓰는것들만 정리해 놓으려 합니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-crawler-selenium/" rel="permalink">[Python] Linux 18에서 selenium을 이용한 crawler
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">백을 사기위해 크롤링을 해야하는 세상에 사신다면 믿으시겠습니까?
+루이비똥을 사기위해서 만들었고 5일만에 구매 할 수 있었습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-ubuntu-init-package/" rel="permalink">[Ubuntu 18] Initial install package
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">ubuntu 18 설치 후 초기 설치들입니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
