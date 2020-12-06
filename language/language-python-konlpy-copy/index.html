@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정 - TMM</title>
-<meta name="description" content="Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다. 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다. ">
+<!-- begin _includes/seo.html --><title>[Python] window10에 KoNLPy 설치 및 테스트 - TMM</title>
+<meta name="description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다. ">
 
 
   <meta name="author" content="To much meng">
@@ -19,32 +19,32 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정">
-<meta property="og:url" content="http://localhost:4000/language/language-python-jupyter-matplotlib/">
+<meta property="og:title" content="[Python] window10에 KoNLPy 설치 및 테스트">
+<meta property="og:url" content="http://localhost:4000/language/language-python-konlpy-copy/">
 
 
-  <meta property="og:description" content="Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다. 이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다. ">
-
-
-
+  <meta property="og:description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다. ">
 
 
 
 
-  <meta property="article:published_time" content="2020-03-12T00:00:00+09:00">
 
 
 
-  <meta property="article:modified_time" content="2020-03-12T22:05:34+09:00">
+  <meta property="article:published_time" content="2020-12-05T00:00:00+09:00">
 
 
 
-  
+  <meta property="article:modified_time" content="2020-12-05T22:05:34+09:00">
+
+
 
   
 
+  
 
-<link rel="canonical" href="http://localhost:4000/language/language-python-jupyter-matplotlib/">
+
+<link rel="canonical" href="http://localhost:4000/language/language-python-konlpy-copy/">
 
 
 
@@ -279,15 +279,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정">
-    <meta itemprop="description" content="Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.">
-    <meta itemprop="datePublished" content="2020-03-12T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2020-03-12T22:05:34+09:00">
+    <meta itemprop="headline" content="[Python] window10에 KoNLPy 설치 및 테스트">
+    <meta itemprop="description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다.mecab은 설치 실패 했습니다.">
+    <meta itemprop="datePublished" content="2020-12-05T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-12-05T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[Python] Jupyter matplotlib로 내/외부 이미지 그리기 설정
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] window10에 KoNLPy 설치 및 테스트
 </h1>
           
         </header>
@@ -299,72 +299,109 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#명령어">명령어</a></li>
-  <li><a href="#예제-소스">예제 소스</a></li>
-  <li><a href="#추가-내용">추가 내용</a>
+  <li><a href="#설치">설치</a>
     <ul>
-      <li><a href="#macos-catalina-anaconda-설치">MacOS Catalina anaconda 설치</a></li>
-      <li><a href="#jupyter-설치">jupyter 설치</a></li>
-      <li><a href="#jupyter-실행">jupyter 실행</a></li>
+      <li><a href="#jpype1-설치">JPype1 설치</a></li>
+      <li><a href="#konlpy-설치">koNLPy 설치</a></li>
     </ul>
   </li>
+  <li><a href="#테스트">테스트</a>
+    <ul>
+      <li><a href="#jupyter-실행">jupyter 실행</a></li>
+      <li><a href="#konlpy-실행">KoNLPy 실행</a></li>
+    </ul>
+  </li>
+  <li><a href="#참고">참고</a></li>
 </ul>
 
             </nav>
           </aside>
         
-        <p>Jupyter에서 Matplotlib를 활용하여 차트나 이미지를 그리는 경우가 있습니다.<br />
-이때 외부, 내부 이미지, 내부 대화식 을 선택 할 수 있습니다.</p>
+        <p>window10에서 토큰화를 위해 KoNLPy를 설치했습니다.<br />
+mecab은 설치 실패 했습니다.<br /></p>
 
-<h2 id="명령어">명령어</h2>
+<h2 id="설치">설치</h2>
 
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="err">%</span><span class="na">matplotlib tk</span><span class="pi">:</span> <span class="s">또는 %matplotlib qt 지정된 대화식 백엔드가있는 노트북 외부에 그림을 보여줍니다.</span>
-<span class="pi">-</span> <span class="err">%</span><span class="na">matplotlib inline</span><span class="pi">:</span> <span class="s">정적 png 이미지로 내부에 표시됩니다.</span>
-<span class="pi">-</span> <span class="err">%</span><span class="na">matplotlib notebook</span><span class="pi">:</span> <span class="s">또는 %matplotlib nbagg는 노트북 내부의 대화식 그림을 보여줍니다.</span>
-<span class="pi">-</span> <span class="err">%</span><span class="na">matplotlib widgets</span><span class="pi">:</span> <span class="s">노트북 내부의 대화 형 그림을 보여줍니다. ( jupyter-matplotlib 을 설치해야 함)</span>
+<h3 id="jpype1-설치">JPype1 설치</h3>
+
+<ol>
+  <li>https://www.lfd.uci.edu/~gohlke/pythonlibs/#jpype</li>
+  <li>운영체제 bit와 파이썬 버전에 맞는 whl 파일을 다운 받습니다.
+    <ul>
+      <li>저는 파이썬 3.5, 64bit 이기 때문에 <code class="highlighter-rouge">JPype1‑0.7.1‑cp35‑cp35m‑win_amd64.whl</code> 를 받았습나다.</li>
+    </ul>
+  </li>
+  <li>whl 파일 설치
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>pip <span class="nb">install </span>JPype1‑0.7.1‑cp35‑cp35m‑win_amd64.whl
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="konlpy-설치">koNLPy 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>konlpy
 </code></pre></div></div>
 
-<h2 id="예제-소스">예제 소스</h2>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># %matplotlib inline
-</span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">notebook</span>
-<span class="c1"># %matplotlib qt5
-</span>
-<span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
-<span class="kn">import</span> <span class="nn">pytesseract</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">'dark_background'</span><span class="p">)</span>
-
-<span class="n">img_ori</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span>
-
-<span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">channel</span> <span class="o">=</span> <span class="n">img_ori</span><span class="o">.</span><span class="n">shape</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_ori</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">'gray'</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h2 id="추가-내용">추가 내용</h2>
-
-<h3 id="macos-catalina-anaconda-설치">MacOS Catalina anaconda 설치</h3>
-<ul>
-  <li>MacOS Catalina 로 업데이트를 했더니 기존 아나콘다가 너무 느려저서 재설치를 했습니다.</li>
-  <li>삭제는 anaconda nevgation application 삭제 후 ~/anaconda, ~/.conda 폴더를 삭제 하고 export 설정을 삭제 하였습니다.</li>
-  <li>설치 방법은 dmg파일을 다운받아서 다음다음 하면 됩니다. 별도의 export 설정은 하지 않았습니다.</li>
-</ul>
-
-<blockquote>
-  <p>https://www.anaconda.com/how-to-restore-anaconda-after-macos-catalina-update/</p>
-</blockquote>
-
-<h3 id="jupyter-설치">jupyter 설치</h3>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>jupyter
-</code></pre></div></div>
+<h2 id="테스트">테스트</h2>
 
 <h3 id="jupyter-실행">jupyter 실행</h3>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>jupyter notebook
 </code></pre></div></div>
+
+<h3 id="konlpy-실행">KoNLPy 실행</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Hannanum</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Kkma</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Komoran</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Okt</span>
+<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Twitter</span>
+
+<span class="n">hannanum</span> <span class="o">=</span> <span class="n">Hannanum</span><span class="p">()</span>
+<span class="n">kkma</span> <span class="o">=</span> <span class="n">Kkma</span><span class="p">()</span>
+<span class="n">komoran</span> <span class="o">=</span><span class="n">Komoran</span><span class="p">()</span>
+<span class="n">okt</span> <span class="o">=</span> <span class="n">Okt</span><span class="p">()</span>
+<span class="n">twitter</span> <span class="o">=</span> <span class="n">Twitter</span><span class="p">()</span>
+
+<span class="n">titleList</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">'❤ 💜  테스트 데이터 💚 💛 이모지 포함 </span><span class="se">\U0001f970</span><span class="s">'</span><span class="p">,</span>
+    <span class="s">'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ'</span><span class="p">,</span>
+    <span class="s">'이미지 이름.jpg'</span><span class="p">,</span>
+    <span class="s">'💙🎁 공유가능 💙🎁 문의👌'</span><span class="p">,</span>
+    <span class="s">'●▅▇█▇▆▅▄산 모양의 텍스트'</span>
+    <span class="p">]</span>
+
+
+<span class="n">emoji_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">'[</span><span class="se">\U00010000</span><span class="s">-</span><span class="se">\U0010ffff</span><span class="s">]'</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">titleList</span><span class="p">:</span>
+
+    <span class="c1"># kkma, kororan의 경우 이모지 입력시 오류가 발생해 이모지 필터 처리
+</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">emoji_pattern</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">' title: {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'''
+        hannanum: {}
+        kkma: {}
+        komoran: {}
+        okt: {}
+        '''</span> <span class="o">.</span><span class="nb">format</span><span class="p">(</span>
+            <span class="n">hannanum</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+            <span class="n">kkma</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+            <span class="n">komoran</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+            <span class="n">okt</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="p">)</span>
+
+</code></pre></div></div>
+
+<h2 id="참고">참고</h2>
+
+<ul>
+  <li>https://webnautes.tistory.com/1394</li>
+  <li>https://cleancode-ws.tistory.com/97</li>
+</ul>
 
         
       </section>
@@ -385,15 +422,7 @@
     
       
       
-      <a href="/tags/#anaconda" class="page__taxonomy-item" rel="tag">anaconda</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#jupyter" class="page__taxonomy-item" rel="tag">Jupyter</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#matplotlib" class="page__taxonomy-item" rel="tag">Matplotlib</a><span class="sep">, </span>
+      <a href="/tags/#konlpy" class="page__taxonomy-item" rel="tag">konlpy</a><span class="sep">, </span>
     
       
       
@@ -418,14 +447,14 @@
     
       
       
-      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">Language</a>
+      <a href="/categories/#language" class="page__taxonomy-item" rel="tag">language</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-03-12">March 12, 2020</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-12-05">December 5, 2020</time></p>
         
       </footer>
 
@@ -434,22 +463,22 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+Jupyter+matplotlib%EB%A1%9C+%EB%82%B4%2F%EC%99%B8%EB%B6%80+%EC%9D%B4%EB%AF%B8%EC%A7%80+%EA%B7%B8%EB%A6%AC%EA%B8%B0+%EC%84%A4%EC%A0%95%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-jupyter-matplotlib%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+window10%EC%97%90+KoNLPy+%EC%84%A4%EC%B9%98+%EB%B0%8F+%ED%85%8C%EC%8A%A4%ED%8A%B8%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy-copy%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-jupyter-matplotlib%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy-copy%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-jupyter-matplotlib%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy-copy%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/language/language-python-image-processing/" class="pagination--pager" title="[작성중][Python] Image processing
+      <a href="/language/language-python-sklearn-copy/" class="pagination--pager" title="[Python] sklearn tf-idf, clustering
 ">이전</a>
     
     
-      <a href="/database/database-mysql-create-table/" class="pagination--pager" title="[MySQL] 테이블 생성시 고려사항
+      <a href="/language/language-python-appstore-review/" class="pagination--pager" title="[Python] app store review parsing
 ">다음</a>
     
   </nav>
@@ -496,27 +525,6 @@ ip 차단 조건은 다음에 ...</p>
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/language/language-python-konlpy-copy/" rel="permalink">[Python] window10에 KoNLPy 설치 및 테스트
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">window10에서 토큰화를 위해 KoNLPy를 설치했습니다.
-mecab은 설치 실패 했습니다.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
         <a href="/language/language-python-sklearn-copy/" rel="permalink">[Python] sklearn tf-idf, clustering
 </a>
       
@@ -544,6 +552,27 @@ mecab은 설치 실패 했습니다.
     
     <p class="archive__item-excerpt" itemprop="description">데이터 분석을 위해 pandas를 사용해 보았습니다.
 한동안 안쓰면 또 잊어버릴 것 같아서 자주 쓰는것들만 정리해 놓으려 합니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-crawler-selenium/" rel="permalink">[Python] Linux 18에서 selenium을 이용한 crawler
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">백을 사기위해 크롤링을 해야하는 세상에 사신다면 믿으시겠습니까?
+루이비똥을 사기위해서 만들었고 5일만에 구매 할 수 있었습니다.
 </p>
   </article>
 </div>

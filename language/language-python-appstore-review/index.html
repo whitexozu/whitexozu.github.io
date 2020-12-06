@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[Python] window10에 KoNLPy 설치 및 테스트 - TMM</title>
-<meta name="description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다. ">
+<!-- begin _includes/seo.html --><title>[Python] app store review parsing - TMM</title>
+<meta name="description" content="google play store는 개발자 키파일이 있어야 리뷰 조회가 가능하지만 app store 는 RSS 방식으로 제공을 해줍니다. json과 xml 방식을 제공하는데 xml 방식에서 입력 및 수정날짜를 얻을 수 있어 xml을 선택할 수밖게 없습니다. ip 차단 조건은 다음에 확인해보도록 하겠습니다. ">
 
 
   <meta name="author" content="To much meng">
@@ -19,19 +19,19 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[Python] window10에 KoNLPy 설치 및 테스트">
-<meta property="og:url" content="http://localhost:4000/language/language-python-konlpy/">
+<meta property="og:title" content="[Python] app store review parsing">
+<meta property="og:url" content="http://localhost:4000/language/language-python-appstore-review/">
 
 
-  <meta property="og:description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다. ">
-
-
-
+  <meta property="og:description" content="google play store는 개발자 키파일이 있어야 리뷰 조회가 가능하지만 app store 는 RSS 방식으로 제공을 해줍니다. json과 xml 방식을 제공하는데 xml 방식에서 입력 및 수정날짜를 얻을 수 있어 xml을 선택할 수밖게 없습니다. ip 차단 조건은 다음에 확인해보도록 하겠습니다. ">
 
 
 
 
-  <meta property="article:published_time" content="2020-12-05T00:00:00+09:00">
+
+
+
+  <meta property="article:published_time" content="2020-12-06T00:00:00+09:00">
 
 
 
@@ -44,7 +44,7 @@
   
 
 
-<link rel="canonical" href="http://localhost:4000/language/language-python-konlpy/">
+<link rel="canonical" href="http://localhost:4000/language/language-python-appstore-review/">
 
 
 
@@ -279,15 +279,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[Python] window10에 KoNLPy 설치 및 테스트">
-    <meta itemprop="description" content="window10에서 토큰화를 위해 KoNLPy를 설치했습니다.mecab은 설치 실패 했습니다.">
-    <meta itemprop="datePublished" content="2020-12-05T00:00:00+09:00">
+    <meta itemprop="headline" content="[Python] app store review parsing">
+    <meta itemprop="description" content="google play store는 개발자 키파일이 있어야 리뷰 조회가 가능하지만app store 는 RSS 방식으로 제공을 해줍니다.json과 xml 방식을 제공하는데 xml 방식에서 입력 및 수정날짜를 얻을 수 있어 xml을 선택할 수밖게 없습니다.ip 차단 조건은 다음에 확인해보도록 하겠습니다.">
+    <meta itemprop="datePublished" content="2020-12-06T00:00:00+09:00">
     <meta itemprop="dateModified" content="2020-12-05T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[Python] window10에 KoNLPy 설치 및 테스트
+          <h1 id="page-title" class="page__title" itemprop="headline">[Python] app store review parsing
 </h1>
           
         </header>
@@ -299,16 +299,17 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
               <ul class="toc__menu">
-  <li><a href="#설치">설치</a>
+  <li><a href="#rss">rss</a>
     <ul>
-      <li><a href="#jpype1-설치">JPype1 설치</a></li>
-      <li><a href="#konlpy-설치">koNLPy 설치</a></li>
+      <li><a href="#url">url</a></li>
+      <li><a href="#param">param</a></li>
+      <li><a href="#id-확인-방법">id 확인 방법</a></li>
     </ul>
   </li>
-  <li><a href="#테스트">테스트</a>
+  <li><a href="#xml-parsing">xml parsing</a>
     <ul>
-      <li><a href="#jupyter-실행">jupyter 실행</a></li>
-      <li><a href="#konlpy-실행">KoNLPy 실행</a></li>
+      <li><a href="#xmltodict-설치">xmltodict 설치</a></li>
+      <li><a href="#테스트">테스트</a></li>
     </ul>
   </li>
   <li><a href="#참고">참고</a></li>
@@ -317,90 +318,59 @@
             </nav>
           </aside>
         
-        <p>window10에서 토큰화를 위해 KoNLPy를 설치했습니다.<br />
-mecab은 설치 실패 했습니다.<br /></p>
+        <p>google play store는 개발자 키파일이 있어야 리뷰 조회가 가능하지만<br />
+app store 는 RSS 방식으로 제공을 해줍니다.<br />
+json과 xml 방식을 제공하는데 xml 방식에서 입력 및 수정날짜를 얻을 수 있어 xml을 선택할 수밖게 없습니다.
+ip 차단 조건은 다음에 확인해보도록 하겠습니다.<br /></p>
 
-<h2 id="설치">설치</h2>
+<h2 id="rss">rss</h2>
 
-<h3 id="jpype1-설치">JPype1 설치</h3>
+<h3 id="url">url</h3>
 
-<ol>
-  <li>https://www.lfd.uci.edu/~gohlke/pythonlibs/#jpype</li>
-  <li>운영체제 bit와 파이썬 버전에 맞는 whl 파일을 다운 받습니다.
-    <ul>
-      <li>저는 파이썬 3.5, 64bit 이기 때문에 <code class="highlighter-rouge">JPype1‑0.7.1‑cp35‑cp35m‑win_amd64.whl</code> 를 받았습나다.</li>
-    </ul>
-  </li>
-  <li>whl 파일 설치
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>pip <span class="nb">install </span>JPype1‑0.7.1‑cp35‑cp35m‑win_amd64.whl
-</code></pre></div>    </div>
-  </li>
-</ol>
+<ul>
+  <li>https://itunes.apple.com/kr/rss/customerreviews/page=1/id=909319292/sortby=mostrecent/xml?urlDesc=/customerreviews/id=1037778235/sortBy=mostRecent/xml</li>
+</ul>
 
-<h3 id="konlpy-설치">koNLPy 설치</h3>
+<h3 id="param">param</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>konlpy
+<ul>
+  <li>id: app store의 app id 입니다.</li>
+  <li>page: 1-10까지 선택가능하면 페이지당 50개씩 노출되기 때문에 최대 500개까지 조회가 가능합니다.</li>
+</ul>
+
+<h3 id="id-확인-방법">id 확인 방법</h3>
+
+<ul>
+  <li>app store에서 app을 검색하면 url이 나오는데 그중 id 부분의 정보입니다.</li>
+  <li>https://apps.apple.com/us/app/google-calendar-get-organized/id<code class="highlighter-rouge">909319292</code></li>
+</ul>
+
+<h2 id="xml-parsing">xml parsing</h2>
+
+<h3 id="xmltodict-설치">xmltodict 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>xmltodict
 </code></pre></div></div>
 
-<h2 id="테스트">테스트</h2>
+<h3 id="테스트">테스트</h3>
 
-<h3 id="jupyter-실행">jupyter 실행</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">import</span> <span class="nn">xmltodict</span>
+<span class="kn">import</span> <span class="nn">json</span>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>jupyter notebook
-</code></pre></div></div>
+<span class="n">url</span> <span class="o">=</span> <span class="s">"https://itunes.apple.com/kr/rss/customerreviews/page=1/id=909319292/sortby=mostrecent/xml?urlDesc=/customerreviews/id=1037778235/sortBy=mostRecent/xml"</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
-<h3 id="konlpy-실행">KoNLPy 실행</h3>
+<span class="n">app_store_review_dick</span> <span class="o">=</span> <span class="n">xmltodict</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="n">app_store_review_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">app_store_review_dick</span><span class="p">))</span>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Hannanum</span>
-<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Kkma</span>
-<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Komoran</span>
-<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Okt</span>
-<span class="kn">from</span> <span class="nn">konlpy.tag</span> <span class="kn">import</span> <span class="n">Twitter</span>
-
-<span class="n">hannanum</span> <span class="o">=</span> <span class="n">Hannanum</span><span class="p">()</span>
-<span class="n">kkma</span> <span class="o">=</span> <span class="n">Kkma</span><span class="p">()</span>
-<span class="n">komoran</span> <span class="o">=</span><span class="n">Komoran</span><span class="p">()</span>
-<span class="n">okt</span> <span class="o">=</span> <span class="n">Okt</span><span class="p">()</span>
-<span class="n">twitter</span> <span class="o">=</span> <span class="n">Twitter</span><span class="p">()</span>
-
-<span class="n">titleList</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">'❤ 💜  테스트 데이터 💚 💛 이모지 포함 </span><span class="se">\U0001f970</span><span class="s">'</span><span class="p">,</span>
-    <span class="s">'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ'</span><span class="p">,</span>
-    <span class="s">'이미지 이름.jpg'</span><span class="p">,</span>
-    <span class="s">'💙🎁 공유가능 💙🎁 문의👌'</span><span class="p">,</span>
-    <span class="s">'●▅▇█▇▆▅▄산 모양의 텍스트'</span>
-    <span class="p">]</span>
-
-
-<span class="n">emoji_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="s">'[</span><span class="se">\U00010000</span><span class="s">-</span><span class="se">\U0010ffff</span><span class="s">]'</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">UNICODE</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">titleList</span><span class="p">:</span>
-
-    <span class="c1"># kkma, kororan의 경우 이모지 입력시 오류가 발생해 이모지 필터 처리
-</span>    <span class="n">v</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">emoji_pattern</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-
-    <span class="k">print</span><span class="p">(</span><span class="s">' title: {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'''
-        hannanum: {}
-        kkma: {}
-        komoran: {}
-        okt: {}
-        '''</span> <span class="o">.</span><span class="nb">format</span><span class="p">(</span>
-            <span class="n">hannanum</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
-            <span class="n">kkma</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
-            <span class="n">komoran</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
-            <span class="n">okt</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-    <span class="p">)</span>
-
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">app_store_review_json</span><span class="p">[</span><span class="s">'feed'</span><span class="p">][</span><span class="s">'entry'</span><span class="p">]))</span>
 </code></pre></div></div>
 
 <h2 id="참고">참고</h2>
 
 <ul>
-  <li>https://webnautes.tistory.com/1394</li>
-  <li>https://cleancode-ws.tistory.com/97</li>
+  <li>https://signing.tistory.com/51</li>
 </ul>
 
         
@@ -422,7 +392,7 @@ mecab은 설치 실패 했습니다.<br /></p>
     
       
       
-      <a href="/tags/#konlpy" class="page__taxonomy-item" rel="tag">konlpy</a><span class="sep">, </span>
+      <a href="/tags/#app-store" class="page__taxonomy-item" rel="tag">app store</a><span class="sep">, </span>
     
       
       
@@ -463,18 +433,18 @@ mecab은 설치 실패 했습니다.<br /></p>
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+window10%EC%97%90+KoNLPy+%EC%84%A4%EC%B9%98+%EB%B0%8F+%ED%85%8C%EC%8A%A4%ED%8A%B8%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BPython%5D+app+store+review+parsing%20http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-appstore-review%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-appstore-review%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-konlpy%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Flanguage%2Flanguage-python-appstore-review%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/language/language-python-sklearn-copy/" class="pagination--pager" title="[Python] sklearn tf-idf, clustering
+      <a href="/language/language-python-konlpy-copy/" class="pagination--pager" title="[Python] window10에 KoNLPy 설치 및 테스트
 ">이전</a>
     
     
@@ -492,6 +462,27 @@ mecab은 설치 실패 했습니다.<br /></p>
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/language/language-python-konlpy-copy/" rel="permalink">[Python] window10에 KoNLPy 설치 및 테스트
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">window10에서 토큰화를 위해 KoNLPy를 설치했습니다.
+mecab은 설치 실패 했습니다.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -550,26 +541,6 @@ mecab은 설치 실패 했습니다.<br /></p>
     
     <p class="archive__item-excerpt" itemprop="description">백을 사기위해 크롤링을 해야하는 세상에 사신다면 믿으시겠습니까?
 루이비똥을 사기위해서 만들었고 5일만에 구매 할 수 있었습니다.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/server/server-ubuntu-init-package/" rel="permalink">[Ubuntu 18] Initial install package
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">ubuntu 18 설치 후 초기 설치들입니다.
 </p>
   </article>
 </div>
