@@ -141,8 +141,12 @@
 <lastmod>2020-12-05T22:05:34+09:00</lastmod>
 </url>
 <url>
-<loc>http://localhost:4000/language/language-python-appstore-review/</loc>
-<lastmod>2020-12-05T22:05:34+09:00</lastmod>
+<loc>http://localhost:4000/language/language-python-appstore-review-copy/</loc>
+<lastmod>2020-12-06T22:05:34+09:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/language/language-python-sentencepiece/</loc>
+<lastmod>2020-12-07T22:05:34+09:00</lastmod>
 </url>
 <url>
 <loc>http://localhost:4000/about/</loc>

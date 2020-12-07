@@ -1,4 +1,103 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-07T02:32:32+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Python] app store review parsing</title><link href="http://localhost:4000/language/language-python-appstore-review/" rel="alternate" type="text/html" title="[Python] app store review parsing" /><published>2020-12-06T00:00:00+09:00</published><updated>2020-12-05T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-appstore-review</id><content type="html" xml:base="http://localhost:4000/language/language-python-appstore-review/">&lt;p&gt;google play store는 개발자 키파일이 있어야 리뷰 조회가 가능하지만&lt;br /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-07T13:30:16+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Python] google sentencepiece</title><link href="http://localhost:4000/language/language-python-sentencepiece/" rel="alternate" type="text/html" title="[Python] google sentencepiece" /><published>2020-12-07T00:00:00+09:00</published><updated>2020-12-07T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-sentencepiece</id><content type="html" xml:base="http://localhost:4000/language/language-python-sentencepiece/">&lt;p&gt;sentencepiece를 황용해서 토큰화 해보겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;sentencepiece&quot;&gt;sentencepiece&lt;/h2&gt;
+
+&lt;h3 id=&quot;subword-segmentation&quot;&gt;Subword Segmentation&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;subword segmentation(단어 분리, 단어 분절)이란, 하나의 단어(혹은 토큰)는 여러 개의 subword의 조합으로 이루어져 있다는 가정하에, subword 단위의 토크나이징을 수행하여 단어를 이해하려는 목적을 가진 전처리 작업을 말합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bpebyte-pair-encoding&quot;&gt;BPE(Byte Pair Encoding)&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;BPE는 subword segmentation의 대표적인 알고리즘입니다. ‘byte’라는 단어에서 알 수 있듯이 원래는 데이터 압축을 위한 알고리즘으로 탄생했지만, 현재는 NLP 분야의 대표적인 토크나이징 방법으로 활용되고 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;설치&quot;&gt;설치&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;sentencepiece
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;argument&quot;&gt;argument&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;input : 학습시킬 text의 위치&lt;/li&gt;
+  &lt;li&gt;model_name : 만들어질 모델 이름, 학습 후 &lt;model_name&gt;.model, &lt;model_name&gt;.vocab 두 파일 생성&lt;/model_name&gt;&lt;/model_name&gt;&lt;/li&gt;
+  &lt;li&gt;model_type : 어느 방식으로 학습할것인가, (unigram(default), bpe, char, word)&lt;/li&gt;
+  &lt;li&gt;vocal_size : Subword 갯수 설정, 보통 3,200개&lt;/li&gt;
+  &lt;li&gt;character_coverage : 몇%의 데이터를 커버할것인가, default=0.9995, 데이터셋이 적은 경우 1.0으로 설정&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;model-생성&quot;&gt;model 생성&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sentencepiece&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spm&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;input_file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'data.log'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32000&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;model_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'subword_tokenizer'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;model_type&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'bpe'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;user_defined_symbols&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'[PAD],[UNK],[CLS],[SEP],[MASK],[UNK1],[UNK2],[UNK3],[UNK4],[UNK5]'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;input_argument&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'--input=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s --model_prefix=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s --vocab_size=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s --user_defined_symbols=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s --model_type=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;input_argument&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input_file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vocab_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_defined_symbols&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model_type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;spm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SentencePieceTrainer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;model-사용&quot;&gt;model 사용&lt;/h3&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sentencepiece&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spm&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;spm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SentencePieceProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;subword_tokenizer.model&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# text -&amp;gt; subword
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EncodeAsPieces&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;This is a test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# ['▁This', '▁is', '▁a', '▁', 't', 'est']
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# text -&amp;gt; subword id
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EncodeAsIds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;This is a test&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# [497, 100, 49, 6, 47, 514]
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# subword id -&amp;gt; text
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DecodeIds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;497&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;49&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;47&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;514&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 'This is a test'
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# subword -&amp;gt; text
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DecodePieces&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'▁This'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'▁is'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'▁a'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'▁'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'t'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'est'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 'This is a test'
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# subword size
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GetPieceSize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 1000
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# id -&amp;gt; piece
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IdToPiece&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# '&amp;lt;/s&amp;gt;'
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# piece -&amp;gt; id
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;PieceToId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 0
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Drop-out 사용하기
+# enable_sampling=True 일 때 Drop-out이 적용되며 alpha=0.1은 10% 확률로 dropout 한다는 의미이다.
+&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'This is a test'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out_type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;enable_sampling&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alpha&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nbest_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# encode의 인자로 encoding 하기
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'나는 오늘 아침밥을 먹었다.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out_type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# ['▁', '나는', '▁', '오늘', '▁', '아침밥을', '▁', '먹었다', '.']
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'나는 오늘 아침밥을 먹었다.'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out_type&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# [245, 0, 245, 0, 245, 0, 245, 0, 251]
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;참고&quot;&gt;참고&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://signing.tistory.com/51&lt;/li&gt;
+  &lt;li&gt;https://velog.io/@gwkoo/BPEByte-Pair-Encoding&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="sentencepiece" /><summary type="html">sentencepiece를 황용해서 토큰화 해보겠습니다.</summary></entry><entry><title type="html">[Python] app store review parsing</title><link href="http://localhost:4000/language/language-python-appstore-review-copy/" rel="alternate" type="text/html" title="[Python] app store review parsing" /><published>2020-12-06T00:00:00+09:00</published><updated>2020-12-06T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-appstore-review%20copy</id><content type="html" xml:base="http://localhost:4000/language/language-python-appstore-review-copy/">&lt;p&gt;google play store는 개발자 키파일이 있어야 리뷰 조회가 가능하지만&lt;br /&gt;
 app store 는 RSS 방식으로 제공을 해줍니다.&lt;br /&gt;
 json과 xml 방식을 제공하는데 xml 방식에서 입력 및 수정날짜를 얻을 수 있어 xml을 선택할 수밖게 없습니다.
 ip 차단 조건은 다음에 확인해보도록 하겠습니다.&lt;br /&gt;&lt;/p&gt;
@@ -1033,210 +1132,4 @@ Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원
 
 &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;site&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;prettier options&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://ux.stories.pe.kr/150&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="vscode" /><summary type="html">Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다. Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다.</summary></entry><entry><title type="html">[Nginx] Nginx 설치 및 Tomcat 연동</title><link href="http://localhost:4000/web%20servier/server-nginx-install-tomcat-redirect/" rel="alternate" type="text/html" title="[Nginx] Nginx 설치 및 Tomcat 연동" /><published>2020-06-29T00:00:00+09:00</published><updated>2020-06-29T22:05:34+09:00</updated><id>http://localhost:4000/web%20servier/server-nginx-install-tomcat-redirect</id><content type="html" xml:base="http://localhost:4000/web%20servier/server-nginx-install-tomcat-redirect/">&lt;p&gt;Nginx란 Apache같은 웹 서버입니다.&lt;br /&gt;
-Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다.&lt;br /&gt;
-방화벽이 없는 상태에서 진행 했습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;목표&quot;&gt;목표&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Ubuntu 16에 Eginx 설치&lt;/li&gt;
-  &lt;li&gt;8080 포트 eginx 연결&lt;/li&gt;
-  &lt;li&gt;옵션 설정&lt;/li&gt;
-  &lt;li&gt;권한 변경&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;nginx-설치&quot;&gt;Nginx 설치&lt;/h2&gt;
-
-&lt;h3 id=&quot;설치&quot;&gt;설치&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;제거&quot;&gt;제거&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get remove nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;버전확인&quot;&gt;버전확인&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nginx &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
-nginx version: nginx/1.10.3 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;Ubuntu&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;기본-화면-접속&quot;&gt;기본 화면 접속&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://localhost&quot;&gt;http://localhost&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;서비스-시작&quot;&gt;서비스 시작&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;service nginx status
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;service nginx restart
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;설정&quot;&gt;설정&lt;/h2&gt;
-
-&lt;h3 id=&quot;nginx-설치-위치&quot;&gt;Nginx 설치 위치&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/etc/nginx
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;폴더-구조&quot;&gt;폴더 구조&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;├── conf.d &lt;span class=&quot;c&quot;&gt;# (디렉토리) nginx.conf에서 불러들일 수 있는 파일을 저장&lt;/span&gt;
-├── fastcgi.conf &lt;span class=&quot;c&quot;&gt;# (파일) FastCGI 환경설정 파일&lt;/span&gt;
-├── fastcgi_params
-├── koi-utf
-├── koi-win
-├── mime.types
-├── nginx.conf &lt;span class=&quot;c&quot;&gt;# 접속자 수, 동작 프로세스 수 등 퍼포먼스에 관한 설정들&lt;/span&gt;
-├── proxy_params
-├── scgi_params
-├── sites-available &lt;span class=&quot;c&quot;&gt;# 비활성화된 사이트들의 설정 파일들이 위치한다.&lt;/span&gt;
-│   └── default
-├── sites-enabled &lt;span class=&quot;c&quot;&gt;# 활성화된 사이트들의 설정 파일들이 위치한다. 존재하지 않은 경우에는 디렉토리를 직접 만들 수도 있다.&lt;/span&gt;
-│   └── default -&amp;gt; /etc/nginx/sites-available/default
-├── snippets
-│   ├── fastcgi-php.conf
-│   └── snakeoil.conf
-├── uwsgi_params
-└── win-utf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;설정-파일&quot;&gt;설정 파일&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/nginx/nginx.cnf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;upstream-설정&quot;&gt;upstream 설정&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;upstream &amp;lt;업스트림 이름&amp;gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  &amp;lt;로드밸런스 타입: defulat는 round-robin&amp;gt;
-  server &amp;lt;host1&amp;gt;:&amp;lt;port1&amp;gt;
-  ...
-  server &amp;lt;host2&amp;gt;:&amp;lt;port2&amp;gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-server &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-  ...
-  location &amp;lt;url&amp;gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    proxy_pass http://&amp;lt;업스트림 이름&amp;gt;
-  &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-  ...
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;upstream-방식으로-8080-포트-연결&quot;&gt;upstream 방식으로 8080 포트 연결&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/nginx/sites-enabled/tomcat.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;upstream tomcat &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   ip_hash&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   server 127.0.0.1:8080&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-server &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   listen       80&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   server_name  localhost&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-   access_log   /var/log/nginx/tomcat_access.log&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-   location / &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-       proxy_set_header        Host &lt;span class=&quot;nv&quot;&gt;$http_host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_set_header        X-Real-IP &lt;span class=&quot;nv&quot;&gt;$remote_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_set_header        X-Forwarded-For &lt;span class=&quot;nv&quot;&gt;$proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_set_header        X-Forwarded-Proto &lt;span class=&quot;nv&quot;&gt;$scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_set_header        X-NginX-Proxy &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-       proxy_pass http://tomcat&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_redirect          off&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       charset utf-8&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;기본-설정-제거&quot;&gt;기본 설정 제거&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;default 심볼릭링크 삭제&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /etc/nginx/sites-enabled
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;rm&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; default
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;nginx-reload&quot;&gt;nginx reload&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nginx &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; reload
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;nginx-load-balancer&quot;&gt;nginx load balancer&lt;/h2&gt;
-
-&lt;h3 id=&quot;기존-upstream-파일에-서버-추가&quot;&gt;기존 upstream 파일에 서버 추가&lt;/h3&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/nginx/sites-enabled/tomcat.conf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;upstream tomcat &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   ip_hash&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   server 127.0.0.1:8080&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   server 127.0.0.1:8081&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-server &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   listen       80&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   server_name  localhost&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-   access_log   /var/log/nginx/tomcat_access.log&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-   location / &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-       proxy_set_header        Host &lt;span class=&quot;nv&quot;&gt;$http_host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_set_header        X-Real-IP &lt;span class=&quot;nv&quot;&gt;$remote_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_set_header        X-Forwarded-For &lt;span class=&quot;nv&quot;&gt;$proxy_add_x_forwarded_for&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_set_header        X-Forwarded-Proto &lt;span class=&quot;nv&quot;&gt;$scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_set_header        X-NginX-Proxy &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-       proxy_pass http://tomcat&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       proxy_redirect          off&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-       charset utf-8&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-   &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;load-balancing-methods부하-부산-규칙&quot;&gt;Load balancing methods(부하 부산 규칙)&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;round-robin(디폴트) - 그냥 돌아가면서 분배한다.&lt;/li&gt;
-  &lt;li&gt;hash - 해시한 값으로 분배한다 쓰려면 hash &lt;키&gt; 형태로 쓴다. ex)hash \$remote_addr &amp;lt;- 이는 ip_hash와 같다.&lt;/키&gt;&lt;/li&gt;
-  &lt;li&gt;ip_hash - 아이피로 해싱해서 분배한다.&lt;/li&gt;
-  &lt;li&gt;random - 그냥 랜덤으로 분배한다.&lt;/li&gt;
-  &lt;li&gt;least_conn - 연결수가 가장 적은 서버를 선택해서 분배, 근데 가중치를 고려함&lt;/li&gt;
-  &lt;li&gt;least_time - 연결수가 가자 적으면서 평균 응답시간이 가장 적은 쪽을 선택해서분배&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;method-options&quot;&gt;method options&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;weight - 가중치를 둬서 더많이 가게 한다.&lt;/li&gt;
-  &lt;li&gt;max_conns - 최대 연결 한계를 정한다&lt;/li&gt;
-  &lt;li&gt;max_fails - 최대 실패 한계를 정한다. 최대 실패횟수에 도달하면 서버가 죽은것으로 간주한다.&lt;/li&gt;
-  &lt;li&gt;fail_timeout - 시간을 정한다. 이 시간을 넘어서도 응답하지 않으면 서버가 죽은것으로 간주한다.&lt;/li&gt;
-  &lt;li&gt;backup - 이 서버는 백업서버로 간주하고 다른 메인 서버가 죽었을때 동작한다. load balancing methods가 hash나 random일때는 무의미&lt;/li&gt;
-  &lt;li&gt;down - 표시한 서버는 사용치 않는다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;install &amp;amp; description:
-    &lt;ul&gt;
-      &lt;li&gt;https://whatisthenext.tistory.com/123&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;load balancer:
-    &lt;ul&gt;
-      &lt;li&gt;https://kamang-it.tistory.com/entry/WebServernginxnginx%EB%A1%9C-%EB%A1%9C%EB%93%9C%EB%B0%B8%EB%9F%B0%EC%8B%B1-%ED%95%98%EA%B8%B0&lt;/li&gt;
-      &lt;li&gt;https://velog.io/@minholee_93/Nginx-Load-Balancer&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Nginx" /><summary type="html">Nginx란 Apache같은 웹 서버입니다. Ubuntu 16에 Eninx 설치 후 Spring boot으로 실행 된 8080 포트를 연결 해보겠습니다. 방화벽이 없는 상태에서 진행 했습니다.</summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="vscode" /><summary type="html">Vue로 개발하는데 저장만 눌러도 포맷을 맞춰주는 기능이 있다고해서 적용했습니다. Vue 파일은 JS 파일과 포맷이 조금 다른 부분도 있고해서 팀원들간에 소스 정형화에 도움이 될거 같습니다.</summary></entry></feed>
