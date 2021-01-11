@@ -1,0 +1,616 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[ngrok] Vue 핫리로딩을 외부 단말에서 - TMM</title>
+<meta name="description" content="Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다. 그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다. 바로 ngrok 입니다. 한번 사용해보겠습니다. ">
+
+
+  <meta name="author" content="To much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[ngrok] Vue 핫리로딩을 외부 단말에서">
+<meta property="og:url" content="http://localhost:4000/package/package-ngrok-vue/">
+
+
+  <meta property="og:description" content="Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다. 그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다. 바로 ngrok 입니다. 한번 사용해보겠습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-12-22T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-12-22T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/package/package-ngrok-vue/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[ngrok] Vue 핫리로딩을 외부 단말에서">
+    <meta itemprop="description" content="Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다.그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다.바로 ngrok 입니다.한번 사용해보겠습니다.">
+    <meta itemprop="datePublished" content="2020-12-22T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-12-22T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[ngrok] Vue 핫리로딩을 외부 단말에서
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#ngrok-설치">ngrok 설치</a></li>
+  <li><a href="#vueconfigjs-수정">vue.config.js 수정</a></li>
+  <li><a href="#실행">실행</a></li>
+  <li><a href="#ngork-실행">ngork 실행</a></li>
+  <li><a href="#모바일에서-접속">모바일에서 접속</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다.<br />
+그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다.<br />
+바로 ngrok 입니다.<br />
+한번 사용해보겠습니다.</p>
+
+<h3 id="ngrok-설치">ngrok 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install </span>ngrok
+</code></pre></div></div>
+
+<h3 id="vueconfigjs-수정">vue.config.js 수정</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">...</span><span class="err">생략</span><span class="p">...</span>
+    <span class="na">devServer</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">disableHostCheck</span><span class="p">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="실행">실행</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm run serve
+</code></pre></div></div>
+
+<h3 id="ngork-실행">ngork 실행</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ngrok http 8080 <span class="c">#실행 포트 입력</span>
+
+ngrok by @inconshreveable                                                <span class="o">(</span>Ctrl+C to quit<span class="o">)</span>
+
+Session Status                online
+Session Expires               7 hours, 44 minutes
+Version                       2.3.35
+Region                        United States <span class="o">(</span>us<span class="o">)</span>
+Web Interface                 http://127.0.0.1:4040
+Forwarding                    http://6d3ec3487f97.ngrok.io -&gt; http://localhost:8080
+Forwarding                    https://6d3ec3487f97.ngrok.io -&gt; http://localhost:8080
+
+Connections                   ttl     opn     rt1     rt5     p50     p90
+                              7       0       0.00    0.00    8.50    17.79
+
+HTTP Requests
+<span class="nt">-------------</span>
+
+GET /app.ade16c2b65ed50af02aa.hot-update.js 200 OK
+GET /app.ade16c2b65ed50af02aa.hot-update.js 200 OK
+</code></pre></div></div>
+
+<h3 id="모바일에서-접속">모바일에서 접속</h3>
+
+<ul>
+  <li>생성된 경로 http://6d3ec3487f97.ngrok.io 또는 https://6d3ec3487f97.ngrok.io 로 접속하면 포워딩 됩니다.</li>
+  <li>소스 수정시 바로바로 확인이 가능한것을 볼수 있습니다.</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ngrok" class="page__taxonomy-item" rel="tag">ngrok</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#vue" class="page__taxonomy-item" rel="tag">Vue</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#package" class="page__taxonomy-item" rel="tag">Package</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-12-22">December 22, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5Bngrok%5D+Vue+%ED%95%AB%EB%A6%AC%EB%A1%9C%EB%94%A9%EC%9D%84+%EC%99%B8%EB%B6%80+%EB%8B%A8%EB%A7%90%EC%97%90%EC%84%9C%20http%3A%2F%2Flocalhost%3A4000%2Fpackage%2Fpackage-ngrok-vue%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fpackage%2Fpackage-ngrok-vue%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fpackage%2Fpackage-ngrok-vue%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/application/application-pwa-vue-vuetify/" class="pagination--pager" title="[작성중][PWA] Vue + Vuetify 활용한 PWA 개발
+">이전</a>
+    
+    
+      <a href="/javascript/language-javascript-navigator/" class="pagination--pager" title="[Javascript] Navigator
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-ubuntu16-init-package/" rel="permalink">[Ubuntu 18] Initial install package + nginx + gunicorn + flask
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/javascript/language-javascript-notification/" rel="permalink">[작성중][Javascript] Notification API
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.
+웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/javascript/language-javascript-navigator/" rel="permalink">[Javascript] Navigator
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">작성 예정입니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/application/application-pwa-vue-vuetify/" rel="permalink">[작성중][PWA] Vue + Vuetify 활용한 PWA 개발
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Vue를 이용해 PWA를 만들어 보겠습니다.
+nvm은 설치가 돼 있고 vuetify를 사용할 수 있다는 전제로 진행하겠습니다.
+nvm 버전은 v13.14.0을 사용하였습니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
