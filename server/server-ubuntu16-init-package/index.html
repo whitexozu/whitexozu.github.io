@@ -558,6 +558,7 @@
  Group<span class="p">=</span>www<span class="p">-</span>data
  WorkingDirectory<span class="p">=</span><span class="sr">/home/</span><span class="k">sin</span><span class="sr">/dev/</span>project/thesaurus
  ExecStart<span class="p">=</span><span class="sr">/home/</span>igs_admin<span class="sr">/.local/</span>bin<span class="sr">/gunicorn --workers 1 --timeout 300 --bind unix:thesaurus.sock --error-logfile /</span>var<span class="sr">/log/</span>gunicorn<span class="sr">/error.log --access-logfile /</span>var<span class="sr">/log/</span>gunicorn/access<span class="p">.</span>log <span class="p">--</span>capture<span class="p">-</span>output <span class="p">--</span>log<span class="p">-</span>level <span class="k">debug</span> <span class="p">-</span><span class="k">m</span> <span class="m">007</span> wsgi<span class="p">:</span>app
+ Environment<span class="p">=</span>PYTHONUNBUFFERED<span class="p">=</span><span class="m">1</span>
 
  <span class="p">[</span>Install<span class="p">]</span>
  WantedBy<span class="p">=</span>multi<span class="p">-</span>user<span class="p">.</span>target
