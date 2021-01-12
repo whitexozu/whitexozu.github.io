@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-01-11T11:43:45+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Ubuntu 16] Initial install package + nginx + gunicorn + flask</title><link href="http://localhost:4000/server/server-ubuntu16-init-package/" rel="alternate" type="text/html" title="[Ubuntu 16] Initial install package + nginx + gunicorn + flask" /><published>2021-01-08T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/server/server-ubuntu16-init-package</id><content type="html" xml:base="http://localhost:4000/server/server-ubuntu16-init-package/">&lt;p&gt;ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-01-12T18:21:29+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Ubuntu 16] Initial install package + nginx + gunicorn + flask</title><link href="http://localhost:4000/server/server-ubuntu16-init-package/" rel="alternate" type="text/html" title="[Ubuntu 16] Initial install package + nginx + gunicorn + flask" /><published>2021-01-08T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/server/server-ubuntu16-init-package</id><content type="html" xml:base="http://localhost:4000/server/server-ubuntu16-init-package/">&lt;p&gt;ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;openssh-server&quot;&gt;openssh-server&lt;/h3&gt;
 
@@ -59,6 +59,7 @@
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;add-apt-repository ppa:deadsnakes/ppa
  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python3.6
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python3.6-gdbm
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -88,7 +89,8 @@
   &lt;li&gt;
     &lt;p&gt;설치&lt;/p&gt;
 
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; 1. &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python3-pip
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python3-pip
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python3 &lt;span class=&quot;nt&quot;&gt;-m&lt;/span&gt; pip &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--upgrade&lt;/span&gt; pip
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -241,13 +243,20 @@
  &lt;span class=&quot;nb&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sin&lt;/span&gt;
  Group&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;www&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;data
  WorkingDirectory&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/dev/&lt;/span&gt;project/thesaurus
- ExecStart&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.local/&lt;/span&gt;bin/gunicorn &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;workers &lt;span class=&quot;m&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;bind unix&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;thesaurus&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;sock &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;007&lt;/span&gt; wsgi&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;app
+ ExecStart&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/home/&lt;/span&gt;igs_admin&lt;span class=&quot;sr&quot;&gt;/.local/&lt;/span&gt;bin&lt;span class=&quot;sr&quot;&gt;/gunicorn --workers 1 --timeout 300 --bind unix:thesaurus.sock --error-logfile /&lt;/span&gt;var&lt;span class=&quot;sr&quot;&gt;/log/&lt;/span&gt;gunicorn&lt;span class=&quot;sr&quot;&gt;/error.log --access-logfile /&lt;/span&gt;var&lt;span class=&quot;sr&quot;&gt;/log/&lt;/span&gt;gunicorn/access&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;log &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;capture&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;output &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;log&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;level &lt;span class=&quot;k&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;007&lt;/span&gt; wsgi&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;app
 
  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;Install&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
  WantedBy&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;multi&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;user&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;target
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
     &lt;p&gt;&lt;em&gt;ExecStart의 gunicorn 경로는 which 명령으로 확인&lt;/em&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;로그 폴더 생성&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo mkdir&lt;/span&gt; /var/log/gunicorn
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo chmod &lt;/span&gt;777 /var/log/gunicorn
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;서비스 실행&lt;/p&gt;

@@ -373,6 +373,7 @@
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>add-apt-repository ppa:deadsnakes/ppa
  <span class="nv">$ </span><span class="nb">sudo </span>apt-get update
  <span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>python3.6
+ <span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>python3.6-gdbm
 </code></pre></div>    </div>
   </li>
   <li>
@@ -402,7 +403,8 @@
   <li>
     <p>설치</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1. <span class="nb">sudo </span>apt-get <span class="nb">install </span>python3-pip
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>python3-pip
+ <span class="nv">$ </span>python3 <span class="nt">-m</span> pip <span class="nb">install</span> <span class="nt">--upgrade</span> pip
 </code></pre></div>    </div>
   </li>
   <li>
@@ -555,13 +557,20 @@
  <span class="nb">User</span><span class="p">=</span><span class="k">sin</span>
  Group<span class="p">=</span>www<span class="p">-</span>data
  WorkingDirectory<span class="p">=</span><span class="sr">/home/</span><span class="k">sin</span><span class="sr">/dev/</span>project/thesaurus
- ExecStart<span class="p">=</span><span class="sr">/home/</span><span class="k">sin</span><span class="sr">/.local/</span>bin/gunicorn <span class="p">--</span>workers <span class="m">3</span> <span class="p">--</span>bind unix<span class="p">:</span>thesaurus<span class="p">.</span>sock <span class="p">-</span><span class="k">m</span> <span class="m">007</span> wsgi<span class="p">:</span>app
+ ExecStart<span class="p">=</span><span class="sr">/home/</span>igs_admin<span class="sr">/.local/</span>bin<span class="sr">/gunicorn --workers 1 --timeout 300 --bind unix:thesaurus.sock --error-logfile /</span>var<span class="sr">/log/</span>gunicorn<span class="sr">/error.log --access-logfile /</span>var<span class="sr">/log/</span>gunicorn/access<span class="p">.</span>log <span class="p">--</span>capture<span class="p">-</span>output <span class="p">--</span>log<span class="p">-</span>level <span class="k">debug</span> <span class="p">-</span><span class="k">m</span> <span class="m">007</span> wsgi<span class="p">:</span>app
 
  <span class="p">[</span>Install<span class="p">]</span>
  WantedBy<span class="p">=</span>multi<span class="p">-</span>user<span class="p">.</span>target
 </code></pre></div>    </div>
 
     <p><em>ExecStart의 gunicorn 경로는 which 명령으로 확인</em></p>
+  </li>
+  <li>
+    <p>로그 폴더 생성</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo mkdir</span> /var/log/gunicorn
+ <span class="nv">$ </span><span class="nb">sudo chmod </span>777 /var/log/gunicorn
+</code></pre></div>    </div>
   </li>
   <li>
     <p>서비스 실행</p>
