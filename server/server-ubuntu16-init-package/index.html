@@ -301,6 +301,9 @@
               <ul class="toc__menu">
   <li><a href="#openssh-server">openssh-server</a></li>
   <li><a href="#노트북-전원-유지">노트북 전원 유지</a></li>
+  <li><a href="#git-설치">git 설치</a></li>
+  <li><a href="#curl-설치">curl 설치</a></li>
+  <li><a href="#nvm-설치">nvm 설치</a></li>
   <li><a href="#python36">python3.6</a></li>
   <li><a href="#pip3">pip3</a></li>
   <li><a href="#mysql-8">mysql 8</a></li>
@@ -364,6 +367,50 @@
   </li>
 </ol>
 
+<h3 id="git-설치">git 설치</h3>
+
+<ol>
+  <li>설치
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>git
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="curl-설치">curl 설치</h3>
+
+<ol>
+  <li>설치
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>curl
+</code></pre></div>    </div>
+  </li>
+  <li>의존성 실패가 나오면
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>curl
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="nvm-설치">nvm 설치</h3>
+
+<ol>
+  <li>설치
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl <span class="nt">-o-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+</code></pre></div>    </div>
+  </li>
+  <li>명령어 참고
+    <ul>
+      <li>nvm ls-remote : nvm이 지원하는 버전 확인</li>
+      <li>nvm install [버전] : nvm에서 지원 버전 install
+        <ul>
+          <li>ex) $ nvm install v13</li>
+        </ul>
+      </li>
+      <li>nvm ls =&gt; 설치된 node 버전 확인</li>
+      <li>nvm use v12.18.2 =&gt; v12.18.2 버전의 node를 사용</li>
+      <li>nvm alias default [버전] =&gt; default 버전을 변경 및 유지</li>
+    </ul>
+  </li>
+</ol>
+
 <h3 id="python36">python3.6</h3>
 
 <ol>
@@ -413,8 +460,6 @@
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">cd</span> /usr/bin
  <span class="nv">$ </span>ll | gerp pip3
 </code></pre></div>    </div>
-
-    <p><strong>pip3 update 금지</strong></p>
   </li>
 </ol>
 
