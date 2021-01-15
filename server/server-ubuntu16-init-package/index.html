@@ -299,6 +299,7 @@
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
               <ul class="toc__menu">
+  <li><a href="#apt">apt</a></li>
   <li><a href="#openssh-server">openssh-server</a></li>
   <li><a href="#노트북-전원-유지">노트북 전원 유지</a></li>
   <li><a href="#git-설치">git 설치</a></li>
@@ -316,6 +317,28 @@
           </aside>
         
         <p>ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.</p>
+
+<h3 id="apt">apt</h3>
+
+<ol>
+  <li>
+    <p>source list 변경</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>vi /etc/apt/source.list
+</code></pre></div>    </div>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> deb http://kr.archive.ubuntu.com/ubuntu xenial main restricted universe multiverse
+ deb http://kr.archive.ubuntu.com/ubuntu xenial-updates main restricted universe multiverse
+ deb http://kr.archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
+ deb http://kr.archive.ubuntu.com/ubuntu xenial-proposed main restricted universe multiverse
+ deb http://kr.archive.ubuntu.com/ubuntu xenial-security main restricted universe multiverse
+
+ deb-src http://kr.archive.ubuntu.com/ubuntu xenial main restricted universe multiverse
+ deb-src http://kr.archive.ubuntu.com/ubuntu xenial-updates main restricted universe multiverse
+ deb-src http://kr.archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
+</code></pre></div>    </div>
+  </li>
+</ol>
 
 <h3 id="openssh-server">openssh-server</h3>
 
