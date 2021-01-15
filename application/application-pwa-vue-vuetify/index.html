@@ -319,7 +319,6 @@
       <li><a href="#플러그인-모드">플러그인 모드</a></li>
       <li><a href="#프리캐시">프리캐시</a></li>
       <li><a href="#프리캐시-예제">프리캐시 예제</a></li>
-      <li><a href="#워크박스의-5가지-캐시-전략">워크박스의 5가지 캐시 전략</a></li>
       <li><a href="#런타임-캐시">런타임 캐시</a></li>
       <li><a href="#런타임-캐시-예제">런타임 캐시 예제</a>
         <ul>
@@ -329,10 +328,19 @@
       </li>
     </ul>
   </li>
-  <li><a href="#firebase-pwa와-다른-주제로-뺄지-고민">firebase (pwa와 다른 주제로 뺄지 고민)</a></li>
-  <li><a href="#vuefire-pwa와-다른-주제로-뺄지-고민">Vuefire (pwa와 다른 주제로 뺄지 고민)</a></li>
   <li><a href="#pwa-성능-테스트">PWA 성능 테스트</a></li>
-  <li><a href="#푸시-서비스">푸시 서비스</a></li>
+  <li><a href="#푸시-서비스">푸시 서비스</a>
+    <ul>
+      <li><a href="#웹-푸시-알림-이란">웹 푸시 알림 이란</a></li>
+      <li><a href="#프로젝트-생성">프로젝트 생성</a></li>
+      <li><a href="#모듈-설치">모듈 설치</a></li>
+      <li><a href="#packagejson-수정">package.json 수정</a></li>
+      <li><a href="#비대칭킹-생성">비대칭킹 생성</a></li>
+      <li><a href="#메니페스트-작성-예제">메니페스트 작성 예제</a></li>
+      <li><a href="#frontend-예제">frontend 예제</a></li>
+      <li><a href="#backend-예제">backend 예제</a></li>
+    </ul>
+  </li>
 </ul>
 
             </nav>
@@ -341,6 +349,8 @@
         <p>Vue를 이용해 PWA를 만들어 보겠습니다.<br />
 nvm은 설치가 돼 있고 vuetify를 사용할 수 있다는 전제로 진행하겠습니다.<br />
 nvm 버전은 v13.14.0을 사용하였습니다.</p>
+
+<hr />
 
 <h2 id="npm-package-설치-및-실행">npm package 설치 및 실행</h2>
 
@@ -518,32 +528,87 @@ info All dependencies
   <li>개발자 도구 -&gt; Application -&gt; Service Worker -&gt; status 상태 확인</li>
 </ul>
 
+<hr />
+
 <h2 id="워크박스">워크박스</h2>
 
 <h3 id="워크박스란">워크박스란</h3>
 
-<p>253</p>
+<p>구글에서 제공하는 워크박스(workbox)는 <strong>웹앱의 오프라인 기능을 지원하는 자바스크립트 라이브러리</strong>입니다. 워크박스는 PWA의 장점인 오프라인 퍼스트의 경험을 쉽게 구현하도록 오픈소스 모듈로 지원합니다. Vue-CLI 3부터는 PWA 지원이 강화되어 워크박스라는 체계적인 오프라인 기능을 지원하고 있습니다.</p>
 
 <h3 id="플러그인-모드">플러그인 모드</h3>
 
-<p>286</p>
+<!-- 286 -->
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">플러그인 모드</th>
+      <th style="text-align: left">사용할 상황</th>
+      <th style="text-align: left">한계</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">GenerateSW<br />(기본값)</td>
+      <td style="text-align: left">- 프리캐시할 파일을 빠르게 지정해야 할 때<br />- 간단한 런타임 캐시가 필요할 때</td>
+      <td style="text-align: left">- 서비스 워커에 코드를 넣어야 할때<br />- 웹 푸시 알림을 사용할 때</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">InjectManifest</td>
+      <td style="text-align: left">- 서비스 워커에 자신의 코드를 넣어야 할 때<br />- 코드로 직접 프리캐시, 런타임 캐시를 지정하고 싶을 때<br />- 웹 푸시 알림을 사용하고 싶을 때</td>
+      <td style="text-align: left">- 복잡해질 수 있으므로 간단할 때는 GenerateSW가 적합할 수 있음</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>워크박스의 두 플러그인 모드를 사용하려면 vue.config.js 파일이 필요합니다.</em></p>
 
 <h3 id="프리캐시">프리캐시</h3>
 
-<p>286</p>
+<p>프리캐시란 프로그램이 실행되기 전에 원하는 파일만 캐시 메모리에 미리 저장하는 것을 말합니다. 워크박스에서 제공하는 다양한 프리캐시 옵션을 사용할 수 있습니다. 하지만 Vue-CLI에서는 기본적으로 아무 옵션을 지정하지 않아도 빌드한 후에 웹팩으로 생성된 dist 폴더에 있는 index.html, _.css, _.js, robots.txt 파일을 프리캐시합니다. 그리고 index.html 파일에서 외부 HTTP 요청을 한 URL이 있다면 자동으로 프리캐시하므로 웬만한 것은 거의 다 처리할 수 있습니다.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">옵션</th>
+      <th style="text-align: left">의미</th>
+      <th style="text-align: left">적용 사례</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">include</td>
+      <td style="text-align: left">프리캐시에서 사용할 파일을 지정합니다. 이것은 파일이름을 토대로 하므로 대량으로 찾는 정규식을 함께 활용하면 유용합니다.</td>
+      <td style="text-align: left">include: [/\.css$/, /\.js$/]</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">exclude</td>
+      <td style="text-align: left">프리캐시에서 제거할 파일을 지정합니다. 유의할 점은 제거할 파일이 없어도 exclude: []처럼 반드시 명시해 주어야 제대로 동작합니다.</td>
+      <td style="text-align: left">exclude: [/\.json$/, /\.png$/]</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="프리캐시-예제">프리캐시 예제</h3>
 
-<p>vue.config.js
-289</p>
+<ul>
+  <li>vue.config.js</li>
+</ul>
 
-<h3 id="워크박스의-5가지-캐시-전략">워크박스의 5가지 캐시 전략</h3>
-
-<p>313</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">pwa</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">workboxOptions</span><span class="p">:</span> <span class="p">{</span>
+            <span class="c1">// 프리캐시(pre-cache)할 파일 지정</span>
+            <span class="na">include</span><span class="p">:</span> <span class="p">[</span><span class="sr">/^index</span><span class="se">\.</span><span class="sr">html$/</span><span class="p">,</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">css$/</span><span class="p">,</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js$/</span><span class="p">,</span> <span class="sr">/^manifest</span><span class="se">\.</span><span class="sr">json$/</span><span class="p">,</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">png$/</span><span class="p">],</span>
+            <span class="c1">// exclude는 반드시 기입해야 정상적으로 동작함.</span>
+            <span class="na">exclude</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h3 id="런타임-캐시">런타임 캐시</h3>
-
-<p>313</p>
 
 <ul>
   <li>프리캐시(pre-cache)는 서비스 워커가 등록될 때 미리 원하는 파일만 지정하여 캐시하는 것을 말합니다. 이 방법은 분명히 빠르고 손쉽지만 브라우저의 HTTPS 요청처럼 프로그램 로직에 따라 앱 실행 중에 캐시해야 하는 경우드 발생합니다. 이럴 때 수행하는 방법을 <strong>런타임 캐시(runtime-cache)</strong>라고 합니다.</li>
@@ -651,12 +716,7 @@ info All dependencies
   </li>
 </ul>
 
-<p>vue.config.js
-318</p>
-
-<h2 id="firebase-pwa와-다른-주제로-뺄지-고민">firebase (pwa와 다른 주제로 뺄지 고민)</h2>
-
-<h2 id="vuefire-pwa와-다른-주제로-뺄지-고민">Vuefire (pwa와 다른 주제로 뺄지 고민)</h2>
+<hr />
 
 <h2 id="pwa-성능-테스트">PWA 성능 테스트</h2>
 
@@ -667,7 +727,61 @@ info All dependencies
   <li>report 결과 확인</li>
 </ol>
 
+<hr />
+
 <h2 id="푸시-서비스">푸시 서비스</h2>
+
+<h3 id="웹-푸시-알림-이란">웹 푸시 알림 이란</h3>
+
+<!-- 422 -->
+
+<h3 id="프로젝트-생성">프로젝트 생성</h3>
+
+<ul>
+  <li>frontend 프로젝트는 브라우저별 push endpoint 생성을 합니다.</li>
+  <li>backend 프로젝트는 push 발송을 합니다.</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vue create pwa-frontend
+<span class="nv">$ </span>vue create pwa-backend
+</code></pre></div></div>
+
+<h3 id="모듈-설치">모듈 설치</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm run web-push
+</code></pre></div></div>
+
+<h3 id="packagejson-수정">package.json 수정</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vi package.json
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+  <span class="dl">"</span><span class="s2">scripts</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">serve</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">vue-cli-service serve</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">build</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">vue-cli-service build</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">web-push</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">web-push</span><span class="dl">"</span>
+  <span class="p">},</span>
+<span class="p">...</span>
+</code></pre></div></div>
+
+<h3 id="비대칭킹-생성">비대칭킹 생성</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm run web-push gnenrate-vapid-keys
+</code></pre></div></div>
+
+<ul>
+  <li>생성된 키는 frontend endpoint 생성, backend push 요청에 사용됩니다.</li>
+  <li>키는 web-push-key.txt 파일을 만들어 임시로 저장해 둡니다.</li>
+</ul>
+
+<h3 id="메니페스트-작성-예제">메니페스트 작성 예제</h3>
+
+<!-- 431 -->
+
+<h3 id="frontend-예제">frontend 예제</h3>
+
+<h3 id="backend-예제">backend 예제</h3>
 
         
       </section>
@@ -797,7 +911,7 @@ info All dependencies
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/javascript/language-javascript-notification/" rel="permalink">[작성중][Javascript] Notification API
+        <a href="/javascript/language-javascript-notification/" rel="permalink">[Javascript] Notification API
 </a>
       
     </h2>
@@ -817,7 +931,7 @@ info All dependencies
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/javascript/language-javascript-navigator/" rel="permalink">[Javascript] Navigator
+        <a href="/javascript/language-javascript-navigator/" rel="permalink">[작성중][Javascript] Navigator
 </a>
       
     </h2>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-01-15T14:51:57+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Ubuntu 16] Initial install package + nginx + gunicorn + flask</title><link href="http://localhost:4000/server/server-ubuntu16-init-package/" rel="alternate" type="text/html" title="[Ubuntu 16] Initial install package + nginx + gunicorn + flask" /><published>2021-01-08T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/server/server-ubuntu16-init-package</id><content type="html" xml:base="http://localhost:4000/server/server-ubuntu16-init-package/">&lt;p&gt;ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-01-16T08:29:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Ubuntu 16] Initial install package + nginx + gunicorn + flask</title><link href="http://localhost:4000/server/server-ubuntu16-init-package/" rel="alternate" type="text/html" title="[Ubuntu 16] Initial install package + nginx + gunicorn + flask" /><published>2021-01-08T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/server/server-ubuntu16-init-package</id><content type="html" xml:base="http://localhost:4000/server/server-ubuntu16-init-package/">&lt;p&gt;ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;apt&quot;&gt;apt&lt;/h3&gt;
 
@@ -134,7 +134,7 @@
   &lt;li&gt;
     &lt;p&gt;파이선 버젼 변경&lt;/p&gt;
 
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-alternatives &lt;span class=&quot;nt&quot;&gt;--config&lt;/span&gt; python3 // python 버전 변경
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;update-alternatives &lt;span class=&quot;nt&quot;&gt;--config&lt;/span&gt; python3
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -391,7 +391,7 @@
       &lt;li&gt;해당 서버 &lt;strong&gt;IP&lt;/strong&gt;로 브라우저 접속 테스트&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ubuntu 18" /><category term="nginx" /><category term="gunicorn" /><category term="flask" /><summary type="html">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.</summary></entry><entry><title type="html">[Javascript] Navigator</title><link href="http://localhost:4000/javascript/language-javascript-navigator/" rel="alternate" type="text/html" title="[Javascript] Navigator" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-navigator</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-navigator/">&lt;p&gt;작성 예정입니다.&lt;/p&gt;
+&lt;/ol&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ubuntu 18" /><category term="nginx" /><category term="gunicorn" /><category term="flask" /><summary type="html">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.</summary></entry><entry><title type="html">[작성중][Javascript] Navigator</title><link href="http://localhost:4000/javascript/language-javascript-navigator/" rel="alternate" type="text/html" title="[작성중][Javascript] Navigator" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-navigator</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-navigator/">&lt;p&gt;작성 예정입니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
 
@@ -412,7 +412,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;https://developer.mozilla.org/ko/docs/Web/API/Navigator&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Navigator" /><summary type="html">작성 예정입니다.</summary></entry><entry><title type="html">[작성중][Javascript] Notification API</title><link href="http://localhost:4000/javascript/language-javascript-notification/" rel="alternate" type="text/html" title="[작성중][Javascript] Notification API" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-notification</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-notification/">&lt;p&gt;PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.&lt;br /&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Navigator" /><summary type="html">작성 예정입니다.</summary></entry><entry><title type="html">[Javascript] Notification API</title><link href="http://localhost:4000/javascript/language-javascript-notification/" rel="alternate" type="text/html" title="[Javascript] Notification API" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-notification</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-notification/">&lt;p&gt;PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.&lt;br /&gt;
 웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이션이 백그라운드에 있더라도 웹이 사용자에게 정보를 보낼 수 있습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
@@ -425,17 +425,17 @@
 
 &lt;h3 id=&quot;예제-소스&quot;&gt;예제 소스&lt;/h3&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;wrap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;c&quot;&gt;&amp;lt;!--&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;상단에&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;제목&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;표시&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--&amp;gt;&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;col&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cols&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;text-center&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
-                &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;display-1&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;메시지&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;테스트&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/h1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;            &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/v-col&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;        &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/v-row&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/v-container&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/template&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;v-container&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;v-row&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;wrap&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 상단에 제목 표시 --&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;v-col&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;cols=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;12&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text-center&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;display-1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;메시지 테스트&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/v-col&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/v-row&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/v-container&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
@@ -454,7 +454,7 @@
             &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Notification&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                 &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;이 브라우저는 알림을 지원하지 않습니다.&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
             &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-                &lt;span class=&quot;nx&quot;&gt;Notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;requestPermission&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nx&quot;&gt;Notification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;requestPermission&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
                     &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Notification.requestPermission result : &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
                     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;granted&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -471,8 +471,8 @@
         &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/script&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;gt;
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;권한-설명&quot;&gt;권한 설명&lt;/h3&gt;
 
@@ -494,7 +494,7 @@
 &lt;ul&gt;
   &lt;li&gt;테스트 시에는 localhost 로 알림을 받을 수 있습니다.&lt;/li&gt;
   &lt;li&gt;IP, Domain 으로 접속할때는 HTTPS를 사용해야 합니다.&lt;/li&gt;
-  &lt;li&gt;브라우저가 꺼지면 기능도 종료됩니다. 꺼진 상태에서도 받기 위해서는 PWA를 사용해야 합니다.&lt;/li&gt;
+  &lt;li&gt;브라우저 탭이 닫히면 기능도 종료됩니다. 닫힌 상태에서도 받기 위해서는 PWA를 사용해야 합니다. 브라우저가 꺼지면 PWA도 받을 수 없습니다.&lt;/li&gt;
   &lt;li&gt;데스크탑에서는 Chrome, Safari 사용이 가능하나 모바일에서는 Android 에서만 사용이 가능 합니다. iOS에서는 Chrome, Safari, Firefox 모두 사용 불가 합니다. 자세한 브라우저 호환성은 참고사이트에서 확인 바랍니다.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -561,6 +561,8 @@ GET /app.ade16c2b65ed50af02aa.hot-update.js 200 OK
 &lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ngrok" /><category term="Vue" /><summary type="html">Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다. 그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다. 바로 ngrok 입니다. 한번 사용해보겠습니다.</summary></entry><entry><title type="html">[작성중][PWA] Vue + Vuetify 활용한 PWA 개발</title><link href="http://localhost:4000/application/application-pwa-vue-vuetify/" rel="alternate" type="text/html" title="[작성중][PWA] Vue + Vuetify 활용한 PWA 개발" /><published>2020-12-18T00:00:00+09:00</published><updated>2020-12-17T22:05:34+09:00</updated><id>http://localhost:4000/application/application-pwa-vue-vuetify</id><content type="html" xml:base="http://localhost:4000/application/application-pwa-vue-vuetify/">&lt;p&gt;Vue를 이용해 PWA를 만들어 보겠습니다.&lt;br /&gt;
 nvm은 설치가 돼 있고 vuetify를 사용할 수 있다는 전제로 진행하겠습니다.&lt;br /&gt;
 nvm 버전은 v13.14.0을 사용하였습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h2 id=&quot;npm-package-설치-및-실행&quot;&gt;npm package 설치 및 실행&lt;/h2&gt;
 
@@ -738,32 +740,87 @@ info All dependencies
   &lt;li&gt;개발자 도구 -&amp;gt; Application -&amp;gt; Service Worker -&amp;gt; status 상태 확인&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;hr /&gt;
+
 &lt;h2 id=&quot;워크박스&quot;&gt;워크박스&lt;/h2&gt;
 
 &lt;h3 id=&quot;워크박스란&quot;&gt;워크박스란&lt;/h3&gt;
 
-&lt;p&gt;253&lt;/p&gt;
+&lt;p&gt;구글에서 제공하는 워크박스(workbox)는 &lt;strong&gt;웹앱의 오프라인 기능을 지원하는 자바스크립트 라이브러리&lt;/strong&gt;입니다. 워크박스는 PWA의 장점인 오프라인 퍼스트의 경험을 쉽게 구현하도록 오픈소스 모듈로 지원합니다. Vue-CLI 3부터는 PWA 지원이 강화되어 워크박스라는 체계적인 오프라인 기능을 지원하고 있습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;플러그인-모드&quot;&gt;플러그인 모드&lt;/h3&gt;
 
-&lt;p&gt;286&lt;/p&gt;
+&lt;!-- 286 --&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;플러그인 모드&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;사용할 상황&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;한계&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GenerateSW&lt;br /&gt;(기본값)&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;- 프리캐시할 파일을 빠르게 지정해야 할 때&lt;br /&gt;- 간단한 런타임 캐시가 필요할 때&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;- 서비스 워커에 코드를 넣어야 할때&lt;br /&gt;- 웹 푸시 알림을 사용할 때&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;InjectManifest&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;- 서비스 워커에 자신의 코드를 넣어야 할 때&lt;br /&gt;- 코드로 직접 프리캐시, 런타임 캐시를 지정하고 싶을 때&lt;br /&gt;- 웹 푸시 알림을 사용하고 싶을 때&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;- 복잡해질 수 있으므로 간단할 때는 GenerateSW가 적합할 수 있음&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;em&gt;워크박스의 두 플러그인 모드를 사용하려면 vue.config.js 파일이 필요합니다.&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;프리캐시&quot;&gt;프리캐시&lt;/h3&gt;
 
-&lt;p&gt;286&lt;/p&gt;
+&lt;p&gt;프리캐시란 프로그램이 실행되기 전에 원하는 파일만 캐시 메모리에 미리 저장하는 것을 말합니다. 워크박스에서 제공하는 다양한 프리캐시 옵션을 사용할 수 있습니다. 하지만 Vue-CLI에서는 기본적으로 아무 옵션을 지정하지 않아도 빌드한 후에 웹팩으로 생성된 dist 폴더에 있는 index.html, _.css, _.js, robots.txt 파일을 프리캐시합니다. 그리고 index.html 파일에서 외부 HTTP 요청을 한 URL이 있다면 자동으로 프리캐시하므로 웬만한 것은 거의 다 처리할 수 있습니다.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;옵션&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;의미&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;적용 사례&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;include&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;프리캐시에서 사용할 파일을 지정합니다. 이것은 파일이름을 토대로 하므로 대량으로 찾는 정규식을 함께 활용하면 유용합니다.&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;include: [/\.css$/, /\.js$/]&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;exclude&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;프리캐시에서 제거할 파일을 지정합니다. 유의할 점은 제거할 파일이 없어도 exclude: []처럼 반드시 명시해 주어야 제대로 동작합니다.&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;exclude: [/\.json$/, /\.png$/]&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
 &lt;h3 id=&quot;프리캐시-예제&quot;&gt;프리캐시 예제&lt;/h3&gt;
 
-&lt;p&gt;vue.config.js
-289&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;vue.config.js&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h3 id=&quot;워크박스의-5가지-캐시-전략&quot;&gt;워크박스의 5가지 캐시 전략&lt;/h3&gt;
-
-&lt;p&gt;313&lt;/p&gt;
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;pwa&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;workboxOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// 프리캐시(pre-cache)할 파일 지정&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;include&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/^index&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;html$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;css$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;js$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^manifest&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;json$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\.&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;png$/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// exclude는 반드시 기입해야 정상적으로 동작함.&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;exclude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[],&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;런타임-캐시&quot;&gt;런타임 캐시&lt;/h3&gt;
-
-&lt;p&gt;313&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;프리캐시(pre-cache)는 서비스 워커가 등록될 때 미리 원하는 파일만 지정하여 캐시하는 것을 말합니다. 이 방법은 분명히 빠르고 손쉽지만 브라우저의 HTTPS 요청처럼 프로그램 로직에 따라 앱 실행 중에 캐시해야 하는 경우드 발생합니다. 이럴 때 수행하는 방법을 &lt;strong&gt;런타임 캐시(runtime-cache)&lt;/strong&gt;라고 합니다.&lt;/li&gt;
@@ -871,12 +928,7 @@ info All dependencies
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;vue.config.js
-318&lt;/p&gt;
-
-&lt;h2 id=&quot;firebase-pwa와-다른-주제로-뺄지-고민&quot;&gt;firebase (pwa와 다른 주제로 뺄지 고민)&lt;/h2&gt;
-
-&lt;h2 id=&quot;vuefire-pwa와-다른-주제로-뺄지-고민&quot;&gt;Vuefire (pwa와 다른 주제로 뺄지 고민)&lt;/h2&gt;
+&lt;hr /&gt;
 
 &lt;h2 id=&quot;pwa-성능-테스트&quot;&gt;PWA 성능 테스트&lt;/h2&gt;
 
@@ -887,7 +939,61 @@ info All dependencies
   &lt;li&gt;report 결과 확인&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;푸시-서비스&quot;&gt;푸시 서비스&lt;/h2&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="PWA" /><category term="Javascript" /><category term="Vue" /><category term="Vuetify" /><summary type="html">Vue를 이용해 PWA를 만들어 보겠습니다. nvm은 설치가 돼 있고 vuetify를 사용할 수 있다는 전제로 진행하겠습니다. nvm 버전은 v13.14.0을 사용하였습니다.</summary></entry><entry><title type="html">[PWA] PWA란? 순수 자바스크립트로 PWA 만들기</title><link href="http://localhost:4000/application/application-pwa-javascript/" rel="alternate" type="text/html" title="[PWA] PWA란? 순수 자바스크립트로 PWA 만들기" /><published>2020-12-16T00:00:00+09:00</published><updated>2020-12-16T22:05:34+09:00</updated><id>http://localhost:4000/application/application-pwa-javascript</id><content type="html" xml:base="http://localhost:4000/application/application-pwa-javascript/">&lt;p&gt;스타벅스는 소비자 주문 경험을 더 빠르게 개선하고자 PWA로 갈아탔습다. 특히 인터넷 접속이 원할하지 않은 신흥 시장의 만족도를 높이고 모든 플랫폼에서 실행되는 범용적인 시스템 구축을 위해 PWA가 그 역할을 훌륭히 수행하고 있습니다.&lt;br /&gt;
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;푸시-서비스&quot;&gt;푸시 서비스&lt;/h2&gt;
+
+&lt;h3 id=&quot;웹-푸시-알림-이란&quot;&gt;웹 푸시 알림 이란&lt;/h3&gt;
+
+&lt;!-- 422 --&gt;
+
+&lt;h3 id=&quot;프로젝트-생성&quot;&gt;프로젝트 생성&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;frontend 프로젝트는 브라우저별 push endpoint 생성을 합니다.&lt;/li&gt;
+  &lt;li&gt;backend 프로젝트는 push 발송을 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vue create pwa-frontend
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vue create pwa-backend
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;모듈-설치&quot;&gt;모듈 설치&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm run web-push
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;packagejson-수정&quot;&gt;package.json 수정&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vi package.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+  &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;scripts&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;serve&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;vue-cli-service serve&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;vue-cli-service build&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;web-push&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;web-push&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;비대칭킹-생성&quot;&gt;비대칭킹 생성&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm run web-push gnenrate-vapid-keys
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;생성된 키는 frontend endpoint 생성, backend push 요청에 사용됩니다.&lt;/li&gt;
+  &lt;li&gt;키는 web-push-key.txt 파일을 만들어 임시로 저장해 둡니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;메니페스트-작성-예제&quot;&gt;메니페스트 작성 예제&lt;/h3&gt;
+
+&lt;!-- 431 --&gt;
+
+&lt;h3 id=&quot;frontend-예제&quot;&gt;frontend 예제&lt;/h3&gt;
+
+&lt;h3 id=&quot;backend-예제&quot;&gt;backend 예제&lt;/h3&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="PWA" /><category term="Javascript" /><category term="Vue" /><category term="Vuetify" /><summary type="html">Vue를 이용해 PWA를 만들어 보겠습니다. nvm은 설치가 돼 있고 vuetify를 사용할 수 있다는 전제로 진행하겠습니다. nvm 버전은 v13.14.0을 사용하였습니다.</summary></entry><entry><title type="html">[PWA] PWA란? 순수 자바스크립트로 PWA 만들기</title><link href="http://localhost:4000/application/application-pwa-javascript/" rel="alternate" type="text/html" title="[PWA] PWA란? 순수 자바스크립트로 PWA 만들기" /><published>2020-12-16T00:00:00+09:00</published><updated>2020-12-16T22:05:34+09:00</updated><id>http://localhost:4000/application/application-pwa-javascript</id><content type="html" xml:base="http://localhost:4000/application/application-pwa-javascript/">&lt;p&gt;스타벅스는 소비자 주문 경험을 더 빠르게 개선하고자 PWA로 갈아탔습다. 특히 인터넷 접속이 원할하지 않은 신흥 시장의 만족도를 높이고 모든 플랫폼에서 실행되는 범용적인 시스템 구축을 위해 PWA가 그 역할을 훌륭히 수행하고 있습니다.&lt;br /&gt;
 가장 매력적인 부분은 iOS 기준으로 네이티브 앱에 비해 용량이 99%이상 가볍고 매우 빠른 반응 속도를 자랑합니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;pwa란&quot;&gt;PWA란&lt;/h2&gt;
