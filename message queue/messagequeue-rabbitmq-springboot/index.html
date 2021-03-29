@@ -523,7 +523,7 @@
   <li>사용자 추가
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl add_user admin p@ssWord
  <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl set_user_tags admin administrator
- <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl <span class="nb">set</span><span class="k">*</span>permissions <span class="nt">-p</span> / <span class="s2">"admin"</span> <span class="s2">".*"</span> <span class="s2">".</span><span class="se">\_</span><span class="s2">"</span> <span class="s2">".</span><span class="se">\*</span><span class="s2">"</span>
+ <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl set_permissions <span class="nt">-p</span> / <span class="s2">"admin"</span> <span class="s2">".*"</span> <span class="s2">".*"</span> <span class="s2">".*"</span>
  <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl list_users
  <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl list_permissions
 </code></pre></div>    </div>
