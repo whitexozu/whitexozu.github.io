@@ -1,4 +1,234 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-01-16T08:29:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[Ubuntu 16] Initial install package + nginx + gunicorn + flask</title><link href="http://localhost:4000/server/server-ubuntu16-init-package/" rel="alternate" type="text/html" title="[Ubuntu 16] Initial install package + nginx + gunicorn + flask" /><published>2021-01-08T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/server/server-ubuntu16-init-package</id><content type="html" xml:base="http://localhost:4000/server/server-ubuntu16-init-package/">&lt;p&gt;ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-03-29T17:01:43+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[작성중][RabbitMQ] RabbitMq install window and linux - springboot</title><link href="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/" rel="alternate" type="text/html" title="[작성중][RabbitMQ] RabbitMq install window and linux - springboot" /><published>2021-03-25T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot</id><content type="html" xml:base="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/">&lt;p&gt;spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;install&quot;&gt;install&lt;/h2&gt;
+
+&lt;h3 id=&quot;window&quot;&gt;window&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;https://www.rabbitmq.com/install-windows.html 이동&lt;/li&gt;
+      &lt;li&gt;Direct Download 에 있는 링크를 클릭하여 다운로드
+        &lt;ul&gt;
+          &lt;li&gt;저는 &lt;em&gt;rabbitmq-server-3.8.14.exe&lt;/em&gt; 으로 받았습니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;다운받은 파일을 실행하면 &lt;strong&gt;Erlang could not be detected&lt;/strong&gt; 라는 메시지가 나옵니다. PC에 Erlang을 설치해야 합니다. “예(Y)” 를 눌러줍니다.&lt;/li&gt;
+      &lt;li&gt;Erlnag 다운로드 페이지에서 &lt;em&gt;OTP 23.1 windowns 64-bit Binary Fil&lt;/em&gt;을 다운받아 설치합니다.&lt;/li&gt;
+      &lt;li&gt;다시 RabbitMQ Install File을 눌러 설치합니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;시스템 변수 확인&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;ERLANG_HOME: :\Program Files\erl-23.3&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;시스템 변수 등록&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;환경 변수 등록 창의 사용자 변수 Path에 &lt;em&gt;C:\Program Files\RabbitMQ Server\rabbitmq_server-3.8.14\sbin&lt;/em&gt; 추가합니다.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;명령어&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;상태 확인
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmqctl status&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Port 확인
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;table&gt;
+              &lt;tbody&gt;
+                &lt;tr&gt;
+                  &lt;td&gt;netstat -ano&lt;/td&gt;
+                  &lt;td&gt;findstr 5672&lt;/td&gt;
+                &lt;/tr&gt;
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;플러그인 설치
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmq-plugins enable rabbitmq_management&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;플러그인 설치 확인
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmq-plugins list&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사용자 추가
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmqctl add_user admin p@ssWord&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사용자 태그 설정
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmqctl set_user_tags admin administrator&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사용자 목록 확인
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmqctl list_users&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사용자 삭제
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmqctl delete_user rabbitmq&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사용자 권한 설정
+        &lt;ul&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmqctl set_permissions [-p &amp;lt;vhostpath&amp;gt;] &amp;lt;user&amp;gt; &amp;lt;conf&amp;gt; &amp;lt;write&amp;gt; &amp;lt;read&amp;gt;&lt;/code&gt;&lt;/li&gt;
+          &lt;li&gt;rabbitmqctl set&lt;em&gt;permissions -p / “admin” “.&lt;/em&gt;” “._” “.*”&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;사용자 권한 목록 확인
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmqctl list_permissions&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;관리 페이지 접속&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;http://localhost:15672/&lt;/li&gt;
+      &lt;li&gt;admin/p@ssWord&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;config 및 log 파일 위치&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;C:\Users&amp;lt;사용자명&amp;gt;\AppData\Roaming\RabbitMQ&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;사용자 변수 등록 (confing 및 log 파일 위치 변경)&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;RABBITMQ_BASE : D:\dev\application\rabbitmq&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치 후 에러 발생시&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;서비스 삭제
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmq-service.bat remove&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;서비스 생성
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmq-service.bat install&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;실행
+        &lt;ul&gt;
+          &lt;li&gt;rabbitmq-server.bat -detached&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;mac&quot;&gt;Mac&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;/usr/bin/ruby -e “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”&lt;/li&gt;
+      &lt;li&gt;brew install rabbitmq&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;명령어&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;상태 확인
+        &lt;ul&gt;
+          &lt;li&gt;./rabbitmqctl status&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;ubuntu-16&quot;&gt;Ubuntu 16&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;apt-key adv &lt;span class=&quot;nt&quot;&gt;--keyserver&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hkps.pool.sks-keyservers.net&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--recv-keys&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;0x6B73A36E6026DFCA&quot;&lt;/span&gt;
+ ...
+
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo tee&lt;/span&gt; /etc/apt/sources.list.d/bintray.rabbitmq.list &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOF&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+ deb &amp;lt;https://dl.bintray.com/rabbitmq-erlang/debian&amp;gt; xenial erlang
+ deb &amp;lt;https://dl.bintray.com/rabbitmq/debian&amp;gt; xenial main
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt; EOF
+
+&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+ ...
+
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;rabbitmq-server
+ ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;서버 시작&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;service rabbitmq-server start
+ &lt;span class=&quot;o&quot;&gt;====&lt;/span&gt; AUTHENTICATING FOR org.freedesktop.systemd1.manage-units &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt;
+ Authentication is required to start &lt;span class=&quot;s1&quot;&gt;'rabbitmq-server.service'&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+ Authenticating as: root
+ Password:
+ ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;플러그인 설치&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rabbitmq-plugins &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;rabbitmq_management
+ ...
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;사용자 추가
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rabbitmqctl add_user admin p@ssWord
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rabbitmqctl set_user_tags admin administrator
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rabbitmqctl &lt;span class=&quot;nb&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;permissions &lt;span class=&quot;nt&quot;&gt;-p&lt;/span&gt; / &lt;span class=&quot;s2&quot;&gt;&quot;admin&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;.*&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;.&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\_&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;.&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\*&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rabbitmqctl list_users
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;rabbitmqctl list_permissions
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;관리 페이지 접속&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;http://localhost:15672/&lt;/li&gt;
+      &lt;li&gt;admin/p@ssWord&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;로그위치
+    &lt;ul&gt;
+      &lt;li&gt;/var/log/rabbitmq&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="rabbitmq" /><category term="mac" /><category term="window 10" /><category term="ubuntu 16" /><category term="erlnag otp" /><summary type="html">spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.</summary></entry><entry><title type="html">[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot</title><link href="http://localhost:4000/server/server-ubuntu16-init-package/" rel="alternate" type="text/html" title="[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot" /><published>2021-01-08T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/server/server-ubuntu16-init-package</id><content type="html" xml:base="http://localhost:4000/server/server-ubuntu16-init-package/">&lt;p&gt;ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;apt&quot;&gt;apt&lt;/h3&gt;
 
@@ -33,20 +263,6 @@
  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;openssh-server
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;만약 의존성 실패가 나오면&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;cd /etc/apt&lt;/li&gt;
-      &lt;li&gt;sudo vi source.list&lt;/li&gt;
-      &lt;li&gt;:%s/kr.archive.ubuntu.com/ftp.daumkakao.com&lt;/li&gt;
-      &lt;li&gt;:wq&lt;/li&gt;
-      &lt;li&gt;sudo apt-add-repository “deb http://archive.ubuntu.com/ubuntu precise main restricted”&lt;/li&gt;
-      &lt;li&gt;sudo apt-get update&lt;/li&gt;
-      &lt;li&gt;sudo apt-get upgrade&lt;/li&gt;
-      &lt;li&gt;sudo apt-get install openssh-client=1:7.2p2 로 강제 버전 지정&lt;/li&gt;
-      &lt;li&gt;sudo apt-get install openssh-server&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;노트북-전원-유지&quot;&gt;노트북 전원 유지&lt;/h3&gt;
@@ -78,37 +294,6 @@
   &lt;li&gt;설치
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;git
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;curl-설치&quot;&gt;curl 설치&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;설치
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;curl
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;nvm-설치&quot;&gt;nvm 설치&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;설치
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o-&lt;/span&gt; https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-  &lt;li&gt;명령어 참고
-    &lt;ul&gt;
-      &lt;li&gt;nvm ls-remote : nvm이 지원하는 버전 확인&lt;/li&gt;
-      &lt;li&gt;nvm install [버전] : nvm에서 지원 버전 install
-        &lt;ul&gt;
-          &lt;li&gt;ex) $ nvm install v13&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;nvm ls =&amp;gt; 설치된 node 버전 확인&lt;/li&gt;
-      &lt;li&gt;nvm use v12.18.2 =&amp;gt; v12.18.2 버전의 node를 사용&lt;/li&gt;
-      &lt;li&gt;nvm alias default [버전] =&amp;gt; default 버전을 변경 및 유지&lt;/li&gt;
-    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -191,8 +376,8 @@
     &lt;p&gt;db 생성&lt;/p&gt;
 
     &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; mysql&amp;gt; create database nlp&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
- mysql&amp;gt; create user &lt;span class=&quot;s1&quot;&gt;'nlp_admin'&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;'%'&lt;/span&gt; identified by &lt;span class=&quot;s1&quot;&gt;'p@ssWord'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
- mysql&amp;gt; grant all on nlp.&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; to &lt;span class=&quot;s1&quot;&gt;'nlp_admin'&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;'%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ mysql&amp;gt; create user &lt;span class=&quot;s1&quot;&gt;'admin'&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;'%'&lt;/span&gt; identified by &lt;span class=&quot;s1&quot;&gt;'password'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ mysql&amp;gt; grant all on nlp.&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; to &lt;span class=&quot;s1&quot;&gt;'admin'&lt;/span&gt;@&lt;span class=&quot;s1&quot;&gt;'%'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
  mysql&amp;gt; flush privileges&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
@@ -303,7 +488,7 @@
  &lt;span class=&quot;nb&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sin&lt;/span&gt;
  Group&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;www&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;data
  WorkingDirectory&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/dev/&lt;/span&gt;project/thesaurus
- ExecStart&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/home/&lt;/span&gt;igs_admin&lt;span class=&quot;sr&quot;&gt;/.local/&lt;/span&gt;bin&lt;span class=&quot;sr&quot;&gt;/gunicorn --workers 1 --timeout 300 --bind unix:thesaurus.sock --error-logfile /&lt;/span&gt;var&lt;span class=&quot;sr&quot;&gt;/log/&lt;/span&gt;gunicorn&lt;span class=&quot;sr&quot;&gt;/error.log --access-logfile /&lt;/span&gt;var&lt;span class=&quot;sr&quot;&gt;/log/&lt;/span&gt;gunicorn/access&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;log &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;capture&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;output &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;log&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;level &lt;span class=&quot;k&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;007&lt;/span&gt; wsgi&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;app
+ ExecStart&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/.local/&lt;/span&gt;bin&lt;span class=&quot;sr&quot;&gt;/gunicorn --workers 1 --timeout 300 --bind unix:thesaurus.sock --error-logfile /&lt;/span&gt;var&lt;span class=&quot;sr&quot;&gt;/log/&lt;/span&gt;gunicorn&lt;span class=&quot;sr&quot;&gt;/error.log --access-logfile /&lt;/span&gt;var&lt;span class=&quot;sr&quot;&gt;/log/&lt;/span&gt;gunicorn/access&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;log &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;capture&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;output &lt;span class=&quot;p&quot;&gt;--&lt;/span&gt;log&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;level &lt;span class=&quot;k&quot;&gt;debug&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;007&lt;/span&gt; wsgi&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;app
  Environment&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;PYTHONUNBUFFERED&lt;span class=&quot;p&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;
 
  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;Install&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
@@ -353,7 +538,8 @@
   &lt;li&gt;
     &lt;p&gt;sites-available에 wsgi 등록&lt;/p&gt;
 
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/nginx/sites-available/thesaurus
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;sudo rm&lt;/span&gt; /etc/nginx/sites-available/default
+ &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;vi /etc/nginx/sites-available/default
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
 
     &lt;div class=&quot;language-vim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; server &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -370,7 +556,7 @@
   &lt;li&gt;
     &lt;p&gt;sites-enabled에 링크 생성&lt;/p&gt;
 
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;sudo ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /etc/nginx/sites-available/thesaurus /etc/nginx/sites-enabled
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;sudo ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /etc/nginx/sites-available/default /etc/nginx/sites-enabled
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -391,28 +577,301 @@
       &lt;li&gt;해당 서버 &lt;strong&gt;IP&lt;/strong&gt;로 브라우저 접속 테스트&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ubuntu 18" /><category term="nginx" /><category term="gunicorn" /><category term="flask" /><summary type="html">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.</summary></entry><entry><title type="html">[작성중][Javascript] Navigator</title><link href="http://localhost:4000/javascript/language-javascript-navigator/" rel="alternate" type="text/html" title="[작성중][Javascript] Navigator" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-navigator</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-navigator/">&lt;p&gt;작성 예정입니다.&lt;/p&gt;
+&lt;/ol&gt;
 
-&lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
+&lt;h3 id=&quot;curl-설치&quot;&gt;curl 설치&lt;/h3&gt;
 
-&lt;h3 id=&quot;환경&quot;&gt;환경&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;설치
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;curl
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;vue 기반으로 테스트 했습니다.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3 id=&quot;nvm-설치&quot;&gt;nvm 설치&lt;/h3&gt;
 
-&lt;h3 id=&quot;예제-소스&quot;&gt;예제 소스&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치&lt;/p&gt;
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-o-&lt;/span&gt; https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
 
-&lt;h3 id=&quot;설정-정보&quot;&gt;설정 정보&lt;/h3&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;명령어 참고&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;nvm ls-remote : nvm이 지원하는 버전 확인&lt;/li&gt;
+      &lt;li&gt;nvm install [버전] : nvm에서 지원 버전 install
+        &lt;ul&gt;
+          &lt;li&gt;ex) $ nvm install v13&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;nvm ls =&amp;gt; 설치된 node 버전 확인&lt;/li&gt;
+      &lt;li&gt;nvm use v12.18.2 =&amp;gt; v12.18.2 버전의 node를 사용&lt;/li&gt;
+      &lt;li&gt;nvm alias default [버전] =&amp;gt; default 버전을 변경 및 유지&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;32bit 에서는 nvm install 이 안돼요&lt;/em&gt;&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;https://developer.mozilla.org/ko/docs/Web/API/Navigator&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Navigator" /><summary type="html">작성 예정입니다.</summary></entry><entry><title type="html">[Javascript] Notification API</title><link href="http://localhost:4000/javascript/language-javascript-notification/" rel="alternate" type="text/html" title="[Javascript] Notification API" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-notification</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-notification/">&lt;p&gt;PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.&lt;br /&gt;
+&lt;h3 id=&quot;koa&quot;&gt;koa&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치&lt;/p&gt;
+
+    &lt;p&gt;생략&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;koa app 생성&lt;/p&gt;
+
+    &lt;p&gt;생략&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;실행&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;node src
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;테스트&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;해당 서버 &lt;strong&gt;IP:4000&lt;/strong&gt;로 브라우저 접속 테스트&lt;/li&gt;
+      &lt;li&gt;&lt;em&gt;ctrl + c&lt;/em&gt; 로 종료&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;pm2&quot;&gt;pm2&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;npm &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pm2 &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt;
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pm2 &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;실행&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pm2 start src
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;or&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;vi ecosystem.config.js
+
+ module.exports &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+ apps: &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;
+         &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+             name: &lt;span class=&quot;s1&quot;&gt;'app'&lt;/span&gt;,
+             script: &lt;span class=&quot;s1&quot;&gt;'./src'&lt;/span&gt;,
+             instances: 1,
+             exec_mode: &lt;span class=&quot;s1&quot;&gt;'cluster'&lt;/span&gt;,
+         &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;,
+     &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;,
+ &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pm2 start ecosystem.config.js
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;종료&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pm2 &lt;span class=&quot;nb&quot;&gt;kill&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;명령어 참고&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;목록 : pm2 list&lt;/li&gt;
+      &lt;li&gt;중지 : pm2 stop 0, pm2 stop all&lt;/li&gt;
+      &lt;li&gt;삭제 : pm2 delete 0&lt;/li&gt;
+      &lt;li&gt;모니터 : pm2 monit&lt;/li&gt;
+      &lt;li&gt;아이디 저장 : pm2 start server.js –name “API”&lt;/li&gt;
+      &lt;li&gt;상세 보기 : pm2 show API&lt;/li&gt;
+      &lt;li&gt;로그 : pm2 log
+        &lt;ul&gt;
+          &lt;li&gt;파일 위치 : ~/.pm2/logs&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;stdout : pm2 delete API &amp;amp;&amp;amp; pm2 start server.js –name “API” -o ./api.log&lt;/li&gt;
+      &lt;li&gt;stderr : pm2 delete API &amp;amp;&amp;amp; pm2 start server.js –name “API” -o ./api.log -e ./api.log –merge-logs&lt;/li&gt;
+      &lt;li&gt;스케일 조정 : pm2 scale API 5&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;무료-도메인-생성&quot;&gt;무료 도메인 생성&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;회원 가입
+    &lt;ol&gt;
+      &lt;li&gt;&lt;a href=&quot;https://www.freenom.com/en/index.html?lang=en&quot;&gt;프리놈&lt;/a&gt; 이동&lt;/li&gt;
+      &lt;li&gt;Sign in &amp;gt; Google login&lt;/li&gt;
+      &lt;li&gt;Services &amp;gt; Register New Domain&lt;/li&gt;
+      &lt;li&gt;도메인 키워드 입력 후 검색 &amp;gt; 선택&lt;/li&gt;
+      &lt;li&gt;Services &amp;gt; My Domains &amp;gt; Manage Domain &amp;gt; Manage Freenom DNS &amp;gt; IP 등록 &amp;gt; 서비스 기간 선택
+        &lt;ul&gt;
+          &lt;li&gt;등록이 완료되면 5분정도 후에 사용 가능 합니다. 만약 오래 기다려도 사용이 안되면 재등록을 추천 합니다.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;nginx-수정&quot;&gt;nginx 수정&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;pm2 추가&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sodu vi /etc/nginx/sites-available/default
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;div class=&quot;language-vim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; server &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     listen &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt;;
+     server_name  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;도메인&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;;
+
+     location &lt;span class=&quot;sr&quot;&gt;/thesaurus/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         add_header Access&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Control&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Allow&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Origin *;
+
+         proxy_set_header X&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Real&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;IP $remote_addr;
+
+         rewrite ^&lt;span class=&quot;sr&quot;&gt;/thesaurus(/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;*&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;$ $&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;;
+         proxy_pass http&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;thesaurus;
+         proxy_redirect off;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+     location &lt;span class=&quot;sr&quot;&gt;/pwapush/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         add_header Access&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Control&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Allow&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Origin *;
+
+         proxy_set_header X&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Real&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;IP $remote_addr;
+
+         rewrite ^&lt;span class=&quot;sr&quot;&gt;/pwapush(/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;*&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;$ $&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;;
+         proxy_pass http&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;pwapush;
+         proxy_redirect off;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ upstream thesaurus &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     server unix&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/dev/&lt;/span&gt;project&lt;span class=&quot;sr&quot;&gt;/Flask-Scaffold/&lt;/span&gt;thesaurus/thesaurus&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;sock;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ upstream pwapush &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     server localhost&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4000&lt;/span&gt;;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;certbot&quot;&gt;certbot&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;설치&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;snap &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;core&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;snap refresh core
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;snap &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--classic&lt;/span&gt; certbot
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo ln&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt; /snap/bin/certbot /usr/bin/certbot
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;실행&lt;/p&gt;
+
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;certbot &lt;span class=&quot;nt&quot;&gt;--nginx&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;갱싱 테스트&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ sudo certbot renew --dry-run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;자동 갱신 등록&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;
+        &lt;p&gt;root 비밀번호 설정&lt;/p&gt;
+
+        &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;passwd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;root 권한으로 crontab 등록&lt;/p&gt;
+
+        &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; $ su
+ $ crontab -e
+
+ 15 3 * * 0 certbot renew
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;        &lt;/div&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;결과 확인 및 자동 https 변경 설정&lt;/p&gt;
+
+    &lt;div class=&quot;language-vim highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; server &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     listen &lt;span class=&quot;m&quot;&gt;443&lt;/span&gt; ssl; # managed by Certbot
+     server_name  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;domain name&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;;
+
+     location &lt;span class=&quot;sr&quot;&gt;/thesaurus/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         add_header Access&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Control&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Allow&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Origin *;
+
+         proxy_set_header X&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Real&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;IP $remote_addr;
+
+         rewrite ^&lt;span class=&quot;sr&quot;&gt;/thesaurus(/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;*&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;$ $&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;;
+         proxy_pass http&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;thesaurus;
+         proxy_redirect off;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+     location &lt;span class=&quot;sr&quot;&gt;/pwapush/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         add_header Access&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Control&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Allow&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Origin *;
+
+         proxy_set_header X&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;Real&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;IP $remote_addr;
+
+         rewrite ^&lt;span class=&quot;sr&quot;&gt;/pwapush(/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;*&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;$ $&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;;
+         proxy_pass http&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;pwapush;
+         proxy_redirect off;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+     ssl_certificate &lt;span class=&quot;sr&quot;&gt;/etc/&lt;/span&gt;letsencrypt&lt;span class=&quot;sr&quot;&gt;/live/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;도메인&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;/fullchain&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;pem; # managed by Certbot
+     ssl_certificate_key &lt;span class=&quot;sr&quot;&gt;/etc/&lt;/span&gt;letsencrypt&lt;span class=&quot;sr&quot;&gt;/live/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;도메인&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;/privkey&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;pem; # managed by Certbot
+     include &lt;span class=&quot;sr&quot;&gt;/etc/&lt;/span&gt;letsencrypt/&lt;span class=&quot;k&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;ssl&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;nginx&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;conf&lt;/span&gt;; # managed by Certbot
+     ssl_dhparam &lt;span class=&quot;sr&quot;&gt;/etc/&lt;/span&gt;letsencrypt/ssl&lt;span class=&quot;p&quot;&gt;-&lt;/span&gt;dhparams&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;pem; # managed by Certbot
+
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ upstream thesaurus &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     server unix&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/home/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;sin&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/dev/&lt;/span&gt;project&lt;span class=&quot;sr&quot;&gt;/Flask-Scaffold/&lt;/span&gt;thesaurus/thesaurus&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;sock;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ upstream pwapush &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     server localhost&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;4000&lt;/span&gt;;
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ server &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     #&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;$host &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;도메인&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     #    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;301&lt;/span&gt; https&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;$host$request_uri;
+     #&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+     listen       &lt;span class=&quot;m&quot;&gt;80&lt;/span&gt;;
+     server_name  &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;도메인&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;;
+     #&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;404&lt;/span&gt;; # managed by Certbot
+
+     location / &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+         &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;301&lt;/span&gt; https&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;$server_name$request_uri;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+ &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ubuntu 16" /><category term="nginx" /><category term="gunicorn" /><category term="flask" /><category term="pm2" /><category term="nodejs" /><category term="certbot" /><summary type="html">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.</summary></entry><entry><title type="html">[Javascript] Notification API</title><link href="http://localhost:4000/javascript/language-javascript-notification/" rel="alternate" type="text/html" title="[Javascript] Notification API" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-notification</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-notification/">&lt;p&gt;PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.&lt;br /&gt;
 웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이션이 백그라운드에 있더라도 웹이 사용자에게 정보를 보낼 수 있습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
@@ -502,7 +961,28 @@
 
 &lt;ul&gt;
   &lt;li&gt;https://developer.mozilla.org/ko/docs/WebAPI/Using_Web_Notifications&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Notification" /><category term="Vue" /><summary type="html">PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다. 웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이션이 백그라운드에 있더라도 웹이 사용자에게 정보를 보낼 수 있습니다.</summary></entry><entry><title type="html">[ngrok] Vue 핫리로딩을 외부 단말에서</title><link href="http://localhost:4000/package/package-ngrok-vue/" rel="alternate" type="text/html" title="[ngrok] Vue 핫리로딩을 외부 단말에서" /><published>2020-12-22T00:00:00+09:00</published><updated>2020-12-22T22:05:34+09:00</updated><id>http://localhost:4000/package/package-ngrok-vue</id><content type="html" xml:base="http://localhost:4000/package/package-ngrok-vue/">&lt;p&gt;Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다.&lt;br /&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Notification" /><category term="Vue" /><summary type="html">PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다. 웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이션이 백그라운드에 있더라도 웹이 사용자에게 정보를 보낼 수 있습니다.</summary></entry><entry><title type="html">[작성중][Javascript] Navigator</title><link href="http://localhost:4000/javascript/language-javascript-navigator/" rel="alternate" type="text/html" title="[작성중][Javascript] Navigator" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-navigator</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-navigator/">&lt;p&gt;작성 예정입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
+
+&lt;h3 id=&quot;환경&quot;&gt;환경&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;vue 기반으로 테스트 했습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;예제-소스&quot;&gt;예제 소스&lt;/h3&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;설정-정보&quot;&gt;설정 정보&lt;/h3&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://developer.mozilla.org/ko/docs/Web/API/Navigator&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Navigator" /><summary type="html">작성 예정입니다.</summary></entry><entry><title type="html">[ngrok] Vue 핫리로딩을 외부 단말에서</title><link href="http://localhost:4000/package/package-ngrok-vue/" rel="alternate" type="text/html" title="[ngrok] Vue 핫리로딩을 외부 단말에서" /><published>2020-12-22T00:00:00+09:00</published><updated>2020-12-22T22:05:34+09:00</updated><id>http://localhost:4000/package/package-ngrok-vue</id><content type="html" xml:base="http://localhost:4000/package/package-ngrok-vue/">&lt;p&gt;Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다.&lt;br /&gt;
 그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다.&lt;br /&gt;
 바로 ngrok 입니다.&lt;br /&gt;
 한번 사용해보겠습니다.&lt;/p&gt;
@@ -1634,89 +2114,4 @@ mecab은 설치 실패 했습니다.&lt;br /&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;https://webnautes.tistory.com/1394&lt;/li&gt;
   &lt;li&gt;https://cleancode-ws.tistory.com/97&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="konlpy" /><summary type="html">window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다.</summary></entry><entry><title type="html">[Python] sklearn tf-idf, clustering</title><link href="http://localhost:4000/language/language-python-sklearn-copy/" rel="alternate" type="text/html" title="[Python] sklearn tf-idf, clustering" /><published>2020-12-03T00:00:00+09:00</published><updated>2020-12-03T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-sklearn%20copy</id><content type="html" xml:base="http://localhost:4000/language/language-python-sklearn-copy/">&lt;p&gt;순서에 상관없이 Document-Term에서 중요한 단어, 혹은 중요하지 않은 단어를 찾는 방법중 TF-IDF(Term Frequency - Inverse Document Frequency)를 sklearn을 활용하여 간단하게 사용한 예제입니다.&lt;br /&gt;
-그리고 TF-IDF결과를 clustering 해보도록 하겠습니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
-
-&lt;h3 id=&quot;sklearn-pandas-jupyter&quot;&gt;sklearn, pandas, jupyter&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;sklearn
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;jupyter
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;pandas
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;jupyter-실행&quot;&gt;jupyter 실행&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jupyter notebook
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;tf-idf&quot;&gt;TF-IDF&lt;/h2&gt;
-
-&lt;h3 id=&quot;read-csv-file&quot;&gt;read csv file&lt;/h3&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;pandas&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.font_manager&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fm&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.manifold&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TSNE&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.feature_extraction.text&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TfidfVectorizer&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read_csv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'./article_data.csv'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encoding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'utf-8'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# df = article_data.head(5)
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;documents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;row&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'title'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;row&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;values&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()]&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;tf-idf-vectorizer&quot;&gt;tf-idf vectorizer&lt;/h3&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;n&quot;&gt;tfidf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TfidfVectorizer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max_features&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.95&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;min_df&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;tfidf_sp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tfidf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;documents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;#size D x V
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tfidf_dict&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tfidf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get_feature_names&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tfidf_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;data_array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tfidf_sp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;toarray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;2d-chart&quot;&gt;2D chart&lt;/h3&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataFrame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;columns&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tfidf_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;tsne&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TSNE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_components&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_iter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;verbose&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;Z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tsne&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_array&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;'./NanumGothic.ttf'&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;fontprop&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;FontProperties&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fname&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;figsize&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[:,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tfidf_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;annotate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tfidf_dict&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;utf8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Z&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fontProperties&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fontprop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;draw&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;clustering&quot;&gt;clustering&lt;/h2&gt;
-
-&lt;h3 id=&quot;kmeans&quot;&gt;KMeans&lt;/h3&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data_array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;kmeans&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;KMeans&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_clusters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;random_state&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kmeans&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;labels_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;fornt-download&quot;&gt;fornt download&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;https://hangeul.naver.com/2017/nanum&lt;/li&gt;
-  &lt;li&gt;“네이버에서 개발한 글꼴모음 설치하하기 클릭”&lt;/li&gt;
-  &lt;li&gt;윈도우, 맥 모두 윈도우 버전의 압축파일을 다운 받아서 사용합니다.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;참고&quot;&gt;참고&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;https://donghwa-kim.github.io/TFIDF.html&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="sklearn" /><category term="tf-idf" /><category term="clustering" /><summary type="html">순서에 상관없이 Document-Term에서 중요한 단어, 혹은 중요하지 않은 단어를 찾는 방법중 TF-IDF(Term Frequency - Inverse Document Frequency)를 sklearn을 활용하여 간단하게 사용한 예제입니다. 그리고 TF-IDF결과를 clustering 해보도록 하겠습니다.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="konlpy" /><summary type="html">window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다.</summary></entry></feed>

@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[Ubuntu 16] Initial install package + nginx + gunicorn + flask - TMM</title>
-<meta name="description" content="ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다. ">
+<!-- begin _includes/seo.html --><title>[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot - TMM</title>
+<meta name="description" content="ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다. ">
 
 
   <meta name="author" content="To much meng">
@@ -19,11 +19,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[Ubuntu 16] Initial install package + nginx + gunicorn + flask">
+<meta property="og:title" content="[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot">
 <meta property="og:url" content="http://localhost:4000/server/server-ubuntu16-init-package/">
 
 
-  <meta property="og:description" content="ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다. ">
+  <meta property="og:description" content="ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다. ">
 
 
 
@@ -279,15 +279,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[Ubuntu 16] Initial install package + nginx + gunicorn + flask">
-    <meta itemprop="description" content="ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.">
+    <meta itemprop="headline" content="[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot">
+    <meta itemprop="description" content="ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.">
     <meta itemprop="datePublished" content="2021-01-08T00:00:00+09:00">
     <meta itemprop="dateModified" content="2021-01-08T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[Ubuntu 16] Initial install package + nginx + gunicorn + flask
+          <h1 id="page-title" class="page__title" itemprop="headline">[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot
 </h1>
           
         </header>
@@ -303,20 +303,25 @@
   <li><a href="#openssh-server">openssh-server</a></li>
   <li><a href="#노트북-전원-유지">노트북 전원 유지</a></li>
   <li><a href="#git-설치">git 설치</a></li>
-  <li><a href="#curl-설치">curl 설치</a></li>
-  <li><a href="#nvm-설치">nvm 설치</a></li>
   <li><a href="#python36">python3.6</a></li>
   <li><a href="#pip3">pip3</a></li>
   <li><a href="#mysql-8">mysql 8</a></li>
   <li><a href="#flask">flask</a></li>
   <li><a href="#gunicorn">gunicorn</a></li>
   <li><a href="#nginx">nginx</a></li>
+  <li><a href="#curl-설치">curl 설치</a></li>
+  <li><a href="#nvm-설치">nvm 설치</a></li>
+  <li><a href="#koa">koa</a></li>
+  <li><a href="#pm2">pm2</a></li>
+  <li><a href="#무료-도메인-생성">무료 도메인 생성</a></li>
+  <li><a href="#nginx-수정">nginx 수정</a></li>
+  <li><a href="#certbot">certbot</a></li>
 </ul>
 
             </nav>
           </aside>
         
-        <p>ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치, 그리고 nginx + gunicorn + flask 조합으로 웹서비스를 구성 해보겠습니다.</p>
+        <p>ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.</p>
 
 <h3 id="apt">apt</h3>
 
@@ -351,20 +356,6 @@
  <span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>openssh-server
 </code></pre></div>    </div>
   </li>
-  <li>
-    <p>만약 의존성 실패가 나오면</p>
-    <ul>
-      <li>cd /etc/apt</li>
-      <li>sudo vi source.list</li>
-      <li>:%s/kr.archive.ubuntu.com/ftp.daumkakao.com</li>
-      <li>:wq</li>
-      <li>sudo apt-add-repository “deb http://archive.ubuntu.com/ubuntu precise main restricted”</li>
-      <li>sudo apt-get update</li>
-      <li>sudo apt-get upgrade</li>
-      <li>sudo apt-get install openssh-client=1:7.2p2 로 강제 버전 지정</li>
-      <li>sudo apt-get install openssh-server</li>
-    </ul>
-  </li>
 </ol>
 
 <h3 id="노트북-전원-유지">노트북 전원 유지</h3>
@@ -396,37 +387,6 @@
   <li>설치
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>git
 </code></pre></div>    </div>
-  </li>
-</ol>
-
-<h3 id="curl-설치">curl 설치</h3>
-
-<ol>
-  <li>설치
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>curl
-</code></pre></div>    </div>
-  </li>
-</ol>
-
-<h3 id="nvm-설치">nvm 설치</h3>
-
-<ol>
-  <li>설치
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl <span class="nt">-o-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
-</code></pre></div>    </div>
-  </li>
-  <li>명령어 참고
-    <ul>
-      <li>nvm ls-remote : nvm이 지원하는 버전 확인</li>
-      <li>nvm install [버전] : nvm에서 지원 버전 install
-        <ul>
-          <li>ex) $ nvm install v13</li>
-        </ul>
-      </li>
-      <li>nvm ls =&gt; 설치된 node 버전 확인</li>
-      <li>nvm use v12.18.2 =&gt; v12.18.2 버전의 node를 사용</li>
-      <li>nvm alias default [버전] =&gt; default 버전을 변경 및 유지</li>
-    </ul>
   </li>
 </ol>
 
@@ -509,8 +469,8 @@
     <p>db 생성</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> mysql&gt; create database nlp<span class="p">;</span>
- mysql&gt; create user <span class="s1">'nlp_admin'</span>@<span class="s1">'%'</span> identified by <span class="s1">'p@ssWord'</span><span class="p">;</span>
- mysql&gt; grant all on nlp.<span class="k">*</span> to <span class="s1">'nlp_admin'</span>@<span class="s1">'%'</span><span class="p">;</span>
+ mysql&gt; create user <span class="s1">'admin'</span>@<span class="s1">'%'</span> identified by <span class="s1">'password'</span><span class="p">;</span>
+ mysql&gt; grant all on nlp.<span class="k">*</span> to <span class="s1">'admin'</span>@<span class="s1">'%'</span><span class="p">;</span>
  mysql&gt; flush privileges<span class="p">;</span>
 </code></pre></div>    </div>
   </li>
@@ -621,7 +581,7 @@
  <span class="nb">User</span><span class="p">=</span><span class="k">sin</span>
  Group<span class="p">=</span>www<span class="p">-</span>data
  WorkingDirectory<span class="p">=</span><span class="sr">/home/</span><span class="k">sin</span><span class="sr">/dev/</span>project/thesaurus
- ExecStart<span class="p">=</span><span class="sr">/home/</span>igs_admin<span class="sr">/.local/</span>bin<span class="sr">/gunicorn --workers 1 --timeout 300 --bind unix:thesaurus.sock --error-logfile /</span>var<span class="sr">/log/</span>gunicorn<span class="sr">/error.log --access-logfile /</span>var<span class="sr">/log/</span>gunicorn/access<span class="p">.</span>log <span class="p">--</span>capture<span class="p">-</span>output <span class="p">--</span>log<span class="p">-</span>level <span class="k">debug</span> <span class="p">-</span><span class="k">m</span> <span class="m">007</span> wsgi<span class="p">:</span>app
+ ExecStart<span class="p">=</span><span class="sr">/home/</span><span class="k">sin</span><span class="sr">/.local/</span>bin<span class="sr">/gunicorn --workers 1 --timeout 300 --bind unix:thesaurus.sock --error-logfile /</span>var<span class="sr">/log/</span>gunicorn<span class="sr">/error.log --access-logfile /</span>var<span class="sr">/log/</span>gunicorn/access<span class="p">.</span>log <span class="p">--</span>capture<span class="p">-</span>output <span class="p">--</span>log<span class="p">-</span>level <span class="k">debug</span> <span class="p">-</span><span class="k">m</span> <span class="m">007</span> wsgi<span class="p">:</span>app
  Environment<span class="p">=</span>PYTHONUNBUFFERED<span class="p">=</span><span class="m">1</span>
 
  <span class="p">[</span>Install<span class="p">]</span>
@@ -671,7 +631,8 @@
   <li>
     <p>sites-available에 wsgi 등록</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo </span>vi /etc/nginx/sites-available/thesaurus
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo rm</span> /etc/nginx/sites-available/default
+ <span class="nb">sudo </span>vi /etc/nginx/sites-available/default
 </code></pre></div>    </div>
 
     <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code> server <span class="p">{</span>
@@ -688,7 +649,7 @@
   <li>
     <p>sites-enabled에 링크 생성</p>
 
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo ln</span> <span class="nt">-s</span> /etc/nginx/sites-available/thesaurus /etc/nginx/sites-enabled
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">sudo ln</span> <span class="nt">-s</span> /etc/nginx/sites-available/default /etc/nginx/sites-enabled
 </code></pre></div>    </div>
   </li>
   <li>
@@ -711,6 +672,300 @@
   </li>
 </ol>
 
+<h3 id="curl-설치">curl 설치</h3>
+
+<ol>
+  <li>설치
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>apt <span class="nb">install </span>curl
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="nvm-설치">nvm 설치</h3>
+
+<ol>
+  <li>
+    <p>설치</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl <span class="nt">-o-</span> https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+
+ <span class="nv">$ </span><span class="nb">source</span> ~/.bashrc
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>명령어 참고</p>
+    <ul>
+      <li>nvm ls-remote : nvm이 지원하는 버전 확인</li>
+      <li>nvm install [버전] : nvm에서 지원 버전 install
+        <ul>
+          <li>ex) $ nvm install v13</li>
+        </ul>
+      </li>
+      <li>nvm ls =&gt; 설치된 node 버전 확인</li>
+      <li>nvm use v12.18.2 =&gt; v12.18.2 버전의 node를 사용</li>
+      <li>nvm alias default [버전] =&gt; default 버전을 변경 및 유지</li>
+    </ul>
+  </li>
+</ol>
+
+<p><em>32bit 에서는 nvm install 이 안돼요</em></p>
+
+<h3 id="koa">koa</h3>
+
+<ol>
+  <li>
+    <p>설치</p>
+
+    <p>생략</p>
+  </li>
+  <li>
+    <p>koa app 생성</p>
+
+    <p>생략</p>
+  </li>
+  <li>
+    <p>실행</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>node src
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>테스트</p>
+    <ul>
+      <li>해당 서버 <strong>IP:4000</strong>로 브라우저 접속 테스트</li>
+      <li><em>ctrl + c</em> 로 종료</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="pm2">pm2</h3>
+
+<ol>
+  <li>
+    <p>설치</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>npm <span class="nb">install </span>pm2 <span class="nt">-g</span>
+ <span class="nv">$ </span>pm2 <span class="nt">-v</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>실행</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>pm2 start src
+</code></pre></div>    </div>
+
+    <p>or</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>vi ecosystem.config.js
+
+ module.exports <span class="o">=</span> <span class="o">{</span>
+ apps: <span class="o">[</span>
+         <span class="o">{</span>
+             name: <span class="s1">'app'</span>,
+             script: <span class="s1">'./src'</span>,
+             instances: 1,
+             exec_mode: <span class="s1">'cluster'</span>,
+         <span class="o">}</span>,
+     <span class="o">]</span>,
+ <span class="o">}</span><span class="p">;</span>
+
+ <span class="nv">$ </span>pm2 start ecosystem.config.js
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>종료</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>pm2 <span class="nb">kill</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>명령어 참고</p>
+    <ul>
+      <li>목록 : pm2 list</li>
+      <li>중지 : pm2 stop 0, pm2 stop all</li>
+      <li>삭제 : pm2 delete 0</li>
+      <li>모니터 : pm2 monit</li>
+      <li>아이디 저장 : pm2 start server.js –name “API”</li>
+      <li>상세 보기 : pm2 show API</li>
+      <li>로그 : pm2 log
+        <ul>
+          <li>파일 위치 : ~/.pm2/logs</li>
+        </ul>
+      </li>
+      <li>stdout : pm2 delete API &amp;&amp; pm2 start server.js –name “API” -o ./api.log</li>
+      <li>stderr : pm2 delete API &amp;&amp; pm2 start server.js –name “API” -o ./api.log -e ./api.log –merge-logs</li>
+      <li>스케일 조정 : pm2 scale API 5</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="무료-도메인-생성">무료 도메인 생성</h3>
+
+<ol>
+  <li>회원 가입
+    <ol>
+      <li><a href="https://www.freenom.com/en/index.html?lang=en">프리놈</a> 이동</li>
+      <li>Sign in &gt; Google login</li>
+      <li>Services &gt; Register New Domain</li>
+      <li>도메인 키워드 입력 후 검색 &gt; 선택</li>
+      <li>Services &gt; My Domains &gt; Manage Domain &gt; Manage Freenom DNS &gt; IP 등록 &gt; 서비스 기간 선택
+        <ul>
+          <li>등록이 완료되면 5분정도 후에 사용 가능 합니다. 만약 오래 기다려도 사용이 안되면 재등록을 추천 합니다.</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<h3 id="nginx-수정">nginx 수정</h3>
+
+<ol>
+  <li>
+    <p>pm2 추가</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>sodu vi /etc/nginx/sites-available/default
+</code></pre></div>    </div>
+
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code> server <span class="p">{</span>
+     listen <span class="m">80</span>;
+     server_name  <span class="p">[</span>도메인<span class="p">]</span>;
+
+     location <span class="sr">/thesaurus/</span> <span class="p">{</span>
+         add_header Access<span class="p">-</span>Control<span class="p">-</span>Allow<span class="p">-</span>Origin *;
+
+         proxy_set_header X<span class="p">-</span>Real<span class="p">-</span>IP $remote_addr;
+
+         rewrite ^<span class="sr">/thesaurus(/</span><span class="p">.</span>*<span class="p">)</span>$ $<span class="m">1</span> <span class="k">break</span>;
+         proxy_pass http<span class="p">:</span><span class="sr">//</span>thesaurus;
+         proxy_redirect off;
+     <span class="p">}</span>
+
+     location <span class="sr">/pwapush/</span> <span class="p">{</span>
+         add_header Access<span class="p">-</span>Control<span class="p">-</span>Allow<span class="p">-</span>Origin *;
+
+         proxy_set_header X<span class="p">-</span>Real<span class="p">-</span>IP $remote_addr;
+
+         rewrite ^<span class="sr">/pwapush(/</span><span class="p">.</span>*<span class="p">)</span>$ $<span class="m">1</span> <span class="k">break</span>;
+         proxy_pass http<span class="p">:</span><span class="sr">//</span>pwapush;
+         proxy_redirect off;
+     <span class="p">}</span>
+ <span class="p">}</span>
+
+ upstream thesaurus <span class="p">{</span>
+     server unix<span class="p">:</span><span class="sr">/home/</span><span class="k">sin</span><span class="sr">/dev/</span>project<span class="sr">/Flask-Scaffold/</span>thesaurus/thesaurus<span class="p">.</span>sock;
+ <span class="p">}</span>
+
+ upstream pwapush <span class="p">{</span>
+     server localhost<span class="p">:</span><span class="m">4000</span>;
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="certbot">certbot</h3>
+
+<ol>
+  <li>
+    <p>설치</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>snap <span class="nb">install </span>core<span class="p">;</span> <span class="nb">sudo </span>snap refresh core
+ <span class="nv">$ </span><span class="nb">sudo </span>snap <span class="nb">install</span> <span class="nt">--classic</span> certbot
+ <span class="nv">$ </span><span class="nb">sudo ln</span> <span class="nt">-s</span> /snap/bin/certbot /usr/bin/certbot
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>실행</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>certbot <span class="nt">--nginx</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>갱싱 테스트</p>
+
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ sudo certbot renew --dry-run
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>자동 갱신 등록</p>
+
+    <ol>
+      <li>
+        <p>root 비밀번호 설정</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>passwd
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>root 권한으로 crontab 등록</p>
+
+        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ su
+ $ crontab -e
+
+ 15 3 * * 0 certbot renew
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>결과 확인 및 자동 https 변경 설정</p>
+
+    <div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code> server <span class="p">{</span>
+     listen <span class="m">443</span> ssl; # managed by Certbot
+     server_name  <span class="p">[</span>domain name<span class="p">]</span>;
+
+     location <span class="sr">/thesaurus/</span> <span class="p">{</span>
+         add_header Access<span class="p">-</span>Control<span class="p">-</span>Allow<span class="p">-</span>Origin *;
+
+         proxy_set_header X<span class="p">-</span>Real<span class="p">-</span>IP $remote_addr;
+
+         rewrite ^<span class="sr">/thesaurus(/</span><span class="p">.</span>*<span class="p">)</span>$ $<span class="m">1</span> <span class="k">break</span>;
+         proxy_pass http<span class="p">:</span><span class="sr">//</span>thesaurus;
+         proxy_redirect off;
+     <span class="p">}</span>
+
+     location <span class="sr">/pwapush/</span> <span class="p">{</span>
+         add_header Access<span class="p">-</span>Control<span class="p">-</span>Allow<span class="p">-</span>Origin *;
+
+         proxy_set_header X<span class="p">-</span>Real<span class="p">-</span>IP $remote_addr;
+
+         rewrite ^<span class="sr">/pwapush(/</span><span class="p">.</span>*<span class="p">)</span>$ $<span class="m">1</span> <span class="k">break</span>;
+         proxy_pass http<span class="p">:</span><span class="sr">//</span>pwapush;
+         proxy_redirect off;
+     <span class="p">}</span>
+
+     ssl_certificate <span class="sr">/etc/</span>letsencrypt<span class="sr">/live/</span><span class="p">[</span>도메인<span class="p">]</span>/fullchain<span class="p">.</span>pem; # managed by Certbot
+     ssl_certificate_key <span class="sr">/etc/</span>letsencrypt<span class="sr">/live/</span><span class="p">[</span>도메인<span class="p">]</span>/privkey<span class="p">.</span>pem; # managed by Certbot
+     include <span class="sr">/etc/</span>letsencrypt/<span class="k">options</span><span class="p">-</span>ssl<span class="p">-</span>nginx<span class="p">.</span><span class="k">conf</span>; # managed by Certbot
+     ssl_dhparam <span class="sr">/etc/</span>letsencrypt/ssl<span class="p">-</span>dhparams<span class="p">.</span>pem; # managed by Certbot
+
+ <span class="p">}</span>
+
+ upstream thesaurus <span class="p">{</span>
+     server unix<span class="p">:</span><span class="sr">/home/</span><span class="k">sin</span><span class="sr">/dev/</span>project<span class="sr">/Flask-Scaffold/</span>thesaurus/thesaurus<span class="p">.</span>sock;
+ <span class="p">}</span>
+
+ upstream pwapush <span class="p">{</span>
+     server localhost<span class="p">:</span><span class="m">4000</span>;
+ <span class="p">}</span>
+
+ server <span class="p">{</span>
+     #<span class="k">if</span> <span class="p">(</span>$host <span class="p">=</span> <span class="p">[</span>도메인<span class="p">])</span> <span class="p">{</span>
+     #    <span class="k">return</span> <span class="m">301</span> https<span class="p">:</span><span class="sr">//</span>$host$request_uri;
+     #<span class="p">}</span>
+
+     listen       <span class="m">80</span>;
+     server_name  <span class="p">[</span>도메인<span class="p">]</span>;
+     #<span class="k">return</span> <span class="m">404</span>; # managed by Certbot
+
+     location / <span class="p">{</span>
+         <span class="k">return</span> <span class="m">301</span> https<span class="p">:</span><span class="sr">//</span>$server_name$request_uri;
+     <span class="p">}</span>
+
+ <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
         
       </section>
 
@@ -730,6 +985,10 @@
     
       
       
+      <a href="/tags/#certbot" class="page__taxonomy-item" rel="tag">certbot</a><span class="sep">, </span>
+    
+      
+      
       <a href="/tags/#flask" class="page__taxonomy-item" rel="tag">flask</a><span class="sep">, </span>
     
       
@@ -742,7 +1001,15 @@
     
       
       
-      <a href="/tags/#ubuntu-18" class="page__taxonomy-item" rel="tag">ubuntu 18</a>
+      <a href="/tags/#nodejs" class="page__taxonomy-item" rel="tag">nodejs</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pm2" class="page__taxonomy-item" rel="tag">pm2</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#ubuntu-16" class="page__taxonomy-item" rel="tag">ubuntu 16</a>
     
     </span>
   </p>
@@ -779,7 +1046,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5BUbuntu+16%5D+Initial+install+package+%2B+nginx+%2B+gunicorn+%2B+flask%20http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-ubuntu16-init-package%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BUbuntu+16%5D+Initial+install+package+%2B+nginx+%2B+gunicorn+%2B+flask+%2B+pm2+%2B+nodejs+%2B+certbot%20http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-ubuntu16-init-package%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fserver%2Fserver-ubuntu16-init-package%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
@@ -794,7 +1061,8 @@
 ">이전</a>
     
     
-      <a href="#" class="pagination--pager disabled">다음</a>
+      <a href="/message%20queue/messagequeue-rabbitmq-springboot/" class="pagination--pager" title="[작성중][RabbitMQ] RabbitMq install window and linux - springboot
+">다음</a>
     
   </nav>
 
@@ -808,6 +1076,26 @@
     <div class="page__related">
       <h4 class="page__related-title">참고</h4>
       <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/message%20queue/messagequeue-rabbitmq-springboot/" rel="permalink">[작성중][RabbitMQ] RabbitMq install window and linux - springboot
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.
+</p>
+  </article>
+</div>
+
         
           
 
@@ -867,28 +1155,6 @@
 그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다.
 바로 ngrok 입니다.
 한번 사용해보겠습니다.
-</p>
-  </article>
-</div>
-
-        
-          
-
-
-
-<div class="grid__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
-      
-        <a href="/application/application-pwa-vue-vuetify/" rel="permalink">[작성중][PWA] Vue + Vuetify 활용한 PWA 개발
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">Vue를 이용해 PWA를 만들어 보겠습니다.
-nvm은 설치가 돼 있고 vuetify를 사용할 수 있다는 전제로 진행하겠습니다.
-nvm 버전은 v13.14.0을 사용하였습니다.
 </p>
   </article>
 </div>

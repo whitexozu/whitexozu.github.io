@@ -1,0 +1,806 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[작성중][RabbitMQ] RabbitMq install window and linux - springboot - TMM</title>
+<meta name="description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다. ">
+
+
+  <meta name="author" content="To much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[작성중][RabbitMQ] RabbitMq install window and linux - springboot">
+<meta property="og:url" content="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/">
+
+
+  <meta property="og:description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-03-25T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2021-01-08T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">To much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[작성중][RabbitMQ] RabbitMq install window and linux - springboot">
+    <meta itemprop="description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.">
+    <meta itemprop="datePublished" content="2021-03-25T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2021-01-08T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[작성중][RabbitMQ] RabbitMq install window and linux - springboot
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#install">install</a>
+    <ul>
+      <li><a href="#window">window</a></li>
+      <li><a href="#mac">Mac</a></li>
+      <li><a href="#ubuntu-16">Ubuntu 16</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.</p>
+
+<h2 id="install">install</h2>
+
+<h3 id="window">window</h3>
+
+<ol>
+  <li>
+    <p>설치</p>
+
+    <ol>
+      <li>https://www.rabbitmq.com/install-windows.html 이동</li>
+      <li>Direct Download 에 있는 링크를 클릭하여 다운로드
+        <ul>
+          <li>저는 <em>rabbitmq-server-3.8.14.exe</em> 으로 받았습니다.</li>
+        </ul>
+      </li>
+      <li>다운받은 파일을 실행하면 <strong>Erlang could not be detected</strong> 라는 메시지가 나옵니다. PC에 Erlang을 설치해야 합니다. “예(Y)” 를 눌러줍니다.</li>
+      <li>Erlnag 다운로드 페이지에서 <em>OTP 23.1 windowns 64-bit Binary Fil</em>을 다운받아 설치합니다.</li>
+      <li>다시 RabbitMQ Install File을 눌러 설치합니다.</li>
+    </ol>
+  </li>
+  <li>
+    <p>시스템 변수 확인</p>
+
+    <ul>
+      <li>ERLANG_HOME: :\Program Files\erl-23.3</li>
+    </ul>
+  </li>
+  <li>
+    <p>시스템 변수 등록</p>
+
+    <ol>
+      <li>환경 변수 등록 창의 사용자 변수 Path에 <em>C:\Program Files\RabbitMQ Server\rabbitmq_server-3.8.14\sbin</em> 추가합니다.</li>
+    </ol>
+  </li>
+  <li>
+    <p>명령어</p>
+
+    <ul>
+      <li>상태 확인
+        <ul>
+          <li>rabbitmqctl status</li>
+        </ul>
+      </li>
+      <li>Port 확인
+        <ul>
+          <li>
+            <table>
+              <tbody>
+                <tr>
+                  <td>netstat -ano</td>
+                  <td>findstr 5672</td>
+                </tr>
+              </tbody>
+            </table>
+          </li>
+        </ul>
+      </li>
+      <li>플러그인 설치
+        <ul>
+          <li>rabbitmq-plugins enable rabbitmq_management</li>
+        </ul>
+      </li>
+      <li>플러그인 설치 확인
+        <ul>
+          <li>rabbitmq-plugins list</li>
+        </ul>
+      </li>
+      <li>사용자 추가
+        <ul>
+          <li>rabbitmqctl add_user admin p@ssWord</li>
+        </ul>
+      </li>
+      <li>사용자 태그 설정
+        <ul>
+          <li>rabbitmqctl set_user_tags admin administrator</li>
+        </ul>
+      </li>
+      <li>사용자 목록 확인
+        <ul>
+          <li>rabbitmqctl list_users</li>
+        </ul>
+      </li>
+      <li>사용자 삭제
+        <ul>
+          <li>rabbitmqctl delete_user rabbitmq</li>
+        </ul>
+      </li>
+      <li>사용자 권한 설정
+        <ul>
+          <li><code class="highlighter-rouge">rabbitmqctl set_permissions [-p &lt;vhostpath&gt;] &lt;user&gt; &lt;conf&gt; &lt;write&gt; &lt;read&gt;</code></li>
+          <li>rabbitmqctl set<em>permissions -p / “admin” “.</em>” “._” “.*”</li>
+        </ul>
+      </li>
+      <li>사용자 권한 목록 확인
+        <ul>
+          <li>rabbitmqctl list_permissions</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>관리 페이지 접속</p>
+
+    <ul>
+      <li>http://localhost:15672/</li>
+      <li>admin/p@ssWord</li>
+    </ul>
+  </li>
+  <li>
+    <p>config 및 log 파일 위치</p>
+
+    <ul>
+      <li>C:\Users&lt;사용자명&gt;\AppData\Roaming\RabbitMQ</li>
+    </ul>
+  </li>
+  <li>
+    <p>사용자 변수 등록 (confing 및 log 파일 위치 변경)</p>
+
+    <ul>
+      <li>RABBITMQ_BASE : D:\dev\application\rabbitmq</li>
+    </ul>
+  </li>
+  <li>
+    <p>설치 후 에러 발생시</p>
+
+    <ul>
+      <li>서비스 삭제
+        <ul>
+          <li>rabbitmq-service.bat remove</li>
+        </ul>
+      </li>
+      <li>서비스 생성
+        <ul>
+          <li>rabbitmq-service.bat install</li>
+        </ul>
+      </li>
+      <li>실행
+        <ul>
+          <li>rabbitmq-server.bat -detached</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="mac">Mac</h3>
+
+<ol>
+  <li>
+    <p>설치</p>
+
+    <ol>
+      <li>/usr/bin/ruby -e “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”</li>
+      <li>brew install rabbitmq</li>
+    </ol>
+  </li>
+  <li>
+    <p>명령어</p>
+    <ul>
+      <li>상태 확인
+        <ul>
+          <li>./rabbitmqctl status</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="ubuntu-16">Ubuntu 16</h3>
+
+<ol>
+  <li>
+    <p>설치</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>apt-key adv <span class="nt">--keyserver</span> <span class="s2">"hkps.pool.sks-keyservers.net"</span> <span class="nt">--recv-keys</span> <span class="s2">"0x6B73A36E6026DFCA"</span>
+ ...
+
+ <span class="nv">$ </span><span class="nb">sudo tee</span> /etc/apt/sources.list.d/bintray.rabbitmq.list <span class="o">&lt;&lt;</span><span class="no">EOF</span><span class="sh">
+ deb &lt;https://dl.bintray.com/rabbitmq-erlang/debian&gt; xenial erlang
+ deb &lt;https://dl.bintray.com/rabbitmq/debian&gt; xenial main
+</span><span class="no"> EOF
+
+</span> <span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+ ...
+
+ <span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>rabbitmq-server
+ ...
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>서버 시작</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>service rabbitmq-server start
+ <span class="o">====</span> AUTHENTICATING FOR org.freedesktop.systemd1.manage-units <span class="o">===</span>
+ Authentication is required to start <span class="s1">'rabbitmq-server.service'</span><span class="nb">.</span>
+ Authenticating as: root
+ Password:
+ ...
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>플러그인 설치</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>rabbitmq-plugins <span class="nb">enable </span>rabbitmq_management
+ ...
+</code></pre></div>    </div>
+  </li>
+  <li>사용자 추가
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl add_user admin p@ssWord
+ <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl set_user_tags admin administrator
+ <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl <span class="nb">set</span><span class="k">*</span>permissions <span class="nt">-p</span> / <span class="s2">"admin"</span> <span class="s2">".*"</span> <span class="s2">".</span><span class="se">\_</span><span class="s2">"</span> <span class="s2">".</span><span class="se">\*</span><span class="s2">"</span>
+ <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl list_users
+ <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl list_permissions
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>관리 페이지 접속</p>
+
+    <ul>
+      <li>http://localhost:15672/</li>
+      <li>admin/p@ssWord</li>
+    </ul>
+  </li>
+  <li>로그위치
+    <ul>
+      <li>/var/log/rabbitmq</li>
+    </ul>
+  </li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#erlnag-otp" class="page__taxonomy-item" rel="tag">erlnag otp</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#mac" class="page__taxonomy-item" rel="tag">mac</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#rabbitmq" class="page__taxonomy-item" rel="tag">rabbitmq</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#ubuntu-16" class="page__taxonomy-item" rel="tag">ubuntu 16</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#window-10" class="page__taxonomy-item" rel="tag">window 10</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#message-queue" class="page__taxonomy-item" rel="tag">Message Queue</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-01-08">January 8, 2021</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D%5BRabbitMQ%5D+RabbitMq+install+window+and+linux+-+springboot%20http%3A%2F%2Flocalhost%3A4000%2Fmessage%2520queue%2Fmessagequeue-rabbitmq-springboot%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmessage%2520queue%2Fmessagequeue-rabbitmq-springboot%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fmessage%2520queue%2Fmessagequeue-rabbitmq-springboot%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/server/server-ubuntu16-init-package/" class="pagination--pager" title="[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-ubuntu16-init-package/" rel="permalink">[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/javascript/language-javascript-notification/" rel="permalink">[Javascript] Notification API
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.
+웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/javascript/language-javascript-navigator/" rel="permalink">[작성중][Javascript] Navigator
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">작성 예정입니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/package/package-ngrok-vue/" rel="permalink">[ngrok] Vue 핫리로딩을 외부 단말에서
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다.
+그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다.
+바로 ngrok 입니다.
+한번 사용해보겠습니다.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
