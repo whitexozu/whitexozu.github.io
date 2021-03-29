@@ -306,6 +306,27 @@
       <li><a href="#ubuntu-16">Ubuntu 16</a></li>
     </ul>
   </li>
+  <li><a href="#개념">개념</a>
+    <ul>
+      <li><a href="#rabbitmq란">RabbitMQ란</a></li>
+      <li><a href="#ampq">AMPQ</a></li>
+    </ul>
+  </li>
+  <li><a href="#예제-소스">예제 소스</a>
+    <ul>
+      <li><a href="#spring-boot">Spring-boot</a>
+        <ul>
+          <li><a href="#producer">Producer</a></li>
+        </ul>
+      </li>
+      <li><a href="#python-36">Python 3.6</a>
+        <ul>
+          <li><a href="#producer-1">Producer</a></li>
+          <li><a href="#consumer">consumer</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ul>
 
             </nav>
@@ -471,6 +492,7 @@
   </li>
   <li>
     <p>명령어</p>
+
     <ul>
       <li>상태 확인
         <ul>
@@ -520,7 +542,9 @@
  ...
 </code></pre></div>    </div>
   </li>
-  <li>사용자 추가
+  <li>
+    <p>사용자 추가</p>
+
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl add_user admin p@ssWord
  <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl set_user_tags admin administrator
  <span class="nv">$ </span><span class="nb">sudo </span>rabbitmqctl set_permissions <span class="nt">-p</span> / <span class="s2">"admin"</span> <span class="s2">".*"</span> <span class="s2">".*"</span> <span class="s2">".*"</span>
@@ -536,10 +560,175 @@
       <li>admin/p@ssWord</li>
     </ul>
   </li>
-  <li>로그위치
+  <li>
+    <p>로그위치</p>
     <ul>
       <li>/var/log/rabbitmq</li>
     </ul>
+  </li>
+</ol>
+
+<h2 id="개념">개념</h2>
+
+<h3 id="rabbitmq란">RabbitMQ란</h3>
+
+<ul>
+  <li>RabbitMQ 는 얼랭(Erlang)으로 AMQP를 구현한 메시지 브로커 시스템입니다.</li>
+</ul>
+
+<h3 id="ampq">AMPQ</h3>
+
+<ul>
+  <li>클라이언트가 메시지 미들웨어 브로커와 통신할 수 있게 해주는 메세징 프로토콜입니다.</li>
+  <li>Producers -&gt; Broker [Exchange -&gt; Binding -&gt; Queue] -&gt; Consumers</li>
+  <li>메시지를 발행하는 Producer에서 Broker의 Exchange로 메시지를 전달하면, Binding 이라는 규칙에 의해 연결된 Queue로 메시지가 참조 복사됩니다.</li>
+  <li>메시지를 받아가는 Consumer에서는 브로커의 Queue를 통해 메시지를 받아가서 처리합니다.</li>
+</ul>
+
+<h2 id="예제-소스">예제 소스</h2>
+
+<h3 id="spring-boot">Spring-boot</h3>
+
+<h4 id="producer">Producer</h4>
+
+<ol>
+  <li>
+    <p>pom.xml</p>
+
+    <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ...
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-amqp<span class="nt">&lt;/artifactId&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>org.springframework.amqp<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>spring-rabbit-test<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+ ...
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Sender.java</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">org.springframework.amqp.core.Queue</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.amqp.rabbit.core.RabbitMessagingTemplate</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.context.annotation.Bean</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+ <span class="nd">@Component</span>
+ <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Sender</span> <span class="o">{</span>
+     <span class="nd">@Autowired</span>
+     <span class="nc">RabbitMessagingTemplate</span> <span class="n">template</span><span class="o">;</span>
+
+     <span class="nd">@Bean</span>
+     <span class="nc">Queue</span> <span class="nf">queue</span><span class="o">()</span> <span class="o">{</span>
+         <span class="k">return</span> <span class="k">new</span> <span class="nf">Queue</span><span class="o">(</span><span class="s">"hello_queue"</span><span class="o">,</span> <span class="kc">false</span><span class="o">);</span>
+     <span class="o">}</span>
+
+     <span class="kd">public</span> <span class="kt">void</span> <span class="nf">send</span><span class="o">(</span><span class="nc">String</span> <span class="n">message</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">template</span><span class="o">.</span><span class="na">convertAndSend</span><span class="o">(</span><span class="s">"hello_queue"</span><span class="o">,</span> <span class="n">message</span><span class="o">);</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Controller.java</p>
+
+    <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="o">...</span>
+     <span class="nd">@PostMapping</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="s">"/send"</span><span class="o">)</span>
+     <span class="kd">public</span> <span class="nc">String</span> <span class="nf">sendNaverworks</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">MsgDTO</span> <span class="n">userDomain</span><span class="o">)</span> <span class="o">{</span>
+         <span class="k">try</span> <span class="o">{</span>
+             <span class="n">sender</span><span class="o">.</span><span class="na">send</span><span class="o">(</span><span class="n">userDomain</span><span class="o">.</span><span class="na">getContent</span><span class="o">());</span>
+             <span class="k">return</span> <span class="s">"success"</span>
+         <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+             <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+             <span class="k">return</span> <span class="s">"fail"</span>
+         <span class="o">}</span>
+     <span class="o">}</span>
+ <span class="o">...</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="python-36">Python 3.6</h3>
+
+<h4 id="producer-1">Producer</h4>
+
+<ol>
+  <li>
+    <p>producer.py</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#!/usr/bin/env python
+</span> <span class="kn">import</span> <span class="nn">pika</span>
+ <span class="kn">import</span> <span class="nn">sys</span>
+
+ <span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span>
+     <span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span>
+         <span class="n">host</span><span class="o">=</span><span class="s">'localhost'</span><span class="p">,</span>
+         <span class="n">port</span><span class="o">=</span><span class="mi">5672</span><span class="p">,</span>
+         <span class="n">virtual_host</span><span class="o">=</span><span class="s">'/'</span><span class="p">,</span>
+         <span class="n">credentials</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">PlainCredentials</span><span class="p">(</span><span class="s">'admin'</span><span class="p">,</span> <span class="s">'p@ssWord'</span><span class="p">)</span>
+     <span class="p">)</span>
+ <span class="p">)</span>
+ <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
+
+ <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+ <span class="n">message</span> <span class="o">=</span> <span class="s">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">or</span> <span class="s">'{"from":123, "to": "email", "content": "aaa</span><span class="se">\\</span><span class="s">nbbb</span><span class="se">\\</span><span class="s">nccc"}'</span>
+ <span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span>
+     <span class="n">exchange</span><span class="o">=</span><span class="s">''</span><span class="p">,</span>
+     <span class="n">routing_key</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span>
+     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">,</span>
+     <span class="n">properties</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">BasicProperties</span><span class="p">(</span>
+         <span class="n">delivery_mode</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># make message persistent
+</span>     <span class="p">))</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">" [x] Sent </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
+ <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="consumer">consumer</h4>
+
+<ol>
+  <li>
+    <p>consumer.py</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#!/usr/bin/env python
+</span> <span class="kn">import</span> <span class="nn">pika</span>
+ <span class="kn">import</span> <span class="nn">time</span>
+ <span class="kn">import</span> <span class="nn">json</span>
+
+ <span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span>
+     <span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span>
+         <span class="n">host</span><span class="o">=</span><span class="s">'localhost'</span><span class="p">,</span>
+         <span class="n">port</span><span class="o">=</span><span class="mi">5672</span><span class="p">,</span>
+         <span class="n">virtual_host</span><span class="o">=</span><span class="s">'/'</span><span class="p">,</span>
+         <span class="n">credentials</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">PlainCredentials</span><span class="p">(</span><span class="s">'admin'</span><span class="p">,</span> <span class="s">'p@ssWord'</span><span class="p">)</span>
+
+     <span class="p">)</span>
+ <span class="p">)</span>
+ <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
+
+ <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">' [*] Waiting for messages. To exit press CTRL+C'</span><span class="p">)</span>
+
+
+ <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">" [x] Received </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+     <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">" [x] Done {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">'content'</span><span class="p">]))</span>
+     <span class="n">ch</span><span class="o">.</span><span class="n">basic_ack</span><span class="p">(</span><span class="n">delivery_tag</span><span class="o">=</span><span class="n">method</span><span class="o">.</span><span class="n">delivery_tag</span><span class="p">)</span>
+
+
+ <span class="n">channel</span><span class="o">.</span><span class="n">basic_qos</span><span class="p">(</span><span class="n">prefetch_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+ <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'task_queue'</span><span class="p">,</span> <span class="n">on_message_callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+
+ <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
+</code></pre></div>    </div>
   </li>
 </ol>
 
