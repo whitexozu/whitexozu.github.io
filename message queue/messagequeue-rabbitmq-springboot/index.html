@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>[작성중][RabbitMQ] RabbitMq install window and linux - springboot - TMM</title>
-<meta name="description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다. ">
+<meta name="description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.  최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다. ">
 
 
   <meta name="author" content="To much meng">
@@ -23,7 +23,7 @@
 <meta property="og:url" content="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/">
 
 
-  <meta property="og:description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다. ">
+  <meta property="og:description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.  최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다. ">
 
 
 
@@ -280,7 +280,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="[작성중][RabbitMQ] RabbitMq install window and linux - springboot">
-    <meta itemprop="description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.">
+    <meta itemprop="description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다.">
     <meta itemprop="datePublished" content="2021-03-25T00:00:00+09:00">
     <meta itemprop="dateModified" content="2021-01-08T22:05:34+09:00">
 
@@ -327,12 +327,20 @@
       </li>
     </ul>
   </li>
+  <li><a href="#systemd-등록">systemd 등록</a>
+    <ul>
+      <li><a href="#service-file-생성">service file 생성</a></li>
+      <li><a href="#systemd-user-명령어">systemd user 명령어</a></li>
+    </ul>
+  </li>
 </ul>
 
             </nav>
           </aside>
         
-        <p>spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.</p>
+        <p>spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.
+<br />
+최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다.</p>
 
 <h2 id="install">install</h2>
 
@@ -424,7 +432,7 @@
       <li>사용자 권한 설정
         <ul>
           <li><code class="highlighter-rouge">rabbitmqctl set_permissions [-p &lt;vhostpath&gt;] &lt;user&gt; &lt;conf&gt; &lt;write&gt; &lt;read&gt;</code></li>
-          <li>rabbitmqctl set<em>permissions -p / “admin” “.</em>” “._” “.*”</li>
+          <li><code class="highlighter-rouge">rabbitmqctl set_permissions -p / "admin" ".*" ".*" ".*"</code></li>
         </ul>
       </li>
       <li>사용자 권한 목록 확인
@@ -730,7 +738,99 @@
  <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 </code></pre></div>    </div>
   </li>
+  <li>
+    <p>multi_process_consumer.py</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#!/usr/bin/env python
+</span>
+ <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">handlers</span>
+ <span class="kn">import</span> <span class="nn">logging</span>
+ <span class="kn">import</span> <span class="nn">multiprocessing</span>
+ <span class="kn">import</span> <span class="nn">time</span>
+ <span class="kn">import</span> <span class="nn">pika</span>
+ <span class="kn">import</span> <span class="nn">json</span>
+
+ <span class="c1"># this is the writer part
+</span> <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">" [x] </span><span class="si">%</span><span class="s">r received </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="p">(</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">current_process</span><span class="p">(),</span> <span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">()))</span>
+     <span class="k">try</span><span class="p">:</span>
+         <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+         <span class="k">print</span><span class="p">(</span><span class="s">" [x] Done {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">'content'</span><span class="p">]))</span>
+     <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+         <span class="k">print</span> <span class="p">(</span><span class="s">" [x] </span><span class="si">%</span><span class="s">r caught exception </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="p">(</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">current_process</span><span class="p">(),</span> <span class="n">e</span><span class="p">))</span>
+     <span class="n">ch</span><span class="o">.</span><span class="n">basic_ack</span><span class="p">(</span><span class="n">delivery_tag</span><span class="o">=</span><span class="n">method</span><span class="o">.</span><span class="n">delivery_tag</span><span class="p">)</span>
+
+ <span class="k">def</span> <span class="nf">consume</span><span class="p">():</span>
+     <span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span>
+         <span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span>
+             <span class="n">host</span><span class="o">=</span><span class="s">'localhost'</span><span class="p">,</span>
+             <span class="n">port</span><span class="o">=</span><span class="mi">5672</span><span class="p">,</span>
+             <span class="n">virtual_host</span><span class="o">=</span><span class="s">'/'</span><span class="p">,</span>
+             <span class="n">credentials</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">PlainCredentials</span><span class="p">(</span><span class="s">'admin'</span><span class="p">,</span> <span class="s">'p@ssWord'</span><span class="p">)</span>
+
+         <span class="p">)</span>
+     <span class="p">)</span>
+     <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
+     <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">)</span>
+
+     <span class="n">channel</span><span class="o">.</span><span class="n">basic_qos</span><span class="p">(</span><span class="n">prefetch_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+     <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span> <span class="n">on_message_callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
+     <span class="k">print</span> <span class="p">(</span><span class="s">' [*] Waiting for messages. To exit press CTRL+C'</span><span class="p">)</span>
+     <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
+
+
+ <span class="n">userid</span> <span class="o">=</span> <span class="s">"admin"</span>
+ <span class="n">password</span> <span class="o">=</span> <span class="s">"p@ssWord"</span>
+ <span class="n">url</span> <span class="o">=</span> <span class="s">"localhost"</span>
+ <span class="n">port</span> <span class="o">=</span> <span class="mi">5672</span>
+
+ <span class="n">multiprocessing</span><span class="o">.</span><span class="n">log_to_stderr</span><span class="p">()</span>
+ <span class="n">logger</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
+ <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+ <span class="n">FORMATTER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s">'[</span><span class="si">%(asctime)</span><span class="s">s] [</span><span class="si">%(pathname)</span><span class="s">s:</span><span class="si">%(lineno)</span><span class="s">d] </span><span class="si">%(levelname)</span><span class="s">s - </span><span class="si">%(message)</span><span class="s">s'</span><span class="p">,</span><span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S'</span><span class="p">)</span>
+ <span class="n">LOG_HANDLER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">'/home/&lt;user_name&gt;/cobot/log/consumer.log'</span><span class="p">,</span> <span class="n">when</span><span class="o">=</span><span class="s">'midnight'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+ <span class="n">LOG_HANDLER</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">FORMATTER</span><span class="p">)</span>
+ <span class="n">LOG_HANDLER</span><span class="o">.</span><span class="n">suffix</span> <span class="o">=</span> <span class="s">'</span><span class="si">%</span><span class="s">Y</span><span class="si">%</span><span class="s">m</span><span class="si">%</span><span class="s">d'</span>
+ <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">LOG_HANDLER</span><span class="p">)</span>
+
+ <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+     <span class="n">workers</span> <span class="o">=</span> <span class="mi">2</span>
+     <span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">workers</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">workers</span><span class="p">):</span>
+         <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">consume</span><span class="p">)</span>
+
+     <span class="k">print</span><span class="p">(</span><span class="s">'Closing pool...'</span><span class="p">)</span>
+     <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">'Pool closed, waiting for workers...'</span><span class="p">)</span>
+     <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">'Exiting!'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
 </ol>
+
+<h2 id="systemd-등록">systemd 등록</h2>
+
+<h3 id="service-file-생성">service file 생성</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/systemd/user/cobot-consumer.service
+
+<span class="o">[</span>Unit]
+<span class="nv">Description</span><span class="o">=</span>cobot consumer
+
+<span class="o">[</span>Service]
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/python3 /home/&lt;user_name&gt;/cobot/consumer/multi_process_consumer.py
+
+</code></pre></div></div>
+
+<h3 id="systemd-user-명령어">systemd user 명령어</h3>
+
+<ul>
+  <li>수정 반영: systemctl –user daemon-reload</li>
+  <li>시작 : systemctl –user start cobot-consumer.service</li>
+  <li>상태 : systemctl –user status cobot-consumer.service</li>
+  <li>정지 : systemctl –user stop cobot-consumer.service</li>
+</ul>
 
         
       </section>
