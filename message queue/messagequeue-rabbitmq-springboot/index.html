@@ -321,8 +321,8 @@
       </li>
       <li><a href="#python-36">Python 3.6</a>
         <ul>
-          <li><a href="#producer-1">Producer</a></li>
           <li><a href="#consumer">consumer</a></li>
+          <li><a href="#producer-테스트용">Producer (테스트용)</a></li>
         </ul>
       </li>
     </ul>
@@ -330,7 +330,7 @@
   <li><a href="#systemd-등록">systemd 등록</a>
     <ul>
       <li><a href="#service-file-생성">service file 생성</a></li>
-      <li><a href="#systemd-user-명령어">systemd user 명령어</a></li>
+      <li><a href="#systemd-명령어">systemd 명령어</a></li>
     </ul>
   </li>
 </ul>
@@ -358,7 +358,7 @@
         </ul>
       </li>
       <li>다운받은 파일을 실행하면 <strong>Erlang could not be detected</strong> 라는 메시지가 나옵니다. PC에 Erlang을 설치해야 합니다. “예(Y)” 를 눌러줍니다.</li>
-      <li>Erlnag 다운로드 페이지에서 <em>OTP 23.1 windowns 64-bit Binary Fil</em>을 다운받아 설치합니다.</li>
+      <li>Erlang 다운로드 페이지에서 <em>OTP 23.1 windowns 64-bit Binary Fil</em>을 다운받아 설치합니다.</li>
       <li>다시 RabbitMQ Install File을 눌러 설치합니다.</li>
     </ol>
   </li>
@@ -663,42 +663,6 @@
 
 <h3 id="python-36">Python 3.6</h3>
 
-<h4 id="producer-1">Producer</h4>
-
-<ol>
-  <li>
-    <p>producer.py</p>
-
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#!/usr/bin/env python
-</span> <span class="kn">import</span> <span class="nn">pika</span>
- <span class="kn">import</span> <span class="nn">sys</span>
-
- <span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span>
-     <span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span>
-         <span class="n">host</span><span class="o">=</span><span class="s">'localhost'</span><span class="p">,</span>
-         <span class="n">port</span><span class="o">=</span><span class="mi">5672</span><span class="p">,</span>
-         <span class="n">virtual_host</span><span class="o">=</span><span class="s">'/'</span><span class="p">,</span>
-         <span class="n">credentials</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">PlainCredentials</span><span class="p">(</span><span class="s">'admin'</span><span class="p">,</span> <span class="s">'p@ssWord'</span><span class="p">)</span>
-     <span class="p">)</span>
- <span class="p">)</span>
- <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
-
- <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-
- <span class="n">message</span> <span class="o">=</span> <span class="s">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">or</span> <span class="s">'{"from":123, "to": "email", "content": "aaa</span><span class="se">\\</span><span class="s">nbbb</span><span class="se">\\</span><span class="s">nccc"}'</span>
- <span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span>
-     <span class="n">exchange</span><span class="o">=</span><span class="s">''</span><span class="p">,</span>
-     <span class="n">routing_key</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span>
-     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">,</span>
-     <span class="n">properties</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">BasicProperties</span><span class="p">(</span>
-         <span class="n">delivery_mode</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># make message persistent
-</span>     <span class="p">))</span>
- <span class="k">print</span><span class="p">(</span><span class="s">" [x] Sent </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
- <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</code></pre></div>    </div>
-  </li>
-</ol>
-
 <h4 id="consumer">consumer</h4>
 
 <ol>
@@ -789,7 +753,7 @@
  <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
  <span class="n">FORMATTER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s">'[</span><span class="si">%(asctime)</span><span class="s">s] [</span><span class="si">%(pathname)</span><span class="s">s:</span><span class="si">%(lineno)</span><span class="s">d] </span><span class="si">%(levelname)</span><span class="s">s - </span><span class="si">%(message)</span><span class="s">s'</span><span class="p">,</span><span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S'</span><span class="p">)</span>
- <span class="n">LOG_HANDLER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">'/home/&lt;user_name&gt;/cobot/log/consumer.log'</span><span class="p">,</span> <span class="n">when</span><span class="o">=</span><span class="s">'midnight'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+ <span class="n">LOG_HANDLER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">'/home/&lt;user_name&gt;/&lt;project_name&gt;/log/consumer.log'</span><span class="p">,</span> <span class="n">when</span><span class="o">=</span><span class="s">'midnight'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
  <span class="n">LOG_HANDLER</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">FORMATTER</span><span class="p">)</span>
  <span class="n">LOG_HANDLER</span><span class="o">.</span><span class="n">suffix</span> <span class="o">=</span> <span class="s">'</span><span class="si">%</span><span class="s">Y</span><span class="si">%</span><span class="s">m</span><span class="si">%</span><span class="s">d'</span>
  <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">LOG_HANDLER</span><span class="p">)</span>
@@ -809,27 +773,70 @@
   </li>
 </ol>
 
+<h4 id="producer-테스트용">Producer (테스트용)</h4>
+
+<ol>
+  <li>
+    <p>producer.py</p>
+
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#!/usr/bin/env python
+</span> <span class="kn">import</span> <span class="nn">pika</span>
+ <span class="kn">import</span> <span class="nn">sys</span>
+
+ <span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span>
+     <span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span>
+         <span class="n">host</span><span class="o">=</span><span class="s">'localhost'</span><span class="p">,</span>
+         <span class="n">port</span><span class="o">=</span><span class="mi">5672</span><span class="p">,</span>
+         <span class="n">virtual_host</span><span class="o">=</span><span class="s">'/'</span><span class="p">,</span>
+         <span class="n">credentials</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">PlainCredentials</span><span class="p">(</span><span class="s">'admin'</span><span class="p">,</span> <span class="s">'p@ssWord'</span><span class="p">)</span>
+     <span class="p">)</span>
+ <span class="p">)</span>
+ <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
+
+ <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span> <span class="n">durable</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+ <span class="n">message</span> <span class="o">=</span> <span class="s">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">or</span> <span class="s">'{"from":123, "to": "email", "content": "aaa</span><span class="se">\\</span><span class="s">nbbb</span><span class="se">\\</span><span class="s">nccc"}'</span>
+ <span class="n">channel</span><span class="o">.</span><span class="n">basic_publish</span><span class="p">(</span>
+     <span class="n">exchange</span><span class="o">=</span><span class="s">''</span><span class="p">,</span>
+     <span class="n">routing_key</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span>
+     <span class="n">body</span><span class="o">=</span><span class="n">message</span><span class="p">,</span>
+     <span class="n">properties</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">BasicProperties</span><span class="p">(</span>
+         <span class="n">delivery_mode</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># make message persistent
+</span>     <span class="p">))</span>
+ <span class="k">print</span><span class="p">(</span><span class="s">" [x] Sent </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="n">message</span><span class="p">)</span>
+ <span class="n">connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
 <h2 id="systemd-등록">systemd 등록</h2>
 
 <h3 id="service-file-생성">service file 생성</h3>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/systemd/user/cobot-consumer.service
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/systemd/system/&lt;project_name&gt;.consumer.service
 
 <span class="o">[</span>Unit]
-<span class="nv">Description</span><span class="o">=</span>cobot consumer
+<span class="nv">Description</span><span class="o">=</span>&lt;project_name&gt; consumer
+<span class="nv">After</span><span class="o">=</span>network.target
 
 <span class="o">[</span>Service]
-<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/python3 /home/&lt;user_name&gt;/cobot/consumer/multi_process_consumer.py
+<span class="nv">User</span><span class="o">=</span>&lt;user_name&gt;
+<span class="nv">Group</span><span class="o">=</span>&lt;user_name&gt;
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/python3 /home/&lt;user_name&gt;/&lt;project_name&gt;/consumer/multi_process_consumer.py
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">PYTHONUNBUFFERED</span><span class="o">=</span>1
+
+<span class="o">[</span>Install]
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 
 </code></pre></div></div>
 
-<h3 id="systemd-user-명령어">systemd user 명령어</h3>
+<h3 id="systemd-명령어">systemd 명령어</h3>
 
 <ul>
-  <li>수정 반영: systemctl –user daemon-reload</li>
-  <li>시작 : systemctl –user start cobot-consumer.service</li>
-  <li>상태 : systemctl –user status cobot-consumer.service</li>
-  <li>정지 : systemctl –user stop cobot-consumer.service</li>
+  <li>수정 반영: sudo systemctl daemon-reload</li>
+  <li>시작 : sudo systemctl start <project_name>.consumer.service</project_name></li>
+  <li>상태 : sudo systemctl status <project_name>.consumer.service</project_name></li>
+  <li>정지 : sudo systemctl stop <project_name>.consumer.service</project_name></li>
 </ul>
 
         
