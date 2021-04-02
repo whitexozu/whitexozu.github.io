@@ -9,7 +9,7 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>[작성중][RabbitMQ] RabbitMq install window and linux - springboot - TMM</title>
+<!-- begin _includes/seo.html --><title>[RabbitMQ] RabbitMq install window and linux - springboot - TMM</title>
 <meta name="description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.  최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다. ">
 
 
@@ -19,7 +19,7 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:site_name" content="TMM">
-<meta property="og:title" content="[작성중][RabbitMQ] RabbitMq install window and linux - springboot">
+<meta property="og:title" content="[RabbitMQ] RabbitMq install window and linux - springboot">
 <meta property="og:url" content="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/">
 
 
@@ -35,7 +35,7 @@
 
 
 
-  <meta property="article:modified_time" content="2021-01-08T22:05:34+09:00">
+  <meta property="article:modified_time" content="2021-03-25T22:05:34+09:00">
 
 
 
@@ -279,15 +279,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="[작성중][RabbitMQ] RabbitMq install window and linux - springboot">
+    <meta itemprop="headline" content="[RabbitMQ] RabbitMq install window and linux - springboot">
     <meta itemprop="description" content="spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다.">
     <meta itemprop="datePublished" content="2021-03-25T00:00:00+09:00">
-    <meta itemprop="dateModified" content="2021-01-08T22:05:34+09:00">
+    <meta itemprop="dateModified" content="2021-03-25T22:05:34+09:00">
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">[작성중][RabbitMQ] RabbitMq install window and linux - springboot
+          <h1 id="page-title" class="page__title" itemprop="headline">[RabbitMQ] RabbitMq install window and linux - springboot
 </h1>
           
         </header>
@@ -382,51 +382,42 @@
     <ul>
       <li>상태 확인
         <ul>
-          <li>rabbitmqctl status</li>
+          <li><code class="highlighter-rouge">rabbitmqctl status</code></li>
         </ul>
       </li>
       <li>Port 확인
         <ul>
-          <li>
-            <table>
-              <tbody>
-                <tr>
-                  <td>netstat -ano</td>
-                  <td>findstr 5672</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
+          <li><code class="highlighter-rouge">netstat -ano | findstr 5672</code></li>
         </ul>
       </li>
       <li>플러그인 설치
         <ul>
-          <li>rabbitmq-plugins enable rabbitmq_management</li>
+          <li><code class="highlighter-rouge">rabbitmq-plugins enable rabbitmq_management</code></li>
         </ul>
       </li>
       <li>플러그인 설치 확인
         <ul>
-          <li>rabbitmq-plugins list</li>
+          <li><code class="highlighter-rouge">rabbitmq-plugins list</code></li>
         </ul>
       </li>
       <li>사용자 추가
         <ul>
-          <li>rabbitmqctl add_user admin p@ssWord</li>
+          <li><code class="highlighter-rouge">rabbitmqctl add_user admin p@ssWord</code></li>
         </ul>
       </li>
       <li>사용자 태그 설정
         <ul>
-          <li>rabbitmqctl set_user_tags admin administrator</li>
+          <li><code class="highlighter-rouge">rabbitmqctl set_user_tags admin administrator</code></li>
         </ul>
       </li>
       <li>사용자 목록 확인
         <ul>
-          <li>rabbitmqctl list_users</li>
+          <li><code class="highlighter-rouge">rabbitmqctl list_users</code></li>
         </ul>
       </li>
       <li>사용자 삭제
         <ul>
-          <li>rabbitmqctl delete_user rabbitmq</li>
+          <li><code class="highlighter-rouge">rabbitmqctl delete_user rabbitmq</code></li>
         </ul>
       </li>
       <li>사용자 권한 설정
@@ -437,7 +428,7 @@
       </li>
       <li>사용자 권한 목록 확인
         <ul>
-          <li>rabbitmqctl list_permissions</li>
+          <li><code class="highlighter-rouge">rabbitmqctl list_permissions</code></li>
         </ul>
       </li>
     </ul>
@@ -470,17 +461,17 @@
     <ul>
       <li>서비스 삭제
         <ul>
-          <li>rabbitmq-service.bat remove</li>
+          <li><code class="highlighter-rouge">rabbitmq-service.bat remove</code></li>
         </ul>
       </li>
       <li>서비스 생성
         <ul>
-          <li>rabbitmq-service.bat install</li>
+          <li><code class="highlighter-rouge">rabbitmq-service.bat install</code></li>
         </ul>
       </li>
       <li>실행
         <ul>
-          <li>rabbitmq-server.bat -detached</li>
+          <li><code class="highlighter-rouge">rabbitmq-server.bat -detached</code></li>
         </ul>
       </li>
     </ul>
@@ -833,10 +824,26 @@
 <h3 id="systemd-명령어">systemd 명령어</h3>
 
 <ul>
-  <li>수정 반영: sudo systemctl daemon-reload</li>
-  <li>시작 : sudo systemctl start <project_name>.consumer.service</project_name></li>
-  <li>상태 : sudo systemctl status <project_name>.consumer.service</project_name></li>
-  <li>정지 : sudo systemctl stop <project_name>.consumer.service</project_name></li>
+  <li>수정 반영
+    <ul>
+      <li><code class="highlighter-rouge">sudo systemctl daemon-reload</code></li>
+    </ul>
+  </li>
+  <li>시작
+    <ul>
+      <li><code class="highlighter-rouge">sudo systemctl start &lt;project_name&gt;.consumer.service</code></li>
+    </ul>
+  </li>
+  <li>상태
+    <ul>
+      <li><code class="highlighter-rouge">sudo systemctl status &lt;project_name&gt;.consumer.service</code></li>
+    </ul>
+  </li>
+  <li>정지
+    <ul>
+      <li><code class="highlighter-rouge">sudo systemctl stop &lt;project_name&gt;.consumer.service</code></li>
+    </ul>
+  </li>
 </ul>
 
         
@@ -902,7 +909,7 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-01-08">January 8, 2021</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2021-03-25">March 25, 2021</time></p>
         
       </footer>
 
@@ -911,7 +918,7 @@
     <h4 class="page__share-title">공유하기</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%91%EC%84%B1%EC%A4%91%5D%5BRabbitMQ%5D+RabbitMq+install+window+and+linux+-+springboot%20http%3A%2F%2Flocalhost%3A4000%2Fmessage%2520queue%2Fmessagequeue-rabbitmq-springboot%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=%5BRabbitMQ%5D+RabbitMq+install+window+and+linux+-+springboot%20http%3A%2F%2Flocalhost%3A4000%2Fmessage%2520queue%2Fmessagequeue-rabbitmq-springboot%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
   <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fmessage%2520queue%2Fmessagequeue-rabbitmq-springboot%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 

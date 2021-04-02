@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-03T01:46:34+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[작성중][RabbitMQ] RabbitMq install window and linux - springboot</title><link href="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/" rel="alternate" type="text/html" title="[작성중][RabbitMQ] RabbitMq install window and linux - springboot" /><published>2021-03-25T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot</id><content type="html" xml:base="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/">&lt;p&gt;spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-03T01:59:20+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[RabbitMQ] RabbitMq install window and linux - springboot</title><link href="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/" rel="alternate" type="text/html" title="[RabbitMQ] RabbitMq install window and linux - springboot" /><published>2021-03-25T00:00:00+09:00</published><updated>2021-03-25T22:05:34+09:00</updated><id>http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot</id><content type="html" xml:base="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/">&lt;p&gt;spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.
 &lt;br /&gt;
 최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다.&lt;/p&gt;
 
@@ -42,51 +42,42 @@
     &lt;ul&gt;
       &lt;li&gt;상태 확인
         &lt;ul&gt;
-          &lt;li&gt;rabbitmqctl status&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmqctl status&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;Port 확인
         &lt;ul&gt;
-          &lt;li&gt;
-            &lt;table&gt;
-              &lt;tbody&gt;
-                &lt;tr&gt;
-                  &lt;td&gt;netstat -ano&lt;/td&gt;
-                  &lt;td&gt;findstr 5672&lt;/td&gt;
-                &lt;/tr&gt;
-              &lt;/tbody&gt;
-            &lt;/table&gt;
-          &lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;netstat -ano | findstr 5672&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;플러그인 설치
         &lt;ul&gt;
-          &lt;li&gt;rabbitmq-plugins enable rabbitmq_management&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmq-plugins enable rabbitmq_management&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;플러그인 설치 확인
         &lt;ul&gt;
-          &lt;li&gt;rabbitmq-plugins list&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmq-plugins list&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;사용자 추가
         &lt;ul&gt;
-          &lt;li&gt;rabbitmqctl add_user admin p@ssWord&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmqctl add_user admin p@ssWord&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;사용자 태그 설정
         &lt;ul&gt;
-          &lt;li&gt;rabbitmqctl set_user_tags admin administrator&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmqctl set_user_tags admin administrator&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;사용자 목록 확인
         &lt;ul&gt;
-          &lt;li&gt;rabbitmqctl list_users&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmqctl list_users&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;사용자 삭제
         &lt;ul&gt;
-          &lt;li&gt;rabbitmqctl delete_user rabbitmq&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmqctl delete_user rabbitmq&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;사용자 권한 설정
@@ -97,7 +88,7 @@
       &lt;/li&gt;
       &lt;li&gt;사용자 권한 목록 확인
         &lt;ul&gt;
-          &lt;li&gt;rabbitmqctl list_permissions&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmqctl list_permissions&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -130,17 +121,17 @@
     &lt;ul&gt;
       &lt;li&gt;서비스 삭제
         &lt;ul&gt;
-          &lt;li&gt;rabbitmq-service.bat remove&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmq-service.bat remove&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;서비스 생성
         &lt;ul&gt;
-          &lt;li&gt;rabbitmq-service.bat install&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmq-service.bat install&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
       &lt;li&gt;실행
         &lt;ul&gt;
-          &lt;li&gt;rabbitmq-server.bat -detached&lt;/li&gt;
+          &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;rabbitmq-server.bat -detached&lt;/code&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/li&gt;
     &lt;/ul&gt;
@@ -493,10 +484,26 @@
 &lt;h3 id=&quot;systemd-명령어&quot;&gt;systemd 명령어&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;수정 반영: sudo systemctl daemon-reload&lt;/li&gt;
-  &lt;li&gt;시작 : sudo systemctl start &lt;project_name&gt;.consumer.service&lt;/project_name&gt;&lt;/li&gt;
-  &lt;li&gt;상태 : sudo systemctl status &lt;project_name&gt;.consumer.service&lt;/project_name&gt;&lt;/li&gt;
-  &lt;li&gt;정지 : sudo systemctl stop &lt;project_name&gt;.consumer.service&lt;/project_name&gt;&lt;/li&gt;
+  &lt;li&gt;수정 반영
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo systemctl daemon-reload&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;시작
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo systemctl start &amp;lt;project_name&amp;gt;.consumer.service&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;상태
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo systemctl status &amp;lt;project_name&amp;gt;.consumer.service&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;정지
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sudo systemctl stop &amp;lt;project_name&amp;gt;.consumer.service&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="rabbitmq" /><category term="mac" /><category term="window 10" /><category term="ubuntu 16" /><category term="erlnag otp" /><summary type="html">spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다. 최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다.</summary></entry><entry><title type="html">[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot</title><link href="http://localhost:4000/server/server-ubuntu16-init-package/" rel="alternate" type="text/html" title="[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot" /><published>2021-01-08T00:00:00+09:00</published><updated>2021-01-08T22:05:34+09:00</updated><id>http://localhost:4000/server/server-ubuntu16-init-package</id><content type="html" xml:base="http://localhost:4000/server/server-ubuntu16-init-package/">&lt;p&gt;ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.&lt;/p&gt;
 
 &lt;h3 id=&quot;apt&quot;&gt;apt&lt;/h3&gt;
