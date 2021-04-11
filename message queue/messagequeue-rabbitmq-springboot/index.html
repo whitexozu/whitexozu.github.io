@@ -302,7 +302,6 @@
   <li><a href="#install">install</a>
     <ul>
       <li><a href="#window">window</a></li>
-      <li><a href="#mac">Mac</a></li>
       <li><a href="#ubuntu-16">Ubuntu 16</a></li>
     </ul>
   </li>
@@ -333,6 +332,7 @@
       <li><a href="#systemd-명령어">systemd 명령어</a></li>
     </ul>
   </li>
+  <li><a href="#참고-사이트">참고 사이트</a></li>
 </ul>
 
             </nav>
@@ -372,9 +372,9 @@
   <li>
     <p>시스템 변수 등록</p>
 
-    <ol>
+    <ul>
       <li>환경 변수 등록 창의 사용자 변수 Path에 <em>C:\Program Files\RabbitMQ Server\rabbitmq_server-3.8.14\sbin</em> 추가합니다.</li>
-    </ol>
+    </ul>
   </li>
   <li>
     <p>명령어</p>
@@ -472,30 +472,6 @@
       <li>실행
         <ul>
           <li><code class="highlighter-rouge">rabbitmq-server.bat -detached</code></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ol>
-
-<h3 id="mac">Mac</h3>
-
-<ol>
-  <li>
-    <p>설치</p>
-
-    <ol>
-      <li>/usr/bin/ruby -e “$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)”</li>
-      <li>brew install rabbitmq</li>
-    </ol>
-  </li>
-  <li>
-    <p>명령어</p>
-
-    <ul>
-      <li>상태 확인
-        <ul>
-          <li>./rabbitmqctl status</li>
         </ul>
       </li>
     </ul>
@@ -609,6 +585,16 @@
 </code></pre></div>    </div>
   </li>
   <li>
+    <p>application.yml</p>
+
+    <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">spring</span><span class="pi">:</span>
+     <span class="na">rabbitmq</span><span class="pi">:</span>
+         <span class="na">host</span><span class="pi">:</span> <span class="s">localhost</span>
+         <span class="na">username</span><span class="pi">:</span> <span class="s">admin</span>
+         <span class="na">password</span><span class="pi">:</span> <span class="s">p@ssWord</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
     <p>Sender.java</p>
 
     <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">org.springframework.amqp.core.Queue</span><span class="o">;</span>
@@ -658,7 +644,7 @@
 
 <ol>
   <li>
-    <p>consumer.py</p>
+    <p>single_process_consumer.py</p>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#!/usr/bin/env python
 </span> <span class="kn">import</span> <span class="nn">pika</span>
@@ -696,70 +682,151 @@
   <li>
     <p>multi_process_consumer.py</p>
 
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c1">#!/usr/bin/env python
-</span>
- <span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">handlers</span>
- <span class="kn">import</span> <span class="nn">logging</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">logging</span>
+ <span class="kn">import</span> <span class="nn">logging.handlers</span>
  <span class="kn">import</span> <span class="nn">multiprocessing</span>
+ <span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+ <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span><span class="p">,</span> <span class="n">random</span>
  <span class="kn">import</span> <span class="nn">time</span>
+ <span class="kn">import</span> <span class="nn">platform</span>
  <span class="kn">import</span> <span class="nn">pika</span>
  <span class="kn">import</span> <span class="nn">json</span>
+ <span class="kn">import</span> <span class="nn">requests</span>
 
- <span class="c1"># this is the writer part
-</span> <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
-     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">" [x] </span><span class="si">%</span><span class="s">r received </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="p">(</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">current_process</span><span class="p">(),</span> <span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">()))</span>
+ <span class="k">class</span> <span class="nc">Log</span><span class="p">():</span>
+     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">th</span> <span class="o">=</span> <span class="bp">None</span>
+
+     <span class="k">def</span> <span class="nf">get_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+         <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+     <span class="k">def</span> <span class="nf">listener_start</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">queue</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">th</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_proc_log_queue</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">queue</span><span class="p">))</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">th</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+     <span class="k">def</span> <span class="nf">listener_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue</span><span class="p">):</span>
+         <span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">None</span><span class="p">)</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">th</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+         <span class="k">print</span><span class="p">(</span><span class="s">'log listener end...'</span><span class="p">)</span>
+
+     <span class="k">def</span> <span class="nf">_proc_log_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">queue</span><span class="p">):</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">config_log</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+         <span class="n">logger</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+             <span class="k">try</span><span class="p">:</span>
+                 <span class="n">record</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+                 <span class="k">if</span> <span class="n">record</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                     <span class="k">break</span>
+                 <span class="n">logger</span><span class="o">.</span><span class="n">handle</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+             <span class="k">except</span> <span class="nb">Exception</span><span class="p">:</span>
+                 <span class="kn">import</span> <span class="nn">sys</span><span class="p">,</span> <span class="n">traceback</span>
+                 <span class="k">print</span><span class="p">(</span><span class="s">'listener problem'</span><span class="p">,</span> <span class="nb">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+                 <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">(</span><span class="nb">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+     <span class="k">def</span> <span class="nf">config_queue_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queue</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+         <span class="n">qh</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">QueueHandler</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+         <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">qh</span><span class="p">)</span>
+         <span class="k">return</span> <span class="n">logger</span>
+
+     <span class="k">def</span> <span class="nf">config_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+         <span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s">'[</span><span class="si">%(asctime)</span><span class="s">s] [</span><span class="si">%(pathname)</span><span class="s">s:</span><span class="si">%(lineno)</span><span class="s">d] [</span><span class="si">%(processName)</span><span class="s">s] </span><span class="si">%(levelname)</span><span class="s">s - </span><span class="si">%(message)</span><span class="s">s'</span><span class="p">,</span><span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S'</span><span class="p">)</span>
+
+         <span class="c1"># err file handler
+</span>         <span class="n">fileHander_error</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file_path</span> <span class="o">+</span> <span class="s">'/consumer.error.log'</span><span class="p">,</span> <span class="n">when</span><span class="o">=</span><span class="s">'midnight'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+         <span class="n">fileHander_error</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+         <span class="c1"># file handler
+</span>         <span class="n">fileHander_debug</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">file_path</span> <span class="o">+</span> <span class="s">'/consumer.debug.log'</span><span class="p">,</span> <span class="n">when</span><span class="o">=</span><span class="s">'midnight'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+         <span class="n">fileHander_debug</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+         <span class="c1"># console handler
+</span>         <span class="n">streamHander_info</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+         <span class="n">streamHander_info</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+         <span class="c1"># logging format setting
+</span>         <span class="n">fileHander_error</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+         <span class="n">fileHander_error</span><span class="o">.</span><span class="n">suffix</span> <span class="o">=</span> <span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d'</span>
+         <span class="n">fileHander_debug</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+         <span class="n">fileHander_debug</span><span class="o">.</span><span class="n">suffix</span> <span class="o">=</span> <span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d'</span>
+         <span class="n">streamHander_info</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+         <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">==</span> <span class="s">'Windows'</span><span class="p">:</span>
+             <span class="kn">import</span> <span class="nn">msvcrt</span>
+             <span class="kn">import</span> <span class="nn">win32api</span>
+             <span class="kn">import</span> <span class="nn">win32con</span>
+             <span class="n">win32api</span><span class="o">.</span><span class="n">SetHandleInformation</span><span class="p">(</span><span class="n">msvcrt</span><span class="o">.</span><span class="n">get_osfhandle</span><span class="p">(</span><span class="n">fileHander_debug</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">fileno</span><span class="p">()),</span>
+                                         <span class="n">win32con</span><span class="o">.</span><span class="n">HANDLE_FLAG_INHERIT</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+             <span class="n">win32api</span><span class="o">.</span><span class="n">SetHandleInformation</span><span class="p">(</span><span class="n">msvcrt</span><span class="o">.</span><span class="n">get_osfhandle</span><span class="p">(</span><span class="n">fileHander_error</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">fileno</span><span class="p">()),</span>
+                                         <span class="n">win32con</span><span class="o">.</span><span class="n">HANDLE_FLAG_INHERIT</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+         <span class="c1"># create logger, assign handler
+</span>         <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">fileHander_error</span><span class="p">)</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">fileHander_debug</span><span class="p">)</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">streamHander_info</span><span class="p">)</span>
+         <span class="k">return</span> <span class="n">logger</span>
+
+ <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+
+     <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+
      <span class="k">try</span><span class="p">:</span>
          <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">body</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
-         <span class="k">print</span><span class="p">(</span><span class="s">" [x] Done {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s">'content'</span><span class="p">]))</span>
+         <span class="c1"># print(" [x] to {}".format(d['to']))
+</span>         <span class="c1"># print(" [x] from {}".format(d['from']))
+</span>         <span class="c1"># print(" [x] content {}".format(d['content']))
+</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'{} - {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)))</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">'headers [{}] - {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="p">))</span>
+
+         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+             <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="s">'{} - {}'</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)))</span>
      <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-         <span class="k">print</span> <span class="p">(</span><span class="s">" [x] </span><span class="si">%</span><span class="s">r caught exception </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="p">(</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">current_process</span><span class="p">(),</span> <span class="n">e</span><span class="p">))</span>
+         <span class="n">logger</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span> <span class="s">"</span><span class="si">%</span><span class="s">r caught exception </span><span class="si">%</span><span class="s">r"</span> <span class="o">%</span> <span class="p">(</span><span class="n">multiprocessing</span><span class="o">.</span><span class="n">current_process</span><span class="p">(),</span> <span class="n">e</span><span class="p">))</span>
+
      <span class="n">ch</span><span class="o">.</span><span class="n">basic_ack</span><span class="p">(</span><span class="n">delivery_tag</span><span class="o">=</span><span class="n">method</span><span class="o">.</span><span class="n">delivery_tag</span><span class="p">)</span>
 
- <span class="k">def</span> <span class="nf">consume</span><span class="p">():</span>
+ <span class="k">def</span> <span class="nf">consume</span><span class="p">(</span><span class="n">queue</span><span class="p">):</span>
+
+     <span class="n">name</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">current_process</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
+     <span class="n">logger</span> <span class="o">=</span> <span class="n">Log</span><span class="p">()</span><span class="o">.</span><span class="n">config_queue_log</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span> <span class="s">'mp'</span><span class="p">)</span>
+     <span class="k">print</span><span class="p">(</span><span class="s">'Worker started: </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
      <span class="n">connection</span> <span class="o">=</span> <span class="n">pika</span><span class="o">.</span><span class="n">BlockingConnection</span><span class="p">(</span>
          <span class="n">pika</span><span class="o">.</span><span class="n">ConnectionParameters</span><span class="p">(</span>
              <span class="n">host</span><span class="o">=</span><span class="s">'localhost'</span><span class="p">,</span>
              <span class="n">port</span><span class="o">=</span><span class="mi">5672</span><span class="p">,</span>
              <span class="n">virtual_host</span><span class="o">=</span><span class="s">'/'</span><span class="p">,</span>
              <span class="n">credentials</span><span class="o">=</span><span class="n">pika</span><span class="o">.</span><span class="n">PlainCredentials</span><span class="p">(</span><span class="s">'admin'</span><span class="p">,</span> <span class="s">'p@ssWord'</span><span class="p">)</span>
-
          <span class="p">)</span>
      <span class="p">)</span>
      <span class="n">channel</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">channel</span><span class="p">()</span>
      <span class="n">channel</span><span class="o">.</span><span class="n">queue_declare</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">)</span>
 
      <span class="n">channel</span><span class="o">.</span><span class="n">basic_qos</span><span class="p">(</span><span class="n">prefetch_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-     <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span> <span class="n">on_message_callback</span><span class="o">=</span><span class="n">callback</span><span class="p">)</span>
-     <span class="k">print</span> <span class="p">(</span><span class="s">' [*] Waiting for messages. To exit press CTRL+C'</span><span class="p">)</span>
-     <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
+     <span class="n">channel</span><span class="o">.</span><span class="n">basic_consume</span><span class="p">(</span><span class="n">queue</span><span class="o">=</span><span class="s">'hello_queue'</span><span class="p">,</span> <span class="n">on_message_callback</span><span class="o">=</span><span class="k">lambda</span> <span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">callback</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">properties</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">logger</span><span class="p">))</span>
+     <span class="c1"># print (' [*] Waiting for messages. To exit press CTRL+C')
+</span>     <span class="n">channel</span><span class="o">.</span><span class="n">start_consuming</span><span class="p">()</span>
 
+     <span class="k">print</span><span class="p">(</span><span class="s">'Worker finished: </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
 
- <span class="n">userid</span> <span class="o">=</span> <span class="s">"admin"</span>
- <span class="n">password</span> <span class="o">=</span> <span class="s">"p@ssWord"</span>
- <span class="n">url</span> <span class="o">=</span> <span class="s">"localhost"</span>
- <span class="n">port</span> <span class="o">=</span> <span class="mi">5672</span>
+ <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+     <span class="n">queue</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+     <span class="n">listener</span> <span class="o">=</span> <span class="n">Log</span><span class="p">()</span>
+     <span class="n">listener</span><span class="o">.</span><span class="n">listener_start</span><span class="p">(</span><span class="s">'/logs'</span><span class="p">,</span> <span class="s">'listener'</span><span class="p">,</span> <span class="n">queue</span><span class="p">)</span>  <span class="c1"># log consumer thread start
+</span>
+     <span class="n">workers</span> <span class="o">=</span> <span class="p">[]</span>
+     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>  <span class="c1"># multiprocess loop
+</span>         <span class="n">w</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">consume</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">queue</span><span class="p">,))</span>
+         <span class="n">workers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+         <span class="n">w</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
- <span class="n">multiprocessing</span><span class="o">.</span><span class="n">log_to_stderr</span><span class="p">()</span>
- <span class="n">logger</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span>
- <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+     <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">workers</span><span class="p">:</span>
+         <span class="n">w</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 
- <span class="n">FORMATTER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s">'[</span><span class="si">%(asctime)</span><span class="s">s] [</span><span class="si">%(pathname)</span><span class="s">s:</span><span class="si">%(lineno)</span><span class="s">d] </span><span class="si">%(levelname)</span><span class="s">s - </span><span class="si">%(message)</span><span class="s">s'</span><span class="p">,</span><span class="s">'</span><span class="si">%</span><span class="s">Y-</span><span class="si">%</span><span class="s">m-</span><span class="si">%</span><span class="s">d </span><span class="si">%</span><span class="s">H:</span><span class="si">%</span><span class="s">M:</span><span class="si">%</span><span class="s">S'</span><span class="p">)</span>
- <span class="n">LOG_HANDLER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">TimedRotatingFileHandler</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">'/home/&lt;user_name&gt;/&lt;project_name&gt;/log/consumer.log'</span><span class="p">,</span> <span class="n">when</span><span class="o">=</span><span class="s">'midnight'</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
- <span class="n">LOG_HANDLER</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">FORMATTER</span><span class="p">)</span>
- <span class="n">LOG_HANDLER</span><span class="o">.</span><span class="n">suffix</span> <span class="o">=</span> <span class="s">'</span><span class="si">%</span><span class="s">Y</span><span class="si">%</span><span class="s">m</span><span class="si">%</span><span class="s">d'</span>
- <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">LOG_HANDLER</span><span class="p">)</span>
-
+     <span class="n">listener</span><span class="o">.</span><span class="n">listener_end</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>  <span class="c1"># log consumer thread end
+</span>
  <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
-     <span class="n">workers</span> <span class="o">=</span> <span class="mi">2</span>
-     <span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">workers</span><span class="p">)</span>
-     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">workers</span><span class="p">):</span>
-         <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">consume</span><span class="p">)</span>
+     <span class="n">main</span><span class="p">()</span>
 
-     <span class="k">print</span><span class="p">(</span><span class="s">'Closing pool...'</span><span class="p">)</span>
-     <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-     <span class="k">print</span><span class="p">(</span><span class="s">'Pool closed, waiting for workers...'</span><span class="p">)</span>
-     <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-     <span class="k">print</span><span class="p">(</span><span class="s">'Exiting!'</span><span class="p">)</span>
 </code></pre></div>    </div>
   </li>
 </ol>
@@ -844,6 +911,13 @@
       <li><code class="highlighter-rouge">sudo systemctl stop &lt;project_name&gt;.consumer.service</code></li>
     </ul>
   </li>
+</ul>
+
+<h2 id="참고-사이트">참고 사이트</h2>
+
+<ul>
+  <li>https://www.rabbitmq.com/</li>
+  <li>https://jonnung.dev/rabbitmq/2019/02/06/about-amqp-implementtation-of-rabbitmq/</li>
 </ul>
 
         
