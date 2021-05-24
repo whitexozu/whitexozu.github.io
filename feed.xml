@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-11T19:10:08+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[RabbitMQ] Install RabbitMQ on windows and linux</title><link href="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/" rel="alternate" type="text/html" title="[RabbitMQ] Install RabbitMQ on windows and linux" /><published>2021-03-25T00:00:00+09:00</published><updated>2021-03-25T22:05:34+09:00</updated><id>http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot</id><content type="html" xml:base="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot/">&lt;p&gt;spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-05-25T01:04:44+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">TMM</title><subtitle>TMM website.</subtitle><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><entry><title type="html">[작성중][PMP] PMP 해설서 요약</title><link href="http://localhost:4000/certification/certification-pmp/" rel="alternate" type="text/html" title="[작성중][PMP] PMP 해설서 요약" /><published>2021-05-24T00:00:00+09:00</published><updated>2021-05-25T22:05:34+09:00</updated><id>http://localhost:4000/certification/certification-pmp</id><content type="html" xml:base="http://localhost:4000/certification/certification-pmp/">&lt;p&gt;&lt;em&gt;배우고 생각하지 않으면 체계가 없이 막연하고 생각만 하면 위태로우니라&lt;/em&gt;
+&lt;br /&gt;
+프로젝트가 유려하게 진행될 때가 있습니다. 능력있는 PM을 만났을 때인데요. 대부분 반대의 경우가 더 많았습니다.
+&lt;br /&gt;
+그럼 제가 끝내주는 PM이 되면 되겠죠. 근데 전 PM이 되기 싫습니다. 다만 무엇을 어떻게 해야하는지 알고 흔들리지 않을 정도의 지식 습득을 위해 PMP 공부를 해보겠습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;프로젝트-범위-관리&quot;&gt;프로젝트 범위 관리&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;범위 관리 계획 수립&lt;/li&gt;
+  &lt;li&gt;요구사항 수집&lt;/li&gt;
+  &lt;li&gt;범위 정의&lt;/li&gt;
+  &lt;li&gt;WBS 작성&lt;/li&gt;
+  &lt;li&gt;범위 확인&lt;/li&gt;
+  &lt;li&gt;범위 통제&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;프로젝트-일정-관리&quot;&gt;프로젝트 일정 관리&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;일정 관리 계획 수립&lt;/li&gt;
+  &lt;li&gt;활동 정의&lt;/li&gt;
+  &lt;li&gt;활동 순서 배열&lt;/li&gt;
+  &lt;li&gt;활동 기간 산정&lt;/li&gt;
+  &lt;li&gt;일정 개발&lt;/li&gt;
+  &lt;li&gt;일정 통제&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;프로젝트-원가관리&quot;&gt;프로젝트 원가관리&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;주요단어
+    &lt;ul&gt;
+      &lt;li&gt;EST(Earned Schedule Theory): 획득 일정 이론&lt;/li&gt;
+      &lt;li&gt;AT(Actual Time): 실제 시간&lt;/li&gt;
+      &lt;li&gt;ES(Earned Schedule): 획득 일정&lt;/li&gt;
+      &lt;li&gt;SPI: 일정 성과 지수 = ES / AT&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;원가 관리 계획수립&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;원가를 어떻게 관리하고 가이드하고 지시하는지를 제공&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;O : 원가 관리 계획서&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;원가 산정&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;예산 결정&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;원가 통제&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="pmp" /><summary type="html">배우고 생각하지 않으면 체계가 없이 막연하고 생각만 하면 위태로우니라 프로젝트가 유려하게 진행될 때가 있습니다. 능력있는 PM을 만났을 때인데요. 대부분 반대의 경우가 더 많았습니다. 그럼 제가 끝내주는 PM이 되면 되겠죠. 근데 전 PM이 되기 싫습니다. 다만 무엇을 어떻게 해야하는지 알고 흔들리지 않을 정도의 지식 습득을 위해 PMP 공부를 해보겠습니다.</summary></entry><entry><title type="html">[RabbitMQ] Install RabbitMQ on windows and linux</title><link href="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot-copy/" rel="alternate" type="text/html" title="[RabbitMQ] Install RabbitMQ on windows and linux" /><published>2021-03-25T00:00:00+09:00</published><updated>2021-03-25T22:05:34+09:00</updated><id>http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot%20copy</id><content type="html" xml:base="http://localhost:4000/message%20queue/messagequeue-rabbitmq-springboot-copy/">&lt;p&gt;spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.
 &lt;br /&gt;
 최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다.&lt;/p&gt;
 
@@ -1221,7 +1281,28 @@
  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
   &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ubuntu 16" /><category term="nginx" /><category term="gunicorn" /><category term="flask" /><category term="pm2" /><category term="nodejs" /><category term="certbot" /><summary type="html">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.</summary></entry><entry><title type="html">[Javascript] Notification API</title><link href="http://localhost:4000/javascript/language-javascript-notification/" rel="alternate" type="text/html" title="[Javascript] Notification API" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-notification</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-notification/">&lt;p&gt;PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.&lt;br /&gt;
+&lt;/ol&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="ubuntu 16" /><category term="nginx" /><category term="gunicorn" /><category term="flask" /><category term="pm2" /><category term="nodejs" /><category term="certbot" /><summary type="html">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.</summary></entry><entry><title type="html">[작성중][Javascript] Navigator</title><link href="http://localhost:4000/javascript/language-javascript-navigator/" rel="alternate" type="text/html" title="[작성중][Javascript] Navigator" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-navigator</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-navigator/">&lt;p&gt;작성 예정입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
+
+&lt;h3 id=&quot;환경&quot;&gt;환경&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;vue 기반으로 테스트 했습니다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;예제-소스&quot;&gt;예제 소스&lt;/h3&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;설정-정보&quot;&gt;설정 정보&lt;/h3&gt;
+
+&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://developer.mozilla.org/ko/docs/Web/API/Navigator&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Navigator" /><summary type="html">작성 예정입니다.</summary></entry><entry><title type="html">[Javascript] Notification API</title><link href="http://localhost:4000/javascript/language-javascript-notification/" rel="alternate" type="text/html" title="[Javascript] Notification API" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-notification</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-notification/">&lt;p&gt;PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.&lt;br /&gt;
 웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이션이 백그라운드에 있더라도 웹이 사용자에게 정보를 보낼 수 있습니다.&lt;/p&gt;
 
 &lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
@@ -1311,28 +1392,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;https://developer.mozilla.org/ko/docs/WebAPI/Using_Web_Notifications&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Notification" /><category term="Vue" /><summary type="html">PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다. 웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이션이 백그라운드에 있더라도 웹이 사용자에게 정보를 보낼 수 있습니다.</summary></entry><entry><title type="html">[작성중][Javascript] Navigator</title><link href="http://localhost:4000/javascript/language-javascript-navigator/" rel="alternate" type="text/html" title="[작성중][Javascript] Navigator" /><published>2021-01-04T00:00:00+09:00</published><updated>2021-01-04T22:05:34+09:00</updated><id>http://localhost:4000/javascript/language-javascript-navigator</id><content type="html" xml:base="http://localhost:4000/javascript/language-javascript-navigator/">&lt;p&gt;작성 예정입니다.&lt;/p&gt;
-
-&lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
-
-&lt;h3 id=&quot;환경&quot;&gt;환경&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;vue 기반으로 테스트 했습니다.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;예제-소스&quot;&gt;예제 소스&lt;/h3&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;설정-정보&quot;&gt;설정 정보&lt;/h3&gt;
-
-&lt;h2 id=&quot;참고사이트&quot;&gt;참고사이트&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;https://developer.mozilla.org/ko/docs/Web/API/Navigator&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Navigator" /><summary type="html">작성 예정입니다.</summary></entry><entry><title type="html">[ngrok] Vue 핫리로딩을 외부 단말에서</title><link href="http://localhost:4000/package/package-ngrok-vue/" rel="alternate" type="text/html" title="[ngrok] Vue 핫리로딩을 외부 단말에서" /><published>2020-12-22T00:00:00+09:00</published><updated>2020-12-22T22:05:34+09:00</updated><id>http://localhost:4000/package/package-ngrok-vue</id><content type="html" xml:base="http://localhost:4000/package/package-ngrok-vue/">&lt;p&gt;Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다.&lt;br /&gt;
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Notification" /><category term="Vue" /><summary type="html">PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다. 웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이션이 백그라운드에 있더라도 웹이 사용자에게 정보를 보낼 수 있습니다.</summary></entry><entry><title type="html">[ngrok] Vue 핫리로딩을 외부 단말에서</title><link href="http://localhost:4000/package/package-ngrok-vue/" rel="alternate" type="text/html" title="[ngrok] Vue 핫리로딩을 외부 단말에서" /><published>2020-12-22T00:00:00+09:00</published><updated>2020-12-22T22:05:34+09:00</updated><id>http://localhost:4000/package/package-ngrok-vue</id><content type="html" xml:base="http://localhost:4000/package/package-ngrok-vue/">&lt;p&gt;Vue로 Frontend를 개발하면서 편리한점중 하나는 수정한 내용을 바로바로 확인 할 수 있는 핫리로딩 입니다.&lt;br /&gt;
 그리고 핫리로딩을 모바일 기기같은 외부 단말 에서 사용할수 있게 해주는 package가 있습니다.&lt;br /&gt;
 바로 ngrok 입니다.&lt;br /&gt;
 한번 사용해보겠습니다.&lt;/p&gt;
@@ -2380,88 +2440,4 @@ ip 차단 조건은 다음에 확인해보도록 하겠습니다.&lt;br /&gt;&lt
 
 &lt;ul&gt;
   &lt;li&gt;https://signing.tistory.com/51&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="app store" /><summary type="html">google play store는 개발자 키파일이 있어야 리뷰 조회가 가능하지만 app store 는 RSS 방식으로 제공을 해줍니다. json과 xml 방식을 제공하는데 xml 방식에서 입력 및 수정날짜를 얻을 수 있어 xml을 선택할 수밖게 없습니다. ip 차단 조건은 다음에 확인해보도록 하겠습니다.</summary></entry><entry><title type="html">[Python] window10에 KoNLPy 설치 및 테스트</title><link href="http://localhost:4000/language/language-python-konlpy-copy/" rel="alternate" type="text/html" title="[Python] window10에 KoNLPy 설치 및 테스트" /><published>2020-12-05T00:00:00+09:00</published><updated>2020-12-05T22:05:34+09:00</updated><id>http://localhost:4000/language/language-python-konlpy%20copy</id><content type="html" xml:base="http://localhost:4000/language/language-python-konlpy-copy/">&lt;p&gt;window10에서 토큰화를 위해 KoNLPy를 설치했습니다.&lt;br /&gt;
-mecab은 설치 실패 했습니다.&lt;br /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
-
-&lt;h3 id=&quot;jpype1-설치&quot;&gt;JPype1 설치&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;https://www.lfd.uci.edu/~gohlke/pythonlibs/#jpype&lt;/li&gt;
-  &lt;li&gt;운영체제 bit와 파이썬 버전에 맞는 whl 파일을 다운 받습니다.
-    &lt;ul&gt;
-      &lt;li&gt;저는 파이썬 3.5, 64bit 이기 때문에 &lt;code class=&quot;highlighter-rouge&quot;&gt;JPype1‑0.7.1‑cp35‑cp35m‑win_amd64.whl&lt;/code&gt; 를 받았습나다.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;whl 파일 설치
-    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;JPype1‑0.7.1‑cp35‑cp35m‑win_amd64.whl
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;konlpy-설치&quot;&gt;koNLPy 설치&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;konlpy
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;테스트&quot;&gt;테스트&lt;/h2&gt;
-
-&lt;h3 id=&quot;jupyter-실행&quot;&gt;jupyter 실행&lt;/h3&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;jupyter notebook
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;konlpy-실행&quot;&gt;KoNLPy 실행&lt;/h3&gt;
-
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;re&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;konlpy.tag&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Hannanum&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;konlpy.tag&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Kkma&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;konlpy.tag&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Komoran&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;konlpy.tag&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Okt&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;konlpy.tag&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Twitter&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;hannanum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Hannanum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;kkma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Kkma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;komoran&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Komoran&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;okt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Okt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;twitter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Twitter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;n&quot;&gt;titleList&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;'❤ 💜  테스트 데이터 💚 💛 이모지 포함 &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\U0001f970&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;'ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;'이미지 이름.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;'💙🎁 공유가능 💙🎁 문의👌'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;'●▅▇█▇▆▅▄산 모양의 텍스트'&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-
-
-&lt;span class=&quot;n&quot;&gt;emoji_pattern&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;compile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'[&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\U00010000&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\U0010ffff&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;]'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;flags&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UNICODE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;titleList&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-
-    &lt;span class=&quot;c1&quot;&gt;# kkma, kororan의 경우 이모지 입력시 오류가 발생해 이모지 필터 처리
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;re&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;emoji_pattern&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;' title: {}'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'''
-        hannanum: {}
-        kkma: {}
-        komoran: {}
-        okt: {}
-        '''&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;hannanum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;kkma&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;komoran&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-            &lt;span class=&quot;n&quot;&gt;okt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pos&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;참고&quot;&gt;참고&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;https://webnautes.tistory.com/1394&lt;/li&gt;
-  &lt;li&gt;https://cleancode-ws.tistory.com/97&lt;/li&gt;
-&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="konlpy" /><summary type="html">window10에서 토큰화를 위해 KoNLPy를 설치했습니다. mecab은 설치 실패 했습니다.</summary></entry></feed>
+&lt;/ul&gt;</content><author><name>To much meng</name><email>jihoon.don@gmail.com</email></author><category term="Python" /><category term="app store" /><summary type="html">google play store는 개발자 키파일이 있어야 리뷰 조회가 가능하지만 app store 는 RSS 방식으로 제공을 해줍니다. json과 xml 방식을 제공하는데 xml 방식에서 입력 및 수정날짜를 얻을 수 있어 xml을 선택할 수밖게 없습니다. ip 차단 조건은 다음에 확인해보도록 하겠습니다.</summary></entry></feed>
