@@ -1,0 +1,817 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[google drive api] 파일 생성, 권한 추가 사용 방법 조사 - TMM</title>
+<meta name="description" content="spreadsheet를 생성 및 사용 후 다른 사람과 공유를 해야하는 경우가 생겼습니다. 그래서 리서치 중 구글 드라이브 API를 사용하면 가능하다는 글을 보게되어 테스트 해보겠습니다. ">
+
+
+  <meta name="author" content="Too much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[google drive api] 파일 생성, 권한 추가 사용 방법 조사">
+<meta property="og:url" content="http://localhost:4000/open%20api/openapi-google-drive-api/">
+
+
+  <meta property="og:description" content="spreadsheet를 생성 및 사용 후 다른 사람과 공유를 해야하는 경우가 생겼습니다. 그래서 리서치 중 구글 드라이브 API를 사용하면 가능하다는 글을 보게되어 테스트 해보겠습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-06-02T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-06-02T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/open%20api/openapi-google-drive-api/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Too much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[google drive api] 파일 생성, 권한 추가 사용 방법 조사">
+    <meta itemprop="description" content="spreadsheet를 생성 및 사용 후 다른 사람과 공유를 해야하는 경우가 생겼습니다. 그래서 리서치 중 구글 드라이브 API를 사용하면 가능하다는 글을 보게되어 테스트 해보겠습니다.">
+    <meta itemprop="datePublished" content="2021-06-02T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-06-02T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[google drive api] 파일 생성, 권한 추가 사용 방법 조사
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#목표">목표</a></li>
+  <li><a href="#개발-환경">개발 환경</a></li>
+  <li><a href="#순서">순서</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>spreadsheet를 생성 및 사용 후 다른 사람과 공유를 해야하는 경우가 생겼습니다. 그래서 리서치 중 구글 드라이브 API를 사용하면 가능하다는 글을 보게되어 테스트 해보겠습니다.</p>
+
+<h2 id="목표">목표</h2>
+
+<ol>
+  <li>API 계정에서 스프레드시트 생성</li>
+  <li>API 계정에서 스프레드시트 공유</li>
+  <li>공유 계정에서 스프레드시트 확인</li>
+  <li>API 계정에서 스프레드시트 수정</li>
+  <li>공유 계정에서 스프레드시트 수정 내용 확인</li>
+</ol>
+
+<h2 id="개발-환경">개발 환경</h2>
+
+<ul>
+  <li>Java 1.8, Spring-boot, Maven</li>
+</ul>
+
+<h2 id="순서">순서</h2>
+
+<ol>
+  <li>
+    <p>GCP Console 설정</p>
+
+    <ol>
+      <li>GCP 프로젝트 생성</li>
+      <li>
+        <p>서비스 계정 생성 및 권한 설정</p>
+
+        <ol>
+          <li>IAM 및 관리자 &gt; 서비스 계정 &gt; 서비스 계정 만들기(이름 입력 후 권한을 <code class="highlighter-rouge">편집자</code> 선택)</li>
+          <li>IAM 및 관리자 &gt; 서비스 계정 &gt; 생성된 이메일 클릭 &gt; 키 탭 클릭 &gt; 키 추가 &gt; 새 키 만들기 &gt; JSON 선택</li>
+        </ol>
+      </li>
+      <li>
+        <p>API 및 서비스 추가</p>
+
+        <ul>
+          <li>사용할 API 추가</li>
+        </ul>
+
+        <ol>
+          <li>API 및 서비스</li>
+          <li>대시보드 &gt; API 및 서비스 사용 설정 &gt; Google Drive API &gt; 사용</li>
+          <li>대시보드 &gt; API 및 서비스 사용 설정 &gt; Google Sheets API &gt; 사용</li>
+        </ol>
+      </li>
+      <li>
+        <p>사용자 인증 정보 생성</p>
+
+        <ul>
+          <li>사용 설정한 API에 액세스하려면 사용자 인증 정보</li>
+        </ul>
+
+        <ol>
+          <li>API 및 서비스 &gt; 사용자 인증 정보 &gt; 사용자 인증 정보 만들기 &gt; OAuth 클라이언트 ID &gt; 동의 화면 구성 &gt; 내부/외부 선택(저는 개인 사용자이므로 외부를 선택했습니다) &gt; 만들기
+            <ol>
+              <li>앱정보 입력 &gt; 저장 후 계속</li>
+              <li>범위 추가 또는 삭제 &gt; 하기 내용 선택 &gt; 저장 후 계속
+                <ul>
+                  <li>…/auth/drive*</li>
+                  <li>…/auth/spreadsheets*</li>
+                </ul>
+              </li>
+              <li>테스트 사용자 추가 하지 않고 저장 후 계속</li>
+              <li>요약 확인 후 대시보드로 돌아가기</li>
+            </ol>
+          </li>
+          <li>사용자 인증 정보 &gt; 사용자 인증 정보 만들기 &gt; OAuth 클라이언트 ID &gt; 애플리케이션 유형 선택(테스트콥 앱) &gt; 이름 입력(AGA 으로 지었습니다) &gt; 만들기</li>
+          <li>사용자 인증 정보의 <code class="highlighter-rouge">OAuth 2.0 클라이언트 ID</code> 목록에 추가된 ID 확인</li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+  <li>
+    <p>소스 작성</p>
+
+    <ol>
+      <li>
+        <p>pom.추가</p>
+
+        <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="c">&lt;!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>com.google.api-client<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>google-api-client<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>1.30.4<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+
+ <span class="c">&lt;!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>com.google.oauth-client<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>google-oauth-client<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>1.30.4<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+
+ <span class="c">&lt;!-- https://mvnrepository.com/artifact/com.google.apis/google-api-services-sheets --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>com.google.apis<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>google-api-services-sheets<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>v4-rev581-1.25.0<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+
+ <span class="c">&lt;!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client-extensions --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>com.google.api-client<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>google-api-client-extensions<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>1.6.0-beta<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+
+ <span class="c">&lt;!-- https://mvnrepository.com/artifact/com.google.apis/google-api-services-drive --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>com.google.apis<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>google-api-services-drive<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>v3-rev197-1.25.0<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+
+ <span class="c">&lt;!-- https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty --&gt;</span>
+ <span class="nt">&lt;dependency&gt;</span>
+     <span class="nt">&lt;groupId&gt;</span>com.google.oauth-client<span class="nt">&lt;/groupId&gt;</span>
+     <span class="nt">&lt;artifactId&gt;</span>google-oauth-client-jetty<span class="nt">&lt;/artifactId&gt;</span>
+     <span class="nt">&lt;version&gt;</span>1.23.0<span class="nt">&lt;/version&gt;</span>
+ <span class="nt">&lt;/dependency&gt;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>import</p>
+
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kn">import</span> <span class="nn">com.google.api.client.googleapis.batch.BatchRequest</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.client.googleapis.batch.json.JsonBatchCallback</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.client.googleapis.json.GoogleJsonError</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.client.http.HttpHeaders</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.drive.Drive</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.drive.model.File</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.drive.model.FileList</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.drive.model.Permission</span><span class="o">;</span>
+
+
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.Sheets</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.AppendValuesResponse</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.BatchUpdateSpreadsheetRequest</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.BatchUpdateSpreadsheetResponse</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.FindReplaceRequest</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.FindReplaceResponse</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.GridRange</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.Request</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.Sheet</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.Spreadsheet</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.SpreadsheetProperties</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.UpdateValuesResponse</span><span class="o">;</span>
+ <span class="kn">import</span> <span class="nn">com.google.api.services.sheets.v4.model.ValueRange</span><span class="o">;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>스프레드시트 생성</p>
+
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"create"</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">create</span><span class="o">(</span><span class="nd">@ModelAttribute</span> <span class="nc">SheetsDTO</span> <span class="n">dto</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">try</span> <span class="o">{</span>
+         <span class="nc">Spreadsheet</span> <span class="n">spreadsheet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Spreadsheet</span><span class="o">()</span>
+             <span class="o">.</span><span class="na">setProperties</span><span class="o">(</span><span class="k">new</span> <span class="nc">SpreadsheetProperties</span><span class="o">().</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"api-bot-1-spreadsheet-1"</span><span class="o">));</span>
+
+         <span class="c1">// default sheet name is Sheet1</span>
+         <span class="nc">Sheets</span> <span class="n">service</span> <span class="o">=</span> <span class="n">googleAPIClient</span><span class="o">.</span><span class="na">getSheets</span><span class="o">();</span>
+
+         <span class="n">spreadsheet</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">spreadsheets</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">spreadsheet</span><span class="o">)</span>
+                 <span class="o">.</span><span class="na">setFields</span><span class="o">(</span><span class="s">"spreadsheetId"</span><span class="o">)</span>
+                 <span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+
+         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"Spreadsheet ID : {}"</span><span class="o">,</span> <span class="n">spreadsheet</span><span class="o">.</span><span class="na">getSpreadsheetId</span><span class="o">());</span>
+
+     <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+     <span class="o">}</span>
+
+     <span class="k">return</span> <span class="nc">ResultGenerator</span><span class="o">.</span><span class="na">generateList</span><span class="o">(</span><span class="nc">ErrorCode</span><span class="o">.</span><span class="na">ok</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+ <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>스프레드시트 공유</p>
+
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/appendPermission"</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">appendPermission</span><span class="o">()</span> <span class="o">{</span>
+     <span class="k">try</span> <span class="o">{</span>
+         <span class="kd">final</span> <span class="nc">String</span> <span class="n">spreadsheetId</span> <span class="o">=</span> <span class="s">"[Spreadsheet ID]"</span><span class="o">;</span>
+
+         <span class="nc">JsonBatchCallback</span><span class="o">&lt;</span><span class="nc">Permission</span><span class="o">&gt;</span> <span class="n">callback</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">JsonBatchCallback</span><span class="o">&lt;</span><span class="nc">Permission</span><span class="o">&gt;()</span> <span class="o">{</span>
+             <span class="nd">@Override</span>
+             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onFailure</span><span class="o">(</span><span class="nc">GoogleJsonError</span> <span class="n">e</span><span class="o">,</span> <span class="nc">HttpHeaders</span> <span class="n">responseHeaders</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+                 <span class="c1">// Handle error</span>
+                 <span class="n">log</span><span class="o">.</span><span class="na">error</span><span class="o">(</span><span class="s">"{}"</span><span class="o">,</span> <span class="n">e</span><span class="o">.</span><span class="na">getMessage</span><span class="o">());</span>
+             <span class="o">}</span>
+
+             <span class="nd">@Override</span>
+             <span class="kd">public</span> <span class="kt">void</span> <span class="nf">onSuccess</span><span class="o">(</span><span class="nc">Permission</span> <span class="n">permission</span><span class="o">,</span> <span class="nc">HttpHeaders</span> <span class="n">responseHeaders</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">IOException</span> <span class="o">{</span>
+                 <span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="o">(</span><span class="s">"Permission ID: "</span> <span class="o">+</span> <span class="n">permission</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+             <span class="o">}</span>
+         <span class="o">};</span>
+         <span class="nc">Drive</span> <span class="n">service</span> <span class="o">=</span> <span class="n">googleAPIClient</span><span class="o">.</span><span class="na">getDirve</span><span class="o">();</span>
+         <span class="nc">BatchRequest</span> <span class="n">batch</span> <span class="o">=</span> <span class="n">service</span><span class="o">.</span><span class="na">batch</span><span class="o">();</span>
+
+         <span class="nc">Permission</span> <span class="n">userPermissionWriter</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Permission</span><span class="o">().</span><span class="na">setType</span><span class="o">(</span><span class="s">"user"</span><span class="o">).</span><span class="na">setRole</span><span class="o">(</span><span class="s">"writer"</span><span class="o">).</span><span class="na">setEmailAddress</span><span class="o">(</span><span class="s">"[공유 이메일 주소]"</span><span class="o">);</span>
+         <span class="n">service</span><span class="o">.</span><span class="na">permissions</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">spreadsheetId</span><span class="o">,</span> <span class="n">userPermissionWriter</span><span class="o">).</span><span class="na">setFields</span><span class="o">(</span><span class="s">"id"</span><span class="o">).</span><span class="na">queue</span><span class="o">(</span><span class="n">batch</span><span class="o">,</span> <span class="n">callback</span><span class="o">);</span>
+
+         <span class="nc">Permission</span> <span class="n">userPermissionReader</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Permission</span><span class="o">().</span><span class="na">setType</span><span class="o">(</span><span class="s">"user"</span><span class="o">).</span><span class="na">setRole</span><span class="o">(</span><span class="s">"reader"</span><span class="o">).</span><span class="na">setEmailAddress</span><span class="o">(</span><span class="s">"[공유 이메일 주소]"</span><span class="o">);</span>
+         <span class="n">service</span><span class="o">.</span><span class="na">permissions</span><span class="o">().</span><span class="na">create</span><span class="o">(</span><span class="n">spreadsheetId</span><span class="o">,</span> <span class="n">userPermissionReader</span><span class="o">).</span><span class="na">setFields</span><span class="o">(</span><span class="s">"id"</span><span class="o">).</span><span class="na">queue</span><span class="o">(</span><span class="n">batch</span><span class="o">,</span> <span class="n">callback</span><span class="o">);</span>
+
+         <span class="n">batch</span><span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+     <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+     <span class="o">}</span>
+
+     <span class="k">return</span> <span class="nc">ResultGenerator</span><span class="o">.</span><span class="na">generateList</span><span class="o">(</span><span class="nc">ErrorCode</span><span class="o">.</span><span class="na">ok</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+ <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>스프레드시트 수정</p>
+
+        <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/write"</span><span class="o">)</span>
+ <span class="kd">public</span> <span class="nc">Object</span> <span class="nf">SheetWrite</span><span class="o">(</span><span class="nd">@RequestBody</span> <span class="nc">SheetsDTO</span> <span class="n">dto</span><span class="o">)</span> <span class="o">{</span>
+     <span class="k">try</span> <span class="o">{</span>
+         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"sheets write job_type: {}"</span><span class="o">,</span> <span class="n">dto</span><span class="o">.</span><span class="na">getJob_type</span><span class="o">());</span>
+         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"sheets write spradsheet_id: {}"</span><span class="o">,</span> <span class="n">dto</span><span class="o">.</span><span class="na">getSpreadsheet_id</span><span class="o">());</span>
+         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"sheets write sheet_name: {}"</span><span class="o">,</span> <span class="n">dto</span><span class="o">.</span><span class="na">getSheet_name</span><span class="o">());</span>
+         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"sheets write sheet_range: {}"</span><span class="o">,</span> <span class="n">dto</span><span class="o">.</span><span class="na">getSheet_range</span><span class="o">());</span>
+         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"sheets write insert_dataset: {}"</span><span class="o">,</span> <span class="n">dto</span><span class="o">.</span><span class="na">getInsert_dataset</span><span class="o">());</span>
+
+         <span class="kd">final</span> <span class="nc">String</span> <span class="n">spreadsheetId</span> <span class="o">=</span> <span class="n">dto</span><span class="o">.</span><span class="na">getSpreadsheet_id</span><span class="o">();</span>
+         <span class="kd">final</span> <span class="nc">String</span> <span class="n">sheetName</span> <span class="o">=</span> <span class="n">dto</span><span class="o">.</span><span class="na">getSheet_name</span><span class="o">();</span>
+         <span class="kd">final</span> <span class="nc">String</span> <span class="n">sheetRange</span> <span class="o">=</span> <span class="n">dto</span><span class="o">.</span><span class="na">getSheet_range</span><span class="o">();</span>
+         <span class="kd">final</span> <span class="nc">String</span> <span class="n">insertDateset</span> <span class="o">=</span> <span class="n">dto</span><span class="o">.</span><span class="na">getInsert_dataset</span><span class="o">();</span>
+
+         <span class="nc">Sheets</span> <span class="n">service</span> <span class="o">=</span> <span class="n">googleAPIClient</span><span class="o">.</span><span class="na">getSheets</span><span class="o">();</span>
+
+         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%s!%s"</span><span class="o">,</span> <span class="n">sheetName</span><span class="o">,</span> <span class="n">sheetRange</span><span class="o">));</span>
+
+         <span class="nc">List</span><span class="o">&lt;</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Object</span><span class="o">&gt;&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
+             <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">insertDateset</span><span class="o">.</span><span class="na">split</span><span class="o">(</span><span class="s">"\\s*,\\s*"</span><span class="o">)));</span>
+
+         <span class="nc">ValueRange</span> <span class="n">body</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ValueRange</span><span class="o">()</span>
+             <span class="o">.</span><span class="na">setValues</span><span class="o">(</span><span class="n">values</span><span class="o">);</span>
+         <span class="nc">UpdateValuesResponse</span> <span class="n">result</span> <span class="o">=</span>
+             <span class="n">service</span><span class="o">.</span><span class="na">spreadsheets</span><span class="o">().</span><span class="na">values</span><span class="o">().</span><span class="na">update</span><span class="o">(</span><span class="n">spreadsheetId</span><span class="o">,</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span><span class="s">"%s!%s"</span><span class="o">,</span> <span class="n">sheetName</span><span class="o">,</span> <span class="n">sheetRange</span><span class="o">),</span> <span class="n">body</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">setValueInputOption</span><span class="o">(</span><span class="s">"USER_ENTERED"</span><span class="o">)</span>
+             <span class="o">.</span><span class="na">execute</span><span class="o">();</span>
+         <span class="n">log</span><span class="o">.</span><span class="na">debug</span><span class="o">(</span><span class="s">"{} cells updated."</span><span class="o">,</span> <span class="n">result</span><span class="o">.</span><span class="na">getUpdatedCells</span><span class="o">());</span>
+         <span class="n">dto</span><span class="o">.</span><span class="na">setWrite_count</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getUpdatedCells</span><span class="o">());</span>
+
+     <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+         <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+     <span class="o">}</span>
+
+     <span class="k">return</span> <span class="nc">ResultGenerator</span><span class="o">.</span><span class="na">generateObject</span><span class="o">(</span><span class="nc">ErrorCode</span><span class="o">.</span><span class="na">ok</span><span class="o">,</span> <span class="n">dto</span><span class="o">);</span>
+ <span class="o">}</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#google-drive-api" class="page__taxonomy-item" rel="tag">Google Drive API</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#open-api" class="page__taxonomy-item" rel="tag">Open API</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-06-02">June 2, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5Bgoogle+drive+api%5D+%ED%8C%8C%EC%9D%BC+%EC%83%9D%EC%84%B1%2C+%EA%B6%8C%ED%95%9C+%EC%B6%94%EA%B0%80+%EC%82%AC%EC%9A%A9+%EB%B0%A9%EB%B2%95+%EC%A1%B0%EC%82%AC%20http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fopenapi-google-drive-api%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fopenapi-google-drive-api%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fopen%2520api%2Fopenapi-google-drive-api%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/certification/certification-pmp/" class="pagination--pager" title="[작성중][PMP] PMP 해설서 요약
+">이전</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/certification/certification-pmp/" rel="permalink">[작성중][PMP] PMP 해설서 요약
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">배우고 생각하지 않으면 체계가 없이 막연하고 생각만 하면 위태로우니라
+
+프로젝트가 유려하게 진행될 때가 있습니다. 능력있는 PM을 만났을 때인데요. 대부분 반대의 경우가 더 많았습니다.
+
+그럼 제가 끝내주는 PM이 되면 되겠죠. 근데 전 PM이 되기 싫습니다. 다만 무엇을 어떻게 ...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/message%20queue/messagequeue-rabbitmq-springboot/" rel="permalink">[RabbitMQ] Install RabbitMQ on windows and linux
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">spring-boot으로 서비스 중인 서버에 대량의 메시지 발송 API 연동이 필요하게 되었습니다. 그래서 RabbitMQ를 사용해 보기로 했습니다.
+
+최종 목적은 spring-boot으로 메시지 큐에 등록 후 python daemon으로 처리되도록 하겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/server/server-ubuntu16-init-package/" rel="permalink">[Ubuntu 16] Initial install package + nginx + gunicorn + flask + pm2 + nodejs + certbot
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunicorn + flask와 pm2 + nodejs 조합으로 웹서비스를 구성 해보겠습니다. 추가로 nginx + certbot 조합으로 https서비스도 구성하겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/javascript/language-javascript-notification/" rel="permalink">[Javascript] Notification API
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">PWA Push를 개발하다 Javascript의 Notification을 정리할 필요가 있을것 같아 정리합니다.
+웹 페이지나 앱에서 알림(Notifications) API를 사용하면 페이지 외부에 표시되는 알림을 보낼 수 있습니다. 이것은 시스템 레벨에서 처리되는 것으로 애플리케이...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
