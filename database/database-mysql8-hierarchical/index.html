@@ -1,0 +1,661 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.18.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>[MySQL8] 계층 구조의 데이터 활용 - TMM</title>
+<meta name="description" content="공통코드관리, 조직관리 등 계층 구조 데이터를 관리하기 위해 사용되는 테이블 구조와 쿼리를 작성하겠습니다. ">
+
+
+  <meta name="author" content="Too much meng">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:site_name" content="TMM">
+<meta property="og:title" content="[MySQL8] 계층 구조의 데이터 활용">
+<meta property="og:url" content="http://localhost:4000/database/database-mysql8-hierarchical/">
+
+
+  <meta property="og:description" content="공통코드관리, 조직관리 등 계층 구조 데이터를 관리하기 위해 사용되는 테이블 구조와 쿼리를 작성하겠습니다. ">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-11-16T00:00:00+09:00">
+
+
+
+  <meta property="article:modified_time" content="2020-11-16T22:05:34+09:00">
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/database/database-mysql8-hierarchical/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "TMM",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="TMM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          TMM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/year-archive/" >Year</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/" >Category</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/" >Tag</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">토글 메뉴</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Too much meng</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">팔로우</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">서울시 영등포구</span>
+        </li>
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:jihoon.don@gmail.com">
+            <meta itemprop="email" content="jihoon.don@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> 이메일
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="[MySQL8] 계층 구조의 데이터 활용">
+    <meta itemprop="description" content="공통코드관리, 조직관리 등 계층 구조 데이터를 관리하기 위해 사용되는 테이블 구조와 쿼리를 작성하겠습니다.">
+    <meta itemprop="datePublished" content="2020-11-16T00:00:00+09:00">
+    <meta itemprop="dateModified" content="2020-11-16T22:05:34+09:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">[MySQL8] 계층 구조의 데이터 활용
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On This Page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#테이블-생성">테이블 생성</a></li>
+  <li><a href="#테이버-입력">테이버 입력</a></li>
+  <li><a href="#조회-쿼리">조회 쿼리</a></li>
+  <li><a href="#참고사이트">참고사이트</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <p>공통코드관리, 조직관리 등 계층 구조 데이터를 관리하기 위해 사용되는 테이블 구조와 쿼리를 작성하겠습니다.<br /></p>
+
+<h2 id="테이블-생성">테이블 생성</h2>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="nv">`tb_code`</span> <span class="p">(</span>
+  <span class="nv">`id`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+  <span class="nv">`pid`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nb">unsigned</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`name`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+  <span class="nv">`status`</span> <span class="nb">tinyint</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="s1">'1'</span><span class="p">,</span>
+  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">),</span>
+  <span class="k">KEY</span> <span class="nv">`menu_menu_idx_fk`</span> <span class="p">(</span><span class="nv">`pid`</span><span class="p">),</span>
+  <span class="k">CONSTRAINT</span> <span class="nv">`fk_code_code_id`</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="nv">`pid`</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="nv">`tb_code`</span> <span class="p">(</span><span class="nv">`id`</span><span class="p">)</span>
+<span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="n">AUTO_INCREMENT</span><span class="o">=</span><span class="mi">0</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8mb4</span> <span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8mb4_0900_ai_ci</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="테이버-입력">테이버 입력</h2>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">chatbot</span><span class="p">.</span><span class="n">tb_code</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">pid</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">status</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="s1">'과일'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">'포도'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">'귤'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s1">'사과'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">'청포도'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">'거봉'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s1">'머루포도'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="s1">'한라봉'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="s1">'천애향'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">'홍옥'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">;</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">chatbot</span><span class="p">.</span><span class="n">tb_code</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">pid</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">status</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="s1">'청사과'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">13</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="s1">'스포츠'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">14</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="s1">'야구'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">15</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="s1">'축구'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">16</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="s1">'배구'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">17</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="s1">'메이저리그'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">18</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="s1">'마이너리그'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">19</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="s1">'발야구'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">20</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="s1">'유럽축구'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">21</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="s1">'한국축구'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">;</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">chatbot</span><span class="p">.</span><span class="n">tb_code</span> <span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">pid</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">status</span><span class="p">)</span> <span class="k">VALUES</span>
+<span class="p">(</span><span class="mi">22</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="s1">'남자배구'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">,(</span><span class="mi">23</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="s1">'여자배구'</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="조회-쿼리">조회 쿼리</h2>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">WITH</span> <span class="k">RECURSIVE</span> <span class="n">CTE</span> <span class="k">AS</span> <span class="p">(</span>
+<span class="k">SELECT</span>
+	<span class="n">id</span><span class="p">,</span>
+	<span class="n">ifnull</span><span class="p">(</span> <span class="n">pid</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span> <span class="k">as</span> <span class="n">pid</span><span class="p">,</span>
+	<span class="n">name</span><span class="p">,</span>
+	<span class="mi">1</span> <span class="k">as</span> <span class="k">level</span><span class="p">,</span>
+	<span class="k">cast</span><span class="p">(</span><span class="n">id</span> <span class="k">as</span> <span class="nb">char</span><span class="p">)</span> <span class="k">as</span> <span class="n">ppid</span>
+<span class="k">FROM</span>
+	<span class="n">tb_code</span>
+<span class="k">where</span>
+<span class="c1">-- 	pid IS NULL</span>
+<span class="c1">-- 	pid = '3'</span>
+	<span class="n">id</span> <span class="o">=</span> <span class="s1">'2'</span>
+<span class="k">AND</span> <span class="n">status</span> <span class="o">=</span> <span class="s1">'1'</span>
+<span class="k">UNION</span> <span class="k">ALL</span>
+<span class="k">SELECT</span>
+	<span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+	<span class="n">p</span><span class="p">.</span><span class="n">pid</span><span class="p">,</span>
+	<span class="n">p</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+	<span class="mi">1</span> <span class="o">+</span> <span class="k">level</span> <span class="k">AS</span> <span class="k">level</span><span class="p">,</span>
+	<span class="n">if</span><span class="p">(</span> <span class="n">cte</span><span class="p">.</span><span class="n">ppid</span> <span class="o">=</span> <span class="k">cast</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">pid</span> <span class="k">as</span> <span class="nb">char</span><span class="p">),</span> <span class="n">concat</span><span class="p">(</span><span class="n">cte</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">),</span> <span class="n">concat</span><span class="p">(</span><span class="n">ppid</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">id</span><span class="p">)</span> <span class="p">)</span> <span class="k">as</span> <span class="n">ppid</span>
+<span class="k">FROM</span>
+	<span class="n">tb_code</span> <span class="n">p</span>
+<span class="k">INNER</span> <span class="k">JOIN</span> <span class="n">CTE</span> <span class="k">ON</span>
+	<span class="n">p</span><span class="p">.</span><span class="n">pid</span><span class="o">=</span> <span class="n">cte</span><span class="p">.</span><span class="n">id</span> <span class="p">)</span>
+<span class="k">select</span>
+	<span class="n">ifnull</span><span class="p">(</span> <span class="n">pid</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span> <span class="k">as</span> <span class="n">pid</span><span class="p">,</span>
+	<span class="n">id</span><span class="p">,</span>
+	<span class="n">name</span><span class="p">,</span>
+	<span class="k">level</span><span class="p">,</span>
+	<span class="n">ppid</span>
+<span class="k">FROM</span>
+	<span class="n">cte</span>
+<span class="c1">-- WHERE</span>
+<span class="c1">-- 	LEVEL &lt; 3</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">ppid</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="참고사이트">참고사이트</h2>
+
+<ul>
+  <li><a href="https://dus815.tistory.com/entry/mariadb-%EC%97%90%EC%84%9C-connected-by-%EB%A5%BC-%EC%8D%A8%EB%B3%B4%EC%9E%90">https://dus815.tistory.com/entry/mariadb-%EC%97%90%EC%84%9C-connected-by-%EB%A5%BC-%EC%8D%A8%EB%B3%B4%EC%9E%90</a></li>
+  <li><a href="https://bulkywebdeveloper.tistory.com/109">https://bulkywebdeveloper.tistory.com/109</a></li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> 태그: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/" class="page__taxonomy-item" rel="tag"></a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#mysql8" class="page__taxonomy-item" rel="tag">MySQL8</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/" class="page__taxonomy-item" rel="tag"></a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> 카테고리: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#database" class="page__taxonomy-item" rel="tag">Database</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> 업데이트:</strong> <time datetime="2020-11-16">November 16, 2020</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">공유하기</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%5BMySQL8%5D+%EA%B3%84%EC%B8%B5+%EA%B5%AC%EC%A1%B0%EC%9D%98+%EB%8D%B0%EC%9D%B4%ED%84%B0+%ED%99%9C%EC%9A%A9%20http%3A%2F%2Flocalhost%3A4000%2Fdatabase%2Fdatabase-mysql8-hierarchical%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fdatabase%2Fdatabase-mysql8-hierarchical%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fdatabase%2Fdatabase-mysql8-hierarchical%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="공유하기 LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/server/server-ubuntu18-init-package/" class="pagination--pager" title="[Ubuntu 18] Initial install package
+">이전</a>
+    
+    
+      <a href="/language/language-python-crawler-selenium/" class="pagination--pager" title="[Python] Linux 18에서 selenium을 이용한 crawler
+">다음</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">참고</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/certification/certification-amp/" rel="permalink">[작성중][Agile] 애자일 &amp; 스크럼 프로젝트 관리
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">프랙티스 없이 빈약한 원리는 빈 껍데기와 같고, 원리를 이해하지 못하고 수행하는 프랙티스는 판단 없는 암기에 불과하다
+
+애자일이 좋은건 아는데 설명하려면 머리가 복잡해집니다. 그래서 크게 사상, 계획, 실행, 효과 로 나누어 정리하고 대상과 상황에 따라 전달하려고 합니다
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/framework/framework-springboot-vue-context-path/" rel="permalink">[context-path] springboot + swagger2 + vue context-path 적용
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">서버 한대에 한개의 Nginx와 두개의 톰켓 서버를 뛰워야 할 일이 생겼습니다.
+맞는 방법인지는 모르나 일단 잘 돌아가는건 확인해서 나중에 같은 작업을 할때 참고하기 위해 작성하겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/open%20api/openapi-google-drive-api/" rel="permalink">[google drive api] 파일 생성, 권한 추가 사용 방법 조사
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">spreadsheet를 생성 및 사용 후 다른 사람과 공유를 해야하는 경우가 생겼습니다. 그래서 리서치 중 구글 드라이브 API를 사용하면 가능하다는 글을 보게되어 테스트 해보겠습니다.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/certification/certification-pmp/" rel="permalink">[작성중][PMP] PMP 해설서 요약
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">배우고 생각하지 않으면 체계가 없이 막연하고 생각만 하면 위태로우니라
+
+프로젝트가 유려하게 진행될 때가 있습니다. 능력있는 PM을 만났을 때인데요. 대부분 반대의 경우가 더 많았습니다.
+
+그럼 제가 끝내주는 PM이 되면 되겠죠. 근데 전 PM이 되기 싫습니다. 다만 무엇을 어떻게 ...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="검색어를 입력하세요..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>팔로우:</strong></li>
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> 피드</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 TMM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
