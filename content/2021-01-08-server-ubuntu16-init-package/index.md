@@ -112,6 +112,26 @@ ubuntu 16을 개인 노트북에 설치 후 ssh와 mysql 설치 그리고 gunico
    $ ll | gerp pip3
    ```
 
+### python3.7
+
+- 2022년 3월 기준 Ubuntu16에 apt를 이용한 Python3.7 설치가 안되는 이슈가 있어 수동으로 다운 받은 후 설치 해야 합니다.
+
+1. 설치
+
+   ```bash
+   $ sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev
+   $ cd /opt
+   $ sudo wget https://www.python.org/ftp/python/3.7.12/Python-3.7.12.tgz
+   $ sudo tar xzf Python-3.7.12.tgz
+   $ cd Python-3.7.12/
+   $ sudo ./configure --enable-optimizations
+   $ sudo make altinstall
+   $ sudo update-alternatives --install /usr/bin/python python /usr/local/bin/python3.7 1 #python3.7 1순위 지정
+
+   $ sudo apt-get install python3-pip
+   $ python -m pip install --upgrade pip
+   ```
+
 ### mysql 8
 
 1. 설치
