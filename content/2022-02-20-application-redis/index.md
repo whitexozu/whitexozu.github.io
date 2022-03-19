@@ -1,6 +1,5 @@
 ---
-title: '[Redis] 설치 및 명령어'
-
+title: '[작성중][Redis] 설치 및 명령어'
 date: 2022-02-20 08:05:34
 author: TMM
 categories: Application
