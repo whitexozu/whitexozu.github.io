@@ -239,3 +239,4 @@ $ curl -X GET http://localhost:8881/redis/red | jq ''
 - Pub/Sub: https://luran.me/385
 - Spring-boot: https://bcp0109.tistory.com/328
 - Spring-boot: https://oingdaddy.tistory.com/239
+- Spring-boot: https://velog.io/@devsh/Redis-8-Spring-Boot-Redis-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0
